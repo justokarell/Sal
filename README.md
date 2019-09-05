@@ -2,7 +2,7 @@
 The aim of SurPlusPlus is to reduce food waste and other surplus resources, such as clothing, groceries, etc. by connecting grocery stores and other reatailers, food providers, such as corporations, hotels, events and catering, with those in need, such as food pantries, shelters, direct consumers, etc.
 
 ## Examples of food waste apps  
-[OLIO](https://olioex.com/), [Food for all](https://foodforall.com/), [treatsure](https://www.treatsure.co/), and [Food rescue US](https://foodrescue.us/).
+[OLIO](https://olioex.com/), [Food for all](https://foodforall.com/), [treatsure](https://www.treatsure.co/), and [Food rescue US](https://foodrescue.us/)
 
 ## What features are there? 
 **Business App**
