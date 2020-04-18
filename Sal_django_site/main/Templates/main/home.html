@@ -5,34 +5,116 @@
 
 <head>
     {% load static %}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="{% static 'tinymce/css/prism.css' %}" rel='stylesheet'>
     {% comment %} {% load {% static 'tinymce/css/prism.css' %}%} {% endcomment %}
-
+    
 </head>
+
 
 
 <body>
 
-<h1>Donation Information</h1>
 
-<form action="/action_page.php">
-  <label for="Name of Organization">Name of Organization :</label><br><br>
-  <input type="Name" id="org_name" name="org_name" placeholder="CharityCo. or John Doe" ><br><br>
-  <label for="Email Address">Email Address :</label><br><br>
-  <input type="Email" id="Email" name="Email" placeholder="salhateswaste@gmail.com" ><br><br>
-  <label for="phone">(Optional) Enter a phone number:</label><br><br>
-  <input type="tel" id="phone" name="phone" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"><br><br>
-  <small>Format: 123-45-678</small><br><br>
-  <label for="Exact Address of Organization">Exact Address of Organization :</label><br><br>
-  <input type="Address" id="Address" name="Address" placeholder="123 Sesame Street, City, State, 12345" ><br><br>
-  <label for="When will this be available?">When will this be available? :</label><br><br>
-  <input type="Address" id="Address" name="Address" placeholder="123 Sesame Street, City, State, 12345" ><br><br>
-  <input type="submit">
-    {% comment %} {% for prompt in InfoPrompt %}
-        <p>{{prompt.org_name}}</p>
-        <p>{{prompt.org_email|safe}}</p>
-        <br><br>
-    {% endfor %} {% endcomment %}
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#!">one</a></li>
+  <li><a href="#!">two</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">three</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo center">Logo</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="sass.html">Sass</a></li>
+      <li><a href="badges.html">Components</a></li>
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+          
+<div class="row">
+<div class="col s8 push-s4"><span class="flow-text"></span></div>
+<div class="col s4 pull-s8"><span class="flow-text"></span>
+ <nav>
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label class="label-icon" for="search"><i class="material-icons">srch</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
+  </div>
+ </div>
 </body>
 
+
+
+{% comment %} 
+<body>
+    <div class="row">
+        <header> 
+            <div class="row">
+                <div class="col s7 push-s5"><span class="flow-text"><h3>Donation Information</h3></span></div>
+                <div class="col s5 pull-s7"><span class="flow-text"><h3>Find Donors, Recipients, and more!</span></div> 
+            </div>
+        </header>
+        <form class="col s4 offset-s1">
+        <div class="row">
+            <div class="input-field col s6">
+            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+            <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+            <input id="last_name" type="text" class="validate">
+            <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+            <input disabled value="I am not editable" id="disabled" type="text" class="validate">
+            <label for="disabled">Disabled</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+            <input id="password" type="password" class="validate">
+            <label for="password">Password</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+            <input id="email" type="email" class="validate">
+            <label for="email">Email</label>
+            </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          This is an inline input field:
+          <div class="input-field inline">
+            <input id="email_inline" type="email" class="validate">
+            <label for="email_inline">Email</label>
+            <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+        
+</body> {% endcomment %}
+
 <script src="{% static 'tinymce/js/prism.js' %}"></script>
+
+
+
