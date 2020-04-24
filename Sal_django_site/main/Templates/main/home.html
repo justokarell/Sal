@@ -29,7 +29,7 @@
     <a href="#!" class="brand-logo center">Salhateswaste</a>
     <ul class="right hide-on-med-and-down">
       <li><a href="About.html">About</a></li>
-      <li><a href="Contact.html">Contact</a></li>
+      <li><a href="#contact" class="smooth-goto">Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -51,8 +51,8 @@
     <div class="row">
         <header> 
             <div class="row">
-                <div class="col s7 push-s5"><span class="flow-text"><h3>Donation Information</h3></span></div>
-                <div class="col s5 pull-s7"><span class="flow-text"><h3>Find Donors, Recipients, and more!</span></div> 
+                <div class="col s7 push-s5"><span class="flow-text"><h4>Donation Information</h3></span></div>
+                <div class="col s5 pull-s7"><span class="flow-text"><h4>Find Donors, Recipients, and more!</span></div> 
             </div>
         </header>
         <form class="col s4 offset-s1">
@@ -96,7 +96,24 @@
       </div>
     </form>
   </div>
-        
+
+  <div class="container">
+  <form action="action_page.php">
+  <a id="contact" class="brand-logo center">Contact Us!</a>
+
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+    <label for="subject">Subject</label>
+    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+    <input type="submit" value="Submit">
+
+  </form>
+</div>     
 </body> 
 
 <script src="{% static 'tinymce/js/prism.js' %}"></script>
