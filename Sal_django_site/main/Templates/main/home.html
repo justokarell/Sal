@@ -4,7 +4,12 @@
 
 <head>
     <!--{% load static %}
-     Compiled and minified CSS -->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -17,13 +22,6 @@
 <body>
 
 
-<!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">three</a></li>
-</ul>
 <nav>
   <div class="nav-wrapper">
     <a href="#!" class="brand-logo center">Salhateswaste</a>
@@ -34,86 +32,60 @@
   </div>
 </nav>
 
-
-
-          
-<div class="row">
-<div class="col s8 push-s4"><span class="flow-text"></span></div>
-<div class="col s4 pull-s8"><span class="flow-text"></span>
- 
-</div>
-</div>
-</body>
-
-
-
-<body>
+<div class="container">       
+  <form>
+    <br></br>
+      <h4>Enter Donation Info</h4>
+    <br></br>
     <div class="row">
-        <header> 
-            <div class="row">
-                <div class="col s7 push-s5"><span class="flow-text"><h4>Donation Information</h3></span></div>
-                <div class="col s5 pull-s7"><span class="flow-text"><h4>Find Donors, Recipients, and more!</span></div> 
-            </div>
-        </header>
-        <form class="col s4 offset-s1">
-        <div class="row">
-            <div class="input-field col s6">
-            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-            <label for="first_name">First Name</label>
-            </div>
-            <div class="input-field col s6">
-            <input id="last_name" type="text" class="validate">
-            <label for="last_name">Last Name</label>
-            </div>
+        <div class="input-field col s5 pull-s1">
+        <input placeholder="Placeholder" id="org_name" type="text" class="validate">
+        <label for="org_name">Name of Organization</label>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-            <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-            <label for="disabled">Disabled</label>
-            </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s5 pull-s1">
+        <input id="password" type="password" class="validate">
+        <label for="password">Password</label>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-            <input id="password" type="password" class="validate">
-            <label for="password">Password</label>
-            </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s5 pull-s1">
+        <input id="email" type="email" class="validate">
+        <label for="email">Email</label>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
-            <label for="email">Email</label>
-            </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          This is an inline input field:
-          <div class="input-field inline">
-            <input id="email_inline" type="email" class="validate">
-            <label for="email_inline">Email</label>
-            <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
+    </div>
+  </form>
+ </div>
+
+<br></br><br></br><br></br>
+
+    
 
   <div class="container">
   <form action="action_page.php">
-  <a id="contact" class="brand-logo center">Contact Us!</a>
+  <h4 class="center-align">Contact Us!</h4>
 
-    <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+    <label for="fname">email address</label>
+    <input type="text" id="email" name="email" placeholder="123sesamestreet@gmail.com">
 
-    <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+    <label for="lname">Name (you or organization)</label>
+    <input type="text" id="name" name="name" placeholder="Ernie">
 
-    <label for="subject">Subject</label>
-    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+    <label for="lname">Subject</label>
+    <input type="text" id="subject" name="subject" placeholder="Last Week's Number of the Day">
+    
+    <label for="subject">Tell us your thoughts! </label>
+    <textarea id="thoughts" name="thoughts" placeholder="Help! I need donations fast and don't know what to do!" style="height:200px"></textarea>
 
     <input type="submit" value="Submit">
 
   </form>
 </div>     
+</div> 
+<br></br><br></br><br></br>
+
+
 </body> 
 
 <script src="{% static 'tinymce/js/prism.js' %}"></script>
