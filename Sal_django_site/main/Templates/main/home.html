@@ -14,63 +14,67 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="{% static 'tinymce/css/prism.css' %}" rel='stylesheet'>
-    
-    <style>
-     #map {
-        height: 400px;  /* The height is 400 pixels */
-        width: 100%;  /* The width is the width of the web page */
-       }
-    </style>
 
 </head>
 
+<style>
+  .Map {
+    float: right;
+    padding: 40px;
+  }
+  .Donation {
+    float: left;
+    padding: 40px;
+  }
+  #map {
+      height: 400px;  /* The height is 400 pixels */
+      width: 400px;  /* The width is the width of the web page */
+     }
+  </style>
 
 
 <body>
 
 <!-- NAVBAR -->
-
 <nav>
   <div class="nav-wrapper">
     <a href="#!" class="brand-logo center">Salhateswaste</a>
     <ul class="right hide-on-med-and-down">
       <li><a href="About.html">About</a></li>
-      <li><a href="#contact" class="smooth-goto">Contact</a></li>
+      <li></li><a href="#contact" class="smooth-goto">Contact</a></li>
     </ul>
   </div>
 </nav>
 
 
+<!-- MAP -->
+<section class="Map">
+  <h3>My Google Maps Demo</h3>
+      <!--The div element for the map -->
+  <div id="map"></div>
+</section>
+
+
 <!-- DONATION INFORMATION -->
-
-<section class="container section">
-
-<!-- GOOGLE MAPS API -->
-
-<section class="container-section">
-<h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div class="col s5 pull-s10" id="map"></div>
-
-</section>       
-  <form>
+<section class="Donation">
+<form>
     <br></br>
       <h4>Enter Donation Info</h4>
     <br></br>
     <div class="row">
-        <div class="input-field col s5 pull-s1">
+        <div class="input-field col s7">
         <input placeholder="Placeholder" id="org_name" type="text" class="validate">
         <label for="org_name">Name of Organization</label>
         </div>
     </div>
     <div class="row">
-        <div class="input-field col s5 pull-s1">
+        <div class="input-field col s7">
         <input id="password" type="password" class="validate">
         <label for="password">Password</label>
         </div>
     </div>
     <div class="row">
-        <div class="input-field col s5 pull-s1">
+        <div class="input-field col s7">
         <input id="email" type="email" class="validate">
         <label for="email">Email</label>
         </div>
@@ -81,38 +85,15 @@
 
 
 
-<br></br><br></br><br></br>
 
-    
 
-  <div class="container">
-  <form action="action_page.php">
-  <h4 id="contact" class="center-align">Contact Us!</h4>
-
-    <label for="fname">email address</label>
-    <input type="text" id="email" name="email" placeholder="123sesamestreet@gmail.com">
-
-    <label for="lname">Name (you or organization)</label>
-    <input type="text" id="name" name="name" placeholder="Ernie">
-
-    <label for="lname">Subject</label>
-    <input type="text" id="subject" name="subject" placeholder="Last Week's Number of the Day">
-    
-    <label for="subject">Tell us your thoughts! </label>
-    <textarea id="thoughts" name="thoughts" placeholder="Help! I need donations fast and don't know what to do!" style="height:200px"></textarea>
-
-    <input type="submit" value="Submit">
-
-  </form>
-</div>     
-</div> 
-<br></br><br></br><br></br>
-
+<br></br><br></br>
 
 </body> 
 
 <script src="{% static 'tinymce/js/prism.js' %}"></script>
 <script>
+
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
