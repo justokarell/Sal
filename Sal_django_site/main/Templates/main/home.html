@@ -19,16 +19,22 @@
 
 <style>
   .Map {
+    margin: auto;
     float: right;
     padding: 40px;
   }
   .Donation {
+    margin: 80px;
     float: left;
-    padding: 40px;
+    width: 500px;
+    padding: 30px;
+    border: 2px dotted black;
   }
+
   #map {
-      height: 400px;  /* The height is 400 pixels */
-      width: 400px;  /* The width is the width of the web page */
+      margin: auto;
+      height: 600px;  /* The height is 400 pixels */
+      width: 600px;  /* The width is the width of the web page */
      }
   </style>
 
@@ -36,16 +42,17 @@
 <body>
 
 <!-- NAVBAR -->
-<nav>
-  <div class="nav-wrapper">
-    <a href="#!" class="brand-logo center">Salhateswaste</a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="About.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
+<section>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo center">Salhateswaste</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="About.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</section>
 
 <!-- MAP -->
 <section class="Map">
@@ -62,19 +69,19 @@
       <h4>Enter Donation Info</h4>
     <br></br>
     <div class="row">
-        <div class="input-field col s7">
+        <div class="input-field">
         <input placeholder="Placeholder" id="org_name" type="text" class="validate">
         <label for="org_name">Name of Organization</label>
         </div>
     </div>
     <div class="row">
-        <div class="input-field col s7">
+        <div class="input-field">
         <input id="password" type="password" class="validate">
         <label for="password">Password</label>
         </div>
     </div>
     <div class="row">
-        <div class="input-field col s7">
+        <div class="input-field">
         <input id="email" type="email" class="validate">
         <label for="email">Email</label>
         </div>
