@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-
-
+ <!DOCTYPE html>
 
 <head>
     <!--{% load static %}
@@ -19,18 +17,24 @@
 
 <style>
   .Map {
-    margin: auto;
     float: right;
+    margin: auto;
     padding: 40px;
   }
   .Donation {
-    margin: 80px;
     float: left;
+    margin: 80px;
+    padding: 20px;
     width: 500px;
-    padding: 30px;
-    border: 2px dotted black;
   }
-
+  .input-field {
+    margin: 30px;
+    padding: 20px;
+    width: 500px;
+  }
+  textarea {
+    margin: 15px;
+  }
   #map {
       margin: auto;
       height: 600px;  /* The height is 400 pixels */
@@ -56,7 +60,7 @@
 
 <!-- MAP -->
 <section class="Map">
-  <h3>My Google Maps Demo</h3>
+  <h3 class="center-align">My Google Maps Demo</h3>
       <!--The div element for the map -->
   <div id="map"></div>
 </section>
@@ -66,26 +70,30 @@
 <section class="Donation">
 <form>
     <br></br>
-      <h4>Enter Donation Info</h4>
+      <h4 class="center-align">Enter Donation Info</h4>
     <br></br>
-    <div class="row">
-        <div class="input-field">
+      <div class="input-field">
         <input placeholder="Placeholder" id="org_name" type="text" class="validate">
         <label for="org_name">Name of Organization</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="input-field">
+      </div>
+      <div class="input-field">
         <input id="password" type="password" class="validate">
         <label for="password">Password</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="input-field">
+      </div>
+      <div class="input-field">
         <input id="email" type="email" class="validate">
         <label for="email">Email</label>
-        </div>
-    </div>
+      </div>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s13">
+              <textarea id="textarea1" class="materialize-textarea"></textarea>
+              <label for="textarea1">Textarea</label>
+            </div>
+          </div>
+        </form>
+      </div>
   </form>
  </section>
 
