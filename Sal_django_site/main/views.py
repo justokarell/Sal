@@ -13,9 +13,8 @@ def contact(request):
                  # context={"InfoPrompt": InfoPrompt.objects.all})
 
 def login(request):
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
-    return HttpResponse(html)
+    return render(request=request,
+                  template_name="main/login.html")
 
 def signup(request):
     return render(request=request,
