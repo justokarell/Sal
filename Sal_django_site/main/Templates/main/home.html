@@ -1,19 +1,11 @@
- <!DOCTYPE html>
+<!--Template for HTML<HEAD>  and NAVBAR -->
+{% extends 'main/header.html' %}
 
-<head>
-    <!--{% load static %} -->
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<!--Code Unique to Home Page -->
+{% block content %}
+<!DOCTYPE html>
 
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link href="{% static 'tinymce/css/prism.css' %}" rel='stylesheet'>
 
-</head>
 
 <style>
   .Map {
@@ -45,8 +37,7 @@
 
 <body>
 
-<!-- NAVBAR -->
-{% extends 'main/header.html' %}
+
 
 <!-- MAP -->
 <section class="Map">
@@ -126,7 +117,7 @@
 
 </body> 
 
-<script src="{% static 'tinymce/js/prism.js' %}"></script>
+
 <script>
 
 // Initialize and add the map
@@ -148,5 +139,5 @@ function initMap() {
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
 </script>
-
+{% endblock %}
 
