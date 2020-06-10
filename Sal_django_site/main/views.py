@@ -11,3 +11,11 @@ def contact(request):
     return render(request=request,
                   template_name="main/contact.html")#,
                  # context={"InfoPrompt": InfoPrompt.objects.all})
+
+def login(request):
+    return render(request=request,
+                  template_name="main/login.html")
+
+def signup(request):
+    return render(request=request,
+                  template_name="main/signup.html")
