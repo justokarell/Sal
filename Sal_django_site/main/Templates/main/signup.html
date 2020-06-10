@@ -1,16 +1,167 @@
 {% extends 'main/header.html' %}
 
 {% block content %}
-  <div class="row">
-    {% for tut in tutorials %}
-        <div class="col s12 m6">
-          <div class="card hoverable">
-            <div class="card-content">
-              <span class="card-title">{{tut.tutorial_title}}</span>
-              <p style="font-size:70%">Published {{tut.tutorial_published}}</p>
-              <p>{{tut.tutorial_content|safe}}</p>
+<style>
+
+    .active:hover, .active{
+        color: #342E37;
+        background-color: #ffffff;
+    }
+
+
+    .inactive:hover, .inactive{
+        color: #ffffff;
+        background-color: #212121;
+        opacity: 0.7;
+    }
+
+
+    .container {
+        /* display: flex; */
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .floatright {
+	    float: right;
+    }
+
+    .alignright {
+	    text-align: right;
+        margin-left:auto; 
+        margin-right:0;
+        
+    }
+
+    .card {
+        max-width: 750px;
+        min-width: 300px;
+        margin-top: 10%;
+        margin-left:auto; 
+        margin-right:auto;
+        border-radius: 35px;
+        height: auto;
+        width: 60%;
+
+        /* overflow: hidden; */
+    }
+
+    .btn{
+        margin-top: 3%;
+        border-radius: 5px;
+    }
+    
+    .btn-flat:hover, .btn-flat{
+        background-color:white; 
+        color:black;
+        margin-top:2%; 
+        margin-right:2%;
+        border-radius: 25px;
+    }
+
+    .tab-btn{
+        -webkit-box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
+        -moz-box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
+        box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
+        
+    }
+
+    .input-field{
+        max-width: 70%;
+        /* margin: auto; */
+        margin-left:auto; 
+        margin-right:auto;
+    }
+    .flex-center {
+      display: flex;
+      justify-content: center;
+    }
+
+    #login-submit, #login-submit:hover{
+        background-color: #9fd356;
+
+    }
+
+    #facebook, .facebook:hover{
+        background-color: #3b5998;
+        margin-top:6%;
+    }
+
+    #google, .google:hover{
+        background-color: #de5246;
+    }
+
+</style>
+<body>
+        <div class="container col s8 m6">
+            
+            <div class="card hoverable">
+                <a href="javascript:history.back()" class = "btn-flat waves-effect waves-light  right">
+                    <i class = "material-icons">close</i>
+                </a>
+                
+                <div class="card-content center ">
+                    <!-- <span class="card-title">Welcome</span> -->
+                    <h2 class="center">Welcome!</h2>
+
+                    <a href="login" class="btn inactive tab-btn z-depth-1">Login</a>
+                    <a href="#" class="btn active tab-btn z-depth-1">Sign Up</a>
+                    <form class="col s12">
+                      <div class="input-field col s7" style= "margin-top:3rem;">
+                        <input id="name" type="text" class="validate">
+                        <label for="name">Your Organization's Name</label>
+                        <span class="helper-text" data-error="invalid" data-success=""></span>
+                      </div>
+                      <div class="row flex-center " style="margin-left:auto; margin-right:auto; max-width: 90%;" >
+                        <div class="input-field col s6">
+                            <input id="email" type="email" class="validate">
+                            <label for="email">Email</label>
+                            <span class="helper-text" data-error="invalid" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6">
+                          <input id="phone" type="tel" class="validate">
+                          <label for="phone">Organization Phone</label>
+                          <span class="helper-text" data-error="invalid" data-success=""></span>
+                        </div>
+                      </div>
+                      <div class = "input-field col s7">
+                        <input id="address" type="text" class="validate">
+                        <label for = "address">Organization Address</label>
+                        <span class="helper-text" data-error="invalid" data-success=""></span>
+                      </div>
+                      <div class="row flex-center " style="margin-left:auto; margin-right:auto;  max-width: 90%;" >
+                        <div class="input-field col s6" >
+                            <input id="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                            <span class="helper-text" data-error="invalid" data-success=""></span>
+                        </div>
+
+                        <div class="input-field col s6 ">
+                          <input id="confirm-password" type="password" class="validate">
+                          <label for="confirmPassword">Confirm Password</label>
+                          <span class="helper-text" data-error="Password not match" data-success=""></span>
+                        </div>
+                      </div>
+                      
+                      <a href="#" id="login-submit" class=" waves-effect waves-light btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Sign Up!</a>
+
+                      <div class="alignright">
+                          <a href="#" >Forgot Password</a>
+                      </div>
+                      
+
+                      <div class="divider"></div>
+                      <div class="col-xs-6">
+                          <a href="#" id="facebook" class="waves-effect waves-light btn"><i class="material-icons left">face</i>Sign in with Facebook</a>
+                      </div>
+                      <div class="col-xs-6">
+                          <a href="#" id="google" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Sign in with Google</a>
+                      </div>
+                    </form>    
+                    
+              
+                </div>
             </div>
-          </div>
         </div>
-    {% endfor %}
+</body>
 {% endblock %}
