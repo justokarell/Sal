@@ -51,7 +51,13 @@
         border-radius: 5px;
     }
     
-
+    .btn-flat:hover, .btn-flat{
+        background-color:white; 
+        color:black;
+        margin-top:2%; 
+        margin-right:2%;
+        border-radius: 25px;
+    }
 
     .tab-btn{
         -webkit-box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
@@ -66,8 +72,14 @@
         margin-right:auto;
     }
 
+    #login-submit, #login-submit:hover{
+        background-color: #9fd356;
+
+    }
+
     #facebook, .facebook:hover{
         background-color: #3b5998;
+        margin-top:6%;
     }
 
     #google, .google:hover{
@@ -80,7 +92,7 @@
             
             <div class="card hoverable">
                 <!-- card can also be a chip -->
-                <a href="javascript:history.back()" class = "btn-floating btn-small waves-effect waves-light floatright red">
+                <a href="javascript:history.back()" class = "btn-flat waves-effect waves-light  right">
                     <i class = "material-icons">close</i>
                 </a>
                 
@@ -96,15 +108,15 @@
                     <div class="input-field col s7" style= "margin-top:3rem;">
                         <input id="email" type="email" class="validate">
                         <label for="email">Email</label>
-                        <span class="helper-text" data-error="wrong" data-success="right"></span>
+                        <span class="helper-text" data-error="invalid" data-success=""></span>
                     </div>
                     <div class="input-field col s7">
                         <input id="password" type="password" class="validate">
                         <label for="password">Password</label>
-                        <span class="helper-text" data-error="wrong" data-success="right"></span>
+                        <span class="helper-text" data-error="invalid" data-success=""></span>
                     </div>
                     
-                    <a href="#" class=" waves-effect waves-light green btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Submit</a>
+                    <a href="#" id="login-submit" class=" waves-effect waves-light btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Sign In</a>
 
                     <div class="alignright">
                         <a href="#" >Forgot Password</a>
