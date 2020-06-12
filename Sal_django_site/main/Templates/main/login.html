@@ -104,25 +104,28 @@
                     <a href="signup" class="btn inactive tab-btn z-depth-1">Sign Up</a>
 
 
-
-                    <div class="input-field col s7" style= "margin-top:3rem;">
-                        <input id="email" type="email" class="validate">
-                        <label for="email">Email</label>
-                        <span class="helper-text" data-error="invalid" data-success=""></span>
-                    </div>
-                    <div class="input-field col s7">
-                        <input id="password" type="password" class="validate">
-                        <label for="password">Password</label>
-                        <span class="helper-text" data-error="invalid" data-success=""></span>
-                    </div>
+                    <form class="col s12" method="POST">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <!-- <div class="input-field col s7" style= "margin-top:3rem;">
+                            <input id="email" type="email" class="validate">
+                            <label for="email">Email</label>
+                            <span class="helper-text" data-error="invalid" data-success=""></span>
+                        </div>
+                        <div class="input-field col s7">
+                            <input id="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                            <span class="helper-text" data-error="invalid" data-success=""></span>
+                        </div> -->
+                        
+                        <button id="login-submit" type="submit" class=" waves-effect waves-light btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Login</button>
+                    </form>
                     
-                    <a href="#" id="login-submit" class=" waves-effect waves-light btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Sign In</a>
 
                     <div class="alignright">
                         <a href="#" >Forgot Password</a>
                     </div>
                     
-
                     <div class="divider"></div>
                     <div class="col-xs-6">
                         <a href="#" id="facebook" class="waves-effect waves-light btn"><i class="material-icons left">face</i>Sign in with Facebook</a>

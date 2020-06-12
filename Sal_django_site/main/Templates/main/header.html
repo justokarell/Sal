@@ -33,9 +33,15 @@
       <div class="nav-wrapper container">
         <a id="logo-container" href="#" class=" center brand-logo">Salhateswaste</a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="login">Login</a></li>
-          <li><a href="signup">Sign up</a></li>
+          {% if user.is_authenticated %}
+              <li><a href="account">{{user.username|title}}</a></li>
+              <li><a href="logout">Logout</a></li>
+          {% else %}
+              <li><a href="login">Login</a></li>
+              <li><a href="signup">Sign Up</a></li>
+          {% endif %}
         </ul>
+
         <ul class="left hide-on-med-and-down">
           <li><a href="about">About</a></li>
           <li><a href="contact">Contact</a></li>
@@ -49,6 +55,19 @@
       </div>
     </nav>
   </section>
+  {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success'%}
+            <script>M.toast({html: "{{message}}", classes: 'green rounded', displayLength:2000});</script>
+        {% elif message.tags == 'info'%}
+            <script>M.toast({html: "{{message}}", classes: 'blue rounded', displayLength:2000});</script>
+        {% elif message.tags == 'warning'%}
+            <script>M.toast({html: "{{message}}", classes: 'orange rounded', displayLength:10000});</script>
+        {% elif message.tags == 'error'%}
+            <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+        {% endif %}
+    {% endfor %}
+  {% endif %}
   {% block content %}
   {% endblock %}
 </body>
