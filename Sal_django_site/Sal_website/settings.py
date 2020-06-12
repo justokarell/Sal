@@ -123,4 +123,20 @@ STATIC_URL = '/static/'
 # # # User substitution
 # # # https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#auth-custom-user
 
-# AUTH_USER_MODEL = 'Sal_website.User'
+
+# AUTH_USER_MODEL = 'auth.User'
+
+AUTH_USER_MODEL = 'main.CustomUser'
+
+# Tutorial notes oth user model calls:
+#  In short, you can use the get_user_model() method to get the model directly, or if you need 
+#  to create a ForeignKey or other database relationship to the user model, you can settings.AUTH_USER_MODEL 
+#  (which is just a string corresponding to the appname.ModelName path to the user model).
+
+# Note that get_user_model() cannot be called at the module level in any models.py file 
+# (and by extension any file that a models.py imports), due to circular reference issues. 
+# Generally speaking it's easier to keep calls to get_user_model() inside a method whenever 
+#  (so it's called at run time rather than load time), and use settings.AUTH_USER_MODEL in 
+#  all other cases. This isn't always possible (e.g., when creating a ModelForm), but the less
+#   you use it at the module level, the fewer circular references you'll have to stumble your way through.
+

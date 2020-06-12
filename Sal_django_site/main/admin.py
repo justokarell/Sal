@@ -1,8 +1,12 @@
 from django.contrib import admin
-from .models import InfoPrompt
+from django.contrib.auth.admin import UserAdmin
+from .models import InfoPrompt, CustomUser, CustomUserManager
+ 
 # Register your models here.
 
 admin.site.register(InfoPrompt)
+admin.site.register(CustomUser)
+
 
 class InfoPromptAdmin(admin.ModelAdmin):
     fields = [
