@@ -53,8 +53,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     Email and password are required. Other fields are optional.
     """
     email = models.EmailField(_('email address'), max_length=254, unique=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    org_name = models.CharField(_('organization name'), max_length=30, blank=True)
+    address = models.CharField(_('address'), max_length=60, blank=True)
+    phone = models.CharField(_('phone'), max_length=17, blank=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
         help_text=_('Designates whether the user can log into this admin '
                     'site.'))
@@ -77,14 +78,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         """
-        Returns the first_name plus the last_name, with a space in between.
+        Returns the org_name plus the address, with a space in between.
         """
-        full_name = '%s %s' % (self.first_name, self.last_name)
+        full_name = '%s of %s' % (self.org_name, self.address)
         return full_name.strip()
 
     def get_short_name(self):
         "Returns the short name for the user."
-        return self.first_name
+        return self.org_name
 
     def email_user(self, subject, message, from_email=None):
         """

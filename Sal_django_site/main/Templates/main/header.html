@@ -34,7 +34,7 @@
         <a id="logo-container" href="#" class=" center brand-logo">Salhateswaste</a>
         <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
-              <li><a href="account">{{user.username|title}}</a></li>
+              <li><a href="account">{{user.org_name|title}}</a></li>
               <li><a href="logout">Logout</a></li>
           {% else %}
               <li><a href="login">Login</a></li>

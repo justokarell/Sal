@@ -1,4 +1,5 @@
-# from django import forms
+from django import forms
+from django.contrib.auth import password_validation
 # from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth.models import User
 
@@ -39,7 +40,7 @@
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from appname.models import CustomUser
+from .models import CustomUser
 
 class CustomUserCreationForm(UserCreationForm):
     """
@@ -49,11 +50,28 @@ class CustomUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kargs):
         super(CustomUserCreationForm, self).__init__(*args, **kargs)
-        del self.fields['username']
+        if 'username' in self.fields:
+            print ("deleting username from form")
+            del self.fields['username']
+
 
     class Meta:
         model = CustomUser
-        fields = ("email",)
+        fields = ("email", "org_name")
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError(
+                self.error_messages['password_mismatch'],
+                code='password_mismatch',
+            )
+        self.instance.email = self.cleaned_data.get('email')
+        password_validation.validate_password(
+            self.cleaned_data.get('password2'), self.instance
+        )
+        return password2
 
 class CustomUserChangeForm(UserChangeForm):
     """A form for updating users. Includes all the fields on
@@ -63,7 +81,24 @@ class CustomUserChangeForm(UserChangeForm):
 
     def __init__(self, *args, **kargs):
         super(CustomUserChangeForm, self).__init__(*args, **kargs)
-        del self.fields['username']
+        if 'username' in self.fields:
+            print ("deleting username from form")
+            del self.fields['username']
 
     class Meta:
         model = CustomUser
+        fields = ("email",)
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError(
+                self.error_messages['password_mismatch'],
+                code='password_mismatch',
+            )
+        self.instance.email = self.cleaned_data.get('email')
+        password_validation.validate_password(
+            self.cleaned_data.get('password2'), self.instance
+        )
+        return password2

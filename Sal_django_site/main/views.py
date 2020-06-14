@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-# from .forms import NewUserForm
+from .forms import CustomUserCreationForm
 from .models import InfoPrompt
 # Create your views here.
 
@@ -38,8 +38,8 @@ def login_request(request):
 
 def signup(request):
     if request.method == "POST":
-        # form = NewUserForm(request.POST)
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
+        # form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
@@ -56,8 +56,8 @@ def signup(request):
                           template_name = "main/signup.html",
                           context={"form":form})
 
-    # form = NewUserForm()
-    form = UserCreationForm()
+    form = CustomUserCreationForm()
+    # form = UserCreationForm()
     return render(request = request,
                   template_name = "main/signup.html",
                   context={"form":form})

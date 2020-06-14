@@ -124,9 +124,10 @@ STATIC_URL = '/static/'
 # # # https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#auth-custom-user
 
 
-# AUTH_USER_MODEL = 'auth.User'
 
+# AUTH_USER_MODEL = 'auth.User'
 AUTH_USER_MODEL = 'main.CustomUser'
+
 
 # Tutorial notes oth user model calls:
 #  In short, you can use the get_user_model() method to get the model directly, or if you need 
