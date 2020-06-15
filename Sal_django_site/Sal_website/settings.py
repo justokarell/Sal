@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
-    'social_django'
+    'social_django',
+    'materializecssform',
+
 ]
 
 MIDDLEWARE = [
@@ -182,3 +184,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '407986684072-e50nufsm8s5jus4lfbs3cinh3t7iskgl.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '1hdoU5JoFptgTmFHavfO__wr' #client password
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
+
+# [...]
+# TAKENOTE this library is for fromatting forms. might be useful editing the profiles 'materializecssform'
+#https://pypi.org/project/django-materializecss-form/

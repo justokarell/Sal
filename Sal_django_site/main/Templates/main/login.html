@@ -106,7 +106,20 @@
 
                     <form class="col s12" method="POST">
                         {% csrf_token %}
-                        {{form.as_p}}
+                        {% load materializecss %}
+                        <!-- {{ form|materializecss }} -->
+                        {% for field in form %}
+                            <p>
+                                {{ field.label_tag }}<br>
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <small style="color: grey">{{ field.help_text }}</small>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                {% endfor %}
+                            </p>
+                        {% endfor %}
                         <!-- <div class="input-field col s7" style= "margin-top:3rem;">
                             <input id="email" type="email" class="validate">
                             <label for="email">Email</label>

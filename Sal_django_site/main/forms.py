@@ -50,6 +50,8 @@ class CustomUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kargs):
         super(CustomUserCreationForm, self).__init__(*args, **kargs)
+        self.fields['password1'].help_text = '<br/>Password must contain at least 8 characters.'
+        self.fields['password2'].help_text = '<br/> '
         if 'username' in self.fields:
             print ("deleting username from form")
             del self.fields['username']
@@ -81,6 +83,8 @@ class CustomUserChangeForm(UserChangeForm):
 
     def __init__(self, *args, **kargs):
         super(CustomUserChangeForm, self).__init__(*args, **kargs)
+        self.fields['password1'].help_text = '<br/> Password must contain at least 8 characters.'
+        self.fields['password2'].help_text = '<br/> '
         if 'username' in self.fields:
             print ("deleting username from form")
             del self.fields['username']

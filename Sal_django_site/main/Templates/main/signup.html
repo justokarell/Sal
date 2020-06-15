@@ -108,42 +108,46 @@
                     <a href="#" class="btn active tab-btn z-depth-1">Sign Up</a>
                     <form method="POST" class="col s12" >
                         {% csrf_token %}
-                        {{ form.as_p}}
-                      <!-- <div class="input-field col s7" style= "margin-top:3rem;">
-                        <input id="name" type="text" class="validate">
-                        <label for="name">Your Organization's Name</label>
-                        <span class="helper-text" data-error="invalid" data-success=""></span>
-                      </div>
-                      <div class="row flex-center " style="margin-left:auto; margin-right:auto; max-width: 90%;" >
-                        <div class="input-field col s6">
-                            <input id="email" type="email" class="validate">
-                            <label for="email">Email</label>
-                            <span class="helper-text" data-error="invalid" data-success=""></span>
-                        </div>
-                        <div class="input-field col s6">
-                          <input id="phone" type="tel" class="validate">
-                          <label for="phone">Organization Phone</label>
-                          <span class="helper-text" data-error="invalid" data-success=""></span>
-                        </div>
-                      </div>
-                      <div class = "input-field col s7">
-                        <input id="address" type="text" class="validate">
-                        <label for = "address">Organization Address</label>
-                        <span class="helper-text" data-error="invalid" data-success=""></span>
-                      </div>
-                      <div class="row flex-center " style="margin-left:auto; margin-right:auto;  max-width: 90%;" >
-                        <div class="input-field col s6" >
-                            <input id="password" type="password" class="validate">
-                            <label for="password">Password</label>
-                            <span class="helper-text" data-error="invalid" data-success=""></span>
-                        </div>
+                        <!-- {{ form.as_p}} -->
+                        {% load materializecss %}
+                        {{ form|materializecss }}
+                        
+                                                                    <!--  THIS WAS THE MANUALLY GENERATED FORM
+                                                                        <div class="input-field col s7" style= "margin-top:3rem;">
+                                                                        <input id="name" type="text" class="validate">
+                                                                        <label for="name">Your Organization's Name</label>
+                                                                        <span class="helper-text" data-error="invalid" data-success=""></span>
+                                                                    </div>
+                                                                    <div class="row flex-center " style="margin-left:auto; margin-right:auto; max-width: 90%;" >
+                                                                        <div class="input-field col s6">
+                                                                            <input id="email" type="email" class="validate">
+                                                                            <label for="email">Email</label>
+                                                                            <span class="helper-text" data-error="invalid" data-success=""></span>
+                                                                        </div>
+                                                                        <div class="input-field col s6">
+                                                                        <input id="phone" type="tel" class="validate">
+                                                                        <label for="phone">Organization Phone</label>
+                                                                        <span class="helper-text" data-error="invalid" data-success=""></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class = "input-field col s7">
+                                                                        <input id="address" type="text" class="validate">
+                                                                        <label for = "address">Organization Address</label>
+                                                                        <span class="helper-text" data-error="invalid" data-success=""></span>
+                                                                    </div>
+                                                                    <div class="row flex-center " style="margin-left:auto; margin-right:auto;  max-width: 90%;" >
+                                                                        <div class="input-field col s6" >
+                                                                            <input id="password" type="password" class="validate">
+                                                                            <label for="password">Password</label>
+                                                                            <span class="helper-text" data-error="invalid" data-success=""></span>
+                                                                        </div>
 
-                        <div class="input-field col s6 ">
-                          <input id="confirm-password" type="password" class="validate">
-                          <label for="confirmPassword">Confirm Password</label>
-                          <span class="helper-text" data-error="Password not match" data-success=""></span>
-                        </div>
-                      </div> -->
+                                                                        <div class="input-field col s6 ">
+                                                                        <input id="confirm-password" type="password" class="validate">
+                                                                        <label for="confirmPassword">Confirm Password</label>
+                                                                        <span class="helper-text" data-error="Password not match" data-success=""></span>
+                                                                        </div>
+                                                                    </div> -->
                       <button id="login-submit" type="submit" class=" waves-effect waves-light btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Sign Up</button>
 
                       <!-- <a id="login-submit" type="submit" class=" waves-effect waves-light btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Sign Up</a> -->
