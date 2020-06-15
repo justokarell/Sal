@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main.apps.MainConfig'
+    'main.apps.MainConfig',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends', 
+                'social_django.context_processors.login_redirect', 
             ],
         },
     },
@@ -120,24 +123,62 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# # # User substitution
-# # # https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#auth-custom-user
-
-
-
+# User substitution
+#  https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#auth-custom-user
 # AUTH_USER_MODEL = 'auth.User'
 AUTH_USER_MODEL = 'main.CustomUser'
 
 
-# Tutorial notes oth user model calls:
-#  In short, you can use the get_user_model() method to get the model directly, or if you need 
-#  to create a ForeignKey or other database relationship to the user model, you can settings.AUTH_USER_MODEL 
-#  (which is just a string corresponding to the appname.ModelName path to the user model).
+# Social Signin backends
+# https://python-social-auth.readthedocs.io/en/latest/configuration/django.html
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+    'social_core.backends.twitter.TwitterOAuth',
+    # 'social_core.backends.yahoo.YahooOpenId',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
-# Note that get_user_model() cannot be called at the module level in any models.py file 
-# (and by extension any file that a models.py imports), due to circular reference issues. 
-# Generally speaking it's easier to keep calls to get_user_model() inside a method whenever 
-#  (so it's called at run time rather than load time), and use settings.AUTH_USER_MODEL in 
-#  all other cases. This isn't always possible (e.g., when creating a ModelForm), but the less
-#   you use it at the module level, the fewer circular references you'll have to stumble your way through.
 
+# Defining Soc_auth characteristics
+# https://www.digitalocean.com/community/tutorials/django-authentication-with-facebook-instagram-and-linkedin
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+
+# [...]
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+# [...]
+
+SOCIAL_AUTH_FACEBOOK_KEY = '686348802147611'        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '97343bfea6ce9d06b9dab8ac5981f52d'  # App Secret
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link'] 
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email'] 
+# SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       
+#   'fields': 'id, name, email, picture.type(large), link'
+# }
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       
+  'fields': 'id, name, email'
+}
+
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 
+    ('name', 'name'),
+    ('email', 'email'),
+    # ('picture', 'picture'),
+    # ('link', 'profile_url'),
+]
+
+
+# [...]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '407986684072-e50nufsm8s5jus4lfbs3cinh3t7iskgl.apps.googleusercontent.com' #client id
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '1hdoU5JoFptgTmFHavfO__wr' #client password
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
