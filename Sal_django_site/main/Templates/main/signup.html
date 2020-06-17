@@ -1,15 +1,17 @@
 {% extends 'main/header.html' %}
 
+
 {% block content %}
 <style>
-
-    .active:hover, .active{
+    .active:hover,
+    .active {
         color: #342E37;
         background-color: #ffffff;
     }
 
 
-    .inactive:hover, .inactive{
+    .inactive:hover,
+    .inactive {
         color: #ffffff;
         background-color: #212121;
         opacity: 0.7;
@@ -23,22 +25,22 @@
     }
 
     .floatright {
-	    float: right;
+        float: right;
     }
 
     .alignright {
-	    text-align: right;
-        margin-left:auto; 
-        margin-right:0;
-        
+        text-align: right;
+        margin-left: auto;
+        margin-right: 0;
+
     }
 
     .card {
         max-width: 750px;
         min-width: 300px;
         margin-top: 10%;
-        margin-left:auto; 
-        margin-right:auto;
+        margin-left: auto;
+        margin-right: auto;
         border-radius: 35px;
         height: auto;
         width: 60%;
@@ -46,133 +48,156 @@
         /* overflow: hidden; */
     }
 
-    .btn{
+    .btn {
         margin-top: 3%;
         border-radius: 5px;
     }
-    
-    .btn-flat:hover, .btn-flat{
-        background-color:white; 
-        color:black;
-        margin-top:2%; 
-        margin-right:2%;
+
+    .btn-flat:hover,
+    .btn-flat {
+        background-color: white;
+        color: black;
+        margin-top: 2%;
+        margin-right: 2%;
         border-radius: 25px;
     }
 
-    .tab-btn{
+    .tab-btn {
         -webkit-box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
         -moz-box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
         box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
-        
+
     }
 
-    .input-field{
+    .input-field {
         max-width: 70%;
         /* margin: auto; */
-        margin-left:auto; 
-        margin-right:auto;
-    }
-    .flex-center {
-      display: flex;
-      justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    #login-submit, #login-submit:hover{
+    .helper-text {
+        color: red;
+    }
+
+    .flex-center {
+        display: flex;
+        justify-content: center;
+    }
+
+    #login-submit,
+    #login-submit:hover {
         background-color: #9fd356;
 
     }
 
-    #facebook, .facebook:hover{
+    #facebook,
+    .facebook:hover {
         background-color: #3b5998;
-        margin-top:6%;
+        margin-top: 6%;
     }
 
-    #google, .google:hover{
+    #google,
+    .google:hover {
         background-color: #de5246;
     }
-
 </style>
+
 <body>
-        <div class="container col s8 m6">
-            
-            <div class="card hoverable">
-                <a href="javascript:history.back()" class = "btn-flat waves-effect waves-light  right">
-                    <i class = "material-icons">close</i>
-                </a>
-                
-                <div class="card-content center ">
-                    <!-- <span class="card-title">Welcome</span> -->
-                    <h2 class="center">Welcome!</h2>
+    <div class="container col s8 m6">
 
-                    <a href="login" class="btn inactive tab-btn z-depth-1">Login</a>
-                    <a href="#" class="btn active tab-btn z-depth-1">Sign Up</a>
-                    <form method="POST" class="col s12" >
-                        {% csrf_token %}
-                        <!-- {{ form.as_p}} -->
-                        {% load materializecss %}
-                        {{ form|materializecss }}
-                        
-                                                                    <!--  THIS WAS THE MANUALLY GENERATED FORM
-                                                                        <div class="input-field col s7" style= "margin-top:3rem;">
-                                                                        <input id="name" type="text" class="validate">
-                                                                        <label for="name">Your Organization's Name</label>
-                                                                        <span class="helper-text" data-error="invalid" data-success=""></span>
-                                                                    </div>
-                                                                    <div class="row flex-center " style="margin-left:auto; margin-right:auto; max-width: 90%;" >
-                                                                        <div class="input-field col s6">
-                                                                            <input id="email" type="email" class="validate">
-                                                                            <label for="email">Email</label>
-                                                                            <span class="helper-text" data-error="invalid" data-success=""></span>
-                                                                        </div>
-                                                                        <div class="input-field col s6">
-                                                                        <input id="phone" type="tel" class="validate">
-                                                                        <label for="phone">Organization Phone</label>
-                                                                        <span class="helper-text" data-error="invalid" data-success=""></span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class = "input-field col s7">
-                                                                        <input id="address" type="text" class="validate">
-                                                                        <label for = "address">Organization Address</label>
-                                                                        <span class="helper-text" data-error="invalid" data-success=""></span>
-                                                                    </div>
-                                                                    <div class="row flex-center " style="margin-left:auto; margin-right:auto;  max-width: 90%;" >
-                                                                        <div class="input-field col s6" >
-                                                                            <input id="password" type="password" class="validate">
-                                                                            <label for="password">Password</label>
-                                                                            <span class="helper-text" data-error="invalid" data-success=""></span>
-                                                                        </div>
+        <div class="card hoverable">
+            <a href="javascript:history.back()" class="btn-flat waves-effect waves-light  right">
+                <i class="material-icons">close</i>
+            </a>
 
-                                                                        <div class="input-field col s6 ">
-                                                                        <input id="confirm-password" type="password" class="validate">
-                                                                        <label for="confirmPassword">Confirm Password</label>
-                                                                        <span class="helper-text" data-error="Password not match" data-success=""></span>
-                                                                        </div>
-                                                                    </div> -->
-                      <button id="login-submit" type="submit" class=" waves-effect waves-light btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Sign Up</button>
+            <div class="card-content center ">
+                <!-- <span class="card-title">Welcome</span> -->
+                <h2 class="center">Welcome!</h2>
 
-                      <!-- <a id="login-submit" type="submit" class=" waves-effect waves-light btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Sign Up</a> -->
+                <a href="login" class="btn inactive tab-btn z-depth-1">Login</a>
+                <a href="#" class="btn active tab-btn z-depth-1">Sign Up</a>
+                <form method="POST" class="col s12">
+                    {% csrf_token %}
+                    {% load widget_tweaks %}
+                    <!-- {% for field in form.visible_fields %}
+                    <div class="input-field col" style="margin-top:3rem;">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field|add_class:'form-control' }}
+                        {% for error in field.errors %}
+                        <span class="help-block">{{ error }}</span>
+                        <span class="helper-text" data-error="invalid" data-success=""></span>
+                        {% endfor %}
+                    </div>
+                    {% endfor %} -->
 
-                      <div class="alignright">
-                          <a href="login" >Already Have An Account?</a>
-                      </div>
-                      
 
-                      <div class="divider"></div>
-                      <div class="col-md-8 mx-auto social-container my-2 order-md-1">
+
+                    {{ form.non_field_errors }}
+                    {{ form.source.errors }}
+                    {{ form.source }}
+
+                    <div class="input-field col s7" style="margin-top:3rem;">
+                        <label for="name">Your Organization's Name</label>
+                        {{ form.org_name |add_class:"validate" }}
+
+                        <span class="helper-text" data-error="Invalid Name" data-success="">{{ form.org_name.errors }}</span>
+                    </div>
+                    <div class="input-field col s7">
+                        <label for="email">Email Address</label>
+                        {{ form.email |add_class:"validate" }}
+                        <!-- <label for="email">{{ form.email.label_tag }}</label> -->
+                        <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
+                    </div>
+
+                    <div class="input-field col s7">
+                        <label for="password">Password</label>
+                        {{ form.password1|add_class:"validate" }}
+                        <span class="helper-text" data-error="Invalid Password" data-success="">
+                            <!-- <p style="color: lightgrey;">{{ form.password1.help_text }}</p> -->
+                            {{ form.password1.errors }}
+                        </span>
+                    </div>
+
+                    <div class="input-field col s7 ">
+                        <label for="confirmPassword">Confirm Password</label>
+                        {{ form.password2|add_class:"validate" }}
+                        <span class="helper-text" data-error="Passwords not match"
+                            data-success="">{{ form.password2.errors }}</span>
+                    </div>
+
+
+
+                    <button id="login-submit" type="submit" class=" waves-effect waves-light btn-large"
+                        style="margin-top:1rem; margin-bottom:2rem;">Sign Up</button>
+
+                    <!-- <a id="login-submit" type="submit" class=" waves-effect waves-light btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Sign Up</a> -->
+
+                    <div class="alignright">
+                        <a href="login">Already Have An Account?</a>
+                    </div>
+
+
+                    <div class="divider"></div>
+                    <div class="col-md-8 mx-auto social-container my-2 order-md-1">
                         <div class="col-xs-6">
-                            <a href="{% url 'social:begin' 'facebook' %}" id="facebook" class="waves-effect waves-light btn"><i class="material-icons left">face</i>Sign in with Facebook</a>
+                            <a href="{% url 'social:begin' 'facebook' %}" id="facebook"
+                                class="waves-effect waves-light btn"><i class="material-icons left">face</i>Sign in with
+                                Facebook</a>
                             <!-- <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" id="facebook" class="waves-effect waves-light btn"><i class="material-icons left">face</i>Sign in with Facebook</a> -->
                         </div>
                         <div class="col-xs-6">
-                            <a href="{% url 'social:begin' 'google-oauth2' %}"  id="google" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Sign in with Google</a>
+                            <a href="{% url 'social:begin' 'google-oauth2' %}" id="google"
+                                class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Sign in
+                                with Google</a>
                             <!-- <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"  id="google" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Sign in with Google</a> -->
                         </div>
-                      </div>
-                    </form>    
-                    
-              
-                </div>
+                    </div>
+                </form>
+
+
             </div>
         </div>
+    </div>
 </body>
 {% endblock %}

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'social_django',
     'materializecssform',
+    'widget_tweaks',
 
 ]
 
@@ -138,10 +139,10 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOpenId',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.google.GoogleOAuth',
-    'social_core.backends.twitter.TwitterOAuth',
+    # 'social_core.backends.twitter.TwitterOAuth',
     # 'social_core.backends.yahoo.YahooOpenId',
     'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.linkedin.LinkedinOAuth2',
+    # 'social_core.backends.linkedin.LinkedinOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -159,8 +160,8 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 # [...]
 
-SOCIAL_AUTH_FACEBOOK_KEY = '686348802147611'        # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '97343bfea6ce9d06b9dab8ac5981f52d'  # App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = 'xxxxxxxxxxxxxxxxxxx'        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'xxxxxxxxxxxxxxxxxxxxxx'  # App Secret
 # SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link'] 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email'] 
 # SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       
@@ -180,8 +181,8 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
 
 # [...]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '407986684072-e50nufsm8s5jus4lfbs3cinh3t7iskgl.apps.googleusercontent.com' #client id
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '1hdoU5JoFptgTmFHavfO__wr' #client password
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'xxxxxxxxxxxx' #client id
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xxxxxxxxxxxxx' #client password
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
 

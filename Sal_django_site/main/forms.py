@@ -1,45 +1,6 @@
 from django import forms
 from django.contrib.auth import password_validation
-# from django.contrib.auth.forms import UserCreationForm
-# from django.contrib.auth.models import User
-
-
-# class NewUserForm(UserCreationForm):
-#     email = forms.EmailField(required=True)
-
-#     class Meta:
-#         model = User
-#         fields = ("username", "email", "password1", "password2")
-
-#     def save(self, commit=True):
-#         user = super(NewUserForm, self).save(commit=False)
-#         user.email = self.cleaned_data["email"]
-#         if commit:
-#             user.save()
-#         return user
-
-# class NewUserForm(UserCreationForm):
-#     email = forms.EmailField(required=True)
-#     orgname = forms.CharField(required=True)
-#     phone = forms.CharField(required=True)
-#     address = forms.CharField(required=True)
-
-#     class Meta:
-#         model = User
-#         fields = ("username", "orgname", "email", "phone", "address",  "password1", "password2")
-
-#     def save(self, commit=True):
-#         user = super(NewUserForm, self).save(commit=False)
-#         user.email = self.cleaned_data["email"]
-#         user.orgname = self.cleaned_data["orgname"]
-#         user.phone = self.cleaned_data["phone"]
-#         user.address = self.cleaned_data["address"]
-#         if commit:
-#             user.save()
-#         return user
-
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-
 from .models import CustomUser
 
 class CustomUserCreationForm(UserCreationForm):
@@ -50,8 +11,8 @@ class CustomUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kargs):
         super(CustomUserCreationForm, self).__init__(*args, **kargs)
-        self.fields['password1'].help_text = '<br/>Password must contain at least 8 characters.'
-        self.fields['password2'].help_text = '<br/> '
+        self.fields['password1'].help_text = 'Password must contain at least 8 characters.'
+        self.fields['password2'].help_text = ''
         if 'username' in self.fields:
             print ("deleting username from form")
             del self.fields['username']
@@ -83,8 +44,8 @@ class CustomUserChangeForm(UserChangeForm):
 
     def __init__(self, *args, **kargs):
         super(CustomUserChangeForm, self).__init__(*args, **kargs)
-        self.fields['password1'].help_text = '<br/> Password must contain at least 8 characters.'
-        self.fields['password2'].help_text = '<br/> '
+        self.fields['password1'].help_text = 'Password must contain at least 8 characters.'
+        self.fields['password2'].help_text = ' '
         if 'username' in self.fields:
             print ("deleting username from form")
             del self.fields['username']
