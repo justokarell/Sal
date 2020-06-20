@@ -15,6 +15,9 @@ def contact(request):
     return render(request=request,
                   template_name="main/contact.html")#,
                  # context={"InfoPrompt": InfoPrompt.objects.all})
+# def map(request):
+#     return render(request=request,
+#                   template_name="main/map.html")
 
 def login_request(request):
     if request.method == 'POST':

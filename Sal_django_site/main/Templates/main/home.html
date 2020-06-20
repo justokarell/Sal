@@ -2,82 +2,194 @@
 
 {% block content %}
 <style>
-
   html {
     scroll-behavior: 2 smooth;
   }
+  .grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 3fr 3fr 1fr;
+  gap: 1pt 1pt;
+  grid-template-areas: "." "." "." ".";
+  }
+
+  .about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 20pc;
+  gap: 1px 1px;
+  grid-template-areas: ". ." ". .";
+  margin: auto;
+  text-align: center;
+  }
+.search-area {
+  width: 30%;
+  height: 10pc;
+  margin: auto;
+  margin-top: 1%;
+  padding: 2pt;
+  }
+.tab {
+  font-size: 20pt;
+  overflow: hidden;
+  border: 1pt solid #cccccc;
+  border-radius: 2pt;
+  background-color: #f1f1f1;
+  align-items: center;
+}
+.tab-button {
+  background-color: inherit;
+  float: left;
+  border: 1pt solid #cccccc;
+  border-radius: 5pt;
+  outline: none;
+  cursor: pointer;
+  margin: 3pt;
+  padding: 5pt 5pt;
+  transition: 0.3s;
+  align-items: center;
+}
+.tab-button:hover {
+  background-color: #dddddd;
+}
+.tab-button.active {
+  background-color: #cccccc;
+}
+.tabcontent {
+  font-size: 5px;
+  display: none;
+  margin: auto;
+  padding: 6px 12px;
+  border: 1pt solid #cccccc;
+  border-radius: 2pt;
+  border-top: none;
+  background-color: #f1f1f1;
+}
+.tabcontent > h3 {
+  font-size: 20pt;
+  height: 5pt;
+}
+.tab > button {
+  font-size: 15pt;
+  margin: 4pt;
+  align-items: center;
+  align-content: center;
+}
 
 </style>
 
-<!--  Scripts-->
-<!-- commented these out cause they're broken and might not be neccessary -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<!-- <script src="js/materialize.js"></script>
-<script src="js/init.js"></script> -->
+
 
 <body>
+  <div class="grid-container">
+
+    <!-- FIRST PAGE W/ NAVBAR AND SEARCH -->
+      <!-- SEARCH AREA -->
+      <div class="search-area">
+        <div class="tab">
+          <button class="tablinks" onclick="openCity(event, 'Find-food')">Find Food</button>
+          <button class="tablinks" onclick="openCity(event, 'Donate')">Donate</button>
+        </div>
+        <div id="Find-food" class="tabcontent">
+          <h3>Search Donors</h3>
+          <input id="place" type="text" placeholder="Find a business, or organization looking to donate">
+        </div>
+        <div id="Donate" class="tabcontent">
+          <h3>Search Recipients</h3>
+          <input id="place" type="text" placeholder="Find organizations looking for donations">
+        </div>
+        <button onclick="searchPlace()"> Search! </button>
+      </div>
 
 
-<br><br><br><br><br><br>
-
-
-
-  <br><br><br><br><br><br>
-
-
-  <div class="container center">
-    <div class="section">
-      <div class="row">
-        <div class="col s12 m4">
-          <h1 class="center light-green-text"> About Us</h1><br>
-          <p id="about" class="content-about">We are a few bums who did a thing</p>
+    <!-- ABOUT SECTION -->
+    <div class="about-container">
+      <div class="about-top">
+        <div class="about-top-photo">
+          <img src="#">
+        </div>
+          <div class="about-top-desc">
+            <h1>We hate waste too!</h1>
+            <p>Hey! dngakdfnjgak dfvjrencfnperog vperoghveoprw gperhgilviguhqer  urhurg jrbigwleir gr iberguw </p>
+          </div>
+      </div>
+      <div class="about-bottom">
+        <div class="about-bottom-desc">
+          <h1>We hate waste too!</h1>
+          <p>Hey! dngakdfnjgak dfvjrencfnperog vperoghveoprw gperhgilviguhqer  urhurg jrbigwleir gr iberguw </p>
+        </div>
+        <div class="about-bottom-photo">
+          <img src="#">
         </div>
       </div>
     </div>
+    
+
+
+        <footer class="page-footer light-green">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Company Bio</h5>
+                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+              </div>
+              <div class="col l3 s12">
+                <h5 class="white-text">Settings</h5>
+                <ul>
+                  <li><a class="white-text" href="#!">Link 1</a></li>
+                  <li><a class="white-text" href="#!">Link 2</a></li>
+                  <li><a class="white-text" href="#!">Link 3</a></li>
+                  <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+              <div class="col l3 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                  <li><a class="white-text" href="#!">Link 1</a></li>
+                  <li><a class="white-text" href="#!">Link 2</a></li>
+                  <li><a class="white-text" href="#!">Link 3</a></li>
+                  <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            Made by <a class="light-blue-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            </div>
+          </div>
+        </footer>
   </div>
-  <br><br><br><br><br><br>
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script> function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i=0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace("active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += "active";
+      } 
 
-
-  <footer class="page-footer light-green">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="light-blue-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-      </div>
-    </div>
-  </footer>
-
-
-
-
+  </script>
+  <script>
+    function searchPlace() {
+      var place; 
+      place = document.getElementById("place").value
+      window.location.href='/map.html'
+    }
+  </script>
 
 </body>
-
+</html>
 {% endblock %}
