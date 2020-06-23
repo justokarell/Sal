@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# This loads the environment keys
+load_dotenv(verbose=True, dotenv_path=os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -160,8 +163,8 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 # [...]
 
-SOCIAL_AUTH_FACEBOOK_KEY = 'xxxxxxxxxxxxxxxxxxx'        # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'xxxxxxxxxxxxxxxxxxxxxx'  # App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('SOCIAL_AUTH_FACEBOOK_KEY')      # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('SOCIAL_AUTH_FACEBOOK_SECRET') # App Secret
 # SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link'] 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email'] 
 # SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       
@@ -181,11 +184,39 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
 
 # [...]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'xxxxxxxxxxxx' #client id
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xxxxxxxxxxxxx' #client password
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY') #client id
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET') #client password
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
-
 # [...]
 # TAKENOTE this library is for fromatting forms. might be useful editing the profiles 'materializecssform'
 #https://pypi.org/project/django-materializecss-form/
+
+
+# INSTALLED_APPS = (
+#      'materializecssform',
+#      ...
+#      )
+
+# [...]
+# The following is for developing our email backend
+# https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html#sign-up-with-confirmation-mail
+# also this:
+# https://docs.djangoproject.com/en/dev/topics/email/
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# [...]
+# The following is another try at developing our email backend
+# https://django-registration.readthedocs.io/en/3.1/quickstart.html#default-form-template
+
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER= os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD= os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+PASSWORD_RESET_TIMEOUT_DAYS = 2

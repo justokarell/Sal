@@ -16,11 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.conf.urls import url, include
+from main import views
 
 urlpatterns = [
     path('', include('main.urls')),
     path('', include('social_django.urls', namespace='social')),
     path('admin/', admin.site.urls),
+    path('confirm-email/<str:user_id>/<str:token>/', views.ConfirmRegistrationView.as_view(), name='confirm_email'),
+
+
     # path('admin/', include('admin.site.urls')),
     
 ]

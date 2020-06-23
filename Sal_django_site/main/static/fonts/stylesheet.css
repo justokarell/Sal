@@ -148,6 +148,8 @@ h1, h2, h3 {
     font-family: 'certa_sansmedium', Arial, sans-serif;
     font-weight:normal;
     font-style:normal;
+    /* color: #342E37; */
+
   }
   
   button, .btn  {
@@ -160,6 +162,8 @@ h1, h2, h3 {
     font-family: 'certa_sansmedium', Arial, sans-serif;
     font-weight:normal;
     font-style:normal;
+    color: #342E37;
+
   }
 
 
@@ -169,7 +173,7 @@ h1, h2, h3 {
     font-weight:normal;
     font-style:normal;
     font-size: 18px;
-    color: 342E37;
+
   }
   
 
