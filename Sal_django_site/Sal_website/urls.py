@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from django.conf.urls import url, include
+from django.contrib.auth import views as auth_views
+from django.conf import settings
+from main.tokens import user_tokenizer
 from main import views
 
 urlpatterns = [
@@ -24,7 +27,19 @@ urlpatterns = [
     path('', include('social_django.urls', namespace='social')),
     path('admin/', admin.site.urls),
     path('confirm-email/<str:user_id>/<str:token>/', views.ConfirmRegistrationView.as_view(), name='confirm_email'),
-
+        path('reset-password', auth_views.PasswordResetView.as_view(template_name='main/reset_password.html',
+      html_email_template_name='main/reset_password_email.html',
+      success_url=settings.LOGIN_URL,
+      token_generator=user_tokenizer),
+      name='reset_password'),
+    path('reset-password-confirmation/<str:uidb64>/<str:token>/',
+        auth_views.PasswordResetConfirmView.as_view(
+        template_name='main/reset_password_update.html', 
+        post_reset_login=True,
+        post_reset_login_backend='django.contrib.auth.backends.ModelBackend',
+        token_generator=user_tokenizer,
+        success_url=settings.LOGIN_REDIRECT_URL),
+        name='password_reset_confirm'),
 
     # path('admin/', include('admin.site.urls')),
     

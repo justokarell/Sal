@@ -93,7 +93,7 @@ def signup(request):
 
         else:
             for msg in form.error_messages:
-                messages.error(request, f"{msg}: {form.error_messages[msg]}")
+                messages.error(request, f"Some of your input is off. Trya again.")
 
             return render(request = request,
                           template_name = "main/signup.html",
@@ -126,7 +126,7 @@ class ConfirmRegistrationView(View):
             user.save()
             context['message'] = 'Registration complete. Please login'
 
-        messages.info(request, f"You're accoount has been registered")
+        messages.success(request, f"You're accoount has been registered")
         return redirect('main:login')
 
 def account_activation_sent(request):

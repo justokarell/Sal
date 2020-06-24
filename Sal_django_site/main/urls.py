@@ -34,12 +34,13 @@ urlpatterns = [
     path("account_activation_sent", views.account_activation_sent, name='account_activation_sent'),
     path("email-test", views.email_test, name="email-test"),
     path('confirm-email', views.account_activation_sent, name='confirm_email_sent'),
+
+
     # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
     #     views.activate, name='activate'),
     # path('activate/<uidb64>/<token>/', views.activate, name='activate')
     # path('activate', views.activate, name='activate'),
     # path("activate/(<uidb64>[0-9A-Za-z_\-]+)/(<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})",
     #     views.activate, name="activate"),
-    # path('social-auth/', include('social_django.urls', namespace="social")),
-    # path("logout", auth_views.LogoutView.as_view(), name="logout"),
+
 ]
