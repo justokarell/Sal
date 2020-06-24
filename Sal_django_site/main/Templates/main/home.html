@@ -15,14 +15,25 @@
 
   .about-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 3fr;
   height: 20pc;
   gap: 1px 1px;
-  grid-template-areas: ". ." ". .";
+  grid-template-areas: "." ".";
   margin: auto;
   text-align: center;
   }
+  .about-header {
+    font-size: 50pt;
+    height: 5pc;
+  }
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 15pc;
+  }
+  
 .search-area {
   width: 30%;
   height: 10pc;
@@ -105,22 +116,27 @@
 
     <!-- ABOUT SECTION -->
     <div class="about-container">
-      <div class="about-top">
-        <div class="about-top-photo">
-          <img src="#">
+      <div class="about-header">
+        <h1 class="about-header">About Sal Hates Waste</h1>
+      </div>
+      <div class="about-content">
+        <div class="about-top">
+          <div class="about-top-photo">
+            <img src="#">
+          </div>
+            <div class="about-top-desc">
+              <h1>We hate waste too!</h1>
+              <p>Hey! dngakdfnjgak dfvjrencfnperog vperoghveoprw gperhgilviguhqer  urhurg jrbigwleir gr iberguw </p>
+            </div>
         </div>
-          <div class="about-top-desc">
+        <div class="about-bottom">
+          <div class="about-bottom-desc">
             <h1>We hate waste too!</h1>
             <p>Hey! dngakdfnjgak dfvjrencfnperog vperoghveoprw gperhgilviguhqer  urhurg jrbigwleir gr iberguw </p>
           </div>
-      </div>
-      <div class="about-bottom">
-        <div class="about-bottom-desc">
-          <h1>We hate waste too!</h1>
-          <p>Hey! dngakdfnjgak dfvjrencfnperog vperoghveoprw gperhgilviguhqer  urhurg jrbigwleir gr iberguw </p>
-        </div>
-        <div class="about-bottom-photo">
-          <img src="#">
+          <div class="about-bottom-photo">
+            <img src="#">
+          </div>
         </div>
       </div>
     </div>
