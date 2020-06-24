@@ -1,2 +1,19 @@
+<<<<<<< HEAD
 # created by virtualenv automatically
 *
+=======
+
+
+Sal_django_site/main/migrations/__pycache__/__init__.cpython-38.pyc
+Sal_django_site/main/migrations/__pycache__/0002_auto_20200412_1755.cpython-38.pyc
+Sal_django_site/main/migrations/__pycache__/0001_initial.cpython-38.pyc
+Sal_django_site/main/__pycache__/views.cpython-38.pyc
+Sal_django_site/main/__pycache__/urls.cpython-38.pyc
+Sal_django_site/main/__pycache__/models.cpython-38.pyc
+Sal_django_site/main/__pycache__/apps.cpython-38.pyc
+Sal_django_site/main/__pycache__/admin.cpython-38.pyc
+Sal_django_site/main/__pycache__/__init__.cpython-38.pyc
+Sal_django_site/.env
+Sal_django_site/.env
+
+>>>>>>> 5343e3bc8b0630ba8c13a3eb68b2cf1c3408a5bf

@@ -1,10 +1,26 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect 
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_text
+from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import CustomUserCreationForm
-from .models import InfoPrompt
+# from .tokens import account_activation_token
+from .tokens import user_tokenizer
+from .models import InfoPrompt, CustomUser
+#new stuff
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.core.mail import EmailMessage
+from django.template.loader import get_template
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.views import View
 # Create your views here.
 
 def homepage(request):
@@ -15,9 +31,15 @@ def contact(request):
     return render(request=request,
                   template_name="main/contact.html")#,
                  # context={"InfoPrompt": InfoPrompt.objects.all})
+<<<<<<< HEAD
 # def map(request):
 #     return render(request=request,
 #                   template_name="main/map.html")
+=======
+def email_test(request):
+    return render(request=request,
+                  template_name="main/account_activation_email.html")
+>>>>>>> 5343e3bc8b0630ba8c13a3eb68b2cf1c3408a5bf
 
 def login_request(request):
     if request.method == 'POST':
@@ -44,16 +66,40 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         # form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f"New account created: {username}")
-            login(request, user)
-            messages.success(request, f"You are now logged in as {username}")
+            # user = form.save()
+            # username = form.cleaned_data.get('username')
+            # messages.success(request, f"New account created: {username}")
+            # login(request, user)
+            # messages.success(request, f"You are now logged in as {username}")
+            # Below is the stuff for confirmation emails
+            # current_site = get_current_site(request)
+            # subject = 'Activate Your MySite Account'
+            # message = render_to_string('main/account_activation_email.html', {
+            #     'user': user,
+            #     'domain': current_site.domain,
+            #     'uid': urlsafe_base64_encode(force_bytes(user.pk).encode()),
+            #     'token': account_activation_token.make_token(user),
+            # })
+            # user.email_user(subject, message)
+            user = form.save(commit=False)
+            user.is_valid = False
+            user.save()
+            token = user_tokenizer.make_token(user)
+            user_id = urlsafe_base64_encode(force_bytes(user.id))
+            url = 'http://localhost:8000' + reverse('confirm_email', kwargs={'user_id': user_id, 'token': token})
+            message = get_template("main/account_activation_email.html").render({
+              'confirm_url': url
+            })
+            mail = EmailMessage('Sal Hates Waste Confirmation Email', message, to=[user.email], from_email=settings.EMAIL_HOST_USER)
+            mail.content_subtype = 'html'
+            mail.send()
+            messages.success(request,  f'A confirmation email has been sent to {user.email}. Please confirm to finish registering')
+
             return redirect("main:homepage")
 
         else:
             for msg in form.error_messages:
-                messages.error(request, f"{msg}: {form.error_messages[msg]}")
+                messages.error(request, f"Some of your input is off. Trya again.")
 
             return render(request = request,
                           template_name = "main/signup.html",
@@ -69,3 +115,27 @@ def logout_request(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect("main:homepage")
+
+
+class ConfirmRegistrationView(View):
+    def get(self, request, user_id, token):
+        user_id = force_text(urlsafe_base64_decode(user_id).decode())
+        
+        user = CustomUser.objects.get(pk=user_id)
+
+        context = {
+          'form': AuthenticationForm(),
+          'message': 'Registration confirmation error . Please click the reset password to generate a new confirmation email.'
+        }
+        if user and user_tokenizer.check_token(user, token):
+            user.is_valid = True
+            user.save()
+            context['message'] = 'Registration complete. Please login'
+
+        messages.success(request, f"You're accoount has been registered")
+        return redirect('main:login')
+
+def account_activation_sent(request):
+    return render(request=request,
+                  template_name="main/account_activation_sent.html")#,
+                 # context={"InfoPrompt": InfoPrompt.objects.all})
