@@ -31,9 +31,12 @@ def contact(request):
     return render(request=request,
                   template_name="main/contact.html")#,
                  # context={"InfoPrompt": InfoPrompt.objects.all})
-def email_test(request):
+def email_test1(request):
     return render(request=request,
                   template_name="main/account_activation_email.html")
+def email_test2(request):
+    return render(request=request,
+                  template_name="main/reset_password_email.html")
 
 def login_request(request):
     if request.method == 'POST':
@@ -60,21 +63,7 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         # form = UserCreationForm(request.POST)
         if form.is_valid():
-            # user = form.save()
-            # username = form.cleaned_data.get('username')
-            # messages.success(request, f"New account created: {username}")
-            # login(request, user)
-            # messages.success(request, f"You are now logged in as {username}")
-            # Below is the stuff for confirmation emails
-            # current_site = get_current_site(request)
-            # subject = 'Activate Your MySite Account'
-            # message = render_to_string('main/account_activation_email.html', {
-            #     'user': user,
-            #     'domain': current_site.domain,
-            #     'uid': urlsafe_base64_encode(force_bytes(user.pk).encode()),
-            #     'token': account_activation_token.make_token(user),
-            # })
-            # user.email_user(subject, message)
+
             user = form.save(commit=False)
             user.is_valid = False
             user.save()
@@ -93,7 +82,7 @@ def signup(request):
 
         else:
             for msg in form.error_messages:
-                messages.error(request, f"Some of your input is off. Trya again.")
+                messages.error(request, f"Some of your input is off. Try again.")
 
             return render(request = request,
                           template_name = "main/signup.html",
@@ -132,4 +121,9 @@ class ConfirmRegistrationView(View):
 def account_activation_sent(request):
     return render(request=request,
                   template_name="main/account_activation_sent.html")#,
+                 # context={"InfoPrompt": InfoPrompt.objects.all})
+
+def reset_confirmation_sent(request):
+    return render(request=request,
+                  template_name="main/reset_confirmation_sent.html")#,
                  # context={"InfoPrompt": InfoPrompt.objects.all})
