@@ -24,8 +24,12 @@
   text-align: center;
   }
   .about-header {
+    margin-top: 1pt;
     font-size: 50pt;
     height: 5pc;
+  }
+  .about-header > h1 {
+    margin-top: 1pt;
   }
   .about-header > a {
     font-size: inherit;
@@ -65,7 +69,7 @@
   .navbar-search-area {
     position: relative;
     display: block;
-    background-color: transparent;
+    background-color: #ddf1dd;
     background-image: url('/images/food.jpg');
     height: 100%;
     width: 100%;
@@ -75,8 +79,8 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "." ".";
-  width: 30%;
-  height: 12pc;
+  width: 50%;
+  height: 16pt;
   margin: auto;
   margin-top: 15pc;
   padding: 2pt;
@@ -93,10 +97,14 @@
 
   .tab > .tablinks {
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background:linear-gradient(to bottom, #ffffff 100%, #f6f6f6 100%);
 	background-color:#ffffff;
-	border-radius:6px;
-	border:1px solid #dcdcdc;
+  border-top-left-radius: 6pt;
+  border-top-right-radius: 6pt;
+  border-top:1pt solid #dcdcdc;
+  border-bottom: none;
+  border-left: 1pt solid #dcdcdc;
+  border-right: 1pt solid #dcdcdc;
 	display:inline-block;
 	cursor:pointer;
 	color:#666666;
@@ -105,18 +113,20 @@
 	font-weight:bold;
 	padding:6pt 20pt;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #ffffff;
 }
 .tab button:hover {
-	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	background:linear-gradient(to bottom, lightgrey 5%, #f6f6f6 100%);
 	background-color:#f6f6f6;
 }
 .tab button.active {
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background:linear-gradient(to bottom, lightgrey 5%, white 100%);
 	background-color:#ffffff;
-	border-radius:6px;
-	border:1px solid #dcdcdc;
+	border-radius:6pt;
+  border-top-left-radius: 6pt;
+  border-top-right-radius: 6pt;
+  border-top:1px solid #dcdcdc;
+  border-bottom: none;
 	display:inline-block;
 	cursor:pointer;
 	color:#666666;
@@ -125,10 +135,7 @@
 	font-weight:bold;
 	padding:6pt 20pt;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #ffffff;
 }
-
-
 
 .tabcontent {
   font-size: 5px;
@@ -138,11 +145,12 @@
   border: 2pt solid lightgrey;
   border-radius: 15pt;
   border-top: none;
-  background-color: transparent;
+  background-color: white;
 }
 
 .search-button {
   margin: auto;
+  margin-top: 4pt;
   width: 130pt;
   height: 35pt;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -165,6 +173,7 @@
 	background-color:#f6f6f6;
 }
 .search-button:active {
+  background-color: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
 	position:relative;
 	top:1px;
 }
@@ -203,7 +212,7 @@
     <!-- ABOUT SECTION -->
     <div class="about-container">
       <div class="about-header">
-        <h1 class="about-header">About <a>Sal Hates Waste</a></h1>
+        <h1>About <a>Sal Hates Waste</a></h1>
       </div>
       <div class="about-content">
         <div class="about-top">
@@ -229,41 +238,40 @@
     
 
 
-        <footer class="page-footer light-green">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Company Bio</h5>
-                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-              </div>
-              <div class="col l3 s12">
-                <h5 class="white-text">Settings</h5>
-                <ul>
-                  <li><a class="white-text" href="#!">Link 1</a></li>
-                  <li><a class="white-text" href="#!">Link 2</a></li>
-                  <li><a class="white-text" href="#!">Link 3</a></li>
-                  <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-              </div>
-              <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
-                <ul>
-                  <li><a class="white-text" href="#!">Link 1</a></li>
-                  <li><a class="white-text" href="#!">Link 2</a></li>
-                  <li><a class="white-text" href="#!">Link 3</a></li>
-                  <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-              </div>
-            </div>
+    <footer class="page-footer light-blue">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Company Bio</h5>
+            <p class="grey-text text-lighten-4">We are couple of somewhat recent college  grads trying to help out. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+  
+  
           </div>
-          <div class="footer-copyright">
-            <div class="container">
-            Made by <a class="light-blue-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-            </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Social Media</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Facebook</a></li>
+              <li><a class="white-text" href="#!">Instagram</a></li>
+              <li><a class="white-text" href="#!">Twitter</a></li>
+            </ul>
           </div>
-        </footer>
+          <div class="col l3 s12">
+            <h5 class="white-text">Menu</h5>
+            <ul>
+              <li><a class="white-text" href="#!">About</a></li>
+              <li><a class="white-text" href="#!">Map</a></li>
+              <li><a class="white-text" href="#!">Login</a></li>
+              <li><a class="white-text" href="#!">Sign up</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        Made by <a class="light-blue-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        </div>
+      </div>
+    </footer>
   </div>
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

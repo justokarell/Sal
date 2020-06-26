@@ -31,8 +31,9 @@ urlpatterns = [
     path("signup", views.signup, name="signup"),
     path("login", views.login_request, name="login"),
     path("logout", views.logout_request, name="logout"),
-    path("account_activation_sent", views.account_activation_sent, name='account_activation_sent'),
-    path("email-test", views.email_test, name="email-test"),
+    path("reset-password-confirmation", views.reset_confirmation_sent, name='password_reset_confirm_sent'),
+    path("email-test1", views.email_test1, name="email-test1"),
+    path("email-test2", views.email_test2, name="email-test2"),
     path('confirm-email', views.account_activation_sent, name='confirm_email_sent'),
 
 
