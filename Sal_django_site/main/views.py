@@ -127,3 +127,7 @@ def reset_confirmation_sent(request):
     return render(request=request,
                   template_name="main/reset_confirmation_sent.html")#,
                  # context={"InfoPrompt": InfoPrompt.objects.all})
+                 
+def map_page(request):
+    return render(request=request,
+                  template_name="main/map_page.html")

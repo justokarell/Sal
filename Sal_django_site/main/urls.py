@@ -35,6 +35,7 @@ urlpatterns = [
     path("email-test1", views.email_test1, name="email-test1"),
     path("email-test2", views.email_test2, name="email-test2"),
     path('confirm-email', views.account_activation_sent, name='confirm_email_sent'),
+    path('map_page', views.map_page, name='map_page'),
 
 
     # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
