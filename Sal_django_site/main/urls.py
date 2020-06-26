@@ -26,7 +26,7 @@ from .tokens import user_tokenizer
 app_name = 'main'
 
 urlpatterns = [
-    path("home", views.homepage, name="homepage"),
+    path("", views.homepage, name="homepage"),
     path("contact", views.contact, name="contact"),
     path("signup", views.signup, name="signup"),
     path("login", views.login_request, name="login"),
