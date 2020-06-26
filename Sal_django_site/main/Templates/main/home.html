@@ -12,92 +12,162 @@
   gap: 1pt 1pt;
   grid-template-areas: "." "." "." ".";
   }
+
   .about-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 3fr;
-    height: 20pc;
-    gap: 1px 1px;
-    grid-template-areas: "." ".";
-    margin: auto;
-    text-align: center;
-    }
-    .about-header {
-      font-size: 50pt;
-      height: 5pc;
-    }
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      height: 15pc;
-    }
-    
-  .search-area {
-    width: 30%;
-    height: 10pc;
-    margin: auto;
-    margin-top: 1%;
-    padding: 2pt;
-    }
-  .tab {
-    font-size: 20pt;
-    overflow: hidden;
-    border: 1pt solid #cccccc;
-    border-radius: 2pt;
-    background-color: #f1f1f1;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 3fr;
+  height: 20pc;
+  gap: 1px 1px;
+  grid-template-areas: "." ".";
+  margin: auto;
+  text-align: center;
   }
-  .tab-button {
-    background-color: inherit;
-    float: left;
-    border: 1pt solid #cccccc;
-    border-radius: 5pt;
+  .about-header {
+    font-size: 50pt;
+    height: 5pc;
+  }
+  .about-header > a {
+    font-size: inherit;
+    color: rgba(0, 0, 255, 0.637);
+  }
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: ". ." ". .";
+    height: 15pc;
+    margin: 90pt;
+    margin-top: 20pt;
+  }
+  .about-top-desc > h1 {
+    font-size: 30pt;
+    margin: 10pt;
+    padding: 10pt;
+    text-align: center;
+  }
+  .about-bottom-desc > h1 {
+    font-size: 30pt;
+    margin: 10pt;
+    padding: 10pt;
+    text-align: center;
+  }
+  .about-top-desc {
+    font-size: 16pt;
+    margin: auto;
+    text-align: left;
+  }
+  .about-bottom-desc {
+    font-size: 16pt;
+    margin: auto;
+    text-align: right;
+  }
+  .navbar-search-area {
+    position: relative;
+    display: block;
+    background-color: transparent;
+    background-image: url('/images/food.jpg');
+    height: 100%;
+    width: 100%;
+  }
+.search-area {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "." ".";
+  width: 30%;
+  height: 12pc;
+  margin: auto;
+  margin-top: 15pc;
+  padding: 2pt;
+  }
+
+  .tab {
+    background-color: transparent;
     outline: none;
     cursor: pointer;
-    margin: 3pt;
-    padding: 5pt 5pt;
+    margin: auto;
     transition: 0.3s;
     align-items: center;
   }
-  .tab-button:hover {
-    background-color: #dddddd;
-  }
-  .tab-button.active {
-    background-color: #cccccc;
-  }
-  .tabcontent {
-    font-size: 5px;
-    display: none;
-    margin: auto;
-    padding: 6px 12px;
-    border: 1pt solid #cccccc;
-    border-radius: 2pt;
-    border-top: none;
-    background-color: #f1f1f1;
-  }
-  .tabcontent > h3 {
-    font-size: 20pt;
-    height: 5pt;
-  }
-  .tab > button {
-    font-size: 15pt;
-    margin: 4pt;
-    align-items: center;
-    align-content: center;
-  }
-</style>
 
-<!--  Scripts-->
-<!-- commented these out cause they're broken and might not be neccessary -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<!-- <script src="js/materialize.js"></script>
-<script src="js/init.js"></script> -->
-<body>
+  .tab > .tablinks {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size: 15pt;
+	font-weight:bold;
+	padding:6pt 20pt;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.tab button:hover {
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	background-color:#f6f6f6;
+}
+.tab button.active {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size: 20pt;
+	font-weight:bold;
+	padding:6pt 20pt;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
 
 
-<br><br><br><br><br><br>
 
+.tabcontent {
+  font-size: 5px;
+  display: none;
+  margin: auto;
+  padding: 6px 12px;
+  border: 2pt solid lightgrey;
+  border-radius: 15pt;
+  border-top: none;
+  background-color: transparent;
+}
+
+.search-button {
+  margin: auto;
+  width: 130pt;
+  height: 35pt;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size: 15pt;
+	font-weight:bold;
+	padding:8pt 20pt;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.search-button:hover {
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	background-color:#f6f6f6;
+}
+.search-button:active {
+	position:relative;
+	top:1px;
+}
 
 </style>
 
@@ -108,45 +178,50 @@
 
     <!-- FIRST PAGE W/ NAVBAR AND SEARCH -->
       <!-- SEARCH AREA -->
+    <div class="navbar-search-area">
       <div class="search-area">
         <div class="tab">
-          <button class="tablinks" onclick="openCity(event, 'Find-food')">Find Food</button>
-          <button class="tablinks" onclick="openCity(event, 'Donate')">Donate</button>
+          <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')">Find Food <i class="material-icons right">location_on</i></button>
+          <button class="tablinks waves-light" onclick="openCity(event, 'Donate')">Donate<i class="material-icons right">local_grocery_store</i></button>
         </div>
-        <div id="Find-food" class="tabcontent">
-          <h3>Search Donors</h3>
-          <input id="place" type="text" placeholder="Find a business, or organization looking to donate">
+        <div>
+          <div id="Find-food" class="tabcontent">
+            <input id="place" type="text" placeholder="Find a business, or organization looking to donate">
+          </div>
+          <div id="Donate" class="tabcontent">
+            <input id="place" type="text" placeholder="Find organizations looking for donations">
+          </div>
         </div>
-        <div id="Donate" class="tabcontent">
-          <h3>Search Recipients</h3>
-          <input id="place" type="text" placeholder="Find organizations looking for donations">
-        </div>
-        <button onclick="searchPlace()"> Search! </button>
+        <br><br>
+        <button class="search-button waves-light" onclick="searchPlace()"> Search! <i class="material-icons right">location_searching</i>
+        </button>
       </div>
+    </div>
+
 
 
     <!-- ABOUT SECTION -->
     <div class="about-container">
       <div class="about-header">
-        <h1 class="about-header">About Sal Hates Waste</h1>
+        <h1 class="about-header">About <a>Sal Hates Waste</a></h1>
       </div>
       <div class="about-content">
         <div class="about-top">
-          <div class="about-top-photo">
-            <img src="#">
-          </div>
+            <div class="about-top-photo">
+              <img src="images/food.jpg">
+            </div>
             <div class="about-top-desc">
-              <h1>We hate waste too!</h1>
-              <p>Hey! dngakdfnjgak dfvjrencfnperog vperoghveoprw gperhgilviguhqer  urhurg jrbigwleir gr iberguw </p>
+              <h1>We hate waste! And you do too!</h1>
+              <p> Sal helps small businesses and local non-profits connect to donate and/or find surplus food that would otherwise be wasted. </p>
             </div>
         </div>
         <div class="about-bottom">
           <div class="about-bottom-desc">
-            <h1>We hate waste too!</h1>
-            <p>Hey! dngakdfnjgak dfvjrencfnperog vperoghveoprw gperhgilviguhqer  urhurg jrbigwleir gr iberguw </p>
+            <h1>Default to Generosity!</h1>
+            <p> All of our services are free. Simply sign-up and post your business' food surplus or search our map for donations. </p>
           </div>
           <div class="about-bottom-photo">
-            <img src="#">
+            <img src="images/food.jpg">
           </div>
         </div>
       </div>

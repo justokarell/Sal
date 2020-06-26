@@ -31,15 +31,9 @@ def contact(request):
     return render(request=request,
                   template_name="main/contact.html")#,
                  # context={"InfoPrompt": InfoPrompt.objects.all})
-<<<<<<< HEAD
-# def map(request):
-#     return render(request=request,
-#                   template_name="main/map.html")
-=======
 def email_test(request):
     return render(request=request,
                   template_name="main/account_activation_email.html")
->>>>>>> 5343e3bc8b0630ba8c13a3eb68b2cf1c3408a5bf
 
 def login_request(request):
     if request.method == 'POST':
