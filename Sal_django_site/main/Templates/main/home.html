@@ -297,9 +297,16 @@
       var place; 
       place = document.getElementById("place").value
       window.location.href='map_page'
+      sessionStorage.setItem("place", place);
     }
   </script>
-
+  <script>
+    // This goes in the first web page:
+// "favoriteMovie" is the sessionStorage variable name
+// "Shrek" is the variable string value
+{/* sessionStorage.setItem("favoriteMovie", "Shrek"); */}
+ 
+  </script>
 </body>
 </html>
 {% endblock %}
