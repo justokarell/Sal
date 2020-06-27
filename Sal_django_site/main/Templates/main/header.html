@@ -31,7 +31,7 @@
     display: grid;
     height: 30pc;
     margin: auto;
-    background-color: lightskyblue;
+    
   }
 .navbar {
     align-self: center;
@@ -41,6 +41,7 @@
     margin: auto;
     margin-top: 10pt;
     padding: 2pt;
+    
   }
   .nav-wrapper {
     width: 90%;
@@ -52,9 +53,12 @@
   <!-- NAVBAR -->
   <section>
 
-    <nav class="light-blue lighten-1" role="navigation">
+    <nav style="background-color: #342E37" role="navigation">
       <div class="nav-wrapper container">
-        <a id="logo-container" href="" class=" center brand-logo">Salhateswaste</a>
+        <!-- <a id="logo-container" href="" class=" center brand-logo">Salhateswaste</a> -->
+        <a href="/" target="_blank" class=" center brand-logo">
+          <img alt="Logo" src="{% static 'images/sal_hates_waste_logo.png' %}" height="55" style="display: block;  color: #ffffff; font-size: 16px;" border="0">
+      </a>
         <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
           <li><a href="account">{{user.org_name|title}}</a></li>
