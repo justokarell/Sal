@@ -8,7 +8,8 @@
   .grid-container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 3fr 3fr 1fr;
+  grid-template-rows: 2fr 2fr 1fr;
+  /* grid-template-rows: auto auto auto; */
   gap: 1pt 1pt;
   grid-template-areas: "." "." "." ".";
   }
@@ -22,6 +23,7 @@
   grid-template-areas: "." ".";
   margin: auto;
   text-align: center;
+  /* margin-bottom: auto; */
   }
   .about-header {
     margin-top: 1pt;
@@ -68,11 +70,15 @@
   }
   .navbar-search-area {
     position: relative;
-    display: block;
-    background-color: #ddf1dd;
-    background-image: url('/images/food.jpg');
-    height: 100%;
-    width: 100%;
+    display:block;
+    background-color: lightskyblue;
+    /* background-image: url('/images/food.jpg'); */
+    background-image: url('./static/images/food_photo.jpg'); 
+    background-size: 1918px 882px;
+    /* background-size: 100%; */
+    background-repeat: no-repeat;
+    height: auto;
+    width: auto;
   }
 .search-area {
   display: grid;
@@ -108,7 +114,7 @@
 	display:inline-block;
 	cursor:pointer;
 	color:#666666;
-	font-family:Arial;
+	/* font-family:Arial; */
 	font-size: 15pt;
 	font-weight:bold;
 	padding:6pt 20pt;
@@ -130,7 +136,7 @@
 	display:inline-block;
 	cursor:pointer;
 	color:#666666;
-	font-family:Arial;
+	/* font-family:Arial; */
 	font-size: 20pt;
 	font-weight:bold;
 	padding:6pt 20pt;
@@ -161,7 +167,7 @@
 	display:inline-block;
 	cursor:pointer;
 	color:#666666;
-	font-family:Arial;
+	/* font-family:Arial; */
 	font-size: 15pt;
 	font-weight:bold;
 	padding:8pt 20pt;
@@ -187,7 +193,7 @@
 
     <!-- FIRST PAGE W/ NAVBAR AND SEARCH -->
       <!-- SEARCH AREA -->
-    <div class="navbar-search-area">
+    <div class="navbar-search-area" >
       <div class="search-area">
         <div class="tab">
           <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')">Find Food <i class="material-icons right">location_on</i></button>
@@ -238,40 +244,8 @@
     
 
 
-    <footer class="page-footer" style="background-color: #342E37">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Company Bio</h5>
-            <p class="grey-text text-lighten-4">We are couple of somewhat recent college  grads trying to help out. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-  
-  
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Social Media</h5>
-            <ul>
-              <li><a class="white-text" href="#!">Facebook</a></li>
-              <li><a class="white-text" href="#!">Instagram</a></li>
-              <li><a class="white-text" href="#!">Twitter</a></li>
-            </ul>
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Menu</h5>
-            <ul>
-              <li><a class="white-text" href="#!">About</a></li>
-              <li><a class="white-text" href="#!">Map</a></li>
-              <li><a class="white-text" href="#!">Login</a></li>
-              <li><a class="white-text" href="#!">Sign up</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        <div class="container">
-        Made by <a class="light-blue-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-        </div>
-      </div>
-    </footer>
+    {% include 'main/footer.html' %}
+
   </div>
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
