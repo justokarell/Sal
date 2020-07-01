@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# created by virtualenv automatically
-*
-=======
 
 
 Sal_django_site/main/migrations/__pycache__/__init__.cpython-38.pyc
@@ -16,4 +12,3 @@ Sal_django_site/main/__pycache__/__init__.cpython-38.pyc
 Sal_django_site/.env
 Sal_django_site/.env
 
->>>>>>> 5343e3bc8b0630ba8c13a3eb68b2cf1c3408a5bf
