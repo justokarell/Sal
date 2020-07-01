@@ -1,6 +1,6 @@
 {% extends 'main/header.html' %}
 
-{% block content %}
+<!-- {% block content %}
 <style>
   html {
     scroll-behavior: 2 smooth;
@@ -184,7 +184,7 @@
 	top:1px;
 }
 
-</style>
+</style> -->
 
 
 
@@ -251,7 +251,10 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
-  <script> function openCity(evt, cityName) {
+  <script src="js/home_js.js"></script>
+  <script src="{% static 'static/js/home_js.js' %}"></script>
+
+  <!-- <script> function openCity(evt, cityName) {
       var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
       for (i=0; i < tabcontent.length; i++) {
@@ -273,14 +276,7 @@
       window.location.href='map_page'
       sessionStorage.setItem("place", place);
     }
-  </script>
-  <script>
-    // This goes in the first web page:
-// "favoriteMovie" is the sessionStorage variable name
-// "Shrek" is the variable string value
-{/* sessionStorage.setItem("favoriteMovie", "Shrek"); */}
- 
-  </script>
+  </script> -->
 </body>
 </html>
 {% endblock %}
