@@ -1,7 +1,14 @@
 {% extends 'main/header.html' %}
+{% block content %}
 
-<!-- {% block content %}
-<style>
+<head>
+  {% load static %}
+  <script src="{% static '/js/home_js.js' %}"></script>   
+  <link rel="stylesheet" type="text/css" href="{% static '/css/home_style.css' %}">
+
+</head>
+<!-- <style>
+
   html {
     scroll-behavior: 2 smooth;
   }
@@ -223,7 +230,7 @@
       <div class="about-content">
         <div class="about-top">
             <div class="about-top-photo">
-              <img src="images/food.jpg">
+              <img src="{% static 'images/food.jpg' %}">
             </div>
             <div class="about-top-desc">
               <h1>We hate waste! And you do too!</h1>
@@ -236,7 +243,7 @@
             <p> All of our services are free. Simply sign-up and post your business' food surplus or search our map for donations. </p>
           </div>
           <div class="about-bottom-photo">
-            <img src="images/food.jpg">
+            <img src="{% static 'images/food.jpg' %}">
           </div>
         </div>
       </div>
@@ -249,9 +256,8 @@
   </div>
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/home_js.js"></script>
+  <script src="{% static '/js/materialize.js' %}"></script>
+  <script src="{% static '/js/init.js' %}"></script>
 
   <!-- <script> function openCity(evt, cityName) {
       var i, tabcontent, tablinks;
