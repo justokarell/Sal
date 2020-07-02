@@ -1,7 +1,14 @@
 {% extends 'main/header.html' %}
 
 {% block content %}
-<style>
+
+<head>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'login_style.css' %}">
+
+</head>
+
+<!-- <style>
     .active:hover,
     .active {
         color: #342E37;
@@ -130,7 +137,7 @@
         background-color: #de5246;
     }
 
-</style>
+</style> -->
 
 <body>
     <div class="container col s8 m6" style="margin-bottom: 12em;">
