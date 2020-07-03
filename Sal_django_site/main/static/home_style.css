@@ -70,7 +70,7 @@ text-align: center;
   display:block;
   background-color: lightskyblue;
   /* background-image: url('/images/food.jpg'); */
-  background-image: url('./static/images/food_photo.jpg'); 
+  background-image: url('./static/images/food.jpg'); 
   background-size: 1918px 882px;
   /* background-size: 100%; */
   background-repeat: no-repeat;
