@@ -22,4 +22,4 @@ function searchPlace() {
     sessionStorage.setItem("place", place);
 }  
 
-document.getElementById("defaultOpen").click();
+document.getElementById("defaul_tOpen").click();

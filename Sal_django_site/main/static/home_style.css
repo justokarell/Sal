@@ -65,6 +65,18 @@ text-align: center;
   margin: auto;
   text-align: right;
 }
+.about-photo > img{
+  max-width: 50%;
+  width: 50%;
+  height: 50%;
+}
+
+img {
+  max-width: 50%;
+  width: 50%;
+  height: 50%;
+}
+
 .navbar-search-area {
   position: relative;
   display:block;
@@ -78,15 +90,15 @@ text-align: center;
   width: auto;
 }
 .search-area {
-display: grid;
-grid-template-columns: 1fr;
-grid-template-rows: 1fr 1fr;
-grid-template-areas: "." ".";
-width: 50%;
-height: 16pt;
-margin: auto;
-margin-top: 15pc;
-padding: 2pt;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "." ".";
+  width: 50%;
+  height: 16pt;
+  margin: auto;
+  margin-top: 15pc;
+  padding: 2pt;
 }
 
 .tab {
@@ -141,21 +153,21 @@ padding: 2pt;
 }
 
 .tabcontent {
-font-size: 5px;
-display: none;
-margin: auto;
-padding: 6px 12px;
-border: 2pt solid lightgrey;
-border-radius: 12pt;
-border-top: none;
-background-color: white;
+  font-size: 5px;
+  display: none;
+  margin: auto;
+  padding: 6px 12px;
+  border: 2pt solid lightgrey;
+  border-radius: 12pt;
+  border-top: none;
+  background-color: white;
 }
 
 .search-button {
-margin: auto;
-margin-top: 4pt;
-width: 130pt;
-height: 35pt;
+  margin: auto;
+  margin-top: 4pt;
+  width: 130pt;
+  height: 35pt;
   box-shadow:inset 0px 1px 0px 0px #ffffff;
   background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
   background-color:#ffffff;
@@ -180,4 +192,5 @@ background-color: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
   position:relative;
   top:1px;
 }
+
 
