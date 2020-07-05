@@ -7,12 +7,13 @@ function openCity(evt, cityName) {
     }
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace("active", "");
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += "active";
+    evt.currentTarget.className += " active";
     } 
 
+// Get the element with id="defaultOpen" and click on it
  
 function searchPlace() {
     var place; 
@@ -20,3 +21,5 @@ function searchPlace() {
     window.location.href='map_page'
     sessionStorage.setItem("place", place);
 }  
+
+document.getElementById("defaultOpen").click();

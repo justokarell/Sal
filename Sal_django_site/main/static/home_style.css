@@ -73,7 +73,7 @@ text-align: center;
   background-image: url('./static/images/food.jpg'); 
   background-size: 1918px 882px;
   /* background-size: 100%; */
-  background-repeat: no-repeat;
+  background-repeat: no-repeat
   height: auto;
   width: auto;
 }
@@ -126,10 +126,10 @@ padding: 2pt;
   background:linear-gradient(to bottom, lightgrey 5%, white 100%);
   background-color:#ffffff;
   border-radius:12pt;
-border-top-left-radius: 10pt;
-border-top-right-radius: 10pt;
-border-top:1px solid #dcdcdc;
-border-bottom: none;
+  border-top-left-radius: 10pt;
+  border-top-right-radius: 10pt;
+  border-top:1px solid #dcdcdc;
+  border-bottom: none;
   display:inline-block;
   cursor:pointer;
   color:#666666;
