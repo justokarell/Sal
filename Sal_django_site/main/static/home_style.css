@@ -1,12 +1,12 @@
-
+ 
 html {
   scroll-behavior: 2 smooth;
 }
 .grid-container {
 display: grid;
 grid-template-columns: 1fr;
-grid-template-rows: 2fr 2fr 1fr;
-/* grid-template-rows: auto auto auto; */
+grid-template-rows: 2fr 4fr 1fr;
+ /* grid-template-rows: auto auto auto;  */
 gap: 1pt 1pt;
 grid-template-areas: "." "." "." ".";
 }
@@ -20,7 +20,6 @@ gap: 1px 1px;
 grid-template-areas: "." ".";
 margin: auto;
 text-align: center;
-/* margin-bottom: auto; */
 }
 .about-header {
   margin-top: 1pt;
@@ -65,18 +64,23 @@ text-align: center;
   margin: auto;
   text-align: right;
 }
+
+
+ 
 .navbar-search-area {
   position: relative;
   display:block;
-  background-color: lightskyblue;
-  /* background-image: url('/images/food.jpg'); */
-  background-image: url('./static/images/food.jpg'); 
-  background-size: 1918px 882px;
-  /* background-size: 100%; */
-  background-repeat: no-repeat
+  background-color: #3C91E6;
+  background-image: url('images/food_photo.jpg'); 
+  /* background-size: 1918px 882px; */
+  background-size: 100%;
+  background-repeat: no-repeat;
   height: auto;
   width: auto;
 }
+
+
+
 .search-area {
 display: grid;
 grid-template-columns: 1fr;
@@ -111,7 +115,6 @@ padding: 2pt;
   display:inline-block;
   cursor:pointer;
   color:#666666;
-  /* font-family:Arial; */
   font-size: 15pt;
   font-weight:bold;
   padding:6pt 20pt;
@@ -133,7 +136,6 @@ padding: 2pt;
   display:inline-block;
   cursor:pointer;
   color:#666666;
-  /* font-family:Arial; */
   font-size: 20pt;
   font-weight:bold;
   padding:6pt 20pt;
@@ -164,7 +166,7 @@ height: 35pt;
   display:inline-block;
   cursor:pointer;
   color:#666666;
-  /* font-family:Arial; */
+
   font-size: 15pt;
   font-weight:bold;
   padding:8pt 20pt;
@@ -180,4 +182,4 @@ background-color: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
   position:relative;
   top:1px;
 }
-
+ 

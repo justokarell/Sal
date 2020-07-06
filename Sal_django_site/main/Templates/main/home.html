@@ -6,6 +6,7 @@
   <script src="{% static '/js/home_js.js' %}"></script>   
   <link rel="stylesheet" type="text/css" href="{% static 'home_style.css' %}">
 
+
 </head>
 
 
@@ -36,27 +37,35 @@
 
 
     <!-- ABOUT SECTION -->
-    <div class="about-container">
+    <div id="about-title" class="about-container">
       <div class="about-header">
         <h1>About <a>Sal Hates Waste</a></h1>
       </div>
-      <div class="about-content">
-        <div class="about-top">
+      <div class="about-content row">
+        <div class="about-top col">
+          <div class="about-top-desc">
+            <h1>We hate waste! And you do too!</h1>
+            <p> Sal helps small businesses and local non-profits connect to donate and/or find surplus food that would otherwise be wasted. </p>
             <div class="about-top-photo">
-              <img src="{% static 'images/trash_icon.png' %}">
+              <img src="{% static 'images/bread.png' %}" style="  margin-left: 20%; display:inline-flex; max-width: 40%; max-height: 70%;">
             </div>
-            <div class="about-top-desc">
+          </div>
+            <!-- <div class="about-top-desc">
               <h1>We hate waste! And you do too!</h1>
               <p> Sal helps small businesses and local non-profits connect to donate and/or find surplus food that would otherwise be wasted. </p>
-            </div>
+            </div>            
+            <div class="about-top-photo">
+              <img src="{% static 'images/trash_icon.png' %}">
+            </div> -->
         </div>
-        <div class="about-bottom">
+        <div class="about-bottom col">
           <div class="about-bottom-desc">
             <h1>Default to Generosity!</h1>
             <p> All of our services are free. Simply sign-up and post your business' food surplus or search our map for donations. </p>
           </div>
           <div class="about-bottom-photo">
-            <img src="{% static 'images/trash_icon.png' %}">
+            <img src="{% static 'images/trash_icon.png' %}" style=" max-width: 50%;
+            max-height: 70%;">
           </div>
         </div>
       </div>
