@@ -89,14 +89,12 @@ text-align: center;
   display:block;
   background-color: #3C91E6;
   background-image: url('images/food_photo.jpg'); 
-  /* background-size: 1918px 882px; */
   background-size: cover;
   background-repeat: no-repeat;
   height: auto;
   width: auto;
-
   padding: 4rem 2rem;
-  /* Grid styles */
+
   display: grid;
   align-items: center;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -131,7 +129,7 @@ padding: 2pt;
   margin-bottom: 0;
   transition: 0.3s;
   align-items: center;
-  
+  min-width: 181.5px;
 }
 
 .tab > .tablinks {
@@ -148,15 +146,20 @@ padding: 2pt;
   cursor:pointer;
   color:#666666;
   font-size: 15pt;
-  font-weight:bold;
+  /* font-weight:bold; */
   padding:6pt 20pt;
   text-decoration:none;
+  /* overflow: hidden;
+  white-space:nowrap; */
+  min-width: 182px;
+  
 }
 
-@media screen and (max-width: 775px) {
+@media screen and (max-width: 818px) {
   .tab > .tablinks{ 
     border-bottom-left-radius: 10pt;
     border-bottom-right-radius: 10pt;
+    
   }
 }
 .tab button:hover {
@@ -179,6 +182,7 @@ padding: 2pt;
   font-weight:bold;
   padding:6pt 20pt;
   text-decoration:none;
+  
 }
 
 .tabcontent {
@@ -190,6 +194,7 @@ border: 2pt solid lightgrey;
 border-radius: 12pt;
 border-top: none;
 background-color: white;
+min-width: 182px;
 }
 
 .search-button {
