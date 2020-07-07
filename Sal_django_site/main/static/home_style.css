@@ -212,7 +212,7 @@ height: 35pt;
   color:#666666;
 
   font-size: 15pt;
-  font-weight:bold;
+  /* font-weight:bold; */
   padding:8pt 20pt;
   text-decoration:none;
   text-shadow:0px 1px 0px #ffffff;

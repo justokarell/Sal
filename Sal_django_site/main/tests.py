@@ -1,23 +1,49 @@
 from django.test import TestCase
 from unittest.mock import Mock, patch
 from .models import InfoPrompt, CustomUser
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 # Create your tests here.
 class CustomUserTestCase(TestCase):
     def setUp(self):
         CustomUser.objects.create(email="validemail@gmail.com", org_name="New Biz")
-        # CustomUser.objects.create(name="cat", sound="meow")
 
-    @patch('CustomUser.email_user')
-    def test_user_accounts(self, mock_email_user):
-        """Custom User Accounts can recieve emails and display proper account info"""
-        user1 = CustomUser.objects.get(org_name="New Biz")
-        user1.email_user(self, "test Sub", "hello", from_email=None)
-        self.assertTrue(mock_email_user.called)
+    # Can retrieve users name
+    def test_org_name_valid(self):
+        dummy = CustomUser.objects.get(email="validemail@gmail.com")
+        self.assertEqual(dummy.get_short_name(), "New Biz")
+    
+    # User accounts can recieve emails
+    @patch('main.models.CustomUser')
+    def test_user_accounts(self, user_mock):
+        user_mock.email_user(self, "test Sub", "hello", from_email=None)
 
 
-        # """Animals that can speak are correctly identified"""
-        # lion = Animal.objects.get(name="lion")
-        # cat = Animal.objects.get(name="cat")
-        # self.assertEqual(lion.speak(), 'The lion says "roar"')
-        # self.assertEqual(cat.speak(), 'The cat says "meow"')
+
+class CustomUserFormTest(TestCase):
+    def setUp(self):
+        self.user = CustomUser.objects.create(email="user@mp.com", password="user", org_name="user", phone=12345678)
+
+    # Valid User Creation Form Data
+    def test_UserForm_valid(self):
+        form = CustomUserCreationForm(data={'email': "user@gmail.com", 'password1': "Test123.", 'password2': "Test123.",'org_name': "user"})
+        self.assertTrue(form.is_valid())
+
+    # Invalid User Creation Form Data
+    def test_UserForm_invalid(self):
+        form = CustomUserCreationForm(data={'email': "", 'password': "mp", 'org_name': "mp"})
+        self.assertFalse(form.is_valid())
+        
+     # Check Password Cleaning
+    @patch('main.forms.CustomUserChangeForm')
+    def test_PassForm_valid(self, form_mock):
+        form_mock.clean_password2(self)
+
+
+
+# NOTES FOR Coverage Testing
+# First: $ pip install coverage==3.6
+# Second: $ coverage run manage.py test 
+# Third: $ coverage report -m
+# Bonus Fourth: $ coverage html
+# Bonus Fifth: Open Sal_django_site/htmlcov/index.html to see the results of your report. Scroll to the bottom of the report.

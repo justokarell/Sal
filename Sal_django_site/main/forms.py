@@ -44,7 +44,7 @@ class CustomUserChangeForm(UserChangeForm):
 
     def __init__(self, *args, **kargs):
         super(CustomUserChangeForm, self).__init__(*args, **kargs)
-        self.fields['password1'].help_text = 'Password must contain at least 8 characters.'
+        self.fields['password1'].help_text = ''
         self.fields['password2'].help_text = ' '
         if 'username' in self.fields:
             print ("deleting username from form")
