@@ -1,7 +1,6 @@
 from django.test import TestCase
 from unittest.mock import Mock, patch
 from .models import InfoPrompt, CustomUser
-from 
 
 # Create your tests here.
 class CustomUserTestCase(TestCase):
@@ -22,6 +21,3 @@ class CustomUserTestCase(TestCase):
         # cat = Animal.objects.get(name="cat")
         # self.assertEqual(lion.speak(), 'The lion says "roar"')
         # self.assertEqual(cat.speak(), 'The cat says "meow"')
-        
-
-    

@@ -18,7 +18,7 @@
     <section class="navbar-search-area" >
       <div class="search-area">
         <div class="tab">
-          <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')" id="defaultOpen">Find Food<i class="material-icons right">location_on</i></button>
+          <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')" id="defaultOpen">Find Food <i class="material-icons right">location_on</i></button>
           <button class="tablinks waves-light" onclick="openCity(event, 'Donate')">Donate<i class="material-icons right">local_grocery_store</i></button>
         </div>
         <div>
@@ -79,8 +79,11 @@
   {% include 'main/footer.html' %}
 
   </div>
-
   <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static '/js/materialize.js' %}"></script>
+  <script src="{% static '/js/init.js' %}"></script>
+
 <script> document.getElementById("defaultOpen").click(); </script>
 
 </body>

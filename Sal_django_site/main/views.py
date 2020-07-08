@@ -9,8 +9,10 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import CustomUserCreationForm
+# from .tokens import account_activation_token
 from .tokens import user_tokenizer
 from .models import InfoPrompt, CustomUser
+#new stuff
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
@@ -27,8 +29,8 @@ def homepage(request):
                   context={"InfoPrompt": InfoPrompt.objects.all})
 def contact(request):
     return render(request=request,
-                  template_name="main/contact.html")
-
+                  template_name="main/contact.html")#,
+                 # context={"InfoPrompt": InfoPrompt.objects.all})
 def email_test1(request):
     return render(request=request,
                   template_name="main/account_activation_email.html")

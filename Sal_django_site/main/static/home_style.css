@@ -1,52 +1,72 @@
-
+ 
 html {
   scroll-behavior: 2 smooth;
 }
-.grid-container {
+
+
+/* .grid-container {
 display: grid;
-grid-template-columns: 1fr;
-grid-template-rows: 2fr 2fr 1fr;
-/* grid-template-rows: auto auto auto; */
+grid-template-columns: auto;
+grid-template-rows: 2fr 4fr 1fr;
 gap: 1pt 1pt;
 grid-template-areas: "." "." "." ".";
-}
+}   */
 
 .about-container {
-display: grid;
+/* display: grid;
 grid-template-columns: 1fr;
 grid-template-rows: 0.5fr 3fr;
-height: 20pc;
-gap: 1px 1px;
 grid-template-areas: "." ".";
+position: relative; */
+
+/* height: 20pc; */
+/* gap: 1px 1px; */
+height: auto;
 margin: auto;
 text-align: center;
-/* margin-bottom: auto; */
+
 }
+
 .about-header {
-  margin-top: 1pt;
+  margin-top: .5em;
   font-size: 50pt;
-  height: 5pc;
+  margin-bottom: .5em;
 }
 .about-header > h1 {
-  margin-top: 1pt;
+  margin-top: .5em;
 }
 .about-header > a {
   font-size: inherit;
   color: rgba(0, 0, 255, 0.637);
 }
 .about-content {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas: ". ." ". .";
-  height: 15pc;
-  margin: 90pt;
-  margin-top: 20pt;
+  height: 15pc; 
+  margin: 90pt; */
+  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 1rem;
+  margin-top: 1em;
+  margin-right: 1rem;
+  margin-left: 1rem;
+
 }
-.about-top-desc > h1 {
+
+.about-box {
+  margin-bottom: 3.5em;
+} 
+
+
+.about-desc > h1 {
   font-size: 30pt;
   margin: 10pt;
+  margin-bottom: 0;
   padding: 10pt;
+  padding-bottom: 0;
   text-align: center;
 }
 .about-bottom-desc > h1 {
@@ -55,16 +75,13 @@ text-align: center;
   padding: 10pt;
   text-align: center;
 }
-.about-top-desc {
+
+.about-desc {
   font-size: 16pt;
   margin: auto;
-  text-align: left;
+  text-align: center;
 }
-.about-bottom-desc {
-  font-size: 16pt;
-  margin: auto;
-  text-align: right;
-}
+<<<<<<< HEAD
 .about-photo > img{
   max-width: 50%;
   width: 50%;
@@ -77,19 +94,34 @@ img {
   height: 50%;
 }
 
+=======
+
+
+ 
+>>>>>>> bb803ea8b9db9f1ca5f67b070e8ee058dd7d81fd
 .navbar-search-area {
   position: relative;
   display:block;
-  background-color: lightskyblue;
-  /* background-image: url('/images/food.jpg'); */
-  background-image: url('./static/images/food.jpg'); 
-  background-size: 1918px 882px;
-  /* background-size: 100%; */
-  background-repeat: no-repeat
+  background-color: #3C91E6;
+  background-image: url('images/food_photo.jpg'); 
+  /* background-size: 1918px 882px; */
+  background-size: cover;
+  background-repeat: no-repeat;
   height: auto;
   width: auto;
+
+  padding: 4rem 2rem;
+  /* Grid styles */
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-bottom: 5em;
 }
+
+
+
 .search-area {
+<<<<<<< HEAD
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
@@ -99,6 +131,23 @@ img {
   margin: auto;
   margin-top: 15pc;
   padding: 2pt;
+=======
+  /* align-items: center; */
+display: grid;
+grid-template-columns: 1fr;
+grid-template-rows: 1fr 1fr;
+grid-template-areas: "." ".";
+position: relative;
+ 
+width: 50%;
+
+margin: auto;
+margin-top: 5pc;
+padding: 2pt; 
+/* height: 16pt;  */
+/* margin-top: 15pc; */
+
+>>>>>>> bb803ea8b9db9f1ca5f67b070e8ee058dd7d81fd
 }
 
 .tab {
@@ -106,8 +155,10 @@ img {
   outline: none;
   cursor: pointer;
   margin: auto;
+  margin-bottom: 0;
   transition: 0.3s;
   align-items: center;
+  
 }
 
 .tab > .tablinks {
@@ -123,11 +174,17 @@ img {
   display:inline-block;
   cursor:pointer;
   color:#666666;
-  /* font-family:Arial; */
   font-size: 15pt;
   font-weight:bold;
   padding:6pt 20pt;
   text-decoration:none;
+}
+
+@media screen and (max-width: 775px) {
+  .tab > .tablinks{ 
+    border-bottom-left-radius: 10pt;
+    border-bottom-right-radius: 10pt;
+  }
 }
 .tab button:hover {
   background:linear-gradient(to bottom, lightgrey 5%, #f6f6f6 100%);
@@ -145,7 +202,6 @@ img {
   display:inline-block;
   cursor:pointer;
   color:#666666;
-  /* font-family:Arial; */
   font-size: 20pt;
   font-weight:bold;
   padding:6pt 20pt;
@@ -176,7 +232,7 @@ img {
   display:inline-block;
   cursor:pointer;
   color:#666666;
-  /* font-family:Arial; */
+
   font-size: 15pt;
   font-weight:bold;
   padding:8pt 20pt;
@@ -192,5 +248,9 @@ background-color: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
   position:relative;
   top:1px;
 }
+<<<<<<< HEAD
 
 
+=======
+ 
+>>>>>>> bb803ea8b9db9f1ca5f67b070e8ee058dd7d81fd
