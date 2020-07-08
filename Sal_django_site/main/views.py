@@ -129,3 +129,6 @@ def reset_confirmation_sent(request):
 def map_page(request):
     return render(request=request,
                   template_name="main/map_page.html")
+
+def test_homepage_search_input(request):
+    return request.session['place']
