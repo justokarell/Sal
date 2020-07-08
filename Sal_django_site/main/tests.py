@@ -4,6 +4,7 @@ from .models import InfoPrompt, CustomUser
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
+from .views import test_homepage_search_input 
 
 
 #Unit Tests Start Here
@@ -82,5 +83,8 @@ class MySeleniumTests(StaticLiveServerTestCase):
 # Bonus Fifth: Open Sal_django_site/htmlcov/index.html to see the results of your report. Scroll to the bottom of the report.
 
 
-
+def HomepageTest(TestCase):
+    def check_session_var(self):
+        self.assertTrue(test_homepage_search_input()!={})
+    
 
