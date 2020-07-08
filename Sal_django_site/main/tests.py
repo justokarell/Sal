@@ -11,6 +11,11 @@ from .views import test_homepage_search_input
 #////////////////////////////////////////////
 
 
+class HomepageTest(TestCase):
+    # Tell us what this test is supposed to do
+    def test_session_var(self):
+        self.assertTrue(test_homepage_search_input()!={})
+    
 
 class CustomUserTestCase(TestCase):
     def setUp(self):
@@ -82,9 +87,4 @@ class MySeleniumTests(StaticLiveServerTestCase):
 # Bonus Fourth: $ coverage html
 # Bonus Fifth: Open Sal_django_site/htmlcov/index.html to see the results of your report. Scroll to the bottom of the report.
 
-
-def HomepageTest(TestCase):
-    def check_session_var(self):
-        self.assertTrue(test_homepage_search_input()!={})
-    
 
