@@ -2,8 +2,15 @@ from django.test import TestCase
 from unittest.mock import Mock, patch
 from .models import InfoPrompt, CustomUser
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from selenium.webdriver.firefox.webdriver import WebDriver
 
-# Create your tests here.
+
+#Unit Tests Start Here
+#////////////////////////////////////////////
+
+
+
 class CustomUserTestCase(TestCase):
     def setUp(self):
         CustomUser.objects.create(email="validemail@gmail.com", org_name="New Biz")
@@ -39,6 +46,32 @@ class CustomUserFormTest(TestCase):
     def test_PassForm_valid(self, form_mock):
         form_mock.clean_password2(self)
 
+#Integration Tests Start Here
+#////////////////////////////////////////////
+
+
+
+class MySeleniumTests(StaticLiveServerTestCase):
+    # This Integration Test goes through the simple flow of filling out login form and submitting
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.selenium = WebDriver()
+        cls.selenium.implicitly_wait(10)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super().tearDownClass()
+
+    def test_login(self):
+        self.selenium.get('%s%s' % (self.live_server_url, '/login'))
+        username_input = self.selenium.find_element_by_name("username")
+        username_input.send_keys('myuser')
+        password_input = self.selenium.find_element_by_name("password")
+        password_input.send_keys('secret')
+        self.selenium.find_element_by_id('login-submit').click()
 
 
 # NOTES FOR Coverage Testing
@@ -47,3 +80,7 @@ class CustomUserFormTest(TestCase):
 # Third: $ coverage report -m
 # Bonus Fourth: $ coverage html
 # Bonus Fifth: Open Sal_django_site/htmlcov/index.html to see the results of your report. Scroll to the bottom of the report.
+
+
+
+
