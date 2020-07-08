@@ -6,7 +6,6 @@
   <script src="{% static '/js/home_js.js' %}"></script>   
   <link rel="stylesheet" type="text/css" href="{% static 'home_style.css' %}">
 
-
 </head>
 
 
@@ -15,7 +14,7 @@
 
     <!-- FIRST PAGE W/ NAVBAR AND SEARCH -->
       <!-- SEARCH AREA -->
-    <section class="navbar-search-area" >
+    <div class="navbar-search-area" >
       <div class="search-area">
         <div class="tab">
           <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')" id="defaultOpen">Find Food <i class="material-icons right">location_on</i></button>
@@ -32,47 +31,36 @@
         <br><br>
         <button class="search-button waves-light" onclick="searchPlace()"> Search! <i class="material-icons right">location_searching</i></button>
       </div>
-    </section>
+    </div>
 
 
 
     <!-- ABOUT SECTION -->
-    <section id="about-title" class="about-container">
+    <div class="about-container">
       <div class="about-header">
         <h1>About <a>Sal Hates Waste</a></h1>
       </div>
-      <div class="about-content row">
-        <div class="about-box col">
-          <div class="about-desc">
+      <div class="about-content">
+        <div class="about-top">
+          <div class="about-photo">
+            <img src="{% static 'images/trash_icon.png' %}" width="200" height="200">
+          </div>
+          <div class="about-top-desc">
             <h1>We hate waste! And you do too!</h1>
             <p> Sal helps small businesses and local non-profits connect to donate and/or find surplus food that would otherwise be wasted. </p>
-            <div class="about-left-photo">
-              <img src="{% static 'images/trash_icon.png' %}" style=" max-width: 50%; max-height: 70%;">
-            </div>
           </div>
         </div>
-        <div class="about-box col">
-          <div class="about-desc">
-            <h1>Default to generosity!</h1>
+        <div class="about-bottom">
+          <div class="about-bottom-desc">
+            <h1>Default to Generosity!</h1>
             <p> All of our services are free. Simply sign-up and post your business' food surplus or search our map for donations. </p>
           </div>
-          <div class="about-center-photo">
-            <img src="{% static 'images/bread.png' %}" style="display:inline-flex; max-width: 40%; max-height: 70%;">
-          </div>
-        </div>
-        <div class="about-box col">
-          <div class="about-desc">
-            <h1>There are lots of ways to help!</h1>
-            <p> If you would rather give your time, we have some tips on how you can help connect organizations with surplus to groups who could use it. </p>
-          </div>
-          <div class="about-right-photo">
-            <img src="{% static 'images/delivery.png' %}" style=" max-width: 50%;
-            max-height: 70%;">
+          <div class="about-photo">
+            <img src="{% static 'images/sandwich.png' %}" width="200" height="200">
           </div>
         </div>
       </div>
-
-    </section>
+    </div>
     
 
 

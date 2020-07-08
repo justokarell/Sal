@@ -2,11 +2,137 @@
 
 
 {% block content %}
-<head>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'signup_style.css' %}">
-  
-</head>
+<style>
+    .active:hover,
+    .active {
+        color: #342E37;
+        background-color: #ffffff;
+    }
+
+
+    .inactive:hover,
+    .inactive {
+        color: #ffffff;
+        background-color: #212121;
+        opacity: 0.7;
+    }
+
+
+    .container {
+        /* display: flex; */
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .floatright {
+        float: right;
+    }
+
+    .alignright {
+        text-align: right;
+        margin-left: auto;
+        margin-right: 0;
+
+    }
+
+    .card {
+        max-width: 750px;
+        min-width: 300px;
+        margin-top: 10%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 35px;
+        height: auto;
+        width: 60%;
+
+        /* overflow: hidden; */
+    }
+
+    .btn {
+        margin-top: 3%;
+        border-radius: 5px;
+    }
+
+    .btn-flat:hover,
+    .btn-flat {
+        background-color: white;
+        color: black;
+        margin-top: 2%;
+        margin-right: 2%;
+        border-radius: 25px;
+    }
+
+    .tab-btn {
+        -webkit-box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
+        -moz-box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
+        box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
+
+    }
+
+    .input-field {
+        max-width: 70%;
+        /* margin: auto; */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .helper-text {
+        color: red;
+    }
+
+    .flex-center {
+        display: flex;
+        justify-content: center;
+    }
+
+    .sign-in__icon-wrapper {
+        -webkit-tap-highlight-color: transparent;
+        visibility: visible!important;
+        color: #fff;
+        pointer-events: none;
+        padding: 3px 3px 3px 3px;
+        border-radius: 4px;
+        background-color: #fff;
+        line-height: 1.3333;
+        display: inline-flex;
+    }
+
+    .facebook-icon {
+        position: relative;
+        margin-right: 10px;
+        top: 5%;
+    }
+
+    .google-icon {
+        position: relative;
+        margin-right: 10px;
+        top: 2%;
+    }
+    #login-submit,
+    #login-submit:hover {
+        background-color: #9fd356;
+        /* margin-top:2.6rem; 
+        margin-bottom:2rem;  */
+        display: inline-flex; 
+        font-size:20px; 
+        /* font-family:certa_sansmedium; */
+        border-radius: 6px;
+        margin-top:.5rem; 
+        margin-bottom:3.5rem;
+
+    }
+
+    #facebook,
+    .facebook:hover {
+        background-color: #3b5998;
+        margin-top: 6%;
+    }
+
+    #google,
+    .google:hover {
+        background-color: #de5246;
+    }
+</style>
 
 <body>
     <div class="container col s8 m6" style="margin-bottom: 12em;"> 
@@ -17,6 +143,7 @@
             </a>
 
             <div class="card-content center ">
+                <!-- <span class="card-title">Welcome</span> -->
                 <h2 class="center">Welcome!</h2>
 
                 <a href="login" class="btn inactive tab-btn z-depth-1">Login</a>
@@ -24,7 +151,19 @@
                 <form method="POST" class="col s12">
                     {% csrf_token %}
                     {% load widget_tweaks %}
-                    
+                    <!-- {% for field in form.visible_fields %}
+                    <div class="input-field col" style="margin-top:3rem;">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field|add_class:'form-control' }}
+                        {% for error in field.errors %}
+                        <span class="help-block">{{ error }}</span>
+                        <span class="helper-text" data-error="invalid" data-success=""></span>
+                        {% endfor %}
+                    </div>
+                    {% endfor %} -->
+
+
+
                     {{ form.non_field_errors }}
                     {{ form.source.errors }}
                     {{ form.source }}
