@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.sessions import request
 from django.contrib import messages
 from .forms import CustomUserCreationForm
 from .tokens import user_tokenizer
