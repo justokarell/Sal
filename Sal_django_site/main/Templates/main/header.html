@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static '/js/materialize.js' %}"></script>
+  <script src="{% static '/js/init.js' %}"></script>
 
 
 
@@ -34,6 +37,7 @@
     display: grid;
     height: 30pc;
     margin: auto;
+
     
   }
 .navbar {
@@ -44,11 +48,13 @@
     margin: auto;
     margin-top: 10pt;
     padding: 2pt;
+
     
   }
   .nav-wrapper {
     width: 90%;
   }
+
 </style>
 
 <body>
@@ -72,7 +78,7 @@
           {% endif %}
         </ul>
 
-        <ul class="left hide-on-med-and-down">
+        <ul class="left hide-on-med-and-down" >
           <li><a href="/#about-title">About</a></li>
           <li><a href="contact">Contact</a></li>
           <li><a href="profile">Profile</a></li>
@@ -80,17 +86,17 @@
         </ul>
 
         <ul id="nav-mobile" class="sidenav">
-          <li><a href="/">Home</a></li>
-          <li><a href="/#about-title">About</a></li>
-          <li><a href="contact">Contact</a></li>
-          <li><a href="profile">Profile</a></li>
-          <li><a href="map_page">Map</a></li>
+          <li><a href="/" style="font-size: x-large;">Home</a></li>
+          <li><a href="/#about-title"  style="font-size: x-large;">About</a></li>
+          <li><a href="contact"  style="font-size: x-large;">Contact</a></li>
+          <li><a href="profile"  style="font-size: x-large;">Profile</a></li>
+          <li><a href="map_page" style="font-size: x-large;">Map</a></li>
           {% if user.is_authenticated %}
-          <li><a href="account">{{user.org_name|title}}</a></li>
-          <li><a href="logout">Logout</a></li>
+          <li><a href="account"  style="font-size: x-large;">{{user.org_name|title}}</a></li>
+          <li><a href="logout"  style="font-size: x-large;">Logout</a></li>
           {% else %}
-          <li><a href="login">Login</a></li>
-          <li><a href="signup">Sign Up</a></li>
+          <li><a href="login"  style="font-size: x-large;">Login</a></li>
+          <li><a href="signup"  style="font-size: x-large;">Sign Up</a></li>
           {% endif %}
         </ul>
         <!-- <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
@@ -118,12 +124,8 @@
 </body>
 
 <script>
-  function myFunction() {
-    var x = document.getElementById("myLinks");
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    } else {
-      x.style.display = "block";
-    }
-  }
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
 </script>
