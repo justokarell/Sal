@@ -79,6 +79,9 @@ class MySeleniumTests(StaticLiveServerTestCase):
         password_input.send_keys('secret')
         self.selenium.find_element_by_id('login-submit').click()
 
+class HomepageTestSearchData(TestCase):
+    def test_homepage_search_data(self):
+        self.assertTrue(session.request['place'],{})
 
 # NOTES FOR Coverage Testing
 # First: $ pip install coverage==3.6
