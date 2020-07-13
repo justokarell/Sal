@@ -20,6 +20,9 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
+
+from address.models import Address
+from .forms import PersonForm
 # Create your views here.
 
 def homepage(request):
@@ -133,3 +136,27 @@ def map_page(request):
 
 def test_homepage_search_input(request):
     return request.session['place']
+
+
+def profile(request):
+    success = False
+    addresses = Address.objects.all()
+    if settings.GOOGLE_API_KEY:
+        google_api_key_set = True
+    else:
+        google_api_key_set = False
+
+    if request.method == 'POST':
+        form = PersonForm(request.POST)
+        if form.is_valid():
+            success = True
+    else:
+        form = PersonForm(initial={'address': Address.objects.last()})
+
+    
+    return render(request=request,
+                  template_name="main/profile.html", 
+                  context = {'form': form,
+               'google_api_key_set': google_api_key_set,
+               'success': success,
+               'addresses': addresses})

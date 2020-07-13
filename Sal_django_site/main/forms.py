@@ -2,7 +2,12 @@ from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
+from address.forms import AddressField
 
+
+class PersonForm(forms.Form):
+    address = AddressField()
+    
 class CustomUserCreationForm(UserCreationForm):
     """
     A form that creates a user, with no privileges, from the given email and

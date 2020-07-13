@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
-from .models import InfoPrompt, CustomUser
+from .models import InfoPrompt, CustomUser, Profile
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 # Register your models here.
@@ -30,7 +30,7 @@ class CustomUserAdmin(UserAdmin):
     # that reference the removed 'username' field
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('org_name', 'address')}),
+        (_('Personal info'), {'fields': ('org_name', 'profile')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
@@ -43,8 +43,8 @@ class CustomUserAdmin(UserAdmin):
     )
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
-    list_display = ('email', 'org_name', 'address', 'phone', 'is_staff')
-    search_fields = ('email', 'org_name', 'address', 'phone',)
+    list_display = ('email', 'org_name',  'is_staff')
+    search_fields = ('email', 'org_name' )
     ordering = ('email',)
 
 admin.site.register(CustomUser, CustomUserAdmin)

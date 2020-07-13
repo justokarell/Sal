@@ -4,6 +4,7 @@ from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from address.models import AddressField
 
 
 # Create your models here.
@@ -54,8 +55,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
     email = models.EmailField(_('email address'), max_length=254, unique=True)
     org_name = models.CharField(_('organization name'), max_length=30, blank=True)
-    address = models.CharField(_('address'), max_length=60, blank=True)
-    phone = models.CharField(_('phone'), max_length=17, blank=True)
+    # address = models.CharField(_('address'), max_length=60, blank=True)
+    # phone = models.CharField(_('phone'), max_length=17, blank=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
         help_text=_('Designates whether the user can log into this admin '
                     'site.'))
@@ -93,3 +94,34 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         """
         send_mail(subject, message, from_email, [self.email])
 
+class Profile(models.Model):
+    associated_user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    org_name = models.CharField('Your Organization', max_length=30, blank=True, default='')
+    org_desc = models.TextField(max_length=500, blank=True)
+    org_phone = models.CharField(_('phone'), max_length=17, blank=True)
+    org_email = models.EmailField('Your Organizations Email', max_length=254, unique=True)
+    org_address = AddressField(null=True, blank=True)
+    ############
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    ############
+
+    # org_address = models.ManyToManyField(
+    #      'Address', 
+    #      through='AddressInfo'
+    #      through_fields=('address', 'profile')
+    # )
+
+  
+    # If we don't have this, it's going to say profile object only
+    def __str__(self):
+         return f'{self.user.username} Profile'  # it's going to print username Profile
+
+    def save(self, *args, **kwargs):
+            super().save(*args, **kwargs)
+
+            img = Image.open(self.image.path)
+
+            if img.height > 300 or img.width > 300:
+                output_size = (300, 300)
+                img.thumbnail(output_size)
+                img.save(self.image.path)
