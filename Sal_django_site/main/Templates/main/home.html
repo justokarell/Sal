@@ -1,141 +1,89 @@
-
 {% extends 'main/header.html' %}
-
-{% block 'body' %}
+{% block content %}
 
 <head>
   {% load static %}
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css ( I took out rel="stylesheet" to avoid a MIME error)--> 
-    <link type="text/css"  href="css/materialize.min.css"  media="screen,projection"/>
+  <script src="{% static '/js/home_js.js' %}"></script>   
+  <link rel="stylesheet" type="text/css" href="{% static 'home_style.css' %}">
 
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-   
-    <!-- Wanted more material design icons -->
-    <link href="css/materialdesignicons.min.css" media="all" type="text/css" />
-    
-    <!-- Not sure we need the tinymce rich text editor tbh -->
-    <!-- <link href="{% static 'tinymce/css/prism.css' %}" rel='stylesheet'>
-    <script src="{% static 'tinymce/js/prism.js' %}"></script> -->
 
 </head>
 
-<style>
-
-  html {
-    scroll-behavior: 2 smooth;
-  }
-  .grid-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 2fr 1fr;
-  gap: 1px 1px;
-  grid-template-areas: "." "." "." ".";
-}
-.about-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 1px 1px;
-  grid-template-areas: ". ." ". .";
-}
-
-
-</style>
-
-
 
 <body>
+  <div class="grid-container">
 
-
-<br><br><br><br><br><br>
-
-
-
-  <br><br><br><br><br><br>
-
-<div class="grid-container">
-  <div class="search-area">
-    <img src="#">
-  </div>
-
-  <div class="container center">
-    <div class="section">
-      <div class="row">
-        <div class="col s12 m4">
-          <h1 class="center light-green-text"> About Us</h1><br>
-          <p id="about" class="content-about">We are a few bums who did a thing</p>
+    <!-- FIRST PAGE W/ NAVBAR AND SEARCH -->
+      <!-- SEARCH AREA -->
+    <section class="navbar-search-area" >
+      <div class="search-area">
+        <div class="tab">
+          <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')" id="defaultOpen">Find Food<i class="material-icons right">location_on</i></button>
+          <button class="tablinks waves-light" onclick="openCity(event, 'Donate')">Donate<i class="material-icons right">local_grocery_store</i></button>
         </div>
+        <div>
+          <div id="Find-food" class="tabcontent">
+            <input id="place" type="text" placeholder="Find a business, or organization looking to donate">
+          </div>
+          <div id="Donate" class="tabcontent">
+            <input id="place" type="text" placeholder="Find organizations looking for donations">
+          </div>
+        </div>
+        <br><br>
+        <button class="search-button waves-light" onclick="searchPlace()"> Search! <i class="material-icons right">location_searching</i></button>
       </div>
-    </div>
-  </div>
-  <div class="about-container">
-    <div class="about-1">
-      <h1 class="about-subhead">Things we do<h1>
-      <p class="about-1-content">
-        We do lots of things.
-      </p>
-      <img class="about-1-image" src="#">
-    </div>
-    <div class="about-2">
-      <h1 class="about-subhead">Things we do<h1>
-      <p class="about-2-content">
-        We do lots of things.
-      </p>
-      <img class="about-2-image" src="#">
-    </div>
-  </div>
-
-  
-  <br><br><br><br><br><br>
+    </section>
 
 
-    <footer class="page-footer light-green">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Company Bio</h5>
-            <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
 
-
+    <!-- ABOUT SECTION -->
+    <section id="about-title" class="about-container">
+      <div class="about-header">
+        <h1>About <a>Sal Hates Waste</a></h1>
+      </div>
+      <div class="about-content row">
+        <div class="about-box col">
+          <div class="about-desc">
+            <h1>We hate waste! And you do too!</h1>
+            <p> Sal helps small businesses and local non-profits connect to donate and/or find surplus food that would otherwise be wasted. </p>
+            <div class="about-left-photo">
+              <img src="{% static 'images/trash_icon.png' %}" style=" max-width: 50%; max-height: 70%;">
+            </div>
           </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Settings</h5>
-            <ul>
-              <li><a class="white-text" href="#!">Link 1</a></li>
-              <li><a class="white-text" href="#!">Link 2</a></li>
-              <li><a class="white-text" href="#!">Link 3</a></li>
-              <li><a class="white-text" href="#!">Link 4</a></li>
-            </ul>
+        </div>
+        <div class="about-box col">
+          <div class="about-desc">
+            <h1>Default to generosity!</h1>
+            <p> All of our services are free. Simply sign-up and post your business' food surplus or search our map for donations. </p>
           </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Connect</h5>
-            <ul>
-              <li><a class="white-text" href="#!">Link 1</a></li>
-              <li><a class="white-text" href="#!">Link 2</a></li>
-              <li><a class="white-text" href="#!">Link 3</a></li>
-              <li><a class="white-text" href="#!">Link 4</a></li>
-            </ul>
+          <div class="about-center-photo">
+            <img src="{% static 'images/bread.png' %}" style="display:inline-flex; max-width: 40%; max-height: 70%;">
+          </div>
+        </div>
+        <div class="about-box col">
+          <div class="about-desc">
+            <h1>There are lots of ways to help!</h1>
+            <p> If you would rather give your time, we have some tips on how you can help connect organizations with surplus to groups who could use it. </p>
+          </div>
+          <div class="about-right-photo">
+            <img src="{% static 'images/delivery.png' %}" style=" max-width: 50%;
+            max-height: 70%;">
           </div>
         </div>
       </div>
-      <div class="footer-copyright">
-        <div class="container">
-        Made by <a class="light-blue-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-        </div>
-      </div>
-    </footer>
-</div>
+
+    </section>
+    
+
+
+    {% include 'main/footer.html' %}
+
+  </div>
 
   <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
+<script> document.getElementById("defaultOpen").click(); </script>
 
 </body>
+</html>
 
 {% endblock %}

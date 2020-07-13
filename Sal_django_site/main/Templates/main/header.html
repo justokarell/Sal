@@ -1,42 +1,59 @@
-<!DOCTYPE html>
-<html>
+{% load static %}
 
 <head>
-    {% load static %}
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css ( I took out rel="stylesheet" to avoid a MIME error)--> 
-    <link type="text/css"  href="css/materialize.min.css"  media="screen,projection"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-   
-    <!-- Wanted more material design icons -->
-    <link href="css/materialdesignicons.min.css" media="all" type="text/css" />
-    
-    <!-- Not sure we need the tinymce rich text editor tbh -->
-    <!-- <link href="{% static 'tinymce/css/prism.css' %}" rel='stylesheet'>
-    <script src="{% static 'tinymce/js/prism.js' %}"></script> -->
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css ( I took out rel="stylesheet" to avoid a MIME error)-->
+  <link type="text/css" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static '/js/materialize.js' %}"></script>
+  <script src="{% static '/js/init.js' %}"></script>
+
+
+
+  <!-- Wanted more material design icons -->
+  <link href="css/materialdesignicons.min.css" media="all" type="text/css" />
+
+  <link rel="stylesheet" type="text/css" href="{% static '/fonts/stylesheet.css' %}">
+  <!-- Not sure we need the tinymce rich text editor tbh -->
+  <!-- <link href="{% static 'tinymce/css/prism.css' %}" rel='stylesheet'> -->
+  <!-- <link rel="stylesheet" type="text/css" href="{% static '/css/home_style.css' %}"> -->
+
+
 
 </head>
 
-
 <style>
+.nav-search-container {
+    display: grid;
+    height: 30pc;
+    margin: auto;
 
-  .navbar {
+    
+  }
+.navbar {
     align-self: center;
     height: 80px;
     width: 90%;
-    border-radius: 5pt;
+    border-radius: 3pt;
     margin: auto;
-  }
+    margin-top: 10pt;
+    padding: 2pt;
 
+    
+  }
   .nav-wrapper {
     width: 90%;
   }
-
 
 </style>
 
@@ -44,27 +61,71 @@
 
   <!-- NAVBAR -->
   <section>
-    
-    <nav class="navbar indigo darken-3" role="navigation">
+
+    <nav style="background-color: #342E37" role="navigation">
       <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class=" center brand-logo">Salhateswaste</a>
+        <!-- <a id="logo-container" href="" class=" center brand-logo">Salhateswaste</a> -->
+        <a href="/"  class=" center brand-logo">
+          <img alt="Logo" src="{% static 'images/sal_hates_waste_logo.png' %}" height="55" style="display: block;  color: #ffffff; font-size: 16px;" border="0">
+      </a>
         <ul class="right hide-on-med-and-down">
+          {% if user.is_authenticated %}
+          <li><a href="account">{{user.org_name|title}}</a></li>
+          <li><a href="logout">Logout</a></li>
+          {% else %}
           <li><a href="login">Login</a></li>
-          <li><a href="signup">Sign up</a></li>
+          <li><a href="signup">Sign Up</a></li>
+          {% endif %}
         </ul>
-        <ul class="left hide-on-med-and-down">
+
+        <ul class="left hide-on-med-and-down" >
+          <li><a href="/#about-title">About</a></li>
+          <li><a href="contact">Contact</a></li>
           <li><a href="profile">Profile</a></li>
-          <li><a href="Posts">Posts</a></li>
-          <li><a href="about">About</a></li>
+          <li><a href="map_page">Map</a></li>
         </ul>
-  
+
         <ul id="nav-mobile" class="sidenav">
-          <li><a href="#">Navbar Link</a></li>
+          <li><a href="/" style="font-size: x-large;">Home</a></li>
+          <li><a href="/#about-title"  style="font-size: x-large;">About</a></li>
+          <li><a href="contact"  style="font-size: x-large;">Contact</a></li>
+          <li><a href="profile"  style="font-size: x-large;">Profile</a></li>
+          <li><a href="map_page" style="font-size: x-large;">Map</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="account"  style="font-size: x-large;">{{user.org_name|title}}</a></li>
+          <li><a href="logout"  style="font-size: x-large;">Logout</a></li>
+          {% else %}
+          <li><a href="login"  style="font-size: x-large;">Login</a></li>
+          <li><a href="signup"  style="font-size: x-large;">Sign Up</a></li>
+          {% endif %}
         </ul>
-        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <!-- <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
+        <a href="javascript:void(0);" data-target="nav-mobile" class="sidenav-trigger" >
+          <i class="material-icons">menu</i>
+        </a>
       </div>
     </nav>
   </section>
+  {% if messages %}
+  {% for message in messages %}
+  {% if message.tags == 'success'%}
+  <script>M.toast({ html: "{{message}}", classes: 'green rounded', displayLength: 2000 });</script>
+  {% elif message.tags == 'info'%}
+  <script>M.toast({ html: "{{message}}", classes: 'blue rounded', displayLength: 2000 });</script>
+  {% elif message.tags == 'warning'%}
+  <script>M.toast({ html: "{{message}}", classes: 'orange rounded', displayLength: 10000 });</script>
+  {% elif message.tags == 'error'%}
+  <script>M.toast({ html: "{{message}}", classes: 'red rounded', displayLength: 10000 });</script>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
   {% block content %}
   {% endblock %}
 </body>
+
+<script>
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
+</script>
