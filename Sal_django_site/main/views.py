@@ -11,7 +11,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import CustomUserCreationForm
 from .tokens import user_tokenizer
-from .models import InfoPrompt, CustomUser
+from .models import InfoPrompt, CustomUser, Profile
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
@@ -22,7 +22,9 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
 
 from address.models import Address
-from .forms import PersonForm
+from .forms import ProfileForm, EditProfileForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def homepage(request):
@@ -32,6 +34,10 @@ def homepage(request):
 def contact(request):
     return render(request=request,
                   template_name="main/contact.html")
+
+def profile_view(request):
+    return render(request=request,
+                  template_name="main/profile_view.html")
 
 def email_test1(request):
     return render(request=request,
@@ -69,6 +75,7 @@ def signup(request):
             user = form.save(commit=False)
             user.is_valid = False
             user.save()
+            Profile.objects.create(user=user, initial={'org_name': user.get_short_name()})
             token = user_tokenizer.make_token(user)
             user_id = urlsafe_base64_encode(force_bytes(user.id))
             url = 'http://localhost:8000' + reverse('confirm_email', kwargs={'user_id': user_id, 'token': token})
@@ -137,26 +144,53 @@ def map_page(request):
 def test_homepage_search_input(request):
     return request.session['place']
 
+@login_required
+def profile_edit(request):
+ if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)  # request.FILES is show the selected image or file
 
-def profile(request):
-    success = False
+        if form.is_valid() and profile_form.is_valid():
+            user_form = form.save()
+            custom_form = profile_form.save(False)
+            custom_form.user = user_form
+            custom_form.save()
+            return redirect('main:profile-view')
+ else:
+    form = EditProfileForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user.profile)
     addresses = Address.objects.all()
     if settings.GOOGLE_API_KEY:
         google_api_key_set = True
     else:
         google_api_key_set = False
+    # args = {}
+    # args.update(csrf(request))
+    # args['form'] = form
+    # args['profile_form'] = profile_form
+    return render(request, 'main/profile_edit.html', context = {'form': form,
+               'profile_form': profile_form,
+               'google_api_key_set': google_api_key_set,
+               'addresses': addresses})
 
-    if request.method == 'POST':
-        form = PersonForm(request.POST)
-        if form.is_valid():
-            success = True
-    else:
-        form = PersonForm(initial={'address': Address.objects.last()})
+    # success = False
+    # addresses = Address.objects.all()
+    # if settings.GOOGLE_API_KEY:
+    #     google_api_key_set = True
+    # else:
+    #     google_api_key_set = False
+
+    # if request.method == 'POST':
+    #     form = ProfileForm(request.POST)
+    #     if form.is_valid():
+    #         success = True
+    # else:
+    #     form = ProfileForm(initial={'address': Address.objects.last()})
 
     
-    return render(request=request,
-                  template_name="main/profile.html", 
-                  context = {'form': form,
-               'google_api_key_set': google_api_key_set,
-               'success': success,
-               'addresses': addresses})
+    # return render(request=request,
+    #               template_name="main/profile_edit.html", 
+    #               context = {'form': form,
+    #            'google_api_key_set': google_api_key_set,
+    #            'success': success,
+    #            'addresses': addresses})

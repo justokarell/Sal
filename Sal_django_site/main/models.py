@@ -77,12 +77,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def get_absolute_url(self):
         return "/users/%s/" % urlquote(self.email)
 
-    def get_full_name(self):
-        """
-        Returns the org_name plus the address, with a space in between.
-        """
-        full_name = '%s of %s' % (self.org_name, self.address)
-        return full_name.strip()
+    # def get_full_name(self):
+    #     """
+    #     Returns the org_name plus the address, with a space in between.
+    #     """
+    #     full_name = '%s of %s' % (self.org_name, self.address)
+    #     return full_name.strip()
 
     def get_short_name(self):
         "Returns the short name for the user."
@@ -95,14 +95,23 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email])
 
 class Profile(models.Model):
-    associated_user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    org_name = models.CharField('Your Organization', max_length=30, blank=True, default='')
+
+    ROLE_CHOICES = [
+        ('Donor','DONOR' ),
+        ('Recipient','RECIPIENT' ),
+        ('Both','BOTH' ),
+    ]
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    org_name = models.CharField('Your Organization', max_length=30, blank=True)
     org_desc = models.TextField(max_length=500, blank=True)
     org_phone = models.CharField(_('phone'), max_length=17, blank=True)
-    org_email = models.EmailField('Your Organizations Email', max_length=254, unique=True)
+    org_email = models.EmailField('Your Organizations Email', max_length=254)
     org_address = AddressField(null=True, blank=True)
+    org_role = models.CharField(max_length=10,
+                                      choices=ROLE_CHOICES, default="Donor",)
+
     ############
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    image = models.ImageField(default='main\static\images\default.png', upload_to='profile_pics')
     ############
 
     # org_address = models.ManyToManyField(
@@ -114,14 +123,26 @@ class Profile(models.Model):
   
     # If we don't have this, it's going to say profile object only
     def __str__(self):
-         return f'{self.user.username} Profile'  # it's going to print username Profile
+         return f'{self.user.email} Profile'  # it's going to print username Profile
 
-    def save(self, *args, **kwargs):
-            super().save(*args, **kwargs)
+    # @receiver(post_save, sender=User)
+    # def create_or_update_user_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         Profile.objects.create(user=instance)
+    #     instance.profile.save()
 
-            img = Image.open(self.image.path)
+    def createProfile(sender, **kwargs):
+        if kwargs['created']:
+            user_profile = UserProfile.objects.created(user=kwargs['instance'])
 
-            if img.height > 300 or img.width > 300:
-                output_size = (300, 300)
-                img.thumbnail(output_size)
-                img.save(self.image.path)
+        post_save.connect(createProfile, sender=User)
+
+    # def save(self, *args, **kwargs):
+    #         super().save(*args, **kwargs)
+
+    #         img = Image.open(self.image.path)
+
+    #         if img.height > 300 or img.width > 300:
+    #             output_size = (300, 300)
+    #             img.thumbnail(output_size)
+    #             img.save(self.image.path)

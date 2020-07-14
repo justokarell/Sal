@@ -2,12 +2,16 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from .models import InfoPrompt, CustomUser, Profile
-from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm, ProfileForm
 
 # Register your models here.
 
 admin.site.register(InfoPrompt)
 
+class ProfileAdmin(admin.ModelAdmin):
+    # fields = ['org_name', 'org_email','org_phone','org_address','image','org_desc','org_role']
+    list_display = ('org_name','org_email','org_phone','org_address','image','org_desc')
+admin.site.register(Profile, ProfileAdmin)
 
 class InfoPromptAdmin(admin.ModelAdmin):
     fields = [
@@ -21,6 +25,8 @@ class InfoPromptAdmin(admin.ModelAdmin):
             ),
         }),
     )
+
+
     
 class CustomUserAdmin(UserAdmin):
     # The forms to add and change user instances

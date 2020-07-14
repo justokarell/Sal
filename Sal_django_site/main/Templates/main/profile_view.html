@@ -1,0 +1,35 @@
+{% extends 'main/header.html' %}
+
+
+{% block content %}
+<head>
+    <title>User Profile</title>
+    {% load static %}
+    {% load crispy_forms_tags %}
+    <!-- needed for JS/GoogleMaps lookup -->
+    {{ form.media }}
+</head>
+<body>
+  {% if user.is_authenticated %}
+  <div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+      <div class="media-body">
+        <h2 class="account-heading">{{ user.orgname }}</h2>
+        <p class="text-secondary">Profile associated with account: {{ user.email }}</p>
+        <p class="text-secondary">Organization: {{ user.profile.org_name }}</p>
+        <p class="text-secondary">Donor or Recipient: {{ user.profile.org_role }}</p>
+        <p class="text-secondary">Organization Phone: {{ user.profile.org_phone }}</p>
+        <p class="text-secondary">Organization Email: {{ user.profile.org_email }}</p>        
+        <p class="text-secondary">Organzation Location: {{ user.profile.org_address }}</p>
+        <p class="text-secondary">Organization Description: {{ user.profile.org_desc }}</p>
+        <image>{{ user.profile.image }}</image>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <p>Nah bro you need to be signed into have a profile</p>
+  {% endif %}
+  {% include 'main/footer.html' %}
+</body>
+{% endblock %}

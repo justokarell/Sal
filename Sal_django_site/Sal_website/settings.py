@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'materializecssform',
     'widget_tweaks',
     'address',
+    'crispy_forms',
  
 
 ]
