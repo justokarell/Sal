@@ -1,37 +1,40 @@
 {% extends 'main/header.html' %}
-
+{% load static %}
 
 {% block content %}
 <head>
     <title>User Profile</title>
-    {% load static %}
     {% load crispy_forms_tags %}
     <!-- needed for JS/GoogleMaps lookup -->
-    {{ form.media }}
+    <!-- {{ form.media }} -->
 </head>
 <body>
   {% if user.is_authenticated %}
-  <div class="card hoverable"></div>
-    <div class="card-content center ">
-      <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-        <div class="media-body">
-          <h2 class="account-heading">{{ user.orgname }}</h2>
-          <p class="text-secondary">Profile associated with account: {{ user.email }}</p>
-          <p class="text-secondary">Organization: {{ user.profile.org_name }}</p>
-          <p class="text-secondary">Donor or Recipient: {{ user.profile.org_role }}</p>
-          <p class="text-secondary">Organization Phone: {{ user.profile.org_phone }}</p>
-          <p class="text-secondary">Organization Email: {{ user.profile.org_email }}</p>        
-          <p class="text-secondary">Organzation Location: {{ user.profile.org_address }}</p>
-          <p class="text-secondary">Organzation Location: {{ user.profile.org_city }}</p>
-          <p class="text-secondary">Organzation Location: {{ user.profile.org_state }}</p>
-          <p class="text-secondary">Organzation Location: {{ user.profile.org_zipcode }}</p>
-          <p class="text-secondary">Organzation Location: {{ user.profile.org_country }}</p>
-          <p class="text-secondary">Organization Description: {{ user.profile.org_desc }}</p>
+  <div class="container col s8 m6" style="margin-bottom: 12em;"> 
+    <div class="card hoverable">
+      <div class="card-content center ">
+        <div class="media">
+          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            <p class="text-secondary">Profile associated for: {{ user.your_name }}</p>
+            <p class="text-secondary">Organization: {{ user.profile.org_name }}</p>
+            <p class="text-secondary">Donor or Recipient: {{ user.profile.org_role }}</p>
+            <p class="text-secondary">Organization Phone: {{ user.profile.org_phone }}</p>
+            <p class="text-secondary">Organization Email: {{ user.profile.org_email }}</p>        
+            <p class="text-secondary">Organzation Location: {{ user.profile.org_address }}</p>
+            <p class="text-secondary">Organzation Location: {{ user.profile.org_city }}</p>
+            <p class="text-secondary">Organzation Location: {{ user.profile.org_state }}</p>
+            <p class="text-secondary">Organzation Location: {{ user.profile.org_zipcode }}</p>
+            <p class="text-secondary">Organzation Location: {{ user.profile.org_country }}</p>
+            <p class="text-secondary">Organization Description: {{ user.profile.org_desc }}</p>
+        </div>
+        <div>
+          <button><a href="profile-edit" style="font-size: x-large;">Edit Profile</a></button>
+          <button><a href="my-posts" style="font-size: x-large;">My Posts</a></button>
         </div>
       </div>
     </div>
   </div>
+
   {% else %}
   <p>Nah bro you need to be signed into have a profile</p>
   {% endif %}

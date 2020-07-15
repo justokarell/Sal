@@ -16,7 +16,6 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['org_name', 'org_role','org_email','org_phone','org_address','org_city','org_state','org_zipcode','org_country','image','org_desc']
        
-
     
 class CustomUserCreationForm(UserCreationForm):
     """

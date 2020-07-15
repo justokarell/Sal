@@ -15,29 +15,16 @@
   }
 </style>
 <body>
-    <!-- {% if not google_api_key_set %}
-    <p>This django-address example site is running correctly.
-    <p>However, you <span class="bold">must</span> set <span class="fixed-width">GOOGLE_API_KEY</span> in settings.py to use this demo.</p>
-    <p>See this <a target="_blank" href="https://github.com/furious-luke/django-address/blob/master/example_site/README.md">sample project's readme</a> for instructions.</p>
-    {% else %}
-    <h1>django-address demo application</h1>
-    <form action="" method="post">
-      {% csrf_token %}
-      {{ form }}
-      <input type="submit" value="Submit">
-    </form>
-    {% if success %}
-    <p>Successfully submitted an address.</p>
-    <p>View address model data in <a href="{% url 'admin:index' %}">django admin</a>.</p>
-    {% endif %}
-    <p>Total addresses saved: {{ addresses.count }}</p>
-    {% endif %} -->
+
     {% if not google_api_key_set %}
       <p>This django-address example site is running correctly.
       <p>However, you <span class="bold">must</span> set <span class="fixed-width">GOOGLE_API_KEY</span> in settings.py to use this demo.</p>
       <p>See this <a target="_blank" href="https://github.com/furious-luke/django-address/blob/master/example_site/README.md">sample project's readme</a> for instructions.</p>
     {% else %}
       <div class="container">
+        <a href="profile-view" class="btn-flat waves-effect waves-light  right">
+          <i class="material-icons">close</i>
+        </a>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% load widget_tweaks %}
@@ -107,9 +94,12 @@
               {{  profile_form.image}}
             </div>
             <button type="submit">Submit</button>
+            <button href="profile-view" class="btn-flat waves-effect waves-light  right">Cancel</button>
         </form>
-        <br>
+        
       </div>
+        <br>
+
     {% endif %}
     {% include 'main/footer.html' %}
 </body>

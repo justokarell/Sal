@@ -39,6 +39,10 @@ def profile_view(request):
     return render(request=request,
                   template_name="main/profile_view.html")
 
+def my_posts(request):
+    return render(request=request,
+                  template_name="main/my_posts.html")
+
 def email_test1(request):
     return render(request=request,
                   template_name="main/account_activation_email.html")
