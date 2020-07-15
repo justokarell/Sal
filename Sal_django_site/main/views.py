@@ -75,7 +75,7 @@ def signup(request):
             user = form.save(commit=False)
             user.is_valid = False
             user.save()
-            Profile.objects.create(user=user, initial={'org_name': user.get_short_name()})
+            Profile.objects.create(user=user)
             token = user_tokenizer.make_token(user)
             user_id = urlsafe_base64_encode(force_bytes(user.id))
             url = 'http://localhost:8000' + reverse('confirm_email', kwargs={'user_id': user_id, 'token': token})
@@ -159,7 +159,8 @@ def profile_edit(request):
  else:
     form = EditProfileForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
-    addresses = Address.objects.all()
+    # success = False
+    # addresses = Address.objects.all()
     if settings.GOOGLE_API_KEY:
         google_api_key_set = True
     else:
@@ -170,27 +171,12 @@ def profile_edit(request):
     # args['profile_form'] = profile_form
     return render(request, 'main/profile_edit.html', context = {'form': form,
                'profile_form': profile_form,
-               'google_api_key_set': google_api_key_set,
-               'addresses': addresses})
+               'google_api_key_set': google_api_key_set})
 
-    # success = False
-    # addresses = Address.objects.all()
-    # if settings.GOOGLE_API_KEY:
-    #     google_api_key_set = True
-    # else:
-    #     google_api_key_set = False
 
-    # if request.method == 'POST':
-    #     form = ProfileForm(request.POST)
-    #     if form.is_valid():
-    #         success = True
-    # else:
-    #     form = ProfileForm(initial={'address': Address.objects.last()})
-
-    
-    # return render(request=request,
-    #               template_name="main/profile_edit.html", 
-    #               context = {'form': form,
+    # return render(request, 'main/profile_edit.html', context = {'form': form,
+    #            'profile_form': profile_form,
     #            'google_api_key_set': google_api_key_set,
     #            'success': success,
     #            'addresses': addresses})
+

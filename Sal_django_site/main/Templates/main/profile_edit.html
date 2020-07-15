@@ -32,48 +32,85 @@
     {% endif %}
     <p>Total addresses saved: {{ addresses.count }}</p>
     {% endif %} -->
-
-    <div class="container">
-      <form method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-          {% load widget_tweaks %}
-                    
-          {{ form.non_field_errors }}
-          {{ form.source.errors }}
-          {{ form.source }}
-          {{ profile_form.source }}
-          <!-- <table>
-          {{ form.as_table }}
-          {{ profile_form }}
-          </table> -->
-          
-          <!-- Invisible -->
-          <div class="input-field col s7" style="display:none;">
-            <label for="email">Your Account Email</label>
-            {{form}}
-            <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
-          </div>
-          <!-- Invisible -->
-
-
-          <div class="input-field col s7" style="margin-top:3rem;">
-            <label for="org-name">Your Organization's Name</label>
-            {{  profile_form.org_name |add_class:"validate" }}
-          </div>
-          <div class="input-field col s7">
-              <label for="org-email">Email Address</label>
-              {{  profile_form.org_email |add_class:"validate" }}
+    {% if not google_api_key_set %}
+      <p>This django-address example site is running correctly.
+      <p>However, you <span class="bold">must</span> set <span class="fixed-width">GOOGLE_API_KEY</span> in settings.py to use this demo.</p>
+      <p>See this <a target="_blank" href="https://github.com/furious-luke/django-address/blob/master/example_site/README.md">sample project's readme</a> for instructions.</p>
+    {% else %}
+      <div class="container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% load widget_tweaks %}
+                      
+            {{ form.non_field_errors }}
+            {{ form.source.errors }}
+            {{ form.source }}
+            {{ profile_form.source }}
+            <table>
+            <!-- {{ form.as_table }} -->
+            <!-- {{ profile_form }} -->
+            </table>
+            
+            <!-- Invisible -->
+            <div class="input-field col s7" style="display:none;">
+              <label for="email">Your Account Email</label>
+              {{form}}
               <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
-          </div>
-          <div>
-            <label for="org_role">Do You Donate Food or Recieve It?</label>
-            {{  profile_form.org_role |add_class:"select" }}
-          </div>
-          
-          <button type="submit">Submit</button>
-      </form>
-      <br>
-    </div>
+            </div>
+            <!-- Invisible -->
+
+
+            <div class="input-field col s7" style="margin-top:3rem;">
+              <label for="org-name">Your Organization's Name</label>
+              {{  profile_form.org_name |add_class:"validate" }}
+            </div>
+            <div>
+              <label for="org_role">Do You Donate Food or Recieve It?</label>
+              {{  profile_form.org_role |add_class:"select" }}
+            </div>
+            <div class="input-field col s7" style="margin-top:3rem;">
+              <label for="org-phone">Your Organization's Phone</label>
+              {{  profile_form.org_phone |add_class:"validate" }}
+            </div>
+
+            <div class="input-field col s7" style="margin-top:3rem;">
+                <label for="org-email">Your Organization's Email Address</label>
+                {{  profile_form.org_email |add_class:"validate" }}
+                <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
+            </div>
+            <div class="input-field col s7" > 
+              <label for="org_address">Your Organization's Physical Address</label>
+              {{  profile_form.org_address}}
+            </div>
+            <div class="input-field col s5" > 
+              <label for="org_city">City</label>
+              {{  profile_form.org_city}}
+            </div>
+            <div class="input-field col s3" > 
+              <label for="org_state">City</label>
+              {{  profile_form.org_state}}
+            </div>
+            <div class="input-field col s4" > 
+              <label for="org_zipcode">Zipcode</label>
+              {{  profile_form.org_zipcode}}
+            </div>
+            <div class="input-field col s4" > 
+              <label for="org_country">Country</label>
+              {{  profile_form.org_country}}
+            </div>
+            <div>
+              <label for="org_desc">Give a Short Description of Your Organization</label>
+              {{  profile_form.org_desc}}
+            </div>
+            <div>
+              <label for="image">Pick a profile Image</label>
+              {{  profile_form.image}}
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <br>
+      </div>
+    {% endif %}
     {% include 'main/footer.html' %}
 </body>
 {% endblock %}

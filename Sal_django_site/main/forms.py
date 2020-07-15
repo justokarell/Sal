@@ -2,16 +2,9 @@ from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser, Profile
-from address.forms import AddressField
+from address.forms import AddressField, AddressWidget
 from django.forms import ModelForm
 
-
-# class ProfileForm(forms.Form):
-#     # Profile update form allows users to update image
-#     class Meta:
-#         model = Profile
-#         fields = ['org_name','org_email','org_phone','org_address','image','org_desc']
-#     #address = AddressField()
 
 class EditProfileForm(ModelForm):
          class Meta:
@@ -21,12 +14,8 @@ class EditProfileForm(ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['org_name', 'org_role','org_email','org_phone','org_address','image','org_desc']
-        org_address = AddressField()
-        # widgets = {
-        #     'color': Select(attrs={'style': 'width: 400px;'}),
-        # }
-        
+        fields = ['org_name', 'org_role','org_email','org_phone','org_address','org_city','org_state','org_zipcode','org_country','image','org_desc']
+       
 
     
 class CustomUserCreationForm(UserCreationForm):
@@ -46,7 +35,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ("email", "org_name")
+        fields = ("email", "your_name")
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -70,8 +59,8 @@ class CustomUserChangeForm(UserChangeForm):
 
     def __init__(self, *args, **kargs):
         super(CustomUserChangeForm, self).__init__(*args, **kargs)
-        self.fields['password1'].help_text = 'Password must contain at least 8 characters'
-        self.fields['password2'].help_text = ' '
+        self.fields['password'].help_text = 'Password must contain at least 8 characters'
+        self.fields['password'].help_text = ' '
         if 'username' in self.fields:
             print ("deleting username from form")
             del self.fields['username']

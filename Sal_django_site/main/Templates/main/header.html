@@ -92,7 +92,7 @@
           <li><a href="profile-view"  style="font-size: x-large;">Profile</a></li>
           <li><a href="map_page" style="font-size: x-large;">Map</a></li>
           {% if user.is_authenticated %}
-          <li><a href="account"  style="font-size: x-large;">{{user.org_name|title}}</a></li>
+          <li><a href="account"  style="font-size: x-large;">{{user.your_name|title}}</a></li>
           <li><a href="logout"  style="font-size: x-large;">Logout</a></li>
           {% else %}
           <li><a href="login"  style="font-size: x-large;">Login</a></li>

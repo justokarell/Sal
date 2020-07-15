@@ -54,7 +54,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     Email and password are required. Other fields are optional.
     """
     email = models.EmailField(_('email address'), max_length=254, unique=True)
-    org_name = models.CharField(_('organization name'), max_length=30, blank=True)
+    your_name = models.CharField(_('user name'), max_length=30, blank=True)
     # address = models.CharField(_('address'), max_length=60, blank=True)
     # phone = models.CharField(_('phone'), max_length=17, blank=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
@@ -86,7 +86,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         "Returns the short name for the user."
-        return self.org_name
+        return self.your_name
 
     def email_user(self, subject, message, from_email=None):
         """
@@ -101,15 +101,24 @@ class Profile(models.Model):
         ('Recipient','RECIPIENT' ),
         ('Both','BOTH' ),
     ]
+    # const stateAbbreviations = [
+    #     'AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FM','FL','GA',
+    #     'GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MH','MD','MA',
+    #     'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND',
+    #     'MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT',
+    #     'VT','VI','VA','WA','WV','WI','WY'
+    # ]
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     org_name = models.CharField('Your Organization', max_length=30, blank=True)
-    org_desc = models.TextField(max_length=500, blank=True)
+    org_role = models.CharField(max_length=10, choices=ROLE_CHOICES, default="Donor",)
     org_phone = models.CharField(_('phone'), max_length=17, blank=True)
     org_email = models.EmailField('Your Organizations Email', max_length=254)
-    org_address = AddressField(null=True, blank=True)
-    org_role = models.CharField(max_length=10,
-                                      choices=ROLE_CHOICES, default="Donor",)
-
+    org_address = models.CharField('Your Organizations Location', max_length=80, default="123 Test St.")
+    org_city = models.CharField(max_length=30, default="Stamford", blank=False)
+    org_state = models.CharField(max_length=2, default="CT", blank=False)
+    org_zipcode = models.CharField(max_length=30, null=True, blank=True,)
+    org_country = models.CharField(max_length=60, default="USA", blank=False)
+    org_desc = models.TextField(max_length=500, blank=True)
     ############
     image = models.ImageField(default='main\static\images\default.png', upload_to='profile_pics')
     ############
