@@ -14,18 +14,18 @@
     <div class="card hoverable">
       <div class="card-content center ">
         <div class="media">
-          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" width="200">
             <p class="text-secondary">Profile associated for: {{ user.your_name }}</p>
             <p class="text-secondary">Organization: {{ user.profile.org_name }}</p>
             <p class="text-secondary">Donor or Recipient: {{ user.profile.org_role }}</p>
             <p class="text-secondary">Organization Phone: {{ user.profile.org_phone }}</p>
             <p class="text-secondary">Organization Email: {{ user.profile.org_email }}</p>        
-            <p class="text-secondary">Organzation Location: {{ user.profile.org_address }}</p>
-            <p class="text-secondary">Organzation Location: {{ user.profile.org_city }}</p>
-            <p class="text-secondary">Organzation Location: {{ user.profile.org_state }}</p>
-            <p class="text-secondary">Organzation Location: {{ user.profile.org_zipcode }}</p>
-            <p class="text-secondary">Organzation Location: {{ user.profile.org_country }}</p>
-            <p class="text-secondary">Organization Description: {{ user.profile.org_desc }}</p>
+            <p class="text-secondary">Organzation Address: {{ user.profile.org_address }}</p>
+            <p class="text-secondary"> City: {{ user.profile.org_city }}</p>
+            <p class="text-secondary"> State: {{ user.profile.org_state }}</p>
+            <p class="text-secondary"> Zipcode: {{ user.profile.org_zipcode }}</p>
+            <p class="text-secondary"> Country: {{ user.profile.org_country }}</p>
+            <p class="text-secondary"> Description: {{ user.profile.org_desc }}</p>
         </div>
         <div>
           <button><a href="profile-edit" style="font-size: x-large;">Edit Profile</a></button>

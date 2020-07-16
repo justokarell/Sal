@@ -11,7 +11,7 @@ admin.site.register(InfoPrompt)
 
 class ProfileAdmin(admin.ModelAdmin):
     # fields = ['org_name', 'org_email','org_phone','org_address','image','org_desc','org_role']
-    list_display = ('org_name','org_role','org_email','org_phone','org_address','org_city','org_state','org_zipcode','org_country','image','org_desc')
+    list_display = ('user','org_name','org_role','org_email','org_phone','org_address','org_city','org_state','org_zipcode','org_country','image','org_desc')
 
     # formfield_overrides = {
     #     AddressField: {

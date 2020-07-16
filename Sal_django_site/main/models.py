@@ -111,16 +111,16 @@ class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     org_name = models.CharField('Your Organization', max_length=30, blank=True)
     org_role = models.CharField(max_length=10, choices=ROLE_CHOICES, default="Donor",)
-    org_phone = models.CharField(_('phone'), max_length=17, blank=True)
-    org_email = models.EmailField('Your Organizations Email', max_length=254)
-    org_address = models.CharField('Your Organizations Location', max_length=80, default="123 Test St.")
-    org_city = models.CharField(max_length=30, default="Stamford", blank=False)
-    org_state = models.CharField(max_length=2, default="CT", blank=False)
-    org_zipcode = models.CharField(max_length=30, null=True, blank=True,)
-    org_country = models.CharField(max_length=60, default="USA", blank=False)
-    org_desc = models.TextField(max_length=500, blank=True)
+    org_phone = models.IntegerField(_('phone'), null=True, blank=True)
+    org_email = models.EmailField('Your Organizations Email', max_length=254, null=False)
+    org_address = models.CharField('Your Organizations Location', max_length=80, default="123 Test St.", null=False)
+    org_city = models.CharField(max_length=30, default="Stamford", null=False)
+    org_state = models.CharField(max_length=2, default="CT", null=False)
+    org_zipcode = models.CharField(max_length=30, null=True, blank=True)
+    org_country = models.CharField(max_length=60, default="USA", null=False)
+    org_desc = models.TextField(max_length=500, null=True, blank=True)
     ############
-    image = models.ImageField(default='main\static\images\default.png', upload_to='profile_pics')
+    image = models.ImageField('Profile Image',default='default.svg', upload_to='profile_pics', blank=True)
     ############
 
     # org_address = models.ManyToManyField(
@@ -139,6 +139,11 @@ class Profile(models.Model):
     #     if created:
     #         Profile.objects.create(user=instance)
     #     instance.profile.save()
+
+    def get_address(self):
+        "Returns the Formatted address"
+        fulladdress = self.org_address + " " + self.org_city + " " + self.org_state + " " + self.org_zipcode + " " + self.org_country
+        return fulladdress
 
     def createProfile(sender, **kwargs):
         if kwargs['created']:

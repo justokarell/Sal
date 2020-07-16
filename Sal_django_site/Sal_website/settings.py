@@ -132,7 +132,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main/media')
 # User substitution
 #  https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#auth-custom-user
 # AUTH_USER_MODEL = 'auth.User'

@@ -128,7 +128,7 @@ class ConfirmRegistrationView(View):
             user.save()
             context['message'] = 'Registration complete. Please login'
 
-        messages.success(request, f"You're accoount has been registered")
+        messages.success(request, f"Your account has been registered")
         return redirect('main:login')
 
 def account_activation_sent(request):
@@ -159,7 +159,11 @@ def profile_edit(request):
             custom_form = profile_form.save(False)
             custom_form.user = user_form
             custom_form.save()
+            messages.success(request, f"Your profile has been updated")
             return redirect('main:profile-view')
+        else:
+            for msg in form.error_messages:
+                messages.error(request, f"Some of your input is off. Try again.")
  else:
     form = EditProfileForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
