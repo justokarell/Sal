@@ -8,13 +8,13 @@
   .Map {
     float: right;
     margin: auto;
-    padding: 40px;
+    padding: 20pt;
   }
   .Donation {
     float: left;
-    margin: 80px;
-    padding: 20px;
-    width: 500px;
+    margin: 20pt;
+    padding: 20pt;
+    width: 800pt;
   }
   .input-field {
     margin: 30px;
@@ -57,63 +57,60 @@
 
 <!-- DONATION INFORMATION -->
 <section class="Donation">
-<form>
-    <br></br>
-      <h4 class="center-align">Enter Donation Info</h4>
-    <br></br>
-    <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s6">
-            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-            <label for="first_name">First Name</label>
+<div class="row">
+    <div class="col s12 m6">
+      <div class="card white">
+        <h2 class="filter-title center-align blue-text">Filters</h2>
+        <div class="card-content white-text">
+          <br>
+          <form action="#">
+            <p>
+              <label>
+                <input name="group1" type="radio" checked />
+                <span>Donors</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input name="group1" type="radio" />
+                <span>Recipients</span>
+              </label>
+            </p>
+          </form>
+          <br>
+          <form action="#">
+            <h4 class="time-range center-align black-text">Time Range</h4>
+            <p class="range-field">
+              <input type="range" id="test5" min="0" max="100" />
+            </p>
+          </form>
+          <br>
+          <div class="date-picker">
+            <h4 class="date-picker-header center-align black-text">Date(s) Available</h4>
+            <input type="text" class="datepicker">
           </div>
-          <div class="input-field col s6">
-            <input id="last_name" type="text" class="validate">
-            <label for="last_name">Last Name</label>
-          </div>
+
         </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-            <label for="disabled">Disabled</label>
-          </div>
+        <form action="#">
+          <p>
+            <label>
+              <input name="group1" type="radio" checked />
+              <span>Perishable</span>
+            </label>
+          </p>
+          <p>
+            <label>
+              <input name="group1" type="radio" />
+              <span>Non-perishable</span>
+            </label>
+          </p>
+        </form>
+        <div class="card-action center-align">
+          <a href="#">Can't find what you're looking for?</a>
         </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="password" type="password" class="validate">
-            <label for="password">Password</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
-            <label for="email">Email</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            This is an inline input field:
-            <div class="input-field inline">
-              <input id="email_inline" type="email" class="validate">
-              <label for="email_inline">Email</label>
-              <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-            </div>
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
-    <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s13">
-            <textarea id="textarea1" class="materialize-textarea"></textarea>
-            <label for="textarea1">Textarea</label>
-          </div>
-        </div>
-      </form>
-    </div>
-  </form>
+  </div>
  </section>
 
 
@@ -126,6 +123,7 @@
 </body> 
 
 <script src="{% static 'tinymce/js/prism.js' %}"></script>
+
 <script>
 
 // Initialize and add the map
@@ -153,5 +151,19 @@ function initMap() {
 // Retrieve the sessionStorage variable
 var place = sessionStorage.getItem('place'); 
 </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.datepicker');
+    var instances = M.Datepicker.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>
+
 
 {% endblock %}
