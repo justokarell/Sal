@@ -5,17 +5,19 @@
 
 
 <style>
+  .Donation {
+    float: left;
+    margin: auto;
+    padding: 15pt;
+    width: 40%;
+  }
   .Map {
     float: right;
     margin: auto;
-    padding: 20pt;
+    padding: 10pt;
+    width: 60%;
   }
-  .Donation {
-    float: left;
-    margin: 20pt;
-    padding: 20pt;
-    width: 800pt;
-  }
+  
   .input-field {
     margin: 30px;
     padding: 20px;
@@ -45,80 +47,97 @@
       </ul>
     </div>
   </nav>
-</section>
+</section>{% endcomment %}
 
 <!-- MAP -->
 <section class="Map">
   <h3 class="center-align">My Google Maps Demo</h3>
       <!--The div element for the map -->
   <div id="map"></div>
-</section> {% endcomment %}
+</section> 
 
 
 <!-- DONATION INFORMATION -->
 <section class="Donation">
-<div class="row">
+  <div class="row">
     <div class="col s12 m6">
       <div class="card white">
         <h2 class="filter-title center-align blue-text">Filters</h2>
         <div class="card-content white-text">
-          <br>
           <form action="#">
+            <p class="time-range center-align black-text" style="font-size:1.6vw">Donors or Recipients?</p>
+            <br>
             <p>
               <label>
-                <input name="group1" type="radio" checked />
+                <input class="with-gap" name="group1" type="radio" />
                 <span>Donors</span>
               </label>
             </p>
             <p>
               <label>
-                <input name="group1" type="radio" />
+                <input class="with-gap" name="group1" type="radio"  />
                 <span>Recipients</span>
               </label>
             </p>
           </form>
           <br>
           <form action="#">
-            <h4 class="time-range center-align black-text">Time Range</h4>
+            <p class="time-range center-align black-text" style="font-size:1.6vw">Time Range</p>
             <p class="range-field">
               <input type="range" id="test5" min="0" max="100" />
             </p>
           </form>
           <br>
           <div class="date-picker">
-            <h4 class="date-picker-header center-align black-text">Date(s) Available</h4>
+            <p class="date-picker-header center-align black-text" style="font-size:1.6vw">Date(s) Available</p>
             <input type="text" class="datepicker">
           </div>
-
+          <br>
+          <div class="input-field col s12">
+            <select multiple>
+              <option value="1">Sunday</option>
+              <option value="2">Monday</option>
+              <option value="3">Tuesday</option>
+              <option value="4">Wednesday</option>
+              <option value="5">Thursday</option>
+              <option value="6">Fridday</option>
+              <option value="7">Saturday</option>
+            </select>
+            <label>Select the days of availability</label>
+          </div>
+          <br>
+          <form action="#">
+            <p class="time-range center-align black-text" style="font-size:1.6vw">Perishable?</p>
+            <br>
+            <p>
+              <label>
+                <input class="with-gap" name="group1" type="radio" />
+                <span>Perishable</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input class="with-gap" name="group1" type="radio"/>
+                <span>Non-Perishable</span>
+              </label>
+            </p>
+          </form>
+          <br>
         </div>
-        <form action="#">
-          <p>
-            <label>
-              <input name="group1" type="radio" checked />
-              <span>Perishable</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input name="group1" type="radio" />
-              <span>Non-perishable</span>
-            </label>
-          </p>
-        </form>
-        <div class="card-action center-align">
-          <a href="#">Can't find what you're looking for?</a>
+            <div class="card-action center-align">
+              <a href="#">Can't find what you're looking for?</a>
+            </div>
         </div>
       </div>
-    </div>
   </div>
- </section>
+</section>
 
 
 
 
 
 
-<br></br><br></br>
+<br></br>
 
 </body> 
 
@@ -150,6 +169,19 @@ function initMap() {
 // This goes in the second web page:
 // Retrieve the sessionStorage variable
 var place = sessionStorage.getItem('place'); 
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
 </script>
 
 <script>
