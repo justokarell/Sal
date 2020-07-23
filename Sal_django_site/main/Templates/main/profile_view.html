@@ -2,35 +2,181 @@
 {% load static %}
 
 {% block content %}
+
 <head>
-    <title>User Profile</title>
-    {% load crispy_forms_tags %}
-    <!-- needed for JS/GoogleMaps lookup -->
-    <!-- {{ form.media }} -->
+  <title>User Profile</title>
+  {% load crispy_forms_tags %}
+  <!-- needed for JS/GoogleMaps lookup -->
+  <!-- {{ form.media }} -->
 </head>
+<style>
+  .title-banner {
+    background-color: #3C91E6;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+
+  .title-text {
+    color: ghostwhite;
+    margin-left: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .text-secondary{
+    margin-left: 3rem;
+  }
+
+
+
+  .p-line{
+    text-align: left;
+    padding-bottom: 2%;
+    /* background-color:#F2F2F2; */
+  }
+
+
+
+  .card {
+    border-radius: 20px;
+    
+  }
+
+
+  .account-img{
+    min-width: 200;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    padding: 10px;
+
+  }
+
+  .col{ 
+    max-width: auto;
+  }
+
+  .profile-content > .row{
+    margin-bottom: 0;
+    padding-bottom: 2%;
+
+  }
+
+  a{
+    color: ghostwhite;
+    font-size:20px;
+  }
+
+
+  
+  .edit, .edit:hover{
+    background-color: #3C91E6;
+
+  }
+
+  .posts, .posts:hover{
+    background-color: #FA824C;
+    
+
+  }
+
+
+  @media screen and (min-width: 621px) {
+    .main-row{ 
+    display: flex;
+    justify-content: center;
+    }
+
+    /* .profile-content{ 
+      margin-top: 8%;
+    } */
+
+    /* .donor-status{
+    padding-top: 10%;
+    } */
+
+    .desc{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color:#F2F2F2;
+    text-align: left;
+    padding-left: 10%;
+    }
+
+    .right-col {
+      margin-right: 2.5%;
+    }
+
+    .left-col {
+      margin-left: 2.5%;
+    }
+    
+
+
+
+  }
+
+  @media screen and (max-width: 620px) {
+    .main-row{ 
+    display: auto;
+    }
+
+    .donor-status{
+      padding-top: 10%;
+    }
+
+    .btn {
+    margin-top: 4%;
+    }
+
+    .desc{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color:#F2F2F2;
+    text-align: left;
+    }
+  }
+
+</style>
+
 <body>
   {% if user.is_authenticated %}
-  <div class="container col s8 m6" style="margin-bottom: 12em;"> 
+  <div class="container col " style="margin-bottom: 12em;">
     <div class="card hoverable">
-      <div class="card-content center ">
+      <div class="title-banner">
+        <h3 class="title-text"> Your Profile</h2>
+      </div>
+      <div class="card-content center">
         <div class="media">
-          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" width="200">
-            <p class="text-secondary">Profile associated for: {{ user.your_name }}</p>
-            <p class="text-secondary">Organization: {{ user.profile.org_name }}</p>
-            <p class="text-secondary">Donor or Recipient: {{ user.profile.org_role }}</p>
-            <p class="text-secondary">Organization Phone: {{ user.profile.org_phone }}</p>
-            <p class="text-secondary">Organization Email: {{ user.profile.org_email }}</p>        
-            <p class="text-secondary">Organzation Address: {{ user.profile.org_address }}</p>
-            <p class="text-secondary"> City: {{ user.profile.org_city }}</p>
-            <p class="text-secondary"> State: {{ user.profile.org_state }}</p>
-            <p class="text-secondary"> Zipcode: {{ user.profile.org_zipcode }}</p>
-            <p class="text-secondary"> Country: {{ user.profile.org_country }}</p>
-            <p class="text-secondary"> Description: {{ user.profile.org_desc }}</p>
+          <div class=" main-row row center">
+            <div class="col right-col">
+              <!-- <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" width="200"> -->
+              <img class="account-img" src="{{ user.profile.image.url }}" >
+            </div>
+            <div class="col left-col ">
+              <div class="profile-content">
+                <p class="p-line donor-status"><strong>Donor or Recipient: </strong>{{ user.profile.org_role }}</p>
+                <p class="p-line"><strong>Organization: </strong>{{ user.profile.org_name }}</p>
+                <p class="p-line"><strong>Organization Phone: </strong>{{ user.profile.org_phone }}</p>
+                <p class="p-line"><strong>Organization Email: </strong>{{ user.profile.org_email }}</p>
+                <p class="p-line"><strong>Organzation Address: </strong>{{ user.profile.org_address }}</p>
+                <div class="row">
+                  <p class="p-line col"><strong> City: </strong>{{ user.profile.org_city }}</p>
+                  <p class="p-line col"><strong> State: </strong>{{ user.profile.org_state }}</p>
+                </div>
+                <div class="row">
+                  <p class="p-line col"><strong> Zipcode: </strong>{{ user.profile.org_zipcode }}</p>
+                  <p class="p-line col"><strong> Country: </strong>{{ user.profile.org_country }}</p>
+                </div>
+              </div>          
+            </div>
+          </div>
+          <div class="row">
+            <p class="desc"><strong>Description: </strong>{{ user.profile.org_desc }}</p>
+          </div>
+          <div >
+            <button class="edit waves-effect waves-light btn"><a href="profile-edit" >Edit Profile</a></button>
+            <button class="posts waves-effect waves-light btn"><a href="my-posts">My Posts</a></button>
+          </div>
         </div>
-        <div>
-          <button><a href="profile-edit" style="font-size: x-large;">Edit Profile</a></button>
-          <button><a href="my-posts" style="font-size: x-large;">My Posts</a></button>
-        </div>
+        
       </div>
     </div>
   </div>

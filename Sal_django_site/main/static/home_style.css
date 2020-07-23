@@ -3,24 +3,7 @@ html {
   scroll-behavior: 2 smooth;
 }
 
-
-/* .grid-container {
-display: grid;
-grid-template-columns: auto;
-grid-template-rows: 2fr 4fr 1fr;
-gap: 1pt 1pt;
-grid-template-areas: "." "." "." ".";
-}   */
-
 .about-container {
-/* display: grid;
-grid-template-columns: 1fr;
-grid-template-rows: 0.5fr 3fr;
-grid-template-areas: "." ".";
-position: relative; */
-
-/* height: 20pc; */
-/* gap: 1px 1px; */
 height: auto;
 margin: auto;
 text-align: center;
@@ -40,13 +23,6 @@ text-align: center;
   color: rgba(0, 0, 255, 0.637);
 }
 .about-content {
-  /* display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas: ". ." ". .";
-  height: 15pc; 
-  margin: 90pt; */
-  
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: 1rem;

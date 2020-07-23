@@ -70,7 +70,8 @@
       </a>
         <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
-          <li><a href="account">{{user.your_name}}</a></li>
+          <li><a href="account" >{{ user.your_name }}</a></li>
+          <li><a href="account" >My Account</a></li>
           <li><a href="my-posts">My Posts</a></li>
           <li><a href="logout">Logout</a></li>
           {% else %}
@@ -93,7 +94,7 @@
           <li><a href="profile-view"  style="font-size: x-large;">Profile</a></li>
           <li><a href="map_page" style="font-size: x-large;">Map</a></li>
           {% if user.is_authenticated %}
-          <li><a href="account"  style="font-size: x-large;">{{user.your_name}}</a></li>
+          <li><a href="account"  style="font-size: x-large;">My Account</a></li>
           <li><a href="my-posts"  style="font-size: x-large;">My Posts</a></li>
           <li><a href="logout"  style="font-size: x-large;">Logout</a></li>
           {% else %}

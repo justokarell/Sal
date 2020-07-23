@@ -1,11 +1,11 @@
-
+.active:visited,
 .active:hover,
 .active {
     color: #342E37;
     background-color: #ffffff;
 }
 
-
+.inactive:visited,
 .inactive:hover,
 .inactive {
     color: #ffffff;
