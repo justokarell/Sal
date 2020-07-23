@@ -83,13 +83,13 @@
             <br>
             <p>
               <label>
-                <input class="with-gap" name="group1" type="radio" />
+                <input class="with-gap" name="group1" type="checkbox" id="donor" onchange="updateView(this)";/>
                 <span>Donors</span>
               </label>
             </p>
             <p>
               <label>
-                <input class="with-gap" name="group1" type="radio"  />
+                <input class="with-gap" name="group1" type="checkbox"  id="recipient" onchange="updateView(this)";/>
                 <span>Recipients</span>
               </label>
             </p>
@@ -125,13 +125,13 @@
             <br>
             <p>
               <label>
-                <input class="with-gap" name="group1" type="radio" />
+                <input class="with-gap" name="group1" type="checkbox" id="perishable" onchange="updateView(this)";/>
                 <span>Perishable</span>
               </label>
             </p>
             <p>
               <label>
-                <input class="with-gap" name="group1" type="radio"/>
+                <input class="with-gap" name="group1" type="checkbox" id="non-perishable" onchange="updateView(this)";/>
                 <span>Non-Perishable</span>
               </label>
             </p>
@@ -157,6 +157,9 @@
 
 <script src="{% static 'tinymce/js/prism.js' %}"></script>
 
+
+
+
 <script>
 
 // Initialize and add the map
@@ -175,9 +178,14 @@ function initMap() {
     * The key parameter will contain your own API key (which is not needed for this tutorial)
     * The callback parameter executes the initMap() function
     -->
-<script async defer
+    
+<!-- <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
-</script>
+    
+</script> -->
+
+<script src="https://maps.googleapis.com/maps/api/js?key=&v=3&language=ee&dummy=dummy.js"></script>
+
 <script>
 
 // This goes in the second web page:
@@ -209,6 +217,95 @@ var place = sessionStorage.getItem('place');
   $(document).ready(function(){
     $('.datepicker').datepicker();
   });
+</script>
+
+
+
+
+
+<script>
+var gmarkers1 = [];
+var markers1 = [];
+var infowindow = new google.maps.InfoWindow({
+  content: ''
+});
+
+// Our markers
+markers1 = [
+  ['0', 'Title 1', 52.4357808, 4.991315699999973, ['donor', 'perishable']],
+  ['1', 'Title 2', 52.4357808, 4.981315699999973, ['donor']],
+  ['2', 'Title 3', 52.4555687, 5.039231599999994, ['recipient', 'non-perishable']],
+  ['3', 'Title 4', 52.4555687, 5.029231599999994, ['recipient']]
+];
+
+markerCount = markers1.length
+// Function to init map
+function initialize() {
+  var center = new google.maps.LatLng(52.4357808, 4.991315699999973);
+  var mapOptions = {
+    zoom: 12,
+    center: center,
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  for (i = 0; i < markerCount; i++) {
+    addMarker(markers1[i]);
+  }
+}
+// Function to add marker to map
+function addMarker(marker) {
+  var category = marker[4];
+  var title = marker[1];
+  var pos = new google.maps.LatLng(marker[2], marker[3]);
+  var content = marker[1];
+
+  marker1 = new google.maps.Marker({
+    title: title,
+    position: pos,
+    category: category,
+    map: map
+  });
+
+  gmarkers1.push(marker1);
+
+  // Marker click listener
+  google.maps.event.addListener(marker1, 'click', (function(marker1, content) {
+    return function() {
+      console.log('Gmarker 1 gets pushed');
+      infowindow.setContent(content);
+      infowindow.open(map, marker1);
+      map.panTo(this.getPosition());
+      map.setZoom(15);
+    }
+  })(marker1, content));
+}
+// Function on Change of checkbox
+updateView = function(element) {
+  if (element) {
+    //Get array with names of the checked boxes
+    checkedBoxes = ([...document.querySelectorAll('input[type=checkbox]:checked')]).map(function(o) {
+      return o.id;
+    });
+    console.log(checkedBoxes);
+    for (i = 0; i < markerCount; i++) {
+      marker = gmarkers1[i];
+      console.log(marker.category)
+      //Filter to show any markets containing ALL of the selected options
+      if (typeof marker.category == 'object' && checkedBoxes.every(function(o) {
+          return (marker.category).indexOf(o) >= 0;
+        })) {
+        marker.setVisible(true);
+      } else {
+        marker.setVisible(false);
+      }
+    }
+  } else {
+    console.log('No param given');
+  }
+}
+// Init map
+initialize();
 </script>
 
 
