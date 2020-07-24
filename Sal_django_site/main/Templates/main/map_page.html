@@ -95,27 +95,46 @@
             </p>
           </form>
           <br>
-          <form action="#">
-            <p class="time-range center-align black-text" style="font-size:1.6vw">Time Range</p>
-            <p class="range-field">
-              <input type="range" id="test5" min="0" max="100" />
-            </p>
-          </form>
-          <br>
-          <div class="date-picker">
-            <p class="date-picker-header center-align black-text" style="font-size:1.6vw">Date(s) Available</p>
-            <input type="text" class="datepicker">
+          <div class="time-picker">
+            <p class="time-picker-header center-align black-text" style="font-size:1.6vw">Time(s) Available</p>
           </div>
           <br>
           <div class="input-field col s12">
             <select multiple>
-              <option value="1">Sunday</option>
-              <option value="2">Monday</option>
-              <option value="3">Tuesday</option>
-              <option value="4">Wednesday</option>
-              <option value="5">Thursday</option>
-              <option value="6">Fridday</option>
-              <option value="7">Saturday</option>
+              <option value="0">All day (see hours in description)</option>
+              <option value="1">8am</option>
+              <option value="2">9am</option>
+              <option value="3">10am</option>
+              <option value="4">11am</option>
+              <option value="5">12am</option>
+              <option value="6">1pm</option>
+              <option value="7">2pm</option>
+              <option value="8">3pm</option>
+              <option value="9">4pm</option>
+              <option value="10">5pm</option>
+              <option value="11">6pm</option>
+              <option value="12">7pm</option>
+              <option value="13">8pm</option>
+              <option value="14">9pm</option>
+              <option value="15">10pm</option>
+            </select>
+            <label>Select Time(s) of availability</label>
+          </div>
+          <br><br>
+          <div class="date-picker">
+            <p class="date-picker-header center-align black-text" style="font-size:1.6vw">Day(s) Available</p>
+          </div>
+          <br>
+          <div class="input-field col s12">
+            <select multiple>
+              <option value="1" type="checkbox" id="All" onchange="updateView(this)">All</option>
+              <option value="1" type="checkbox" id="Sunday" onchange="updateView(this)">Sunday</option>
+              <option value="2" type="checkbox" id="Monday" onchange="updateView(this)">Monday</option>
+              <option value="3" type="checkbox" id="Tuesday" onchange="updateView(this)">Tuesday</option>
+              <option value="4" type="checkbox" id="Wednesday" onchange="updateView(this)">Wednesday</option>
+              <option value="5" type="checkbox" id="Thursday" onchange="updateView(this)">Thursday</option>
+              <option value="6" type="checkbox" id="Friday" onchange="updateView(this)">Friday</option>
+              <option value="7" type="checkbox" id="Saturday" onchange="updateView(this)">Saturday</option>
             </select>
             <label>Select the days of availability</label>
           </div>
@@ -125,13 +144,13 @@
             <br>
             <p>
               <label>
-                <input class="with-gap" name="group1" type="checkbox" id="perishable" onchange="updateView(this)";/>
+                <input class="with-gap" name="group1" type="checkbox" id="perishable" onchange="updateView(this)"/>
                 <span>Perishable</span>
               </label>
             </p>
             <p>
               <label>
-                <input class="with-gap" name="group1" type="checkbox" id="non-perishable" onchange="updateView(this)";/>
+                <input class="with-gap" name="group1" type="checkbox" id="non-perishable" onchange="updateView(this)"/>
                 <span>Non-Perishable</span>
               </label>
             </p>
