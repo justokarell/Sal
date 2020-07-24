@@ -2,105 +2,325 @@
 
 
 {% block content %}
+
 <head>
-    <title>User Profile</title>
-    {% load static %}
-    {% load crispy_forms_tags %}
-    <!-- needed for JS/GoogleMaps lookup -->
-    {{ form.media }}
+  <title>Edit Profile</title>
+  {% load static %}
+  {% load crispy_forms_tags %}
+  <!-- needed for JS/GoogleMaps lookup -->
+  {{ form.media }}
 </head>
+
+
 <style>
-  .select{
+  .select {
     display: block;
   }
+
+  .title-banner {
+    background-color: #3C91E6;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+
+  .title-text {
+    color: ghostwhite;
+    margin-left: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .text-secondary {
+    margin-left: 3rem;
+  }
+
+
+  .p-line {
+    text-align: left;
+    padding-bottom: 2%;
+  }
+
+  .card {
+    border-radius: 20px;
+
+  }
+
+  .account-img {
+    min-width: 150;
+    max-width: 280;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    padding: 10px;
+
+  }
+
+  .btn {
+    margin-top: 4%;
+    font-size: 20;
+  }
+
+
+  a {
+    color:#342E37;
+    font-size: 16px;
+  }
+
+  .left-col>.a {
+    margin-left: 0;
+    margin-right: 0;
+
+  }
+  .row>.col {
+    margin-left: 0;
+    margin-right: 0;
+
+  }
+
+
+  .input-field {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 91%;
+  }
+
+
+  .edit,
+  .edit:hover {
+    background-color: #3C91E6;
+
+  }
+
+  .posts,
+  .posts:hover {
+    background-color: #FA824C;
+  }
+
+  .textarea{
+    margin: 0px;  
+    height: 228px;
+  }
+
+  #donor-status {
+    max-width: 30%;
+    min-width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #text{
+    display:none;  
+  }
+  #country{
+    margin-bottom: 5%;
+  }
+
+  #submit{
+    margin-bottom: 5%;
+    background-color: #9FD356;
+  }
+
+  #cancel{
+    margin-bottom: 5%;
+    background-color: #F1809B;
+  }
+
+  @media screen and (min-width: 621px) {
+    .main-row {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* .profile-content{ 
+        margin-top: 8%;
+      } */
+
+    /* .donor-status{
+      padding-top: 10%;
+      } */
+
+    .desc {
+      /* padding-top: 2%; */
+      padding-bottom: 2%;
+      /* background-color: #F2F2F2; */
+      text-align: left;
+      padding-left: 10%;
+    }
+
+    .right-col {
+      padding-left: 2.5%;
+      max-width: 50%;
+      /* justify-content: center; */
+    }
+
+    .left-col {
+      padding-right: 2.5%;
+      /* min-width: 50%; */
+      max-width: 50%;
+      justify-content: center;
+    }
+
+    #address {
+      padding-top: 2%;
+    }
+  }
+
+  @media screen and (max-width: 620px) {
+    .main-row {
+      display: auto;
+    }
+
+    .donor-status {
+      padding-top: 8%;
+    }
+
+    .left-col {
+      justify-content: center;
+      max-width: 90%;
+    }
+
+    .right-col {
+      justify-content: center;
+      max-width: 90%;
+    }
+
+    .row{
+      justify-content: center;
+    }
+
+    #address {
+      padding-top: 12%;
+    }
+
+    .desc {
+      /* padding-top: 2%; */
+      padding-bottom: 2%;
+      /* background-color: #F2F2F2; */
+      text-align: left;
+    }
+  }
 </style>
+
 <body>
-
-    {% if not google_api_key_set %}
-      <p>This django-address example site is running correctly.
-      <p>However, you <span class="bold">must</span> set <span class="fixed-width">GOOGLE_API_KEY</span> in settings.py to use this demo.</p>
-      <p>See this <a target="_blank" href="https://github.com/furious-luke/django-address/blob/master/example_site/README.md">sample project's readme</a> for instructions.</p>
-    {% else %}
-      <div class="container">
-        <a href="profile-view" class="btn-flat waves-effect waves-light  right">
-          <i class="material-icons">close</i>
-        </a>
+  <div class="container col " style="margin-bottom: 12em;">
+    <div class="card hoverable">
+      <a href="profile-view" class="btn-flat waves-effect waves-light  right">
+        <i class="material-icons">close</i>
+      </a>
+      <div class="title-banner">
+        <h3 class="title-text"> Your Profile</h2>
+      </div>
+      <div class="card-content center">
         <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% load widget_tweaks %}
-                      
-            {{ form.non_field_errors }}
-            {{ form.source.errors }}
-            {{ form.source }}
-            {{ profile_form.source }}
-            <table>
-            <!-- {{ form.as_table }} -->
-            <!-- {{ profile_form }} -->
-            </table>
-            
-            <!-- Invisible -->
-            <div class="input-field col s7" style="display:none;">
-              <label for="email">Your Account Email</label>
-              {{form}}
-              <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
-            </div>
-            <!-- Invisible -->
+          {% csrf_token %}
+          {% load widget_tweaks %}
+
+          {{ form.non_field_errors }}
+          {{ form.source.errors }}
+          {{ form.source }}
+          {{ profile_form.source }}
+
+          <!-- Invisible -->
+          <div class="input-field col s7" style="display:none;">
+            <label for="email">Your Account Email</label>
+            {{form}}
+            <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
+          </div>
+          <!-- Invisible -->
+
+          <div id="donor-status">
+            <label for="org_role">Do You Donate Food or Recieve It?</label>
+            {{  profile_form.org_role |add_class:"select" }}
+          </div>
+
+          <div class="input-field " style="margin-top:3rem;">
+            <label for="org-name">Your Organization's Name</label>
+            {{  profile_form.org_name |add_class:"validate" }}
+          </div>
+
+          <div class="input-field " style="margin-top:3rem;">
+            <label for="org-phone">Your Organization's Phone</label>
+            {{  profile_form.org_phone |add_class:"validate" }}
+          </div>
+
+          <div class="input-field" style="margin-top:3rem;">
+            <label for="org-email">Your Organization's Email Address</label>
+            {{  profile_form.org_email |add_class:"validate" }}
+            <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
+          </div>
 
 
-            <div class="input-field col s7" style="margin-top:3rem;">
-              <label for="org-name">Your Organization's Name</label>
-              {{  profile_form.org_name |add_class:"validate" }}
+          <div class="row">
+            <div class="col left-col">
+              {{  profile_form.image}}
+              <!-- <img class="account-img" src="{{ user.profile.image.url }}"> -->
+              <img id="image" class="account-img" />
             </div>
-            <div>
-              <label for="org_role">Do You Donate Food or Recieve It?</label>
-              {{  profile_form.org_role |add_class:"select" }}
-            </div>
-            <div class="input-field col s7" style="margin-top:3rem;">
-              <label for="org-phone">Your Organization's Phone</label>
-              {{  profile_form.org_phone |add_class:"validate" }}
-            </div>
+            <div class="col right-col">
 
-            <div class="input-field col s7" style="margin-top:3rem;">
-                <label for="org-email">Your Organization's Email Address</label>
-                {{  profile_form.org_email |add_class:"validate" }}
-                <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
+              <div id="address">
+                <label for="org_address">Your Organization's Physical Address</label>
+                {{  profile_form.org_address}}
+              </div>
+
+              <div>
+                <label for="org_city">City</label>
+                {{  profile_form.org_city}}
+              </div>
+
+              <div>
+                <label for="org_state">State</label>
+                {{  profile_form.org_state}}
+              </div>
+
+
+              <div>
+                <label for="org_zipcode">Zipcode</label>
+                {{  profile_form.org_zipcode}}
+              </div>
+
+              <div id="country">
+                <label for="org_country">Country</label>
+                {{  profile_form.org_country}}
+              </div>
+
             </div>
-            <div class="input-field col s7" > 
-              <label for="org_address">Your Organization's Physical Address</label>
-              {{  profile_form.org_address}}
-            </div>
-            <div class="input-field col s5" > 
-              <label for="org_city">City</label>
-              {{  profile_form.org_city}}
-            </div>
-            <div class="input-field col s3" > 
-              <label for="org_state">City</label>
-              {{  profile_form.org_state}}
-            </div>
-            <div class="input-field col s4" > 
-              <label for="org_zipcode">Zipcode</label>
-              {{  profile_form.org_zipcode}}
-            </div>
-            <div class="input-field col s4" > 
-              <label for="org_country">Country</label>
-              {{  profile_form.org_country}}
-            </div>
+          </div>
+
+          <div class="row">
+            <p class="desc">
             <div>
               <label for="org_desc">Give a Short Description of Your Organization</label>
-              {{  profile_form.org_desc}}
+              {{  profile_form.org_desc |add_class:"textarea" }}
             </div>
-            <div>
-              <label for="image">Pick a profile Image</label>
-              {{  profile_form.image}}
-            </div>
-            <button type="submit">Submit</button>
-            <button href="profile-view" class="btn-flat waves-effect waves-light  right">Cancel</button>
+            </p>
+          </div>
+          <div>
+            <!-- <button class="edit waves-effect waves-light btn"><a href="profile-edit" >Edit Profile</a></button>
+              <button class="posts waves-effect waves-light btn"><a href="my-posts">My Posts</a></button> -->
+            <button id="submit" type="submit" class="btn waves-effect waves-light ">Submit</button>
+            <a id="cancel" href="profile-view" class="btn waves-effect waves-light ">Cancel</a>
+          </div>
+          
         </form>
-        
-      </div>
-        <br>
 
-    {% endif %}
-    {% include 'main/footer.html' %}
+
+
+      </div>
+    </div>
+  </div>
+  <br>
+  {% include 'main/footer.html' %}
 </body>
+<script>
+  document.getElementById("id_image").onchange = function () {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("image").src = e.target.result;
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+};
+</script>
 {% endblock %}

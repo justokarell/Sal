@@ -5,17 +5,18 @@ from .models import CustomUser, Profile
 from address.forms import AddressField, AddressWidget
 from django.forms import ModelForm
 
-
 class EditProfileForm(ModelForm):
          class Meta:
             model = CustomUser
             fields = ('email',)
 
 class ProfileForm(forms.ModelForm):
+    image = forms.ImageField(widget=forms.FileInput)
+
     class Meta:
         model = Profile
         fields = ['org_name', 'org_role','org_email','org_phone','org_address','org_city','org_state','org_zipcode','org_country','image','org_desc']
-       
+        
     
 class CustomUserCreationForm(UserCreationForm):
     """
