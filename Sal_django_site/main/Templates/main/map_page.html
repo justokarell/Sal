@@ -100,25 +100,23 @@
           </div>
           <br>
           <div class="input-field col s12">
-            <select multiple>
-              <option value="0">All day (see hours in description)</option>
-              <option value="1">8am</option>
-              <option value="2">9am</option>
-              <option value="3">10am</option>
-              <option value="4">11am</option>
-              <option value="5">12am</option>
-              <option value="6">1pm</option>
-              <option value="7">2pm</option>
-              <option value="8">3pm</option>
-              <option value="9">4pm</option>
-              <option value="10">5pm</option>
-              <option value="11">6pm</option>
-              <option value="12">7pm</option>
-              <option value="13">8pm</option>
-              <option value="14">9pm</option>
-              <option value="15">10pm</option>
-            </select>
-            <label>Select Time(s) of availability</label>
+              <p><label><input value="0" type="checkbox" id="All" onchange="updateView(this)"><span>All</span></label></p>
+              <p><label><input value="1" type="checkbox" id="7am" onchange="updateView(this)"><span>7am</span></label></p>
+              <p><label><input value="2" type="checkbox" id="8am" onchange="updateView(this)"><span>8am</span></label></p>
+              <p><label><input value="3" type="checkbox" id="9am" onchange="updateView(this)"><span>9am</span></label></p>
+              <p><label><input value="4" type="checkbox" id="10am" onchange="updateView(this)"><span>10am</span></label></p>
+              <p><label><input value="5" type="checkbox" id="11am" onchange="updateView(this)"><span>11am</span></label></p>
+              <p><label><input value="6" type="checkbox" id="12pm" onchange="updateView(this)"><span>12pm</span></label></p>
+              <p><label><input value="7" type="checkbox" id="1pm" onchange="updateView(this)"><span>1pm</span></label></p>
+              <p><label><input value="8" type="checkbox" id="2pm" onchange="updateView(this)"><span>2pm</span></label></p>
+              <p><label><input value="9" type="checkbox" id="3pm" onchange="updateView(this)"><span>3pm</span></label></p>
+              <p><label><input value="10" type="checkbox" id="4pm" onchange="updateView(this)"><span>4pm</span></label></p>
+              <p><label><input value="11" type="checkbox" id="5pm" onchange="updateView(this)"><span>5pm</span></label></p>
+              <p><label><input value="12" type="checkbox" id="6pm" onchange="updateView(this)"><span>6pm</span></label></p>
+              <p><label><input value="13" type="checkbox" id="7pm" onchange="updateView(this)"><span>7pm</span></label></p>
+              <p><label><input value="14" type="checkbox" id="8pm" onchange="updateView(this)"><span>8pm</span></label></p>
+              <p><label><input value="15" type="checkbox" id="9pm" onchange="updateView(this)"><span>9pm</span></label></p>
+              <p><label><input value="16" type="checkbox" id="10pm" onchange="updateView(this)"><span>10pm</span></label></p>
           </div>
           <br><br>
           <div class="date-picker">
@@ -126,17 +124,14 @@
           </div>
           <br>
           <div class="input-field col s12">
-            <select multiple>
-              <option value="1" type="checkbox" id="All" onchange="updateView(this)">All</option>
-              <option value="1" type="checkbox" id="Sunday" onchange="updateView(this)">Sunday</option>
-              <option value="2" type="checkbox" id="Monday" onchange="updateView(this)">Monday</option>
-              <option value="3" type="checkbox" id="Tuesday" onchange="updateView(this)">Tuesday</option>
-              <option value="4" type="checkbox" id="Wednesday" onchange="updateView(this)">Wednesday</option>
-              <option value="5" type="checkbox" id="Thursday" onchange="updateView(this)">Thursday</option>
-              <option value="6" type="checkbox" id="Friday" onchange="updateView(this)">Friday</option>
-              <option value="7" type="checkbox" id="Saturday" onchange="updateView(this)">Saturday</option>
-            </select>
-            <label>Select the days of availability</label>
+            <p><label><input value="0" type="checkbox" id="All" onchange="updateView(this)"><span>All</span></label></p>
+            <p><label><input value="1" type="checkbox" id="Sunday" onchange="updateView(this)"><span>Sunday</span></label></p>
+            <p><label><input value="2" type="checkbox" id="Monday" onchange="updateView(this)"><span>Monday</span></label></p>
+            <p><label><input value="3" type="checkbox" id="Tuesday" onchange="updateView(this)"><span>Tuesday</span></label></p>
+            <p><label><input value="4" type="checkbox" id="Wednesday" onchange="updateView(this)"><span>Wednesday</span></label></p>
+            <p><label><input value="5" type="checkbox" id="Thursday" onchange="updateView(this)"><span>Thrusday</span></label></p>
+            <p><label><input value="6" type="checkbox" id="Friday" onchange="updateView(this)"><span>Friday</span></label></p>
+            <p><label><input value="7" type="checkbox" id="Saturday" onchange="updateView(this)"><span>Saturday</span></label></p>  
           </div>
           <br>
           <form action="#">
@@ -251,10 +246,10 @@ var infowindow = new google.maps.InfoWindow({
 
 // Our markers
 markers1 = [
-  ['0', 'Title 1', 52.4357808, 4.991315699999973, ['donor', 'perishable']],
-  ['1', 'Title 2', 52.4357808, 4.981315699999973, ['donor']],
-  ['2', 'Title 3', 52.4555687, 5.039231599999994, ['recipient', 'non-perishable']],
-  ['3', 'Title 4', 52.4555687, 5.029231599999994, ['recipient']]
+  ['0', 'Title 1', 52.4357808, 4.991315699999973, ['donor', 'perishable'], ['12pm', '9am', '3pm']],
+  ['1', 'Title 2', 52.4357808, 4.981315699999973, ['donor'], ['12pm', '9am', '3pm']],
+  ['2', 'Title 3', 52.4555687, 5.039231599999994, ['recipient', 'non-perishable'], ['12pm', '9am', '3pm', '4pm', '5pm']],
+  ['3', 'Title 4', 52.4555687, 5.029231599999994, ['recipient'], ['9am', '10am', '11am']]
 ];
 
 markerCount = markers1.length
