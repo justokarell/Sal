@@ -4,6 +4,7 @@ from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django_google_maps import fields as map_fields
 
 
 # Create your models here.
@@ -92,4 +93,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email])
+
+""" My attempt at a post model """
+# class UserPost(models):
+#     address = map_fields.AddressField(max_length=200)
+#     geolocation = map_fields.GeoLocationField(max_length=100)
 
