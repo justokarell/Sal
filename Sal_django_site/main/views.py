@@ -7,7 +7,6 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
-# from django.contrib.sessions import request
 from django.contrib import messages
 from .forms import CustomUserCreationForm
 from .tokens import user_tokenizer
@@ -96,7 +95,7 @@ def signup(request):
         else:
             for msg in form.error_messages:
                 messages.error(request, f"Some of your input is off. Try again.")
-
+            
             return render(request = request,
                           template_name = "main/signup.html",
                           context={"form":form})
@@ -162,8 +161,12 @@ def profile_edit(request):
             messages.success(request, f"Your profile has been updated")
             return redirect('main:profile-view')
         else:
-            for msg in form.error_messages:
+            for msg in profile_form.errors:
                 messages.error(request, f"Some of your input is off. Try again.")
+
+            return render(request = request,
+                          template_name = "main/profile_edit.html",
+                          context={"form":form, "profile_form":profile_form})
  else:
     form = EditProfileForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
@@ -180,11 +183,3 @@ def profile_edit(request):
     return render(request, 'main/profile_edit.html', context = {'form': form,
                'profile_form': profile_form,
                'google_api_key_set': google_api_key_set})
-
-
-    # return render(request, 'main/profile_edit.html', context = {'form': form,
-    #            'profile_form': profile_form,
-    #            'google_api_key_set': google_api_key_set,
-    #            'success': success,
-    #            'addresses': addresses})
-

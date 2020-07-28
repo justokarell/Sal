@@ -1,3 +1,4 @@
+import os
 from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
@@ -11,12 +12,12 @@ class EditProfileForm(ModelForm):
             fields = ('email',)
 
 class ProfileForm(forms.ModelForm):
-    image = forms.ImageField(widget=forms.FileInput)
+    image = forms.ImageField(widget=forms.FileInput(attrs={'accept':'image/png,.jpg'}))
+
 
     class Meta:
         model = Profile
         fields = ['org_name', 'org_role','org_email','org_phone','org_address','org_city','org_state','org_zipcode','org_country','image','org_desc']
-        
     
 class CustomUserCreationForm(UserCreationForm):
     """

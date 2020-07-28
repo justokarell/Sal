@@ -34,22 +34,17 @@
     margin-left: 3rem;
   }
 
-
-  .p-line {
-    text-align: left;
-    padding-bottom: 2%;
-  }
-
   .card {
     border-radius: 20px;
-
   }
 
   .account-img {
-    min-width: 150;
-    max-width: 280;
+    width: fit-content;
+    min-width: 180;
+    max-width: 90%;
     border: 3px solid rgba(0, 0, 0, 0.3);
     padding: 10px;
+    
 
   }
 
@@ -67,19 +62,22 @@
   .left-col>.a {
     margin-left: 0;
     margin-right: 0;
+    
 
   }
+
   .row>.col {
-    margin-left: 0;
-    margin-right: 0;
-
+    column-fill: balance;
   }
 
+  .row{
+    margin-bottom: 0;
+  }
 
   .input-field {
     margin-left: auto;
     margin-right: auto;
-    max-width: 91%;
+    background-color: #F2F2F2;
   }
 
 
@@ -97,21 +95,44 @@
   .textarea{
     margin: 0px;  
     height: 228px;
+    background-color: #F2F2F2;
+    border: none;
+  }
+
+  .helper-text {
+        color: red;
+  }
+
+  .helper-text> ul >li {
+    font-family: 'latolight', Arial, sans-serif;
+    color: red;
+  }
+
+  #main-row {
+      margin-bottom: 20px;
+  }
+
+  #close{
+    color: ghostwhite;
+    padding-top: 8px;
   }
 
   #donor-status {
-    max-width: 30%;
-    min-width: 100px;
+    max-width: 55%;
+    min-width: 115px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 1.8rem;
+    padding-bottom: 1.8rem;
   }
 
   #text{
     display:none;  
   }
-  #country{
-    margin-bottom: 5%;
-  }
+
+  /* #address {
+      padding-top: 2%;
+    } */
 
   #submit{
     margin-bottom: 5%;
@@ -124,10 +145,7 @@
   }
 
   @media screen and (min-width: 621px) {
-    .main-row {
-      display: flex;
-      justify-content: center;
-    }
+
 
     /* .profile-content{ 
         margin-top: 8%;
@@ -137,65 +155,51 @@
       padding-top: 10%;
       } */
 
-    .desc {
-      /* padding-top: 2%; */
-      padding-bottom: 2%;
-      /* background-color: #F2F2F2; */
-      text-align: left;
-      padding-left: 10%;
-    }
-
     .right-col {
       padding-left: 2.5%;
       max-width: 50%;
-      /* justify-content: center; */
+      justify-content: center;
     }
 
     .left-col {
       padding-right: 2.5%;
       /* min-width: 50%; */
       max-width: 50%;
-      justify-content: center;
+      /* justify-content: center; */
     }
 
-    #address {
-      padding-top: 2%;
+      .col-input{
+      max-width: 50%;
     }
   }
 
   @media screen and (max-width: 620px) {
-    .main-row {
-      display: auto;
+
+
+    .card-content{
+      justify-content: center;
     }
 
     .donor-status {
       padding-top: 8%;
     }
 
-    .left-col {
-      justify-content: center;
+    .left-col {  
       max-width: 90%;
-    }
+      column-fill: balance;
+     }
 
     .right-col {
-      justify-content: center;
       max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      align-items: center;
     }
 
-    .row{
-      justify-content: center;
+    .row .col {
+      float: none;
     }
 
-    #address {
-      padding-top: 12%;
-    }
-
-    .desc {
-      /* padding-top: 2%; */
-      padding-bottom: 2%;
-      /* background-color: #F2F2F2; */
-      text-align: left;
-    }
   }
 </style>
 
@@ -203,7 +207,7 @@
   <div class="container col " style="margin-bottom: 12em;">
     <div class="card hoverable">
       <a href="profile-view" class="btn-flat waves-effect waves-light  right">
-        <i class="material-icons">close</i>
+        <i id="close" class="material-icons">close</i>
       </a>
       <div class="title-banner">
         <h3 class="title-text"> Your Profile</h2>
@@ -226,83 +230,81 @@
           </div>
           <!-- Invisible -->
 
-          <div id="donor-status">
-            <label for="org_role">Do You Donate Food or Recieve It?</label>
-            {{  profile_form.org_role |add_class:"select" }}
-          </div>
-
-          <div class="input-field " style="margin-top:3rem;">
-            <label for="org-name">Your Organization's Name</label>
-            {{  profile_form.org_name |add_class:"validate" }}
-          </div>
-
-          <div class="input-field " style="margin-top:3rem;">
-            <label for="org-phone">Your Organization's Phone</label>
-            {{  profile_form.org_phone |add_class:"validate" }}
-          </div>
-
-          <div class="input-field" style="margin-top:3rem;">
-            <label for="org-email">Your Organization's Email Address</label>
-            {{  profile_form.org_email |add_class:"validate" }}
-            <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
-          </div>
-
-
-          <div class="row">
+          <div id="main-row" class="row">
             <div class="col left-col">
-              {{  profile_form.image}}
-              <!-- <img class="account-img" src="{{ user.profile.image.url }}"> -->
-              <img id="image" class="account-img" />
+              {{  profile_form.image }}
+              <span class="helper-text" data-error="Invalid Image" data-success="">{{ profile_form.image.errors }}</span>
+                <img id="image" class="account-img" />
+                <!-- <span class="helper-text" data-error="Invalid Image" data-success="">{{ profile_form.image.errors }}</span> -->
+                <div id="donor-status">
+                  <label for="org_role">Do You Donate Food or Recieve It?</label>
+                  {{  profile_form.org_role |add_class:"select" }}
+                </div>  
             </div>
             <div class="col right-col">
-
-              <div id="address">
-                <label for="org_address">Your Organization's Physical Address</label>
-                {{  profile_form.org_address}}
+              <div class="input-field ">
+                <label for="org-name">Your Organization's Name</label>
+                {{  profile_form.org_name |add_class:"validate" }}
+              </div>
+    
+              <div class="row">
+                <div class="col col-input input-field">
+                  <label for="org-email">Your Org Email</label>
+                  {{  profile_form.org_email |add_class:"validate" }}
+                </div>
+                <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
+                <div class="col col-input input-field">
+                  <label for="org-phone">Your Org Phone</label>
+                  {{  profile_form.org_phone |add_class:"validate" }} 
+                </div>
               </div>
 
-              <div>
-                <label for="org_city">City</label>
-                {{  profile_form.org_city}}
+                <div class="input-field">
+                  <label for="org_address ">Organization's Address</label>
+                  {{  profile_form.org_address}}
+                </div>
+
+              <div class="row">
+                <div class="col col-input input-field">
+                  <label for="org_city">City</label>
+                  {{  profile_form.org_city}}
+                </div>
+                <div class="col col-input input-field">
+                  <label for="org_state">State</label>
+                  {{  profile_form.org_state}}
+                </div>    
               </div>
 
-              <div>
-                <label for="org_state">State</label>
-                {{  profile_form.org_state}}
-              </div>
-
-
-              <div>
-                <label for="org_zipcode">Zipcode</label>
-                {{  profile_form.org_zipcode}}
-              </div>
-
-              <div id="country">
-                <label for="org_country">Country</label>
-                {{  profile_form.org_country}}
+              <div class="row">
+                <div class="col col-input input-field">
+                  <label for="org_zipcode">Zipcode</label>
+                  {{  profile_form.org_zipcode}}
+                </div>
+                <div class="col col-input input-field">
+                  <label for="org_country">Country</label>
+                  {{  profile_form.org_country}}
+                </div>
               </div>
 
             </div>
           </div>
 
+
+          
           <div class="row">
-            <p class="desc">
             <div>
-              <label for="org_desc">Give a Short Description of Your Organization</label>
+              <label for="org_desc" style="font-size:18;">Give a Short Description of Your Organization</label>
               {{  profile_form.org_desc |add_class:"textarea" }}
             </div>
             </p>
           </div>
           <div>
-            <!-- <button class="edit waves-effect waves-light btn"><a href="profile-edit" >Edit Profile</a></button>
-              <button class="posts waves-effect waves-light btn"><a href="my-posts">My Posts</a></button> -->
+
             <button id="submit" type="submit" class="btn waves-effect waves-light ">Submit</button>
             <a id="cancel" href="profile-view" class="btn waves-effect waves-light ">Cancel</a>
           </div>
           
         </form>
-
-
 
       </div>
     </div>
@@ -311,6 +313,10 @@
   {% include 'main/footer.html' %}
 </body>
 <script>
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    document.getElementById("image").src = "{{ user.profile.image.url }}";
+  });
+
   document.getElementById("id_image").onchange = function () {
     var reader = new FileReader();
 

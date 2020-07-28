@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from address.models import AddressField
+from .validators import validate_is_pic
 
 
 # Create your models here.
@@ -116,29 +117,18 @@ class Profile(models.Model):
     org_address = models.CharField('Your Organizations Location', max_length=80, default="123 Test St.", null=False)
     org_city = models.CharField(max_length=30, default="Stamford", null=False)
     org_state = models.CharField(max_length=2, default="CT", null=False)
-    org_zipcode = models.CharField(max_length=30, null=True, blank=True)
+    org_zipcode = models.CharField(max_length=10, null=True, blank=True)
     org_country = models.CharField(max_length=60, default="USA", null=False)
     org_desc = models.TextField(max_length=500, null=True, blank=True)
     ############
-    image = models.ImageField('Profile Image',default='default.svg', upload_to='profile_pics', blank=True)
+    image = models.ImageField('Profile Image',default='default.png', upload_to='profile_pics',  blank=True, validators=(validate_is_pic,))
     ############
 
-    # org_address = models.ManyToManyField(
-    #      'Address', 
-    #      through='AddressInfo'
-    #      through_fields=('address', 'profile')
-    # )
 
   
     # If we don't have this, it's going to say profile object only
     def __str__(self):
          return f'{self.user.email} Profile'  # it's going to print username Profile
-
-    # @receiver(post_save, sender=User)
-    # def create_or_update_user_profile(sender, instance, created, **kwargs):
-    #     if created:
-    #         Profile.objects.create(user=instance)
-    #     instance.profile.save()
 
     def get_address(self):
         "Returns the Formatted address"
@@ -151,12 +141,3 @@ class Profile(models.Model):
 
         post_save.connect(createProfile, sender=User)
 
-    # def save(self, *args, **kwargs):
-    #         super().save(*args, **kwargs)
-
-    #         img = Image.open(self.image.path)
-
-    #         if img.height > 300 or img.width > 300:
-    #             output_size = (300, 300)
-    #             img.thumbnail(output_size)
-    #             img.save(self.image.path)
