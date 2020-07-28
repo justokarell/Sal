@@ -4,204 +4,12 @@
 {% block content %}
 
 <head>
-  <title>Edit Profile</title>
+  <title>Edit Profile - Sal Hates Waste</title>
   {% load static %}
   {% load crispy_forms_tags %}
-  <!-- needed for JS/GoogleMaps lookup -->
-  {{ form.media }}
+  <link rel="stylesheet" type="text/css" href="{% static 'profile_edit_style.css' %}">
 </head>
 
-
-<style>
-  .select {
-    display: block;
-  }
-
-  .title-banner {
-    background-color: #3C91E6;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-  }
-
-  .title-text {
-    color: ghostwhite;
-    margin-left: 3rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  .text-secondary {
-    margin-left: 3rem;
-  }
-
-  .card {
-    border-radius: 20px;
-  }
-
-  .account-img {
-    width: fit-content;
-    min-width: 180;
-    max-width: 90%;
-    border: 3px solid rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    
-
-  }
-
-  .btn {
-    margin-top: 4%;
-    font-size: 20;
-  }
-
-
-  a {
-    color:#342E37;
-    font-size: 16px;
-  }
-
-  .left-col>.a {
-    margin-left: 0;
-    margin-right: 0;
-    
-
-  }
-
-  .row>.col {
-    column-fill: balance;
-  }
-
-  .row{
-    margin-bottom: 0;
-  }
-
-  .input-field {
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #F2F2F2;
-  }
-
-
-  .edit,
-  .edit:hover {
-    background-color: #3C91E6;
-
-  }
-
-  .posts,
-  .posts:hover {
-    background-color: #FA824C;
-  }
-
-  .textarea{
-    margin: 0px;  
-    height: 228px;
-    background-color: #F2F2F2;
-    border: none;
-  }
-
-  .helper-text {
-        color: red;
-  }
-
-  .helper-text> ul >li {
-    font-family: 'latolight', Arial, sans-serif;
-    color: red;
-  }
-
-  #main-row {
-      margin-bottom: 20px;
-  }
-
-  #close{
-    color: ghostwhite;
-    padding-top: 8px;
-  }
-
-  #donor-status {
-    max-width: 55%;
-    min-width: 115px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1.8rem;
-    padding-bottom: 1.8rem;
-  }
-
-  #text{
-    display:none;  
-  }
-
-  /* #address {
-      padding-top: 2%;
-    } */
-
-  #submit{
-    margin-bottom: 5%;
-    background-color: #9FD356;
-  }
-
-  #cancel{
-    margin-bottom: 5%;
-    background-color: #F1809B;
-  }
-
-  @media screen and (min-width: 621px) {
-
-
-    /* .profile-content{ 
-        margin-top: 8%;
-      } */
-
-    /* .donor-status{
-      padding-top: 10%;
-      } */
-
-    .right-col {
-      padding-left: 2.5%;
-      max-width: 50%;
-      justify-content: center;
-    }
-
-    .left-col {
-      padding-right: 2.5%;
-      /* min-width: 50%; */
-      max-width: 50%;
-      /* justify-content: center; */
-    }
-
-      .col-input{
-      max-width: 50%;
-    }
-  }
-
-  @media screen and (max-width: 620px) {
-
-
-    .card-content{
-      justify-content: center;
-    }
-
-    .donor-status {
-      padding-top: 8%;
-    }
-
-    .left-col {  
-      max-width: 90%;
-      column-fill: balance;
-     }
-
-    .right-col {
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-      align-items: center;
-    }
-
-    .row .col {
-      float: none;
-    }
-
-  }
-</style>
 
 <body>
   <div class="container col " style="margin-bottom: 12em;">
@@ -224,29 +32,28 @@
 
           <!-- Invisible -->
           <div class="input-field col s7" style="display:none;">
-            <label for="email">Your Account Email</label>
             {{form}}
-            <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
           </div>
           <!-- Invisible -->
 
           <div id="main-row" class="row">
             <div class="col left-col">
               {{  profile_form.image }}
-              <span class="helper-text" data-error="Invalid Image" data-success="">{{ profile_form.image.errors }}</span>
-                <img id="image" class="account-img" />
-                <!-- <span class="helper-text" data-error="Invalid Image" data-success="">{{ profile_form.image.errors }}</span> -->
-                <div id="donor-status">
-                  <label for="org_role">Do You Donate Food or Recieve It?</label>
-                  {{  profile_form.org_role |add_class:"select" }}
-                </div>  
+              <span class="helper-text" data-error="Invalid Image"
+                data-success="">{{ profile_form.image.errors }}</span>
+              <img id="image" class="account-img" />
+              <!-- <span class="helper-text" data-error="Invalid Image" data-success="">{{ profile_form.image.errors }}</span> -->
+              <div id="donor-status">
+                <label for="org_role">Do You Donate Food or Recieve It?</label>
+                {{  profile_form.org_role |add_class:"select" }}
+              </div>
             </div>
             <div class="col right-col">
               <div class="input-field ">
                 <label for="org-name">Your Organization's Name</label>
                 {{  profile_form.org_name |add_class:"validate" }}
               </div>
-    
+
               <div class="row">
                 <div class="col col-input input-field">
                   <label for="org-email">Your Org Email</label>
@@ -255,14 +62,14 @@
                 <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
                 <div class="col col-input input-field">
                   <label for="org-phone">Your Org Phone</label>
-                  {{  profile_form.org_phone |add_class:"validate" }} 
+                  {{  profile_form.org_phone |add_class:"validate" }}
                 </div>
               </div>
 
-                <div class="input-field">
-                  <label for="org_address ">Organization's Address</label>
-                  {{  profile_form.org_address}}
-                </div>
+              <div class="input-field">
+                <label for="org_address ">Organization's Address</label>
+                {{  profile_form.org_address}}
+              </div>
 
               <div class="row">
                 <div class="col col-input input-field">
@@ -272,7 +79,7 @@
                 <div class="col col-input input-field">
                   <label for="org_state">State</label>
                   {{  profile_form.org_state}}
-                </div>    
+                </div>
               </div>
 
               <div class="row">
@@ -289,8 +96,6 @@
             </div>
           </div>
 
-
-          
           <div class="row">
             <div>
               <label for="org_desc" style="font-size:18;">Give a Short Description of Your Organization</label>
@@ -303,7 +108,7 @@
             <button id="submit" type="submit" class="btn waves-effect waves-light ">Submit</button>
             <a id="cancel" href="profile-view" class="btn waves-effect waves-light ">Cancel</a>
           </div>
-          
+
         </form>
 
       </div>
@@ -313,7 +118,7 @@
   {% include 'main/footer.html' %}
 </body>
 <script>
-  document.addEventListener("DOMContentLoaded", function(event) { 
+  document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("image").src = "{{ user.profile.image.url }}";
   });
 
@@ -321,12 +126,12 @@
     var reader = new FileReader();
 
     reader.onload = function (e) {
-        // get loaded data and render thumbnail.
-        document.getElementById("image").src = e.target.result;
+      // get loaded data and render thumbnail.
+      document.getElementById("image").src = e.target.result;
     };
 
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
-};
+  };
 </script>
 {% endblock %}

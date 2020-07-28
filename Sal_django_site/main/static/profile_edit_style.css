@@ -1,0 +1,176 @@
+
+  .select {
+    display: block;
+    background-color: #F2F2F2;
+  }
+
+  .title-banner {
+    background-color: #3C91E6;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+
+  .title-text {
+    color: ghostwhite;
+    margin-left: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .text-secondary {
+    margin-left: 3rem;
+  }
+
+  .card {
+    border-radius: 20px;
+  }
+
+  .account-img {
+    width: fit-content;
+    min-width: 180;
+    max-width: 90%;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    
+
+  }
+
+  .btn {
+    margin-top: 4%;
+    font-size: 20;
+  }
+
+
+  a {
+    color:#342E37;
+    font-size: 16px;
+  }
+
+  .left-col>.a {
+    margin-left: 0;
+    margin-right: 0;
+    
+
+  }
+
+  .row>.col {
+    column-fill: balance;
+  }
+
+  .row{
+    margin-bottom: 0;
+  }
+
+  .input-field {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #F2F2F2;
+  }
+
+
+  .edit,
+  .edit:hover {
+    background-color: #3C91E6;
+
+  }
+
+  .posts,
+  .posts:hover {
+    background-color: #FA824C;
+  }
+
+  .textarea{
+    margin: 0px;  
+    height: 228px;
+    background-color: #F2F2F2;
+    border: none;
+  }
+
+  .helper-text {
+        color: red;
+  }
+
+  .helper-text> ul >li {
+    font-family: 'latolight', Arial, sans-serif;
+    color: red;
+  }
+
+  #main-row {
+      margin-bottom: 20px;
+  }
+
+  #close{
+    color: ghostwhite;
+    padding-top: 8px;
+  }
+
+  #donor-status {
+    max-width: 55%;
+    min-width: 115px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3rem;
+    padding-bottom: 2rem;
+  }
+
+  #text{
+    display:none;  
+  }
+
+  #submit{
+    margin-bottom: 5%;
+    background-color: #9FD356;
+  }
+
+  #cancel{
+    margin-bottom: 5%;
+    background-color: #F1809B;
+  }
+
+  @media screen and (min-width: 621px) {
+
+    .right-col {
+      padding-left: 2.5%;
+      max-width: 50%;
+      justify-content: center;
+    }
+
+    .left-col {
+      padding-right: 2.5%;
+      max-width: 50%;
+
+    }
+
+      .col-input{
+      max-width: 50%;
+    }
+  }
+
+  @media screen and (max-width: 620px) {
+
+
+    .card-content{
+      justify-content: center;
+    }
+
+    .donor-status {
+      padding-top: 8%;
+    }
+
+    .left-col {  
+      max-width: 90%;
+      column-fill: balance;
+     }
+
+    .right-col {
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      align-items: center;
+    }
+
+    .row .col {
+      float: none;
+    }
+
+  }

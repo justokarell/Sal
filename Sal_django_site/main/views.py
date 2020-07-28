@@ -35,8 +35,11 @@ def contact(request):
                   template_name="main/contact.html")
 
 def profile_view(request):
-    return render(request=request,
-                  template_name="main/profile_view.html")
+    if request.user.is_authenticated:
+        return render(request=request,template_name="main/profile_view.html")
+    else:
+        messages.info(request, f"Login to view your profile")
+        return redirect('main:login')
 
 def my_posts(request):
     return render(request=request,
@@ -170,16 +173,6 @@ def profile_edit(request):
  else:
     form = EditProfileForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
-    # success = False
-    # addresses = Address.objects.all()
-    if settings.GOOGLE_API_KEY:
-        google_api_key_set = True
-    else:
-        google_api_key_set = False
-    # args = {}
-    # args.update(csrf(request))
-    # args['form'] = form
-    # args['profile_form'] = profile_form
+    
     return render(request, 'main/profile_edit.html', context = {'form': form,
-               'profile_form': profile_form,
-               'google_api_key_set': google_api_key_set})
+               'profile_form': profile_form})

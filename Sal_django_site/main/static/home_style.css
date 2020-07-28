@@ -55,11 +55,9 @@ text-align: center;
 .about-desc {
   font-size: 16pt;
   margin: auto;
-  text-align: center;
+  align-content: center;
 }
 
-
- 
 .navbar-search-area {
   position: relative;
   display:block;
