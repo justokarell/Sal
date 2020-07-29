@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'address',
     'crispy_forms',
- 
 
 ]
 

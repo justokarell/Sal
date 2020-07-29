@@ -4,7 +4,8 @@ from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from address.models import AddressField
+# from address.models import AddressField
+from django.core.validators import RegexValidator
 from .validators import validate_is_pic
 
 
@@ -109,10 +110,11 @@ class Profile(models.Model):
     #     'MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT',
     #     'VT','VI','VA','WA','WV','WI','WY'
     # ]
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, blank=True)
     org_name = models.CharField('Your Organization', max_length=30, blank=True)
     org_role = models.CharField(max_length=10, choices=ROLE_CHOICES, default="Donor",)
-    org_phone = models.IntegerField(_('phone'), null=True, blank=True)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    org_phone = models.CharField(_('phone'), max_length=20, validators=[phone_regex], null=True, blank=True)
     org_email = models.EmailField('Your Organizations Email', max_length=254, null=False)
     org_address = models.CharField('Your Organizations Location', max_length=80, default="123 Test St.", null=False)
     org_city = models.CharField(max_length=30, default="Stamford", null=False)
