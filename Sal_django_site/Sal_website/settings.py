@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'social_django',
     'materializecssform',
     'widget_tweaks',
+    'address'
 
 ]
 

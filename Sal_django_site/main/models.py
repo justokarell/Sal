@@ -4,6 +4,8 @@ from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from address.models import AddressField
+import urllib
 from django_google_maps import fields as map_fields
 
 
@@ -94,8 +96,23 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         """
         send_mail(subject, message, from_email, [self.email])
 
-""" My attempt at a post model """
-# class UserPost(models):
-#     address = map_fields.AddressField(max_length=200)
-#     geolocation = map_fields.GeoLocationField(max_length=100)
 
+# function to geocode address via Google Maps API call
+def geocode(address, city, state, zip_code):
+    try:
+        location_param = urllib.request.quote("%s, %s, %s, %s" % (address, city, state, zip_code))
+        url_request = "http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % location_param
+        result = requests.get(url_request)
+        data = result.json()
+        location = data['results'][0]['geometry']['location']
+        lat = location['lat']
+        lng = location['lng']
+        return lat, lng
+    except Exception:
+        return None
+
+class UserPost(models.Model):
+    address = map_fields.AddressField(on_delete=models.CASCADE)
+    lat_lon = geocode(address)
+    # need something here to get userID of user who posted
+    

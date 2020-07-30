@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
+from address.forms import AddressField
+
 
 class CustomUserCreationForm(UserCreationForm):
     """
@@ -67,3 +69,6 @@ class CustomUserChangeForm(UserChangeForm):
             self.cleaned_data.get('password2'), self.instance
         )
         return password2
+    
+class PersonForm(forms.Form):
+    address = AddressField()
