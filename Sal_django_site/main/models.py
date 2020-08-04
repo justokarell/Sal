@@ -98,10 +98,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 # function to geocode address via Google Maps API call
-def geocode(address, city, state, zip_code):
+def geocode(address):
     try:
-        location_param = urllib.request.quote("%s, %s, %s, %s" % (address, city, state, zip_code))
-        url_request = "http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % location_param
+        # location_param = urllib.request.quote("%s, %s, %s, %s" % (address))
+        url_request = "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"key="+settings.GOOGLE_API_KEY
+                    #  https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCbMU1uNeRWo7V47J7Bz3WJSaLKQxz6DbE
         result = requests.get(url_request)
         data = result.json()
         location = data['results'][0]['geometry']['location']
@@ -110,9 +111,22 @@ def geocode(address, city, state, zip_code):
         return lat, lng
     except Exception:
         return None
+# def geocode(address, city, state, zip_code):
+#     try:
+#         location_param = urllib.request.quote("%s, %s, %s, %s" % (address, city, state, zip_code))
+#         url_request = "http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % location_param
+#         result = requests.get(url_request)
+#         data = result.json()
+#         location = data['results'][0]['geometry']['location']
+#         lat = location['lat']
+#         lng = location['lng']
+#         return lat, lng
+#     except Exception:
+#         return None
 
 class UserPost(models.Model):
-    address = map_fields.AddressField(on_delete=models.CASCADE)
+    address = map_fields.AddressField(max_length=200)
     lat_lon = geocode(address)
-    # need something here to get userID of user who posted
+    # need something here to get userID of user who posted like this maybe?
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     

@@ -128,8 +128,14 @@ def reset_confirmation_sent(request):
                  # context={"InfoPrompt": InfoPrompt.objects.all})
                  
 def map_page(request):
+    # if settings.GOOGLE_API_KEY:
+    #     google_api_key_set = True
+    # else:
+    #     google_api_key_set = False
     return render(request=request,
-                  template_name="main/map_page.html")
+                  template_name="main/map_page.html")#,
+                  #context={'google_api_key_set': google_api_key_set})
+                  
 
 def test_homepage_search_input(request):
     return request.session['place']
