@@ -175,6 +175,16 @@
   <section class="Map">
     <!--The div element for the map -->
     <div id="map"></div>
+    
+  <!-- var markers1 = [
+  {% for post in post_list %}
+      {% if post.lat = None %}
+      {% else %}
+        <a id="" href="”/store/{{">{{ point.name }}</a>’, {{ post.lat }}, {{ post.lon }}],
+      {% endif %}
+  {% endfor%}
+  ] -->
+
   </section>
 
 
@@ -188,11 +198,11 @@
             <p class="search-location center-align" style="font-size:1.6vw">Location</p>
             <nav class="search-title-filter white">
               <!-- <div class="nav-wrapper"> -->
-                <div class="input-field">
-                  <input id="search" type="search" required="" class="pac-target-input" placeholder="Where to look"
-                    autocomplete="off">
-                  <i class="material-icons" id="search-button">search</i>
-                </div>
+              <div class="input-field">
+                <input id="search" type="search" required="" class="pac-target-input" placeholder="Where to look"
+                  autocomplete="off">
+                <i class="material-icons" id="search-button">search</i>
+              </div>
               <!-- </div> -->
             </nav>
             <br>
@@ -234,22 +244,22 @@
             </div>
             <br>
             <div class="input-field col s12">
-              <p><label><input value="0" type="checkbox" id="All-days" class="day_of_week"
-                    onchange="updateView(this)"><span>All</span></label></p>
-              <p><label><input value="1" type="checkbox" id="Sunday" class="day_of_week"
-                    onchange="updateView(this)"><span>Sunday</span></label></p>
-              <p><label><input value="2" type="checkbox" id="Monday" class="day_of_week"
-                    onchange="updateView(this)"><span>Monday</span></label></p>
-              <p><label><input value="3" type="checkbox" id="Tuesday" class="day_of_week"
-                    onchange="updateView(this)"><span>Tuesday</span></label></p>
-              <p><label><input value="4" type="checkbox" id="Wednesday" class="day_of_week"
-                    onchange="updateView(this)"><span>Wednesday</span></label></p>
-              <p><label><input value="5" type="checkbox" id="Thursday" class="day_of_week"
-                    onchange="updateView(this)"><span>Thrusday</span></label></p>
-              <p><label><input value="6" type="checkbox" id="Friday" class="day_of_week"
-                    onchange="updateView(this)"><span>Friday</span></label></p>
-              <p><label><input value="7" type="checkbox" id="Saturday" class="day_of_week"
-                    onchange="updateView(this)"><span>Saturday</span></label></p>
+              <p><label><input value="0" type="checkbox" id="All-days" class="day_of_week" onchange="updateView(this)"
+                    onchange="filterMarkers(this);"><span>All</span></label></p>
+              <p><label><input value="1" type="checkbox" id="Sunday" class="day_of_week" onchange="updateView(this)"
+                    onchange="filterMarkers(this);"><span>Sunday</span></label></p>
+              <p><label><input value="2" type="checkbox" id="Monday" class="day_of_week" onchange="updateView(this)"
+                    onchange="filterMarkers(this);"><span>Monday</span></label></p>
+              <p><label><input value="3" type="checkbox" id="Tuesday" class="day_of_week" onchange="updateView(this)"
+                    onchange="filterMarkers(this);"><span>Tuesday</span></label></p>
+              <p><label><input value="4" type="checkbox" id="Wednesday" class="day_of_week" onchange="updateView(this)"
+                    onchange="filterMarkers(this);"><span>Wednesday</span></label></p>
+              <p><label><input value="5" type="checkbox" id="Thursday" class="day_of_week" onchange="updateView(this)"
+                    onchange="filterMarkers(this);"><span>Thrusday</span></label></p>
+              <p><label><input value="6" type="checkbox" id="Friday" class="day_of_week" onchange="updateView(this)"
+                    onchange="filterMarkers(this);"><span>Friday</span></label></p>
+              <p><label><input value="7" type="checkbox" id="Saturday" class="day_of_week" onchange="updateView(this)"
+                    onchange="filterMarkers(this);"><span>Saturday</span></label></p>
             </div>
             <br>
             <form action="#">
@@ -311,28 +321,31 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=&v=3&language=ee&dummy=dummy.js"></script> -->
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbMU1uNeRWo7V47J7Bz3WJSaLKQxz6DbE&libraries=places"></script>
+<!-- <script src="/maps/documentation/javascript/examples/markerclusterer/markerclustererplus@4.0.1.min.js"></script> -->
+
+<script src="{% static 'google/markerclustererplus/dist/markerclustererplus.min.js' %}"></script>
 
 <script>
 
   // Retrieve the sessionStorage variable and search
-  
+
 
   var place = sessionStorage.getItem('place');
   // console.log(sessionStorage.getItem('place'));
-  if(place !== null && place !== ""){
+  if (place !== null && place !== "") {
     var searchbox = document.getElementById('search');
-    searchbox.value=place;
-    document.addEventListener('DOMContentLoaded', function(){
-      $(document).ready(function(){
-        window.onload=function(){
+    searchbox.value = place;
+    document.addEventListener('DOMContentLoaded', function () {
+      $(document).ready(function () {
+        window.onload = function () {
           document.getElementById("search-button").click();
         };
-        sessionStorage.setItem("place", "" );
+        sessionStorage.setItem("place", "");
         // console.log(sessionStorage.getItem('place'));  
       });
     });
   }
-  
+
 </script>
 
 <script>
@@ -364,8 +377,6 @@
   });
 
 </script>
-
-
 
 
 <script>
@@ -432,10 +443,11 @@
 </script>
 
 
-
 <script>
+
   var gmarkers1 = [];
   var markers1 = [];
+  var markerCluster;
   var infowindow = new google.maps.InfoWindow({
     content: ''
   });
@@ -449,6 +461,10 @@
     ['3', 'Title 4', 52.4555687, 5.029231599999994, ['recipient', 'donor', 'Sunday'], ['360', '540']],  // ['6am', '9am']
     ['3', 'Title 4', 52.4655687, 5.029231599999994, ['recipient', 'Monday'], ['540', '660']]  // ['9am', '11am']
   ];
+
+  //This will be the way we pass the info in the future
+  // var markers1 = "{{ post_list|safe }}";
+  // console.log(markers1);
 
   markerCount = markers1.length
 
@@ -497,6 +513,8 @@
         marker.setMap(null);
       });
       markers = [];
+      console.log(markers);
+      console.log("You");
       // For each place, get the icon, name and location.
       const bounds = new google.maps.LatLngBounds();
       places.forEach(place => {
@@ -530,6 +548,19 @@
       });
       map.fitBounds(bounds);
     });
+
+    google.maps.event.addListener(map, 'dragend', function () {
+      ajax_update_markers();
+    });
+    google.maps.event.addListener(map, 'zoom_changed', function () {
+      ajax_update_markers();
+    });
+    google.maps.event.addListener(map, 'idle', function () {
+      ajax_update_markers();
+    });
+
+    markerCluster = new MarkerClusterer(map, gmarkers1,
+      { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
   }
 
   //Function to Search when sear ch button is clicked
@@ -558,6 +589,10 @@
 
     });
 
+    marker1.getDraggable = function () {
+      return false;
+    };
+
     gmarkers1.push(marker1);
 
     // Marker click listener
@@ -571,11 +606,14 @@
       }
     })(marker1, content));
 
+
   }
+
 
 
   // Function on Change on Slide
   $(function () {
+    var newclusters = [];
     $("#slider-range").slider();
 
     var startPos = $("#slider-range").slider("value");
@@ -597,6 +635,7 @@
           if ((low_bound < marker.availability[0] && marker.availability[0] < high_bound) ||
             (low_bound < marker.availability[1] && marker.availability[1] < high_bound)) {
             marker.setVisible(true);
+            newclusters.push(marker);
           } else {
             marker.setVisible(false);
           }
@@ -605,6 +644,10 @@
 
       }
       startPos = endPos;
+      //Replace clusters with filtered ones
+      markerCluster.clearMarkers();
+      markerCluster.addMarkers(newclusters);
+      newclusters = [];
     });
   });
 
@@ -613,7 +656,7 @@
 
   // Function on Change of checkbox
   updateView = function (element) {
-
+    var newmarkers = [];
 
     // Handle an "All checkbox" change
     if (document.getElementById('All-days') == element && document.getElementById('All-days').checked) {
@@ -626,8 +669,6 @@
         this.checked = false;
       });
     }
-
-
 
     if (element) {
       //Get array with names of the checked boxes
@@ -643,17 +684,47 @@
           return (marker.category).indexOf(o) >= 0;
         })) {
           marker.setVisible(true);
+
+          newmarkers.push(marker);
         } else {
           marker.setVisible(false);
         }
 
       }
+
+
     } else {
       console.log('No param given');
     }
+
+    //Replace clusters with filtered ones
+    markerCluster.clearMarkers();
+    markerCluster.addMarkers(newmarkers);
   }
+
+  // Asks for updates from the back end
+  // function ajax_update_markers() {
+  //   var r = map.getBounds().getNorthEast().lng();
+  //   var l = map.getBounds().getSouthWest().lng();
+  //   var t = map.getBounds().getNorthEast().lat();
+  //   var b = map.getBounds().getSouthWest().lat();
+
+  //   $.ajax({
+  //     type: "GET",
+  //     url: "/map_page",
+  //     data: { 'right': r, 'left': l, 'top': t, 'bottom': b, 'zoom': map.getZoom() },
+  //     async: true,
+  //     dataType: 'json',
+  //     success: function (data) {
+  //       drawMarkers(data);
+  //     }
+  //   });
+  // }
+
   // Init map
   initialize();
+
+  // google.maps.event.addDomListener(window, "load", initialize);
 </script>
 
 
