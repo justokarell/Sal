@@ -37,6 +37,9 @@ urlpatterns = [
     path("email-test2", views.email_test2, name="email-test2"),
     path('confirm-email', views.account_activation_sent, name='confirm_email_sent'),
     path('map_page', views.map_page, name='map_page'),
+    path('profile-edit', views.profile_edit, name='profile_edit'),
+    path('profile-view', views.profile_view, name='profile-view'),
+    path('my-posts', views.my_posts, name='my_posts'),
 
 
     # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
@@ -46,4 +49,4 @@ urlpatterns = [
     # path("activate/(<uidb64>[0-9A-Za-z_\-]+)/(<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})",
     #     views.activate, name="activate"),
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

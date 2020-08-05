@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'social_django',
     'materializecssform',
     'widget_tweaks',
-    'address'
 
 ]
 
@@ -130,7 +129,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main/media')
 # User substitution
 #  https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#auth-custom-user
 # AUTH_USER_MODEL = 'auth.User'
@@ -216,9 +216,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
 EMAIL_HOST_USER= os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD= os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 PASSWORD_RESET_TIMEOUT_DAYS = 2
+
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')

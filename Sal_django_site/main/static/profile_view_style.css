@@ -1,0 +1,130 @@
+
+  .title-banner {
+    background-color: #3C91E6;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+
+  .title-text {
+    color: ghostwhite;
+    margin-left: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .text-secondary{
+    margin-left: 3rem;
+  }
+
+  h4{
+    text-align: center;
+    padding-top: 3rem;
+    padding-bottom: 7rem;
+  }
+
+  .p-line{
+    text-align: left;
+    padding-bottom: 2%;
+    /* background-color:#F2F2F2; */
+  }
+
+
+
+  .card {
+    border-radius: 20px;
+    
+  }
+
+
+  .account-img{
+    min-width: 200;
+    max-width: 400;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    padding: 10px;
+
+  }
+
+  .col{ 
+    max-width: auto;
+  }
+
+  .profile-content > .row{
+    margin-bottom: 0;
+    padding-bottom: 2%;
+
+  }
+
+  a{
+    color: ghostwhite;
+    font-size:20px;
+  }
+
+
+  
+  .edit, .edit:hover{
+    background-color: #3C91E6;
+
+  }
+
+  .posts, .posts:hover{
+    background-color: #FA824C;
+    
+
+  }
+
+
+  @media screen and (min-width: 621px) {
+    .main-row{ 
+    display: flex;
+    justify-content: center;
+    }
+
+    /* .profile-content{ 
+      margin-top: 8%;
+    } */
+
+    /* .donor-status{
+    padding-top: 10%;
+    } */
+
+    .desc{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color:#F2F2F2;
+    text-align: left;
+    padding-left: 10%;
+    }
+
+    .right-col {
+      margin-right: 2.5%;
+    }
+
+    .left-col {
+      margin-left: 2.5%;
+    }
+    
+
+
+
+  }
+
+  @media screen and (max-width: 620px) {
+    .main-row{ 
+    display: auto;
+    }
+
+    .donor-status{
+      padding-top: 10%;
+    }
+
+    .btn {
+    margin-top: 4%;
+    }
+
+    .desc{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color:#F2F2F2;
+    text-align: left;
+    }
+  }
+
