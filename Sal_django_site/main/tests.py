@@ -13,16 +13,43 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm, ProfileForm
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
 from .views import test_homepage_search_input
-
+from django.http import HttpRequest
+from django.test import SimpleTestCase
+from django.urls import reverse
+import re
+from . import views
 
 # Unit Tests Start Here
 # ////////////////////////////////////////////
 
 
-class HomepageTest(TestCase):
-    # Tell us what this test is supposed to do
-    def test_session_var(self):
-        self.assertTrue(test_homepage_search_input() != {})
+
+
+class HomePageTests(SimpleTestCase):
+    # Check that homepage exists and return 200 HTTP Status
+    def test_home_page_status_code(self):
+        response = self.client.get('/')
+        self.assertEquals(response.status_code, 200)
+    # confirm that it uses the url named home
+    def test_view_url_by_name(self):
+        response = self.client.get(reverse('home'))
+        self.assertEquals(response.status_code, 200)
+    # check that the template used is home.html
+    def test_view_uses_correct_template(self):
+        response = self.client.get(reverse('home'))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'home.html')
+    # test that it does not contain incorrect HTML
+    def test_home_page_does_not_contain_incorrect_html(self):
+        response = self.client.get('/')
+        self.assertNotContains(
+            response, 'Hi there! I should not be on the page.')
+
+
+# class HomepageTest(TestCase):
+#     # Tell us what this test is supposed to do
+#     def test_session_var(self):
+#         self.assertTrue(test_homepage_search_input() != {})
 
 
 class CustomUserTestCase(TestCase):
@@ -101,7 +128,77 @@ class ProfileFormTest(TestCase):
         logged_in = c.login(email='user@gmail.com', password='Easy123')
         # should be logged in now
         self.assertTrue(self.user.is_active)
+  
+        
+# class HomepageTestSearchData(TestCase):
+#     def test_homepage_search_data(self):
+#         self.assertTrue(session.request['place'],{})
 
+
+class ProfileTests(TestCase):
+    
+    def setUp(self):
+        url = reverse('profile_view')
+        response = self.client.get(url)
+        self.client = Client()
+        
+    # general test that we're getting the page we ask for
+    def test_profile_view_page(self):
+        url = reverse('profile_view')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'profile_view.html')
+        self.assertNotContains(response, '.svg')
+        
+    # Tries 'donor' and 'recipient' with upper or lower case, and returns error if not one of these
+    # Let me know if there is an easy way to reefactor this \/\/\/
+    def test_donor_recipient(self):
+        url = reverse('profile_view')
+        response = self.client.get(url)
+        try:
+            self.assertContains(response, 'Donor')
+        except:
+            pass
+        try:
+            self.assertContains(response, 'donor')
+        except:
+            pass
+        try:
+            self.assertContains(response, 'Recipient')
+        except:
+            pass
+        try:
+            self.assertContains(response, 'recipient')
+        except:
+            pass
+        finally:
+            print('Incorrect User Type; must be "donor" or "recipient" user Type. Either no selection or incorrect selection found ')
+    
+    # Test whether address field is greater than 3 characters
+    def test_valid_org_address(self):
+        url = reverse('profile_view')
+        response = self.client.get(url)
+        self.assertTrue(re.search(r'<p class="p-line"><strong>Organzation Address: </strong>\.(.*?)</p>', response).group(1)>=3)
+    
+    # Test whether city field is non-empty
+    def test_valid_org_address(self):
+        url = reverse('profile_view')
+        response = self.client.get(url)
+        self.assertTrue(re.search(r'<p class="p-line col"><strong> City: </strong>\.(.*?)</p>', response).group(1)!='')
+    
+    # Test whether state field is non-empty
+    def test_valid_org_address(self):
+        url = reverse('profile_view')
+        response = self.client.get(url)
+        self.assertTrue(re.search(r'<p class="p-line col"><strong> State: </strong>\.(.*?)</p>', response).group(1)!='')
+    
+    # Test whether zipcode field is non-empty
+    def test_valid_org_address(self):
+        url = reverse('profile_view')
+        response = self.client.get(url)
+        self.assertTrue(re.search(r'<p class="p-line col"><strong> Zipcode: </strong>\.(.*?)</p>', response).group(1)!='')
+    
+     
     # Valid Profile Edit Form Data but it doesn't work SAD.
     # def test_ProfileForm_valid(self):
     #     avatar = create_image(None, 'avatar.png')
@@ -147,9 +244,8 @@ class MySeleniumTests(StaticLiveServerTestCase):
         password_input.send_keys('secret')
         self.selenium.find_element_by_id('login-submit').click()
 
-class HomepageTestSearchData(TestCase):
-    def test_homepage_search_data(self):
-        self.assertTrue(session.request['place'],{})
+
+    
 
 # NOTES FOR Coverage Testing
 # First: $ pip install coverage==3.6

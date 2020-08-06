@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'social_django',
     'materializecssform',
     'widget_tweaks',
-
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
