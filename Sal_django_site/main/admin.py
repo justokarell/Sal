@@ -3,6 +3,10 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from .models import InfoPrompt, CustomUser
 from .forms import CustomUserChangeForm, CustomUserCreationForm
+from django.contrib import admin
+# from django_google_maps import widgets as map_widgets
+# from django_google_maps import fields as map_fields
+
 
 # Register your models here.
 
@@ -48,3 +52,4 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('email',)
 
 admin.site.register(CustomUser, CustomUserAdmin)
+

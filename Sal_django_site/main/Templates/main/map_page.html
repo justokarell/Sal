@@ -3,155 +3,836 @@
 {% block content %}
 {% load static %}
 
+<head>
+  <title>Surplus Map - Sal Hates Waste</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+</head>
 
 <style>
-  .Map {
-    float: right;
-    margin: auto;
-    padding: 40px;
-  }
-  .Donation {
-    float: left;
-    margin: 80px;
-    padding: 20px;
-    width: 500px;
-  }
   .input-field {
-    margin: 30px;
-    padding: 20px;
-    width: 500px;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 5px;
+    width: 94%;
   }
+
   textarea {
-    margin: 15px;
+    margin: auto;
   }
-  #map {
+
+  label{
+    color:#9e9e9e;
+  }
+
+  p{
+    color:#9e9e9e;
+    font-family: 'latoregular', Arial, sans-serif;
+  }
+
+  .card-content{
+    height: 100%;
+  }
+
+  /* #search {
+    padding-left:10px;
+    margin-right: auto;
+  } */
+
+  #search-button {
+    float: right;
+    top: 20%;
+  }
+
+  #cannot{
+    background-color: white;
+    color: #FA824C;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+  }
+
+
+  @media screen and (min-width: 931px) {
+    .filter-label {
+      font-size: 1.6vw;
+      font-family: 'latoregular', Arial, sans-serif;
+      color:#3C91E6;
+    }
+  }
+
+  @media screen and (max-width: 930px) {
+    .filter-label {
+      font-size: 16px;
+      font-family: 'latoregular', Arial, sans-serif;
+      color:#3C91E6;
+    }
+  }
+
+  @media screen and (min-width: 655px) {
+    .Donation {
+      /* float: left; */
+      margin-right: 0;
+      /* margin: auto; */
+      /* padding: 10pt; */
+      max-width: 50%;
+    }
+
+    .Map {
+      /* float: right; */
+      /* margin: auto; */
+      float: left;
+      /* margin-left: 0; */
+      padding-left: 20pt;
+      padding-top: 20pt;
+      width: 70%;
+      z-index: -1;
+    }
+
+    #map {
       margin: auto;
-      height: 600px;  /* The height is 400 pixels */
-      width: 600px;  /* The width is the width of the web page */
-     }
-  </style>
+      height: 90%;
+      /* The height is 400 pixels */
+      width: 100%;
+      /* The width is the width of the web page */
+      /* z-index: -1; */
+    }
+
+
+
+    .card {
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+      max-width: 250pt;
+      /* max-width: 300; */
+      float: left;
+    }
+  }
+
+  @media screen and (max-width: 655px) {
+    .Donation {
+      order: 2;
+      /* margin-left: auto;
+      margin-right: auto; */
+      max-width: 100%;
+
+    }
+
+    .Map {
+      order: 1;
+      /* margin: auto; */
+      float: top;
+      padding-top: 10pt;
+      width: 100%;
+      z-index: -1;
+    }
+
+    #map {
+      margin: auto;
+      height: 300;
+      /* The height is 400 pixels */
+      width: 98%;
+      /* The width is the width of the web page */
+    }
+
+    .card {
+      /* border-top-right-radius: 10px;
+      border-top-left-radius: 10px; */
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      height: 800;
+    }
+
+    /* .filter-title {
+      font-size: 2.8rem;
+      padding-top: 1rem;
+      margin-top: 0;
+      margin-bottom: 0;
+      color: #3C91E6
+    } */
+
+    .scroll-box {
+      overflow-y: scroll;
+      height: 200px;
+      padding: 1rem
+    }
+
+
+    #donate-col {
+      width: 100%;
+      height: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #mega-container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  /* START OF TIME SLIDER STUFF */
+  #time-range p {
+    /* font-family: "Arial", sans-serif; */
+    font-size: 14px;
+    /* color: #333; */
+  }
+
+  .ui-slider-horizontal {
+    height: 8px;
+    background: #D7D7D7;
+    border: 1px solid #BABABA;
+    box-shadow: 0 1px 0 #FFF, 0 1px 0 #CFCFCF inset;
+    clear: both;
+    margin: 8px 0;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+  }
+
+  .ui-slider {
+    position: relative;
+    text-align: left;
+  }
+
+  .ui-slider-horizontal .ui-slider-range {
+    top: -1px;
+    height: 100%;
+  }
+
+  .ui-slider .ui-slider-range {
+    position: absolute;
+    z-index: 1;
+    height: 8px;
+    font-size: .7em;
+    display: block;
+    border: 1px solid #5BA8E1;
+    box-shadow: 0 1px 0 #AAD6F6 inset;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
+    background: #81B8F3;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+    background-size: 100%;
+    background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, #A0D4F5), color-stop(100%, #81B8F3));
+    background-image: -webkit-linear-gradient(top, #A0D4F5, #81B8F3);
+    background-image: -moz-linear-gradient(top, #A0D4F5, #81B8F3);
+    background-image: -o-linear-gradient(top, #A0D4F5, #81B8F3);
+    background-image: linear-gradient(top, #A0D4F5, #81B8F3);
+  }
+
+  .ui-slider .ui-slider-handle {
+    border-radius: 50%;
+    background: #F9FBFA;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+    background-size: 100%;
+    background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, #C7CED6), color-stop(100%, #F9FBFA));
+    background-image: -webkit-linear-gradient(top, #C7CED6, #F9FBFA);
+    background-image: -moz-linear-gradient(top, #C7CED6, #F9FBFA);
+    background-image: -o-linear-gradient(top, #C7CED6, #F9FBFA);
+    background-image: linear-gradient(top, #C7CED6, #F9FBFA);
+    width: 22px;
+    height: 22px;
+    -webkit-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
+    -moz-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
+    box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
+    -webkit-transition: box-shadow .3s;
+    -moz-transition: box-shadow .3s;
+    -o-transition: box-shadow .3s;
+    transition: box-shadow .3s;
+  }
+
+  .ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 22px;
+    height: 22px;
+    cursor: default;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ui-slider .ui-slider-handle:after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    top: 50%;
+    margin-top: -4px;
+    left: 50%;
+    margin-left: -4px;
+    background: #30A2D2;
+    -webkit-box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 #FFF;
+    -moz-box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 white;
+    box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 #FFF;
+  }
+
+  .ui-slider-horizontal .ui-slider-handle {
+    top: -.5em;
+    margin-left: -.6em;
+  }
+
+  .ui-slider a:focus {
+    outline: none;
+  }
+
+  /* END OF TIME SLIDER STUFF */
+</style>
 
 
 <body>
-
-<!-- NAVBAR -->
-{% comment %} <section>
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#!" class="brand-logo center">Salhateswaste</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="About.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-</section>
-
-<!-- MAP -->
-<section class="Map">
-  <h3 class="center-align">My Google Maps Demo</h3>
-      <!--The div element for the map -->
-  <div id="map"></div>
-</section> {% endcomment %}
+  <div id="mega-container" class="row">
 
 
-<!-- DONATION INFORMATION -->
-<section class="Donation">
-<form>
-    <br></br>
-      <h4 class="center-align">Enter Donation Info</h4>
-    <br></br>
-    <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s6">
-            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-            <label for="first_name">First Name</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="last_name" type="text" class="validate">
-            <label for="last_name">Last Name</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-            <label for="disabled">Disabled</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="password" type="password" class="validate">
-            <label for="password">Password</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
-            <label for="email">Email</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            This is an inline input field:
-            <div class="input-field inline">
-              <input id="email_inline" type="email" class="validate">
-              <label for="email_inline">Email</label>
-              <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
+
+    <!-- DONATION INFORMATION -->
+    <section class="Donation">
+      <div>
+        <div id="donate-col" class="col s14 m6">
+          <div class="card scroll-box white">
+            <h2 class="filter-title center-align" style="color:#3C91E6" >Filters</h2>
+            <div class="card-content white">
+              <p class="search-location filter-label center-align">Location</p>
+              <!-- <nav class="search-title-filter white"> -->
+              <!-- <div class="nav-wrapper"> -->
+              <div class="input-field">
+                <input id="search" type="search" required="" class="pac-target-input" placeholder="Where to look"
+                  autocomplete="off">
+                <i class="material-icons" id="search-button" style="display: inline-flex;">search</i>
+              </div>
+              <!-- </div> -->
+              <!-- </nav> -->
+              <br>
+              <form action="#">
+                <p class="time-range filter-label center-align  ">Donors or Recipients?</p>
+                <br>
+                <p>
+                  <label>
+                    <input class="with-gap" name="group1" type="checkbox" id="donor" onchange="updateView(this)" ; />
+                    <span>Donors</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input class="with-gap" name="group1" type="checkbox" id="recipient" onchange="updateView(this)"
+                      ; />
+                    <span>Recipients</span>
+                  </label>
+                </p>
+              </form>
+              <br>
+              
+              <form action="#">
+                <p class="time-range filter-label center-align  ">Perishable?</p>
+                <br>
+                <p>
+                  <label>
+                    <input class="with-gap" name="perishable" type="checkbox" id="perishable"
+                      onchange="updateView(this)" />
+                    <span>Perishable</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input class="with-gap" name="non-perishable" type="checkbox" id="non-perishable"
+                      onchange="updateView(this)" />
+                    <span>Non-Perishable</span>
+                  </label>
+                </p>
+              </form>
+              <br>
+              <div class="time-picker">
+                <p class="time-picker-header filter-label center-align  ">Time(s) Available</p>
+                <div id="time-range">
+                  <p>Availability Range: <span class="slider-time">05:00 AM</span> - <span class="slider-time2">08:00
+                      PM</span>
+                  </p>
+                  <div class="sliders_step1">
+                    <div id="slider-range"></div>
+                  </div>
+                </div>
+              </div>
+              <br><br>
+              <div class="date-picker">
+                <p class="date-picker-header filter-label center-align  ">Day(s) Available</p>
+              </div>
+              <div class="input-field col s12">
+                <p><label><input value="0" type="checkbox" id="All-days" class="day_of_week" onchange="updateView(this)"
+                      onchange="filterMarkers(this);"><span>All</span></label></p>
+                <p><label><input value="1" type="checkbox" id="Sunday" class="day_of_week" onchange="updateView(this)"
+                      onchange="filterMarkers(this);"><span>Sunday</span></label></p>
+                <p><label><input value="2" type="checkbox" id="Monday" class="day_of_week" onchange="updateView(this)"
+                      onchange="filterMarkers(this);"><span>Monday</span></label></p>
+                <p><label><input value="3" type="checkbox" id="Tuesday" class="day_of_week" onchange="updateView(this)"
+                      onchange="filterMarkers(this);"><span>Tuesday</span></label></p>
+                <p><label><input value="4" type="checkbox" id="Wednesday" class="day_of_week"
+                      onchange="updateView(this)" onchange="filterMarkers(this);"><span>Wednesday</span></label></p>
+                <p><label><input value="5" type="checkbox" id="Thursday" class="day_of_week" onchange="updateView(this)"
+                      onchange="filterMarkers(this);"><span>Thrusday</span></label></p>
+                <p><label><input value="6" type="checkbox" id="Friday" class="day_of_week" onchange="updateView(this)"
+                      onchange="filterMarkers(this);"><span>Friday</span></label></p>
+                <p><label><input value="7" type="checkbox" id="Saturday" class="day_of_week" onchange="updateView(this)"
+                      onchange="filterMarkers(this);"><span>Saturday</span></label></p>
+              </div>
+              
+              <div><br>
+
+                <br>
+                
+              </div>
+             
+              
+             
             </div>
+            
           </div>
         </div>
-      </form>
-    </div>
-    <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s13">
-            <textarea id="textarea1" class="materialize-textarea"></textarea>
-            <label for="textarea1">Textarea</label>
-          </div>
-        </div>
-      </form>
-    </div>
-  </form>
- </section>
+       
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section class="Map ">
+      <!--The div element for the map -->
+      <div id="map"></div>
+      
+    </section>
+
+  </div>
+  <div class="center">
+    <a id="cannot" class="btn-small center-align" href="contact">Can't find what you're looking for?</a>
+  </div>
+  <br></br>
+  
+  {% include 'main/footer.html' %}
+</body>
 
 
-
-
-
-
-<br></br><br></br>
-
-</body> 
-
-<script src="{% static 'tinymce/js/prism.js' %}"></script>
-<script>
-
-// Initialize and add the map
-function initMap() {
-  // The location of Uluru
-  var uluru = {lat: -25.344, lng: 131.036};
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
-}
-</script>
-    <!--Load the API from the specified URL
+<!--Load the API from the specified URL
     * The async attribute allows the browser to render the page while the API loads
     * The key parameter will contain your own API key (which is not needed for this tutorial)
     * The callback parameter executes the initMap() function
     -->
-<script async defer
+
+<!-- <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
-</script>
+    
+</script> -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=&v=3&language=ee&dummy=dummy.js"></script> -->
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbMU1uNeRWo7V47J7Bz3WJSaLKQxz6DbE&libraries=places"></script>
+<!-- <script src="/maps/documentation/javascript/examples/markerclusterer/markerclustererplus@4.0.1.min.js"></script> -->
+
+<script src="{% static 'google/markerclustererplus/dist/markerclustererplus.min.js' %}"></script>
+
 <script>
 
-// This goes in the second web page:
-// Retrieve the sessionStorage variable
-var place = sessionStorage.getItem('place'); 
+  // Retrieve the sessionStorage variable and search
+
+
+  var place = sessionStorage.getItem('place');
+  // console.log(sessionStorage.getItem('place'));
+  if (place !== null && place !== "") {
+    var searchbox = document.getElementById('search');
+    searchbox.value = place;
+    document.addEventListener('DOMContentLoaded', function () {
+      $(document).ready(function () {
+        window.onload = function () {
+          document.getElementById("search-button").click();
+        };
+        sessionStorage.setItem("place", "");
+        // console.log(sessionStorage.getItem('place'));  
+      });
+    });
+  }
+
 </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('select');
+    // var instances = M.FormSelect.init(elems, options);
+    var instances = M.FormSelect.init(elems);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function () {
+    $('select').formSelect();
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.datepicker');
+    var instances = M.Datepicker.init(elems);
+    // var instances = M.Datepicker.init(elems, options);
+
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function () {
+    $('.datepicker').datepicker();
+  });
+
+</script>
+
+
+<script>
+  //Slider UI and functionality 
+  $("#slider-range").slider({
+    range: true,
+    min: 0,
+    max: 1440,
+    step: 15,
+    values: [300, 1200],
+    slide: function (e, ui) {
+      var hours1 = Math.floor(ui.values[0] / 60);
+      var minutes1 = ui.values[0] - (hours1 * 60);
+
+      if (hours1.length == 1) hours1 = '0' + hours1;
+      if (minutes1.length == 1) minutes1 = '0' + minutes1;
+      if (minutes1 == 0) minutes1 = '00';
+      if (hours1 >= 12) {
+        if (hours1 == 12) {
+          hours1 = hours1;
+          minutes1 = minutes1 + " PM";
+        } else {
+          hours1 = hours1 - 12;
+          minutes1 = minutes1 + " PM";
+        }
+      } else {
+        hours1 = hours1;
+        minutes1 = minutes1 + " AM";
+      }
+      if (hours1 == 0) {
+        hours1 = 12;
+        minutes1 = minutes1;
+      }
+
+
+
+      $('.slider-time').html(hours1 + ':' + minutes1);
+
+      var hours2 = Math.floor(ui.values[1] / 60);
+      var minutes2 = ui.values[1] - (hours2 * 60);
+
+      if (hours2.length == 1) hours2 = '0' + hours2;
+      if (minutes2.length == 1) minutes2 = '0' + minutes2;
+      if (minutes2 == 0) minutes2 = '00';
+      if (hours2 >= 12) {
+        if (hours2 == 12) {
+          hours2 = hours2;
+          minutes2 = minutes2 + " PM";
+        } else if (hours2 == 24) {
+          hours2 = 11;
+          minutes2 = "59 PM";
+        } else {
+          hours2 = hours2 - 12;
+          minutes2 = minutes2 + " PM";
+        }
+      } else {
+        hours2 = hours2;
+        minutes2 = minutes2 + " AM";
+      }
+
+      $('.slider-time2').html(hours2 + ':' + minutes2);
+    }
+  });
+</script>
+
+
+<script>
+
+  var gmarkers1 = [];
+  var markers1 = [];
+  var markerCluster;
+  var infowindow = new google.maps.InfoWindow({
+    content: ''
+  });
+
+  // Our markers
+  // These serve as temporary data to filter on for each of the "posts"
+  markers1 = [
+    ['0', 'Title 1', 52.4357808, 4.991315699999973, ['donor', 'perishable', 'Monday', 'Saturday'], ['720', '900']], //['12pm', '3pm']
+    ['1', 'Title 2', 52.4357808, 4.981315699999973, ['donor', 'Tuesday'], ['540', '900']], //  ['9am', '3pm']
+    ['2', 'Title 3', 52.4555687, 5.039231599999994, ['recipient', 'non-perishable', 'Monday'], ['900', '1020']], //['3pm', '5pm']
+    ['3', 'Title 4', 52.4555687, 5.029231599999994, ['recipient', 'donor', 'Sunday'], ['360', '540']],  // ['6am', '9am']
+    ['3', 'Title 4', 52.4655687, 5.029231599999994, ['recipient', 'Monday'], ['540', '660']]  // ['9am', '11am']
+  ];
+
+  //This will be the way we pass the info in the future
+  // var markers1 = "{{ post_list|safe }}";
+  // console.log(markers1);
+
+  markerCount = markers1.length
+
+  // Function to init map
+  function initialize() {
+    var center = new google.maps.LatLng(52.4357808, 4.991315699999973);
+    var mapOptions = {
+      zoom: 12,
+      center: center,
+      mapTypeId: google.maps.MapTypeId.TERRAIN,
+      mapTypeControl: false,
+      // disableDefaultUI: true
+    };
+
+    // CT Location Initialization
+    // var center = new google.maps.LatLng(41.6862654, -72.6001019);
+    // var mapOptions = {
+    //   zoom: 10,
+    //   center: center,
+    //   mapTypeId: google.maps.MapTypeId.TERRAIN,
+    // };
+
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    for (i = 0; i < markerCount; i++) {
+      addMarker(markers1[i]);
+    }
+
+    // Create the search box and link it to the UI element.
+    const searchBox = new google.maps.places.SearchBox(document.getElementById('search'));
+    // google.maps.event.addListener(searchBox, 'places_changed', processPlacesSearch);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener("bounds_changed", () => {
+      searchBox.setBounds(map.getBounds());
+    });
+    let markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener("places_changed", () => {
+      const places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+      // Clear out the old markers.
+      markers.forEach(marker => {
+        marker.setMap(null);
+      });
+      markers = [];
+      console.log(markers);
+      console.log("You");
+      // For each place, get the icon, name and location.
+      const bounds = new google.maps.LatLngBounds();
+      places.forEach(place => {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+        const icon = {
+          url: place.icon,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25)
+        };
+        // Create a marker for each place.
+        markers.push(
+          new google.maps.Marker({
+            map,
+            icon,
+            title: place.name,
+            position: place.geometry.location
+          })
+        );
+
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+      map.fitBounds(bounds);
+    });
+
+    // google.maps.event.addListener(map, 'dragend', function () {
+    //   ajax_update_markers();
+    // });
+    // google.maps.event.addListener(map, 'zoom_changed', function () {
+    //   ajax_update_markers();
+    // });
+    // google.maps.event.addListener(map, 'idle', function () {
+    //   ajax_update_markers();
+    // });
+
+    markerCluster = new MarkerClusterer(map, gmarkers1,
+      { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+  }
+
+  //Function to Search when sear ch button is clicked
+  document.getElementById('search-button').onclick = function () {
+    var input = document.getElementById('search');
+    google.maps.event.trigger(input, 'focus', {});
+    google.maps.event.trigger(input, 'keydown', { keyCode: 13 });
+    google.maps.event.trigger(this, 'focus', {});
+
+  };
+
+  // Function to add marker to map
+  function addMarker(marker) {
+    var category = marker[4];
+    var availability = marker[5];
+    var title = marker[1];
+    var pos = new google.maps.LatLng(marker[2], marker[3]);
+    var content = marker[1] + " " + marker [4];
+    //When we start putting in post information find a way to do replace the template stuff with the post json.
+    //content: "<div class=infowindow><image>{{post.image}}</image><h1>{{post.org_name}}</h1><p>{{post.org_desc}}</p></div>"
+
+    marker1 = new google.maps.Marker({
+      title: title,
+      position: pos,
+      category: category,
+      availability: availability,
+      map: map,
+
+    });
+
+    marker1.getDraggable = function () {
+      return false;
+    };
+
+    gmarkers1.push(marker1);
+
+    // Marker click listener
+    google.maps.event.addListener(marker1, 'click', (function (marker1, content) {
+      return function () {
+        console.log('Gmarker 1 gets pushed');
+        infowindow.setContent(content);
+        infowindow.open(map, marker1);
+        map.panTo(this.getPosition());
+        map.setZoom(15);
+      }
+    })(marker1, content));
+
+
+  }
+
+
+
+  // Function on Change on Slide
+  $(function () {
+    var newclusters = [];
+    $("#slider-range").slider();
+
+    var startPos = $("#slider-range").slider("value");
+    endPos = '';
+
+    $("#slider-range").on("slidestop", function (event, ui) {
+      endPos = ui.value;
+
+      if (startPos != endPos) {
+        var low_bound = $('#slider-range').slider("values")[0];
+        var high_bound = $('#slider-range').slider("values")[1];
+
+        // console.log(low_bound);
+        // console.log(high_bound);
+        for (i = 0; i < markerCount; i++) {
+          marker = gmarkers1[i];
+          // console.log(marker.category)
+          //Filter to show any markers with some of their time in the availability range
+          if ((low_bound < marker.availability[0] && marker.availability[0] < high_bound) ||
+            (low_bound < marker.availability[1] && marker.availability[1] < high_bound)) {
+            marker.setVisible(true);
+            newclusters.push(marker);
+          } else {
+            marker.setVisible(false);
+          }
+
+        }
+
+      }
+      startPos = endPos;
+      //Replace clusters with filtered ones
+      markerCluster.clearMarkers();
+      markerCluster.addMarkers(newclusters);
+      newclusters = [];
+    });
+  });
+
+
+
+
+  // Function on Change of checkbox
+  updateView = function (element) {
+    var newmarkers = [];
+
+    // Handle an "All checkbox" change
+    if (document.getElementById('All-days') == element && document.getElementById('All-days').checked) {
+      $('input[class="day_of_week"]').each(function () {
+        this.checked = true;
+      });
+    }
+    if (document.getElementById('All-days') == element && (document.getElementById('All-days').checked != true)) {
+      $('input[class="day_of_week"]').each(function () {
+        this.checked = false;
+      });
+    }
+
+    if (element) {
+      //Get array with names of the checked boxes
+      checkedBoxes = ([...document.querySelectorAll('input[type=checkbox]:checked')]).map(function (o) {
+        return o.id;
+      });
+      // console.log(checkedBoxes);
+      for (i = 0; i < markerCount; i++) {
+        marker = gmarkers1[i];
+        // console.log(marker.category)
+        //Filter to show any markets containing ALL of the selected options
+        if (typeof marker.category == 'object' && checkedBoxes.every(function (o) {
+          return (marker.category).indexOf(o) >= 0;
+        })) {
+          marker.setVisible(true);
+
+          newmarkers.push(marker);
+        } else {
+          marker.setVisible(false);
+        }
+
+      }
+
+
+    } else {
+      console.log('No param given');
+    }
+
+    //Replace clusters with filtered ones
+    markerCluster.clearMarkers();
+    markerCluster.addMarkers(newmarkers);
+  }
+
+  // Asks for updates from the back end
+  // function ajax_update_markers() {
+  //   var r = map.getBounds().getNorthEast().lng();
+  //   var l = map.getBounds().getSouthWest().lng();
+  //   var t = map.getBounds().getNorthEast().lat();
+  //   var b = map.getBounds().getSouthWest().lat();
+
+  //   $.ajax({
+  //     type: "GET",
+  //     url: "/map_page",
+  //     data: { 'right': r, 'left': l, 'top': t, 'bottom': b, 'zoom': map.getZoom() },
+  //     async: true,
+  //     dataType: 'json',
+  //     success: function (data) {
+  //       drawMarkers(data);
+  //     }
+  //   });
+  // }
+
+  // Init map
+  initialize();
+
+  // google.maps.event.addDomListener(window, "load", initialize);
+</script>
+
 
 {% endblock %}
