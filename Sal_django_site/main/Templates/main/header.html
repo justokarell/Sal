@@ -28,7 +28,10 @@
   <!-- <link href="{% static 'tinymce/css/prism.css' %}" rel='stylesheet'> -->
   <!-- <link rel="stylesheet" type="text/css" href="{% static '/css/home_style.css' %}"> -->
 
-
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static '/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static '/site.webmanifest' %}">
 
 </head>
 
@@ -70,7 +73,9 @@
       </a>
         <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
-          <li><a href="account">{{user.org_name|title}}</a></li>
+          <li><a href="account" >{{ user.your_name }}</a></li>
+          <li><a href="account" >My Account</a></li>
+          <li><a href="my-posts">My Posts</a></li>
           <li><a href="logout">Logout</a></li>
           {% else %}
           <li><a href="login">Login</a></li>
@@ -81,7 +86,7 @@
         <ul class="left hide-on-med-and-down" >
           <li><a href="/#about-title">About</a></li>
           <li><a href="contact">Contact</a></li>
-          <li><a href="profile">Profile</a></li>
+          <li><a href="profile-view">Profile</a></li>
           <li><a href="map_page">Map</a></li>
         </ul>
 
@@ -89,10 +94,11 @@
           <li><a href="/" style="font-size: x-large;">Home</a></li>
           <li><a href="/#about-title"  style="font-size: x-large;">About</a></li>
           <li><a href="contact"  style="font-size: x-large;">Contact</a></li>
-          <li><a href="profile"  style="font-size: x-large;">Profile</a></li>
+          <li><a href="profile-view"  style="font-size: x-large;">Profile</a></li>
           <li><a href="map_page" style="font-size: x-large;">Map</a></li>
           {% if user.is_authenticated %}
-          <li><a href="account"  style="font-size: x-large;">{{user.org_name|title}}</a></li>
+          <li><a href="account"  style="font-size: x-large;">My Account</a></li>
+          <li><a href="my-posts"  style="font-size: x-large;">My Posts</a></li>
           <li><a href="logout"  style="font-size: x-large;">Logout</a></li>
           {% else %}
           <li><a href="login"  style="font-size: x-large;">Login</a></li>

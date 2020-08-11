@@ -4,6 +4,9 @@ from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+# from address.models import AddressField
+from django.core.validators import RegexValidator
+from .validators import validate_is_pic
 from address.models import AddressField
 import urllib
 from django_google_maps import fields as map_fields
@@ -56,9 +59,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     Email and password are required. Other fields are optional.
     """
     email = models.EmailField(_('email address'), max_length=254, unique=True)
-    org_name = models.CharField(_('organization name'), max_length=30, blank=True)
-    address = models.CharField(_('address'), max_length=60, blank=True)
-    phone = models.CharField(_('phone'), max_length=17, blank=True)
+    your_name = models.CharField(_('user name'), max_length=30, blank=True)
+    # address = models.CharField(_('address'), max_length=60, blank=True)
+    # phone = models.CharField(_('phone'), max_length=17, blank=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
         help_text=_('Designates whether the user can log into this admin '
                     'site.'))
@@ -79,22 +82,69 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def get_absolute_url(self):
         return "/users/%s/" % urlquote(self.email)
 
-    def get_full_name(self):
-        """
-        Returns the org_name plus the address, with a space in between.
-        """
-        full_name = '%s of %s' % (self.org_name, self.address)
-        return full_name.strip()
+    # def get_full_name(self):
+    #     """
+    #     Returns the org_name plus the address, with a space in between.
+    #     """
+    #     full_name = '%s of %s' % (self.org_name, self.address)
+    #     return full_name.strip()
 
     def get_short_name(self):
         "Returns the short name for the user."
-        return self.org_name
+        return self.your_name
 
     def email_user(self, subject, message, from_email=None):
         """
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email])
+
+class Profile(models.Model):
+
+    ROLE_CHOICES = [
+        ('Donor','DONOR' ),
+        ('Recipient','RECIPIENT' ),
+        ('Both','BOTH' ),
+    ]
+    # const stateAbbreviations = [
+    #     'AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FM','FL','GA',
+    #     'GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MH','MD','MA',
+    #     'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND',
+    #     'MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT',
+    #     'VT','VI','VA','WA','WV','WI','WY'
+    # ]
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, blank=True)
+    org_name = models.CharField('Your Organization', max_length=30, blank=True)
+    org_role = models.CharField(max_length=10, choices=ROLE_CHOICES, default="Donor",)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    org_phone = models.CharField(_('phone'), max_length=20, validators=[phone_regex], null=True, blank=True)
+    org_email = models.EmailField('Your Organizations Email', max_length=254, null=False)
+    org_address = models.CharField('Your Organizations Location', max_length=80, default="123 Test St.", null=False)
+    org_city = models.CharField(max_length=30, default="Stamford", null=False)
+    org_state = models.CharField(max_length=2, default="CT", null=False)
+    org_zipcode = models.CharField(max_length=10, null=True, blank=True)
+    org_country = models.CharField(max_length=60, default="USA", null=False)
+    org_desc = models.TextField(max_length=500, null=True, blank=True)
+    ############
+    image = models.ImageField('Profile Image',default='default.png', upload_to='profile_pics',  blank=True, validators=(validate_is_pic,))
+    ############
+
+
+  
+    # If we don't have this, it's going to say profile object only
+    def __str__(self):
+         return f'{self.user.email} Profile'  # it's going to print username Profile
+
+    def get_address(self):
+        "Returns the Formatted address"
+        fulladdress = self.org_address + " " + self.org_city + " " + self.org_state + " " + self.org_zipcode + " " + self.org_country
+        return fulladdress
+
+    def createProfile(sender, **kwargs):
+        if kwargs['created']:
+            user_profile = UserProfile.objects.created(user=kwargs['instance'])
+
+        post_save.connect(createProfile, sender=User)
 
 
 # function to geocode address via Google Maps API call

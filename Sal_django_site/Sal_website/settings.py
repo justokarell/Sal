@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'social_django',
     'materializecssform',
     'widget_tweaks',
-    'address'
+    'address',
+    'crispy_forms',
 
 ]
 
@@ -130,11 +131,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    ('google','node_modules/@google')
-]
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main/media')
 # User substitution
 #  https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#auth-custom-user
 # AUTH_USER_MODEL = 'auth.User'
@@ -148,7 +146,10 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOpenId',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.google.GoogleOAuth',
+    # 'social_core.backends.twitter.TwitterOAuth',
+    # 'social_core.backends.yahoo.YahooOpenId',
     'social_core.backends.facebook.FacebookOAuth2',
+    # 'social_core.backends.linkedin.LinkedinOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -217,8 +218,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
 EMAIL_HOST_USER= os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD= os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587

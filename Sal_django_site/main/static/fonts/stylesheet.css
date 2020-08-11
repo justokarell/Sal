@@ -175,6 +175,31 @@ h1, h2, h3 {
     font-size: 18px;
 
   }
+  label {
+    color: #7c7c7c;
+    font-family: 'latolight', Arial, sans-serif;
+    font-weight:normal;
+    font-style:normal;
+    font-size: 14px;
+    }
+
+  .input-field>label{
+    color: #7c7c7c;
+    font-family: 'latolight', Arial, sans-serif;
+    font-weight:normal;
+    font-style:normal;
+    font-size: 18px;
+    }
+/* 
+    color: #9e9e9e; */
+
+    strong {
+    font-family: 'latoregular', Arial, sans-serif;
+    font-weight:normal;
+    font-style:normal;
+    font-size: 18px;
+
+  }
   
 
   

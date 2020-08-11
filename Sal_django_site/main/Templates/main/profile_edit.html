@@ -1,0 +1,142 @@
+{% extends 'main/header.html' %}
+
+
+{% block content %}
+
+<head>
+  <title>Edit Profile - Sal Hates Waste</title>
+  {% load static %}
+  {% load crispy_forms_tags %}
+  <link rel="stylesheet" type="text/css" href="{% static 'profile_edit_style.css' %}">
+</head>
+
+
+<body>
+  <div class="container col " style="margin-bottom: 12em;">
+    <div class="card hoverable">
+      <a href="profile-view" class="btn-flat waves-effect waves-light  right">
+        <i id="close" class="material-icons">close</i>
+      </a>
+      <div class="title-banner">
+        <h3 class="title-text"> Your Profile</h2>
+      </div>
+      <div class="card-content center">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% load widget_tweaks %}
+
+          {{ form.non_field_errors }}
+          {{ form.source.errors }}
+          {{ form.source }}
+          {{ profile_form.source }}
+
+          <!-- Invisible -->
+          <div class="input-field col s7" style="display:none;">
+            {{form}}
+          </div>
+          <!-- Invisible -->
+
+          <div id="main-row" class="row">
+            <div class="col left-col">
+              {{  profile_form.image }}
+              <span class="helper-text" data-error="Invalid Image"
+                data-success="">{{ profile_form.image.errors }}</span>
+              <img id="image" class="account-img" />
+              <!-- <span class="helper-text" data-error="Invalid Image" data-success="">{{ profile_form.image.errors }}</span> -->
+              <div id="donor-status">
+                <label for="org_role">Do You Donate Food or Recieve It?</label>
+                {{  profile_form.org_role |add_class:"select" }}
+              </div>
+            </div>
+            <div class="col right-col">
+              <div class="input-field ">
+                <label for="org-name">Your Organization's Name</label>
+                {{  profile_form.org_name |add_class:"validate" }}
+              </div>
+
+              <div class="row">
+                <div class="col col-input input-field">
+                  <label for="org-email">Your Org Email</label>
+                  {{  profile_form.org_email |add_class:"validate" }}
+                </div>
+                <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
+                <div class="col col-input input-field">
+                  <label for="org-phone">Your Org Phone</label>
+                  {{  profile_form.org_phone |add_class:"validate" }}
+                </div>
+                <span class="helper-text" data-error="Invalid Email" data-success="">{{  profile_form.org_phone.errors }}</span>
+              </div>
+
+              <div class="input-field">
+                <label for="org_address ">Organization's Address</label>
+                {{  profile_form.org_address}}
+              </div>
+
+              <div class="row">
+                <div class="col col-input input-field">
+                  <label for="org_city">City</label>
+                  {{  profile_form.org_city}}
+                </div>
+                <div class="col col-input input-field">
+                  <label for="org_state">State</label>
+                  {{  profile_form.org_state}}
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col col-input input-field">
+                  <label for="org_zipcode">Zipcode</label>
+                  {{  profile_form.org_zipcode}}
+                </div>
+                <div class="col col-input input-field">
+                  <label for="org_country">Country</label>
+                  {{  profile_form.org_country}}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="org_desc" style="font-size:18;">Give a Short Description of Your Organization</label>
+              {{  profile_form.org_desc |add_class:"textarea" }}
+            </div>
+            </p>
+          </div>
+          <div>
+
+            <button id="submit" type="submit" class="btn waves-effect waves-light ">Submit</button>
+            <a id="cancel" href="profile-view" class="btn waves-effect waves-light ">Cancel</a>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <br>
+  {% include 'main/footer.html' %}
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function (event) {
+    document.getElementById("image").src = "{{ user.profile.image.url }}";
+    if("{{ user.profile.image.url }}"!=null){
+      document.getElementById("id_image").required = false;
+    }
+  });
+
+  document.getElementById("id_image").onchange = function () {
+    document.getElementById("id_image").required = true;
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      // get loaded data and render thumbnail.
+      document.getElementById("image").src = e.target.result;
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+  };
+</script>
+{% endblock %}

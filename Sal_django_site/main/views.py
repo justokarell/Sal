@@ -7,12 +7,10 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
-from django.core.serializers import serialize
-# from django.contrib.sessions import request
 from django.contrib import messages
 from .forms import CustomUserCreationForm
 from .tokens import user_tokenizer
-from .models import InfoPrompt, CustomUser
+from .models import InfoPrompt, CustomUser, Profile
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
@@ -21,6 +19,11 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
+
+from address.models import Address
+from .forms import ProfileForm, EditProfileForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def homepage(request):
@@ -30,6 +33,17 @@ def homepage(request):
 def contact(request):
     return render(request=request,
                   template_name="main/contact.html")
+
+def profile_view(request):
+    if request.user.is_authenticated:
+        return render(request=request,template_name="main/profile_view.html")
+    else:
+        messages.info(request, f"Login to view your profile")
+        return redirect('main:login')
+
+def my_posts(request):
+    return render(request=request,
+                  template_name="main/my_posts.html")
 
 def email_test1(request):
     return render(request=request,
@@ -67,6 +81,7 @@ def signup(request):
             user = form.save(commit=False)
             user.is_valid = False
             user.save()
+            Profile.objects.create(user=user)
             token = user_tokenizer.make_token(user)
             user_id = urlsafe_base64_encode(force_bytes(user.id))
             url = 'http://localhost:8000' + reverse('confirm_email', kwargs={'user_id': user_id, 'token': token})
@@ -83,7 +98,7 @@ def signup(request):
         else:
             for msg in form.error_messages:
                 messages.error(request, f"Some of your input is off. Try again.")
-
+            
             return render(request = request,
                           template_name = "main/signup.html",
                           context={"form":form})
@@ -115,7 +130,7 @@ class ConfirmRegistrationView(View):
             user.save()
             context['message'] = 'Registration complete. Please login'
 
-        messages.success(request, f"You're accoount has been registered")
+        messages.success(request, f"Your account has been registered")
         return redirect('main:login')
 
 def account_activation_sent(request):
@@ -154,3 +169,30 @@ def map_page(request):
 
 def test_homepage_search_input(request):
     return request.session['place']
+
+@login_required
+def profile_edit(request):
+ if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)  # request.FILES is show the selected image or file
+
+        if form.is_valid() and profile_form.is_valid():
+            user_form = form.save()
+            custom_form = profile_form.save(False)
+            custom_form.user = user_form
+            custom_form.save()
+            messages.success(request, f"Your profile has been updated")
+            return redirect('main:profile-view')
+        else:
+            for msg in profile_form.errors:
+                messages.error(request, f"Some of your input is off. Try again.")
+
+            return render(request = request,
+                          template_name = "main/profile_edit.html",
+                          context={"form":form, "profile_form":profile_form})
+ else:
+    form = EditProfileForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user.profile)
+    
+    return render(request, 'main/profile_edit.html', context = {'form': form,
+               'profile_form': profile_form})
