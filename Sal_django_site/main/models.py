@@ -7,6 +7,9 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 # from address.models import AddressField
 from django.core.validators import RegexValidator
 from .validators import validate_is_pic
+from address.models import AddressField
+import urllib
+from django_google_maps import fields as map_fields
 
 
 # Create your models here.
@@ -143,3 +146,37 @@ class Profile(models.Model):
 
         post_save.connect(createProfile, sender=User)
 
+
+# function to geocode address via Google Maps API call
+def geocode(address):
+    try:
+        # location_param = urllib.request.quote("%s, %s, %s, %s" % (address))
+        url_request = "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"key="+settings.GOOGLE_API_KEY
+                    #  https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCbMU1uNeRWo7V47J7Bz3WJSaLKQxz6DbE
+        result = requests.get(url_request)
+        data = result.json()
+        location = data['results'][0]['geometry']['location']
+        lat = location['lat']
+        lng = location['lng']
+        return lat, lng
+    except Exception:
+        return None
+# def geocode(address, city, state, zip_code):
+#     try:
+#         location_param = urllib.request.quote("%s, %s, %s, %s" % (address, city, state, zip_code))
+#         url_request = "http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % location_param
+#         result = requests.get(url_request)
+#         data = result.json()
+#         location = data['results'][0]['geometry']['location']
+#         lat = location['lat']
+#         lng = location['lng']
+#         return lat, lng
+#     except Exception:
+#         return None
+
+class UserPost(models.Model):
+    address = map_fields.AddressField(max_length=200)
+    lat_lon = geocode(address)
+    # need something here to get userID of user who posted like this maybe?
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    

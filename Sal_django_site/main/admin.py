@@ -67,3 +67,4 @@ class CustomUserAdmin(UserAdmin):
     readonly_fields=('profile',)
 
 admin.site.register(CustomUser, CustomUserAdmin)
+

@@ -83,3 +83,6 @@ class CustomUserChangeForm(UserChangeForm):
             self.cleaned_data.get('password2'), self.instance
         )
         return password2
+    
+class PersonForm(forms.Form):
+    address = AddressField()
