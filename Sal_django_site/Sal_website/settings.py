@@ -44,7 +44,13 @@ INSTALLED_APPS = [
     'social_django',
     'materializecssform',
     'widget_tweaks',
+<<<<<<< HEAD
     'crispy_forms'
+=======
+    'address',
+    'crispy_forms',
+
+>>>>>>> f34bc7d0d4c274878fcad8acf38c87a7f14fc2f4
 ]
 
 MIDDLEWARE = [

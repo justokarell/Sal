@@ -144,8 +144,28 @@ def reset_confirmation_sent(request):
                  # context={"InfoPrompt": InfoPrompt.objects.all})
                  
 def map_page(request):
+    # top = request.GET['top']
+    # bottom = request.GET['bottom']
+    # right = request.GET['right']
+    # left = request.GET['left']
+#I have examples set up so we can either return a json or a list of post objects whatever's easier
+
+
+    # post_list = Post.objects.\
+    #     filter(latitude__gte=bottom).\
+    #     filter(latitude__lte=top). \
+    #     filter(longitude__gte=left).\
+    #     filter(longitude__lte=right)
+
+    # if int(request.GET['zoom']) > 13 or len(post_list) < 2000:
+    #     result = serialize('json', post_list,
+    #                fields=('uid', 'latitude', 'longitude'))
+    # return HttpResponse(result)
+
     return render(request=request,
-                  template_name="main/map_page.html")
+                  template_name="main/map_page.html")#,
+                 # context={"post_list": post_list})
+                  
 
 def test_homepage_search_input(request):
     return request.session['place']
