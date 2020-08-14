@@ -1,0 +1,28 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block content %}
+
+<head>
+  <title>Contact - Sal Hates Waste</title>
+  <!-- {% load crispy_forms_tags %} -->
+  {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'profile_view_style.css' %}">
+</head>
+
+
+<body>
+<div class="container col " style="margin-bottom: 12em;">
+    <div class="card hoverable">
+        <div class="title-banner">
+            <h2 class="title-text center-align"> Thank you! </h2>
+        </div>
+        <div class="main-text">
+            <h2 class="center-align">Your message was sent and we will get back to you as soon as possible.</h2>
+        </div>
+    </div>
+</div>
+  {% include 'main/footer.html' %}
+</body>
+
+{% endblock %}

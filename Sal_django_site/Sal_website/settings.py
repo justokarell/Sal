@@ -44,13 +44,10 @@ INSTALLED_APPS = [
     'social_django',
     'materializecssform',
     'widget_tweaks',
-<<<<<<< HEAD
-    'crispy_forms'
-=======
     'address',
     'crispy_forms',
+    # 'main.apps.SendemailConfig', 
 
->>>>>>> f34bc7d0d4c274878fcad8acf38c87a7f14fc2f4
 ]
 
 MIDDLEWARE = [
@@ -68,7 +65,8 @@ ROOT_URLCONF = 'Sal_website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,6 +76,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends', 
                 'social_django.context_processors.login_redirect', 
+                
             ],
         },
     },
@@ -213,6 +212,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
 # https://docs.djangoproject.com/en/dev/topics/email/
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'salhateswaste@gmail.com'
 
 
 # [...]
@@ -227,5 +227,7 @@ EMAIL_HOST_USER= os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD= os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 PASSWORD_RESET_TIMEOUT_DAYS = 2
+
+
 
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')

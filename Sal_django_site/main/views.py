@@ -19,6 +19,11 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from .forms import ContactForm
+
 
 # from address.models import Address
 from .forms import ProfileForm, EditProfileForm
@@ -30,9 +35,30 @@ def homepage(request):
     return render(request=request,
                   template_name="main/home.html",
                   context={"InfoPrompt": InfoPrompt.objects.all})
+    
 def contact(request):
     return render(request=request,
-                  template_name="main/contact.html")
+                  template_name="main/email.html")
+    
+def contactView(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['admin@example.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('main:success')
+    return render(request, "email.html", {'form': form})
+
+def successView(request):
+    return render(request=request, template_name="success.html")
+    # return HttpResponse('Success! Thank you for your message.')
 
 def profile_view(request):
     if request.user.is_authenticated:
