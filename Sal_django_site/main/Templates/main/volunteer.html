@@ -1,0 +1,28 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block content %}
+
+<head>
+  <title>Volunteer - Sal Hates Waste</title>
+  <!-- {% load crispy_forms_tags %} -->
+  {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'profile_view_style.css' %}">
+</head>
+
+
+<body>
+<div class="container col " style="margin-bottom: 12em;">
+    <div class="card hoverable">
+        <div class="title-banner">
+            <h1 class="title-text center-align">  Want to help out? </h1>
+        </div>
+        <div class="main-text">
+            <h4 class="center-align">If you're interested in volunteering to help transport donations from donors to recipients, please reach out at (203) 524-2311. </h4>
+        </div>
+    </div>
+</div>
+  {% include 'main/footer.html' %}
+</body>
+
+{% endblock %}

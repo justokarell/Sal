@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'address',
     'crispy_forms',
-    # 'main.apps.SendemailConfig', 
 
 ]
 
@@ -213,7 +212,11 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'salhateswaste@gmail.com'
-
+# EMAIL_HOST = 'smtp.sendgrid.net' # new
+# EMAIL_HOST_USER = 'apikey' # new
+# EMAIL_HOST_PASSWORD = '<sendgrid_password>' # new
+# EMAIL_PORT = 587 # new
+# EMAIL_USE_TLS = True # new
 
 # [...]
 # The following is another try at developing our email backend

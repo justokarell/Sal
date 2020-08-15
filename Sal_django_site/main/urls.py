@@ -21,7 +21,7 @@ from django.conf.urls import url, include
 from . import views
 from django.contrib import admin
 from .tokens import user_tokenizer
-from .views import contactView, successView
+from .views import contactView, successView, volunteerView
 
 # from django.contrib.auth import views as auth_views
 
@@ -29,7 +29,6 @@ app_name = 'main'
 
 urlpatterns = [
     path("", views.homepage, name="homepage"),
-    path("contact", views.contact, name="contact"),
     path("signup", views.signup, name="signup"),
     path("login", views.login_request, name="login"),
     path("logout", views.logout_request, name="logout"),
@@ -41,8 +40,10 @@ urlpatterns = [
     path('profile-edit', views.profile_edit, name='profile_edit'),
     path('profile-view', views.profile_view, name='profile-view'),
     path('my-posts', views.my_posts, name='my_posts'),
-    path('contact/', contactView, name='contact'),
-    path('success/', successView, name='success'),
+    path('contact', contactView, name='contact'),
+    path('success', successView, name='success'),
+    path('volunteer', volunteerView, name='volunteer'),
+    
 
 
     # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
