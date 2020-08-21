@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.views.i18n import JavaScriptCatalog
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from django.conf import settings
@@ -47,3 +48,4 @@ urlpatterns = [
     # path('admin/', include('admin.site.urls')),
     
 ]
+

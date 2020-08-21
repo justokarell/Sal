@@ -13,11 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+import django
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.conf.urls import url, include
+from django.views.i18n import JavaScriptCatalog
 from . import views
 from django.contrib import admin
 from .tokens import user_tokenizer
@@ -39,7 +40,8 @@ urlpatterns = [
     path('map_page', views.map_page, name='map_page'),
     path('profile-edit', views.profile_edit, name='profile_edit'),
     path('profile-view', views.profile_view, name='profile-view'),
-    path('my-posts', views.my_posts, name='my_posts'),
+    path('my-posts', views.my_posts, name='my-posts'),
+    path('new-post', views.new_post, name='new_post'),
 
 
     # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
@@ -50,3 +52,14 @@ urlpatterns = [
     #     views.activate, name="activate"),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# If you already have a js_info_dict dictionary, just add
+# 'recurrence' to the existing 'packages' tuple.
+js_info_dict = {
+    'packages': ('recurrence', ),
+}
+
+# jsi18n can be anything you like here
+urlpatterns += [
+    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), js_info_dict),
+]

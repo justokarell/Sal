@@ -10,7 +10,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import CustomUserCreationForm
 from .tokens import user_tokenizer
-from .models import InfoPrompt, CustomUser, Profile
+from .models import InfoPrompt, CustomUser, Profile, DonorPost, RecipientPost, DonorRepeatingPost, RecipientRepeatingPost
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
@@ -21,7 +21,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
 
 from address.models import Address
-from .forms import ProfileForm, EditProfileForm
+from .forms import ProfileForm, EditProfileForm, DonorPostForm, AvailabilityFormset # DonorRepeatingPostForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -34,16 +34,6 @@ def contact(request):
     return render(request=request,
                   template_name="main/contact.html")
 
-def profile_view(request):
-    if request.user.is_authenticated:
-        return render(request=request,template_name="main/profile_view.html")
-    else:
-        messages.info(request, f"Login to view your profile")
-        return redirect('main:login')
-
-def my_posts(request):
-    return render(request=request,
-                  template_name="main/my_posts.html")
 
 def email_test1(request):
     return render(request=request,
@@ -161,21 +151,24 @@ def map_page(request):
     #     result = serialize('json', post_list,
     #                fields=('uid', 'latitude', 'longitude'))
     # return HttpResponse(result)
-
-    return render(request=request,
-                  template_name="main/map_page.html")#,
-                 # context={"post_list": post_list})
+    post_list = DonorPost.objects.all
+    avail_list = Availability.objects.all
+    return render(request=request, template_name="main/map_page.html", context={"post_list": post_list})
                   
 
-def test_homepage_search_input(request):
-    return request.session['place']
+def profile_view(request):
+    if request.user.is_authenticated:
+        return render(request=request,template_name="main/profile_view.html")
+    else:
+        messages.info(request, f"Login to view your profile")
+        return redirect('main:login')
 
 @login_required
 def profile_edit(request):
  if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)  # request.FILES is show the selected image or file
-
+    
         if form.is_valid() and profile_form.is_valid():
             user_form = form.save()
             custom_form = profile_form.save(False)
@@ -196,3 +189,56 @@ def profile_edit(request):
     
     return render(request, 'main/profile_edit.html', context = {'form': form,
                'profile_form': profile_form})
+
+
+def new_post(request):
+    # if not request.user.is_authenticated():
+    #     messages.info(request, f"Login to make a post")
+    #     return HttpResponseRedirect('main:login')
+
+    user = request.user
+    profile = request.user.profile
+    
+
+    if request.method == "POST":
+        donor_post_form = DonorPostForm(request.POST, request.FILES)
+        avail_form = AvailabilityFormset(request.POST, request.FILES)
+
+        if donor_post_form.is_valid():
+            
+            donor_post = donor_post_form.save(False)
+            donor_post.post_creator = user
+            donor_post.save() 
+            if avail_form.is_valid():
+                availslist = avail_form.save(False)
+                for avail in availslist:
+                    avail.assigned_post = donor_post
+                    avail.save()
+                donor_post.save()  
+            else:
+                for errors in avail_form.errors:
+                    messages.error(request, f"Your availability is off. Try again.")
+            messages.success(request, f"Your profile has been updated")
+            return redirect('main:my-posts')
+        
+        else: 
+            for errors in donor_post_form.errors:
+                    messages.error(request, f"Some of your input is off. Try again.")
+    else:
+        donor_post_form = DonorPostForm()
+        avail_form = AvailabilityFormset()
+
+    
+    return render(request=request, template_name="main/new_post.html", context = {
+
+                                                                # "profile": profile,
+                                                                "avail_form": avail_form,
+                                                                "donor_post_form": donor_post_form})
+
+def my_posts(request):
+    if request.user.is_authenticated:
+        return render(request=request, template_name="main/my_posts.html")
+    else:
+        messages.info(request, f"Login to view your posts")
+        return HttpResponseRedirect('main:login')
+    return render(request=request, template_name="main/my_posts.html")

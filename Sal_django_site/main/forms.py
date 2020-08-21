@@ -2,9 +2,42 @@ import os
 from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser, Profile
-from address.forms import AddressField, AddressWidget
+from .models import CustomUser, Profile, Availability, DonorPost, RecipientPost, DonorRepeatingPost, RecipientRepeatingPost
+from .models import DAYS_OF_WEEK
+# from address.forms import AddressField, AddressWidget
+import django.contrib.admin.widgets
+from django.forms.widgets import SelectDateWidget, DateTimeInput
+from django.forms import inlineformset_factory
+from django.forms import formset_factory
 from django.forms import ModelForm
+
+AvailabilityFormset = inlineformset_factory(DonorPost, Availability, fields=('post_day','start_hour','end_hour',),
+    widgets={
+            'post_day': forms.CheckboxSelectMultiple,
+            'start_hour': forms.TimeInput(attrs={
+                'type': 'time'
+            }),
+            'end_hour': forms.TimeInput(attrs={
+                'type': 'time'
+            })},
+    extra=4,
+    # can_order=True
+    )
+
+#  my_field = fields.MultipleChoiceField(choices=MY_CHOICES)
+class DonorPostForm(forms.ModelForm):
+    post_image = forms.ImageField(widget=forms.FileInput(attrs={'accept':'image/png,.jpg'}))
+    # post_avail = forms.ModelMultipleChoiceField(queryset=Availability.objects.all(), widget=forms.SelectMultiple)
+    # post_avail = inlineformset_factory(Author, Book, fields=('title',))
+    post_begin_date = forms.DateField(widget=SelectDateWidget)
+    post_end_date = forms.DateField(widget=SelectDateWidget)
+
+    class Meta:
+        model = DonorPost
+        fields = ['post_title', 'post_org_name','post_org_phone','post_org_email','post_org_address','post_org_city',
+        'post_org_state','post_org_zipcode','post_org_country','post_desc', 'post_begin_date', 'post_image', 
+        'post_end_date', 'post_deliver', 'post_recurring', 'recurrences',]
+# 'post_avail',
 
 class EditProfileForm(ModelForm):
          class Meta:
@@ -18,6 +51,8 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['org_name', 'org_role','org_email','org_phone','org_address','org_city','org_state','org_zipcode','org_country','image','org_desc']
+
+
     
 class CustomUserCreationForm(UserCreationForm):
     """
@@ -84,5 +119,15 @@ class CustomUserChangeForm(UserChangeForm):
         )
         return password2
     
-class PersonForm(forms.Form):
-    address = AddressField()
+# class PersonForm(forms.Form):
+#     address = AddressField()
+
+
+# class DonorRepeatingPostForm(forms.ModelForm):
+#     post_image = forms.ImageField(widget=forms.FileInput(attrs={'accept':'image/png,.jpg'}))
+
+#     class Meta:
+#         model = DonorRepeatingPost
+#         fields = ['post_title', 'post_org_name','post_org_phone','post_org_email','post_org_address','post_org_city',
+#         'post_org_state','post_org_zipcode','post_org_country','post_image','post_desc', 'post_begin_date', 'post_end_date',
+#         'post_deliver','recurrences',]
