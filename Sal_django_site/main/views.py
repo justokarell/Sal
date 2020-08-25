@@ -10,8 +10,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import CustomUserCreationForm
 from .tokens import user_tokenizer
-from .models import InfoPrompt, CustomUser, Profile, DonorPost, RecipientPost, DonorRepeatingPost, RecipientRepeatingPost
-from django.conf import settings
+from rest_framework import serializers
+from .models import InfoPrompt, CustomUser, Profile, UserPost, DonorPost, RecipientPost, Availability
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
 from django.template.loader import get_template
@@ -19,7 +19,9 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
-
+import json
+from .serializers import UserPostSerializer, AvailabilitySerializer
+from django.core.serializers.json import DjangoJSONEncoder
 from address.models import Address
 from .forms import ProfileForm, EditProfileForm, DonorPostForm, AvailabilityFormset # DonorRepeatingPostForm
 from django.contrib.auth import update_session_auth_hash
@@ -151,9 +153,28 @@ def map_page(request):
     #     result = serialize('json', post_list,
     #                fields=('uid', 'latitude', 'longitude'))
     # return HttpResponse(result)
-    post_list = DonorPost.objects.all
-    avail_list = Availability.objects.all
-    return render(request=request, template_name="main/map_page.html", context={"post_list": post_list})
+
+    # post_list = UserPost.objects.all().values()
+    
+
+
+    post_list = UserPost.objects.all()
+    serializer = UserPostSerializer(post_list, many=True)
+    # post_avails = Availability.objects.filter(assigned_post = post)
+    # json_list = []
+    # for post in post_list:
+    #     temp_post = post.values()
+    #     avs = []
+    #     post_avails = Availability.objects.filter(assigned_post = post)
+    #     for avail in post_avails: 
+    #         avs.append({'post_day':avail.post_day, 'start_hour': avail.start_hour, 'end_hour': avail.end_hour})
+    #     temp_post.append(avs)
+    #     json_list.append(temp_post)
+    # result = json.dumps(list(json_list), cls=DjangoJSONEncoder)
+    result = serializer.data
+    
+    
+    return render(request=request, template_name="main/map_page.html", context={"post_list": post_list, "result":result})
                   
 
 def profile_view(request):
@@ -208,11 +229,18 @@ def new_post(request):
             
             donor_post = donor_post_form.save(False)
             donor_post.post_creator = user
+            donor_post.donor_or_recip = "Donor"
+            coord = donor_post.get_geocode()
+            donor_post.post_lat = coord[0]
+            donor_post.post_long = coord[1]
             donor_post.save() 
             if avail_form.is_valid():
                 availslist = avail_form.save(False)
                 for avail in availslist:
                     avail.assigned_post = donor_post
+                    time = avail.get_min()
+                    avail.start_min = time[0]
+                    avail.end_min = time[1]
                     avail.save()
                 donor_post.save()  
             else:
@@ -225,13 +253,16 @@ def new_post(request):
             for errors in donor_post_form.errors:
                     messages.error(request, f"Some of your input is off. Try again.")
     else:
-        donor_post_form = DonorPostForm()
+        donor_post_form = DonorPostForm(initial={'post_org_name': profile.org_name, 'post_org_email':profile.org_email,
+        'post_org_phone':profile.org_phone,'post_org_address':profile.org_address,'post_org_city':profile.org_city,
+        'post_org_state':profile.org_state,'post_org_zipcode':profile.org_zipcode,'post_org_country':profile.org_country})
         avail_form = AvailabilityFormset()
 
     
     return render(request=request, template_name="main/new_post.html", context = {
 
                                                                 # "profile": profile,
+                                                                "profile" : profile,
                                                                 "avail_form": avail_form,
                                                                 "donor_post_form": donor_post_form})
 

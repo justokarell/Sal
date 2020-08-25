@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'recurrence',
     'multiselectfield',
+    'rest_framework',
 
 ]
 
@@ -133,7 +134,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+# STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_DIR, 'static'),
+    os.path.join(BASE_DIR, 'node_modules'),
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'main/media')

@@ -128,9 +128,16 @@
     <a id="cannot" class="btn-small center-align" href="contact">Can't find what you're looking for?</a>
   </div>
   <br></br>
-  {% for post in post_list %}
-    {{ post.availability }}
-  {% endfor %}
+  <!-- {% for post in post_list %}
+    {{post.post_title}}
+    {% for avail in post.availability_set.all %} 
+      {{ avail.start_hour }}
+      {{ avail.end_hour }}
+      {{ avail.post_day }}
+      <br>
+    {% endfor %}
+  {% endfor %} -->
+  {{result}}
   {% include 'main/footer.html' %}
 </body>
 

@@ -11,7 +11,7 @@ from address.forms import AddressWidget
 admin.site.register(InfoPrompt)
 
 class AvailabilityAdmin(admin.ModelAdmin):
-    list_display = ('post_day','start_hour','end_hour','assigned_post')
+    list_display = ('post_day','start_hour','end_hour', 'start_min', 'end_min', 'assigned_post')
 
 admin.site.register(Availability, AvailabilityAdmin)
 
@@ -24,16 +24,9 @@ admin.site.register(Profile, ProfileAdmin)
 class DonorPostAdmin(admin.ModelAdmin):
     fields = ('post_creator','post_title', 'post_org_name','post_org_phone','post_org_email','post_org_address','post_org_city',
         'post_org_state','post_org_zipcode','post_org_country','post_image','post_desc', 'post_begin_date', 'post_end_date',
-         'post_recurring', 'recurrences','post_deliver')
-# 'post_avail',
+         'post_lat','post_long','post_recurring', 'recurrences','post_deliver')
+
 admin.site.register(DonorPost, DonorPostAdmin)
-
-# class DonorRepeatingPostAdmin(admin.ModelAdmin):
-#     list_display = ('post_creator','post_title', 'post_org_name','post_org_phone','post_org_email','post_org_address','post_org_city',
-#         'post_org_state','post_org_zipcode','post_org_country','post_image','post_desc', 'post_begin_date', 'post_end_date',
-#         'post_recurring','post_deliver','recurrences')
-
-# admin.site.register(DonorRepeatingPost, DonorRepeatingPostAdmin)
 
 
 class InfoPromptAdmin(admin.ModelAdmin):

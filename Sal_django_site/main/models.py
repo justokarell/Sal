@@ -9,11 +9,13 @@ from django.core.validators import RegexValidator
 from .validators import validate_is_pic
 from address.models import AddressField
 import urllib
-import datetime
+import requests 
 from django_google_maps import fields as map_fields
 import recurrence.fields
 from multiselectfield import MultiSelectField
-
+from django.conf import settings
+import datetime
+import time
 
 # Create your models here.
 DAYS_OF_WEEK= [
@@ -25,6 +27,11 @@ DAYS_OF_WEEK= [
             ('sa','Sat' ),
             ('su','Sun' ),]
 
+ROLE_CHOICES = [
+        ('Donor', 'DONOR'),
+        ('Recipient', 'RECIPIENT'),
+        ('Both', 'BOTH'),]
+        
 class InfoPrompt(models.Model):
     org_name = models.CharField(max_length=200)
     org_email = models.CharField(max_length=200)
@@ -113,11 +120,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
 
-    ROLE_CHOICES = [
-        ('Donor', 'DONOR'),
-        ('Recipient', 'RECIPIENT'),
-        ('Both', 'BOTH'),
-    ]
+
     # const stateAbbreviations = [
     #     'AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FM','FL','GA',
     #     'GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MH','MD','MA',
@@ -203,18 +206,19 @@ class UserPost(models.Model):
     post_org_country = models.CharField(
         max_length=60, default="USA", null=False)
     post_image = models.ImageField('Profile Image', default='default.png',
-                                   upload_to='profile_pics', null=True, blank=True, validators=(validate_is_pic,))
+                                   upload_to='post_pics', null=True, blank=True, validators=(validate_is_pic,))
     post_desc = models.TextField(max_length=500, null=True, blank=True)
     post_begin_date = models.DateField(_("Availability Start"), default=datetime.date.today)
     post_end_date = models.DateField(_("Availability End"), default=datetime.date.today)
     # post_how_much = models.CharField(max_length=60, default="USA", null=False) include this in description
-    # post_avail = models.ManyToManyField(Availability)
-    # Availability
+    post_lat = models.FloatField(null=True, blank=True)
+    post_long = models.FloatField(null=True, blank=True)
     post_recurring = models.BooleanField(default=False)
     recurrences = models.TextField(max_length=300, null=True, blank=True)
+    donor_or_recip = models.CharField(
+        max_length=10, choices=ROLE_CHOICES, default="Donor",)
     post_active = models.BooleanField(default=True)
     post_deliver = models.BooleanField(default=True)
-
     def __str__(self):  # __unicode__ on Python 2
         return self.post_title
 
@@ -224,34 +228,57 @@ class UserPost(models.Model):
 
     def get_address(self):
         "Returns the Formatted address"
-        fulladdress = self.post_org_address + " " + self.post_org_city + " " + \
-            self.post_org_state + " " + self.post_org_zipcode + " " + self.post_org_country
+        fulladdress = self.post_org_address + ",+" + self.post_org_city + ",+" + \
+            self.post_org_state + ",+" + self.post_org_zipcode + ",+" + self.post_org_country
         return fulladdress
 
     # function to geocode address via Google Maps API call
     def get_geocode(self):
-        address = self.get_address(self)
+        address = self.get_address()
         try:
             # location_param = urllib.request.quote("%s, %s, %s, %s" % (address))
             url_request = "https://maps.googleapis.com/maps/api/geocode/json?address=" + \
-                address+"key="+settings.GOOGLE_API_KEY
-            #  https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCbMU1uNeRWo7V47J7Bz3WJSaLKQxz6DbE
+                address+"&key="+settings.GOOGLE_API_KEY
+            print(url_request)
             result = requests.get(url_request)
+            result.raise_for_status()
             data = result.json()
             location = data['results'][0]['geometry']['location']
-            # lat = location['lat']
-            # lng = location['lng']
             coord = [location['lat'], location['lng']]
             return coord
             # return lat, lng
-        except Exception:
-            return None
+        except requests.exceptions.Timeout as e:
+            # Maybe set up for a retry, or continue in a retry loop
+            print("timeout: ")
+            raise SystemExit(e)
+        except requests.exceptions.TooManyRedirects as e:
+            # Tell the user their URL was bad and try a different one
+            print("toomanyredirects: ")
+            raise SystemExit(e)
+        except requests.exceptions.RequestException as e:
+            # catastrophic error. bail.
+            raise SystemExit(e)
 
 class Availability(models.Model):
     assigned_post = models.ForeignKey(UserPost, on_delete=models.CASCADE, blank=True, null=True)
     post_day = MultiSelectField(choices=DAYS_OF_WEEK, max_choices=7, max_length=10, null=True)
     start_hour = models.TimeField(null=True)
     end_hour = models.TimeField(null=True)
+    start_min = models.IntegerField(null=True, blank=True)
+    end_min = models.IntegerField(null=True, blank=True)
+
+    def get_min(self):
+        # t1 = datetime.datetime.strptime(self.start_hour, '%H:%M:%S.%f0')
+        # t2 = datetime.datetime.strptime(self.end_hour, '%H:%M:%S.%f0')
+        t1 = self.start_hour.hour*60 + self.start_hour.minute
+        t2 = self.end_hour.hour*60 + self.end_hour.minute
+        t0 = 0
+        r1 = (t1-t0)
+        r2 = (t2-t0)
+        coord = [r1, r2]
+
+        return coord
+
 
 class DonorPost(UserPost):
 

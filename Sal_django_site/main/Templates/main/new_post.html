@@ -211,18 +211,6 @@
                         <button type="submit" class="comment-add btn btn-lg btn-purple">Add</button>
                     </div>
                 </form>
-                <!-- <div id="repeating-post" style="display: none;">
-                        {{ drepeat_post_form.as_p}}
-                    </div>
-                    
-                
-                <div>
-                    <label for=reoccur>This Donation is recurring
-                        <input type="checkbox" id="reoccur" title="Reoccuring" onclick="myFunction()">
-                        <span></span>
-                    </label>
-                </div> -->
-
             </div>
     </section>
     {% include 'main/footer.html' %}
@@ -273,12 +261,18 @@
             switch (count) {
                 case 4:
                     $("#avail_3").css('display', 'none');
+                    $("#avail_3").find('input[type=time]').val('');
+                    $("#avail_3").find('input[type=checkbox]').prop("checked", false);
                     break;
                 case 3:
                     $("#avail_2").css('display', 'none');
+                    $("#avail_2").find('input[type=time]').val('');
+                    $("#avail_2").find('input[type=checkbox]').prop("checked", false);
                     break;
                 case 2:
                     $("#avail_1").css('display', 'none');
+                    $("#avail_1").find('input[type=time]').val('');
+                    $("#avail_1").find('input[type=checkbox]').prop("checked", false);
                     break;
                 case 1:
                     break;
