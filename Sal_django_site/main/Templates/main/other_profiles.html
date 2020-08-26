@@ -1,0 +1,60 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block content %}
+
+<head>
+  <title>{{ this_org.profile.org_name }} Profile - Sal Hates Waste</title>
+  {% load crispy_forms_tags %}
+  {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'profile_view_style.css' %}">
+</head>
+
+
+<body>
+  <div class="container col " style="margin-bottom: 12em;">
+    <div class="card hoverable">
+      <div class="title-banner">
+        <h3 class="title-text"> {{ this_org.profile.org_name }} Profile</h2>
+      </div>
+      <div class="card-content center">
+        <div class="media">
+          <div class=" main-row row center">
+            <div class="col right-col">
+              <!-- <img class="rounded-circle account-img" src="{{ this_org.profile.image.url }}" width="200"> -->
+              <img class="account-img" src="{{ this_org.profile.image.url }}" >
+            </div>
+            <div class="col left-col ">
+              <div class="profile-content">
+                <p class="p-line donor-status"><strong>Donor or Recipient: </strong>{{ this_org.profile.org_role }}</p>
+                <p class="p-line"><strong>Organization: </strong>{{ this_org.profile.org_name }}</p>
+                <p class="p-line"><strong>Organization Phone: </strong>{{ this_org.profile.org_phone }}</p>
+                <p class="p-line"><strong>Organization Email: </strong>{{ this_org.profile.org_email }}</p>
+                <p class="p-line"><strong>Organzation Address: </strong>{{ this_org.profile.org_address }}</p>
+                <div class="row">
+                  <p class="p-line col"><strong> City: </strong>{{ this_org.profile.org_city }}</p>
+                  <p class="p-line col"><strong> State: </strong>{{ this_org.profile.org_state }}</p>
+                </div>
+                <div class="row">
+                  <p class="p-line col"><strong> Zipcode: </strong>{{ this_org.profile.org_zipcode }}</p>
+                  <p class="p-line col"><strong> Country: </strong>{{ this_org.profile.org_country }}</p>
+                </div>
+              </div>          
+            </div>
+          </div>
+          <div class="row">
+            <p class="desc"><strong>Description: </strong>{{ this_org.profile.org_desc }}</p>
+          </div>
+          <div >
+            <button class="edit waves-effect waves-light btn"><a href="profile-edit" >Edit Profile</a></button>
+            <button class="posts waves-effect waves-light btn"><a href="my-posts">My Posts</a></button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  {% include 'main/footer.html' %}
+</body>
+{% endblock %}

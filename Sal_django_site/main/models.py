@@ -10,12 +10,14 @@ from .validators import validate_is_pic
 from address.models import AddressField
 import urllib
 import requests 
+from django.template.defaultfilters import slugify 
 from django_google_maps import fields as map_fields
 import recurrence.fields
 from multiselectfield import MultiSelectField
 from django.conf import settings
-import datetime
-import time
+import datetime, time
+from django.utils.crypto import get_random_string
+from better_profanity import profanity
 
 # Create your models here.
 DAYS_OF_WEEK= [
@@ -78,8 +80,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
     email = models.EmailField(_('email address'), max_length=254, unique=True)
     your_name = models.CharField(_('user name'), max_length=30, blank=True)
-    # address = models.CharField(_('address'), max_length=60, blank=True)
-    # phone = models.CharField(_('phone'), max_length=17, blank=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
                                    help_text=_('Designates whether the user can log into this admin '
                                                'site.'))
@@ -146,6 +146,7 @@ class Profile(models.Model):
     org_zipcode = models.CharField(max_length=10, null=True, blank=True)
     org_country = models.CharField(max_length=60, default="USA", null=False)
     org_desc = models.TextField(max_length=500, null=True, blank=True)
+    profile_slug = models.SlugField(max_length=200, null=True, unique=True)
     ############
     image = models.ImageField('Profile Image', default='default.png',
                               upload_to='profile_pics',  blank=True, validators=(validate_is_pic,))
@@ -156,6 +157,9 @@ class Profile(models.Model):
     def __str__(self):
         # it's going to print username Profile
         return f'{self.user.email} Profile'
+    
+    def get_absolute_url(self):
+        return reverse('profile_detail', kwargs={'slug': self.profile_slug}) # new
 
     def get_address(self):
         "Returns the Formatted address"
@@ -166,22 +170,31 @@ class Profile(models.Model):
     def createProfile(sender, **kwargs):
         if kwargs['created']:
             user_profile = UserProfile.objects.created(user=kwargs['instance'])
-
         post_save.connect(createProfile, sender=User)
 
+    def slug_save(self):
+        """ A function to generate a 5 character slug and see if it has been used and contains naughty words."""
+        if not self.profile_slug: # if there isn't a slug
+            self.profile_slug = slugify(self.post_title)+ '-' + get_random_string(5) # create one
+            slug_is_wrong = True  
+            while slug_is_wrong: # keep checking until we have a valid slug
+                slug_is_wrong = False
+                other_objs_with_slug = UserPost.objects.filter(profile_slug=self.profile_slug)
+                if len(other_objs_with_slug) > 0:
+                    # if any other objects have current slug
+                    slug_is_wrong = True
+                # naughty_words = list_of_swear_words_brand_names_etc
+                # if self.slug in naughty_words:
+                if profanity.contains_profanity(self.profile_slug):
+                    slug_is_wrong = True
+                if slug_is_wrong:
+                    # create another slug and check it again
+                    self.profile_slug =slugify(self.org_name) +'-'+ get_random_string(5)
 
-# def geocode(address, city, state, zip_code):
-#     try:
-#         location_param = urllib.request.quote("%s, %s, %s, %s" % (address, city, state, zip_code))
-#         url_request = "http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % location_param
-#         result = requests.get(url_request)
-#         data = result.json()
-#         location = data['results'][0]['geometry']['location']
-#         lat = location['lat']
-#         lng = location['lng']
-#         return lat, lng
-#     except Exception:
-#         return None
+    def save(self, *args, **kwargs):
+
+        self.slug_save()
+        return super().save(*args, **kwargs)
 
     
 class UserPost(models.Model):
@@ -218,13 +231,42 @@ class UserPost(models.Model):
     donor_or_recip = models.CharField(
         max_length=10, choices=ROLE_CHOICES, default="Donor",)
     post_active = models.BooleanField(default=True)
-    post_deliver = models.BooleanField(default=True)
+    post_deliver = models.BooleanField(default=False)
+    post_slug = models.SlugField(max_length=200, null=False, unique=True)
     def __str__(self):  # __unicode__ on Python 2
         return self.post_title
 
     class Meta:
         verbose_name = 'Post'
         verbose_name_plural = "Posts"
+    
+    def slug_save(self):
+        """ A function to generate a 5 character slug and see if it has been used and contains naughty words."""
+        if not self.post_slug: # if there isn't a slug
+            self.post_slug = slugify(self.post_title)+ '-' + get_random_string(5) # create one
+            slug_is_wrong = True  
+            while slug_is_wrong: # keep checking until we have a valid slug
+                slug_is_wrong = False
+                other_objs_with_slug = UserPost.objects.filter(post_slug=self.post_slug)
+                if len(other_objs_with_slug) > 0:
+                    # if any other objects have current slug
+                    slug_is_wrong = True
+                # naughty_words = list_of_swear_words_brand_names_etc
+                # if self.slug in naughty_words:
+                if profanity.contains_profanity(self.post_slug):
+                    slug_is_wrong = True
+                if slug_is_wrong:
+                    # create another slug and check it again
+                    self.post_slug =slugify(self.post_title) +'-'+ get_random_string(5)
+
+    # def save(self, *args, **kwargs):
+    #     """ Add Slug creating/checking to save method. """
+    #     slug_save(self) # call slug_save, listed below
+    #     Super(SomeModelWithSlug, self).save(*args, **kwargs)
+    # # ...
+
+    def get_absolute_url(self):
+        return reverse('single_post', kwargs={'slug': self.post_slug}) # new
 
     def get_address(self):
         "Returns the Formatted address"
@@ -258,6 +300,12 @@ class UserPost(models.Model):
         except requests.exceptions.RequestException as e:
             # catastrophic error. bail.
             raise SystemExit(e)
+
+    def save(self, *args, **kwargs):
+        # if not self.slug:
+            # self.slug = slugify(self.post_title)
+        self.slug_save()
+        return super().save(*args, **kwargs)
 
 class Availability(models.Model):
     assigned_post = models.ForeignKey(UserPost, on_delete=models.CASCADE, blank=True, null=True)

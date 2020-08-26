@@ -2,14 +2,209 @@
 {% load static %}
 
 {% block content %}
+
 <head>
-    <title>User Posts - Sal Hates Waste</title>
+    <title>My Posts - Sal Hates Waste</title>
     {% load crispy_forms_tags %}
 </head>
+<style>
+    .title-banner {
+        background-color: #FA824C;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+    }
+
+    .title-text {
+        color: ghostwhite;
+        margin-left: 3rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .card-title {
+        text-align: left;
+    }
+
+    .text-secondary {
+        margin-left: 3rem;
+    }
+
+    .card .card-content {
+        padding: 20px;
+    }
+
+    .left-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden
+    }
+
+    .times {
+        text-align: left;
+    }
+
+    .text {
+        display: block;
+        text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        height: 30px;
+    }
+
+    #over-card {
+        border-radius: 20px;
+    }
+
+    @media screen and (min-width: 621px) {
+        .card-pic {
+            max-height: 100px;
+            max-width: 100%;
+            flex-shrink: 0;
+        }
+
+        .left-col {
+            margin-left: auto;
+            margin-right: auto;
+            width: 30%;
+        }
+
+        .right-col {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 70%;
+        }
+
+        .card-content .post-row {
+            max-height: 176px;
+        }
+
+
+        .post-row {
+            max-height: 176px;
+            width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    }
+
+    @media screen and (max-width: 620px) {
+        .card-pic {
+            min-height: 60px;
+            max-height: 100px;
+            max-width: 90%;
+        }
+
+        .left-col {
+            max-width: 90%;
+            column-fill: balance;
+        }
+
+        .right-col {
+            margin-top: 1rem;
+            max-width: 90%;
+            column-fill: balance;
+        }
+
+        .card-content .post-row {
+            max-height: fit-content;
+        }
+
+
+        .post-row {
+            max-height: fit-content;
+            width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+</style>
+
 <body>
     <section>
-        <h2>My Posts</h2>
-        <a href="new-post" class="btn-flat waves-effect waves-light green">Make a Post about your surplus</a>
+        <div class="container col " style="margin-bottom: 12em;">
+            <div id="over-card" class="card hoverable">
+                <div class="title-banner">
+                    <h3 class="title-text"> My Posts</h2>
+                </div>
+                <div class="card-content center">
+                    <div class="media">
+                        <div class=" main-row row center">
+                            <a href="new-dpost">
+                                <div class="card hoverable post-row">
+                                    <div class="card-content  ">
+                                        <div class="row">
+                                            <div class="col left-col">
+                                                <img class="card-pic" src="{% static 'images/donor-plus.png' %}">
+                                            </div>
+                                            <div class="col right-col">
+                                                <h4>Make a Post About Your Surplus</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="new-rpost">
+                                <div class="card hoverable post-row">
+                                    <div class="card-content  ">
+                                        <div class="row">
+                                            <div class="col left-col">
+                                                <img class="card-pic" src="{% static 'images/recipient-plus.png' %}">
+                                            </div>
+                                            <div class="col right-col">
+                                                <h4>Make a Post About Your Need</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            {% for post in my_posts %}
+                            <div class="row profile-content">
+                               
+                                    <div class="card hoverable post-row">
+                                        <div class="card-content  ">
+
+                                            <div class="row">
+                                                <a href="{{post.post_slug}}" , style="color:#000">
+                                                <div class="col left-col">
+                                                    <img class="card-pic" src="{{post.post_image.url}}">
+                                                </div>
+                                                </a>
+                                                <div class="col right-col">
+                                                    <Strong>
+                                                        <div class="card-title">{{post.post_title}}</div>
+                                                    </Strong>
+                                                    {% for availability in post.availability_set.all %}
+                                                    <strong>
+                                                        <p class="times">{{availability.post_day}}&emsp;&emsp;
+                                                            {{availability.start_hour}}&nbsp;-&nbsp;{{availability.end_hour}}
+                                                        </p>
+                                                    </strong>
+                                                    {% endfor %}
+                                                   
+                                                    <a href=""><i class="material-icons right">edit</i></a>
+                                                    <p class="text">{{post.post_desc}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                            {% endfor %}
+
+
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </section>
     {% include 'main/footer.html' %}
 </body>

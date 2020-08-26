@@ -4,7 +4,7 @@
 {% block content %}
 
 <head>
-    <title>New Post- Sal Hates Waste</title>
+    <title>New Recipient Post- Sal Hates Waste</title>
     {% load crispy_forms_tags %}
 
 
@@ -29,107 +29,92 @@
 
 <body>
     <section>
-        <h2>New Posts</h2>
+        <h2>New Need</h2>
         <div class="col-md-12 card hoverable">
             <div class="card-content center"> 
                 <form method="post" class="post-form" action=" " enctype="multipart/form-data">
                     {% csrf_token %}
                     {% load widget_tweaks %}
                     <!-- {{ drepeat_post_form.media }} -->
-                    {{  donor_post_form.media }}
-                    {{  donor_post_form.source }}
+                    {{  recipient_post_form.media }}
+                    {{  recipient_post_form.source }}
                     <!-- {{   avail_form.source }} -->
 
                     <div id="main-row" class="row">
                         <div class="input-field ">
                             <label for="post_title">Post Title</label>
-                            {{  donor_post_form.post_title |add_class:"input" }}
+                            {{  recipient_post_form.post_title |add_class:"input" }}
                         </div>
                         <div class="col left-col">
-                            {{  donor_post_form.post_image }}
+                            {{  recipient_post_form.post_image }}
                             <span class="helper-text" data-error="Invalid Image"
-                                data-success="">{{ donor_post_form.post_image.errors }}</span>
+                                data-success="">{{ recipient_post_form.post_image.errors }}</span>
                             <img id="post_image" class="account-img" />
                         </div>
                         <div class="col right-col">
                             <div class="input-field ">
                                 <label for="org-name">Your Organization's Name</label>
-                                {{  donor_post_form.post_org_name |add_class:"validate" }}
+                                {{  recipient_post_form.post_org_name |add_class:"validate" }}
                             </div>
 
                             <div class="row">
                                 <div class="col col-input input-field">
                                     <label for="org-email">Your Org Email</label>
-                                    {{  donor_post_form.post_org_email |add_class:"validate" }}
+                                    {{  recipient_post_form.post_org_email |add_class:"validate" }}
                                 </div>
                                 <span class="helper-text" data-error="Invalid Email"
-                                    data-success="">{{ donor_post_form.email.errors }}</span>
+                                    data-success="">{{ recipient_post_form.email.errors }}</span>
                                 <div class="col col-input input-field">
                                     <label for="org-phone">Your Org Phone</label>
-                                    {{  donor_post_form.post_org_phone |add_class:"validate" }}
+                                    {{  recipient_post_form.post_org_phone |add_class:"validate" }}
                                 </div>
                                 <span class="helper-text" data-error="Invalid Email"
-                                    data-success="">{{  donor_post_form.post_org_phone.errors }}</span>
+                                    data-success="">{{  recipient_post_form.post_org_phone.errors }}</span>
                             </div>
 
                             <div class="input-field">
                                 <label for="org_address ">Organization's Address</label>
-                                {{  donor_post_form.post_org_address}}
+                                {{  recipient_post_form.post_org_address}}
                             </div>
 
                             <div class="row">
                                 <div class="col col-input input-field">
                                     <label for="org_city">City</label>
-                                    {{  donor_post_form.post_org_city}}
+                                    {{  recipient_post_form.post_org_city}}
                                 </div>
                                 <div class="col col-input input-field">
                                     <label for="org_state">State</label>
-                                    {{  donor_post_form.post_org_state}}
+                                    {{  recipient_post_form.post_org_state}}
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col col-input input-field">
                                     <label for="org_zipcode">Zipcode</label>
-                                    {{  donor_post_form.post_org_zipcode}}
+                                    {{  recipient_post_form.post_org_zipcode}}
                                 </div>
                                 <div class="col col-input input-field">
                                     <label for="org_country">Country</label>
-                                    {{  donor_post_form.post_org_country}}
+                                    {{  recipient_post_form.post_org_country}}
                                 </div>
                             </div>
 
                         </div>
                     </div>
                     <div class="row">
-                        <div class="avail-range ">How long will the surplus be available?
+                        <div class="avail-range ">When Do You Need The Donation Buy?
                             <label for="post_begin_date">
-                                {{  donor_post_form.post_begin_date|add_class:"select"}}
+                                {{  recipient_post_form.post_begin_date|add_class:"select"}}
                                 <span></span>
                             </label>
                             <label for="post_end_date">
-                                {{  donor_post_form.post_end_date|add_class:"select"}}
+                                {{  recipient_post_form.post_end_date|add_class:"select"}}
                                 <span></span>
                             </label>
                         </div>
-                        <p>What's the best time window to recieve this?</p>
+                        <p>What's The Best Time Window To Donate this?</p>
                         <div class="avail-section" id="avail-sect_0">
-                            <!-- <label for="id_post_avail">
-                                {{   avail_form.form.start_hour |add_class:"avclass"}}
-                                {{   avail_form.form.end_hour |add_class:"avclass"}}
-                                <span></span>
-                            </label>
-                            <div>
-                                {% for value,text in avail_form.form.post_day.field.choices %}
-                                <label for="id_post_day_{{ forloop.counter0 }}">{{ text }}
-                                    <input id="id_post_day_{{ forloop.counter0 }}" class = "avclass"
-                                        name="{{ avail_form.form.post_day.name }}" type="checkbox" value="{{ value }}"
-                                        {% if value in checked_post_day %} checked="checked" {% endif %}>
-                                    <span></span>
-                                </label>
-                                {% endfor %}
-                            </div> -->
-                            <!-- {{avail_form}} -->
+
                             {{ avail_form.management_form }}
                             {% for form in avail_form %}
                             {% for hidden in form.hidden_fields %}
@@ -181,14 +166,14 @@
                     </div>
                     <div class="row">
                         <div id="deliver-status">
-                            <label for="id_post_deliver">Can you deliver this donation?
-                                {{  donor_post_form.post_deliver}}
+                            <label for="id_post_deliver">Will you be able to pick a donation for this need?
+                                {{  recipient_post_form.post_deliver}}
                                 <span></span>
                             </label>
                         </div>
                         <div id="reccur-status">
-                            <label for="id_post_recurring">Will this surplus be recurring?
-                                {{  donor_post_form.post_recurring | append_attr:"onclick:recurrCheck()" }}
+                            <label for="id_post_recurring">Will this need be recurring?
+                                {{  recipient_post_form.post_recurring | append_attr:"onclick:recurrCheck()" }}
                                 <!-- {{ form.title|append_attr:"class:css_class_1 css_class_2" }} -->
                                 <span></span>
                             </label>
@@ -196,18 +181,17 @@
                         <div id="recurr-div" style="display: none;">
                             <label for="recurrences-details" style="font-size:18; ">Describe the frequency of the
                                 reccurrence</label>
-                            {{  donor_post_form.recurrences |add_class:"textarea" }}
+                            {{  recipient_post_form.recurrences |add_class:"textarea" }}
                         </div>
                     </div>
                     <div class="row">
                         <div>
-                            <label for="org_desc" style="font-size:18;">Give some details about your surplus</label>
-                            {{  donor_post_form.post_desc |add_class:"textarea" }}
+                            <label for="org_desc" style="font-size:18;">Give some details about your need</label>
+                            {{  recipient_post_form.post_desc |add_class:"textarea" }}
                         </div>
                         </p>
                     </div>
                     <div>
-                        {{donor_post_form.errors}}
                         <button type="submit" class="comment-add btn btn-lg btn-purple">Add</button>
                     </div>
                 </form>
@@ -224,6 +208,7 @@
                 $(this).css('display', 'none');
             });
             $("#avail_0").css('display', 'block');
+            $("#avail_0").find('input[type=time]').prop("required", true);
 
         };
     })

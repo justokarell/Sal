@@ -41,7 +41,10 @@ urlpatterns = [
     path('profile-edit', views.profile_edit, name='profile_edit'),
     path('profile-view', views.profile_view, name='profile-view'),
     path('my-posts', views.my_posts, name='my-posts'),
-    path('new-post', views.new_post, name='new_post'),
+    path('new-dpost', views.new_dpost, name='new_dpost'),
+    path('new-rpost', views.new_rpost, name='new_rpost'),
+    path('edit-rpost', views.edit_rpost, name='edit-rpost'),
+    path("<single_slug>", views.single_slug, name="single_slug"),
 
 
     # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
