@@ -184,8 +184,12 @@
                                                         </p>
                                                     </strong>
                                                     {% endfor %}
-                                                   
-                                                    <a href=""><i class="material-icons right">edit</i></a>
+                                                    {% if post.donor_or_recip == 'Recipient' %}
+                                                        <a href="{% url 'main:edit-rpost' post.post_slug %}"><i class="material-icons right">edit</i></a>
+                                                    {% endif %}
+                                                    {% if post.donor_or_recip == 'Donor' %}
+                                                        <a href="{% url 'main:edit-dpost' post.post_slug %}"><i class="material-icons right">edit</i></a>
+                                                    {% endif %}
                                                     <p class="text">{{post.post_desc}}</p>
                                                 </div>
                                             </div>

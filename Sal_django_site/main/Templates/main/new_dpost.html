@@ -12,7 +12,6 @@
 <style>
     .select {
         display: block;
-        /* background-color: #F2F2F2; */
     }
 
     .sign-row {
@@ -31,7 +30,7 @@
     <section>
         <h2>New Surplus</h2>
         <div class="col-md-12 card hoverable">
-            <div class="card-content center"> 
+            <div class="card-content center">
                 <form method="post" class="post-form" action=" " enctype="multipart/form-data">
                     {% csrf_token %}
                     {% load widget_tweaks %}
@@ -165,8 +164,7 @@
                             <div class="row sign-row">
                                 <div class="flexbox">
                                     <img class="col" id="moreAvail" alt="add Availability"
-                                        src="{% static 'images/icon-plus.svg' %}" height="20px"
-                                        style="display: block;">
+                                        src="{% static 'images/icon-plus.svg' %}" height="20px" style="display: block;">
                                     <img class="col" id="lessAvail" alt="remove Availability"
                                         src="{% static 'images/icon-minus.svg' %}" height="20px"
                                         style="display: block;">
@@ -216,6 +214,13 @@
 </body>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        document.getElementById("image").src = "{{  donor_post_form.post_image }}";
+        if ("{{  donor_post_form.post_image }}" != null) {
+            document.getElementById("id_post_image").required = false;
+        }
+    });
+
     $(function () {
         window.onload = function () {
 
@@ -246,7 +251,7 @@
                     break;
                 case 4:
                     break;
-                default:  $("#avail_0").css('display', 'block');
+                default: $("#avail_0").css('display', 'block');
             }
 
         })
@@ -276,7 +281,7 @@
                     break;
                 case 1:
                     break;
-                default:  $("#avail_0").css('display', 'block');
+                default: $("#avail_0").css('display', 'block');
             }
         })
     })

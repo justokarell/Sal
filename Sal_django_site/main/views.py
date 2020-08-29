@@ -199,12 +199,12 @@ def profile_edit(request):
     return render(request, 'main/profile_edit.html', context = {'form': form,
                'profile_form': profile_form})
 
-def edit_rpost(request, slug = None):
+def edit_rpost(request, single_slug = None):
     user = request.user
-    instance = get_object_or_404(RecipientPost, slug = slug)
+    instance = get_object_or_404(RecipientPost, post_slug = single_slug)
     avail_instance = AvailabilityFormset(queryset=Availability.objects.all())
     if request.method == "POST":
-        recipient_post_form = RecipientPostForm(request.POST, request.FILES, instance=instance)
+        recipient_post_form = RecipientPostForm(request.POST or None, request.FILES or None, instance=instance or None)
         avail_form = AvailabilityFormset(request.POST, request.FILES, instance=instance)
 
         if recipient_post_form.is_valid():
@@ -236,6 +236,10 @@ def edit_rpost(request, slug = None):
     else:
         recipient_post_form = RecipientPostForm(instance=instance)
         avail_form = AvailabilityFormset(instance=instance)
+
+    return render(request=request, template_name="main/edit_rpost.html", context = {
+                                                                "avail_form": avail_form,
+                                                                "recipient_post_form": recipient_post_form})
 
 def new_rpost(request):
     user = request.user
@@ -284,6 +288,47 @@ def new_rpost(request):
                                                                "profile" : profile,
                                                                 "avail_form": avail_form,
                                                                 "recipient_post_form": recipient_post_form})
+def edit_dpost(request, single_slug = None):
+    user = request.user
+    instance = get_object_or_404(DonorPost, post_slug = single_slug)
+    avail_instance = AvailabilityFormset(queryset=Availability.objects.all())
+    if request.method == "POST":
+        donor_post_form = DonorPostForm(request.POST or None, request.FILES or None, instance=instance or None)
+        avail_form = AvailabilityFormset(request.POST, request.FILES, instance=instance)
+
+        if donor_post_form.is_valid():
+            
+            donor_post = donor_post_form.save(False)
+            coord = donor_post.get_geocode()
+            donor_post.post_lat = coord[0]
+            donor_post.post_long = coord[1]
+            donor_post.save() 
+            donor_post.save() 
+            if avail_form.is_valid():
+                availslist = avail_form.save(False)
+                for avail in availslist:
+                    avail.assigned_post = donor_post
+                    time = avail.get_min()
+                    avail.start_min = time[0]
+                    avail.end_min = time[1]
+                    avail.save()
+                donor_post.save()  
+            else:
+                for errors in avail_form.errors:
+                    messages.error(request, f"Your availability is off. Try again.")
+            messages.success(request, f"Your post has been uploaded")
+            return redirect('main:my-posts')
+        
+        else: 
+            for errors in donor_post_form.errors:
+                    messages.error(request, f"Some of your input is off. Try again.")
+    else:
+        donor_post_form = DonorPostForm(instance=instance)
+        avail_form = AvailabilityFormset(instance=instance)
+
+    return render(request=request, template_name="main/edit_dpost.html", context = {
+                                                                "avail_form": avail_form,
+                                                                "donor_post_form": donor_post_form})
 
 def new_dpost(request):
     user = request.user

@@ -3,7 +3,6 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from .models import InfoPrompt, CustomUser, Profile, Availability, DonorPost, RecipientPost
 from .forms import CustomUserChangeForm, CustomUserCreationForm 
-# ProfileForm, DonorPostForm, DonorRepeatingPostForm
 from address.models import AddressField
 from address.forms import AddressWidget
 # Register your models here.
@@ -24,14 +23,14 @@ admin.site.register(Profile, ProfileAdmin)
 class DonorPostAdmin(admin.ModelAdmin):
     fields = ('post_creator','post_title','post_slug', 'post_org_name','post_org_phone','post_org_email','post_org_address','post_org_city',
         'post_org_state','post_org_zipcode','post_org_country','post_image','post_desc', 'post_begin_date', 'post_end_date',
-         'post_lat','post_long','post_recurring', 'recurrences','post_deliver')
+         'post_lat','post_long', 'donor_or_recip','post_recurring', 'recurrences','post_deliver')
 
 admin.site.register(DonorPost, DonorPostAdmin)
 
 class RecipientPostAdmin(admin.ModelAdmin):
     fields = ('post_creator','post_title','post_slug', 'post_org_name','post_org_phone','post_org_email','post_org_address','post_org_city',
         'post_org_state','post_org_zipcode','post_org_country','post_image','post_desc', 'post_begin_date', 'post_end_date',
-         'post_lat','post_long','post_recurring', 'recurrences','post_deliver')
+         'post_lat','post_long','donor_or_recip','post_recurring',  'recurrences','post_deliver')
 
 admin.site.register(RecipientPost, RecipientPostAdmin)
 

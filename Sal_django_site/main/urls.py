@@ -43,16 +43,10 @@ urlpatterns = [
     path('my-posts', views.my_posts, name='my-posts'),
     path('new-dpost', views.new_dpost, name='new_dpost'),
     path('new-rpost', views.new_rpost, name='new_rpost'),
-    path('edit-rpost', views.edit_rpost, name='edit-rpost'),
+    path('<single_slug>/edit-rpost/', views.edit_rpost, name='edit-rpost'),
+    path('<single_slug>/edit-dpost/', views.edit_dpost, name='edit-dpost'),
     path("<single_slug>", views.single_slug, name="single_slug"),
 
-
-    # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-    #     views.activate, name='activate'),
-    # path('activate/<uidb64>/<token>/', views.activate, name='activate')
-    # path('activate', views.activate, name='activate'),
-    # path("activate/(<uidb64>[0-9A-Za-z_\-]+)/(<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})",
-    #     views.activate, name="activate"),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
