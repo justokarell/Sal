@@ -7,9 +7,10 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 # from address.models import AddressField
 from django.core.validators import RegexValidator
 from .validators import validate_is_pic
-from address.models import AddressField
+import address
+# from address.models import AddressField
 import urllib
-from django_google_maps import fields as map_fields
+# from django_google_maps import fields as map_fields
 
 
 # Create your models here.
@@ -174,9 +175,9 @@ def geocode(address):
 #     except Exception:
 #         return None
 
-class UserPost(models.Model):
-    address = map_fields.AddressField(max_length=200)
-    lat_lon = geocode(address)
-    # need something here to get userID of user who posted like this maybe?
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+# class UserPost(models.Model):
+#     address = map_fields.AddressField(max_length=200)
+#     lat_lon = geocode(address)
+#     # need something here to get userID of user who posted like this maybe?
+#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     

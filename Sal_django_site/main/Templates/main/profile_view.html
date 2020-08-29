@@ -5,7 +5,7 @@
 
 <head>
   <title>User Profile - Sal Hates Waste</title>
-  {% load crispy_forms_tags %}
+  <!-- {% load crispy_forms_tags %} -->
   {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'profile_view_style.css' %}">
 </head>
@@ -26,7 +26,7 @@
             </div>
             <div class="col left-col ">
               <div class="profile-content">
-                <p class="p-line donor-status"><strong>Donor or Recipient: </strong>{{ user.profile.org_role }}</p>
+                <p class="p-line donor-status"><strong>Type: </strong>{{ user.profile.org_role }}</p>
                 <p class="p-line"><strong>Organization: </strong>{{ user.profile.org_name }}</p>
                 <p class="p-line"><strong>Organization Phone: </strong>{{ user.profile.org_phone }}</p>
                 <p class="p-line"><strong>Organization Email: </strong>{{ user.profile.org_email }}</p>

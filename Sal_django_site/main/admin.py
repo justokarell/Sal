@@ -3,8 +3,8 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from .models import InfoPrompt, CustomUser, Profile
 from .forms import CustomUserChangeForm, CustomUserCreationForm, ProfileForm
-from address.models import AddressField
-from address.forms import AddressWidget
+# from address.models import AddressField
+# from address.forms import AddressWidget
 # Register your models here.
 
 admin.site.register(InfoPrompt)

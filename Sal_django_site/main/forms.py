@@ -3,17 +3,21 @@ from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser, Profile
-from address.forms import AddressField, AddressWidget
+# from address.forms import AddressField, AddressWidget
 from django.forms import ModelForm
 
+class ContactForm(forms.Form):
+    from_email = forms.EmailField(required=True)
+    subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)
+    
 class EditProfileForm(ModelForm):
-         class Meta:
-            model = CustomUser
-            fields = ('email',)
+    class Meta:
+        model = CustomUser
+        fields = ('email',)
 
 class ProfileForm(forms.ModelForm):
     image = forms.ImageField(widget=forms.FileInput(attrs={'accept':'image/png,.jpg'}))
-
 
     class Meta:
         model = Profile
@@ -30,7 +34,7 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['password1'].help_text = 'Password must contain at least 8 characters.'
         self.fields['password2'].help_text = ''
         if 'username' in self.fields:
-            print ("deleting username from form")
+            print("deleting username from form")
             del self.fields['username']
 
 
@@ -63,7 +67,7 @@ class CustomUserChangeForm(UserChangeForm):
         self.fields['password'].help_text = 'Password must contain at least 8 characters'
         self.fields['password'].help_text = ' '
         if 'username' in self.fields:
-            print ("deleting username from form")
+            print("deleting username from form")
             del self.fields['username']
 
     class Meta:
@@ -84,5 +88,5 @@ class CustomUserChangeForm(UserChangeForm):
         )
         return password2
     
-class PersonForm(forms.Form):
-    address = AddressField()
+# class PersonForm(forms.Form):
+#     address = AddressField()
