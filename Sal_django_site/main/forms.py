@@ -11,6 +11,11 @@ from django.forms import inlineformset_factory
 from django.forms import formset_factory
 from django.forms import ModelForm
 
+class ContactForm(forms.Form):
+    from_email = forms.EmailField(required=True)
+    subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)
+
 AvailabilityFormset = inlineformset_factory(UserPost, Availability, fields=('post_day','start_hour','end_hour',),
     widgets={
             'post_day': forms.CheckboxSelectMultiple,

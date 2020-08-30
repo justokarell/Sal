@@ -22,6 +22,7 @@ from django.views.i18n import JavaScriptCatalog
 from . import views
 from django.contrib import admin
 from .tokens import user_tokenizer
+from .views import contactView, successView, volunteerView
 
 # from django.contrib.auth import views as auth_views
 
@@ -29,7 +30,6 @@ app_name = 'main'
 
 urlpatterns = [
     path("", views.homepage, name="homepage"),
-    path("contact", views.contact, name="contact"),
     path("signup", views.signup, name="signup"),
     path("login", views.login_request, name="login"),
     path("logout", views.logout_request, name="logout"),
@@ -43,10 +43,14 @@ urlpatterns = [
     path('my-posts', views.my_posts, name='my-posts'),
     path('new-dpost', views.new_dpost, name='new_dpost'),
     path('new-rpost', views.new_rpost, name='new_rpost'),
+
+    path('contact', contactView, name='contact'),
+    path('success', successView, name='success'),
+    path('volunteer', volunteerView, name='volunteer'),
+
     path('<single_slug>/edit-rpost/', views.edit_rpost, name='edit-rpost'),
     path('<single_slug>/edit-dpost/', views.edit_dpost, name='edit-dpost'),
     path("<single_slug>", views.single_slug, name="single_slug"),
-
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

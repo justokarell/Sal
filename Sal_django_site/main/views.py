@@ -20,6 +20,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
 import json
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from .forms import ContactForm
 from .serializers import UserPostSerializer, AvailabilitySerializer
 from django.core.serializers.json import DjangoJSONEncoder
 from address.models import Address
@@ -32,9 +35,33 @@ def homepage(request):
     return render(request=request,
                   template_name="main/home.html",
                   context={"InfoPrompt": InfoPrompt.objects.all})
-def contact(request):
+
+def volunteerView(request):
     return render(request=request,
-                  template_name="main/contact.html")
+                  template_name="main/volunteer.html")
+    
+def contactView(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                # send_mail(subject, message, from_email, ['salhateswaste@gmail.com'])
+                mail = EmailMessage(subject, message, to=['salhateswaste@gmail.com'], from_email=from_email)
+                mail.content_subtype = 'html'
+                mail.send()
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('main:success')
+    return render(request=request, template_name="main/email.html", context={'form': form})
+
+def successView(request):
+    return render(request=request, template_name="main/success.html")
+    # return HttpResponse('Success! Thank you for your message.')
 
 
 def email_test1(request):
