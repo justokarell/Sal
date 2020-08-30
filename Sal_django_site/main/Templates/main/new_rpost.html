@@ -1,0 +1,282 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block content %}
+
+<head>
+    <title>New Recipient Post- Sal Hates Waste</title>
+    {% load crispy_forms_tags %}
+
+
+</head>
+<style>
+    .select {
+        display: block;
+        /* background-color: #F2F2F2; */
+    }
+
+    .sign-row {
+        margin-top: 1.5rem;
+    }
+
+    .flexbox {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <section>
+        <h2>New Need</h2>
+        <div class="col-md-12 card hoverable">
+            <div class="card-content center"> 
+                <form method="post" class="post-form" action=" " enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% load widget_tweaks %}
+                    <!-- {{ drepeat_post_form.media }} -->
+                    {{  recipient_post_form.media }}
+                    {{  recipient_post_form.source }}
+                    <!-- {{   avail_form.source }} -->
+
+                    <div id="main-row" class="row">
+                        <div class="input-field ">
+                            <label for="post_title">Post Title</label>
+                            {{  recipient_post_form.post_title |add_class:"input" }}
+                        </div>
+                        <div class="col left-col">
+                            {{  recipient_post_form.post_image }}
+                            <span class="helper-text" data-error="Invalid Image"
+                                data-success="">{{ recipient_post_form.post_image.errors }}</span>
+                            <img id="post_image" class="account-img" />
+                        </div>
+                        <div class="col right-col">
+                            <div class="input-field ">
+                                <label for="org-name">Your Organization's Name</label>
+                                {{  recipient_post_form.post_org_name |add_class:"validate" }}
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-input input-field">
+                                    <label for="org-email">Your Org Email</label>
+                                    {{  recipient_post_form.post_org_email |add_class:"validate" }}
+                                </div>
+                                <span class="helper-text" data-error="Invalid Email"
+                                    data-success="">{{ recipient_post_form.email.errors }}</span>
+                                <div class="col col-input input-field">
+                                    <label for="org-phone">Your Org Phone</label>
+                                    {{  recipient_post_form.post_org_phone |add_class:"validate" }}
+                                </div>
+                                <span class="helper-text" data-error="Invalid Email"
+                                    data-success="">{{  recipient_post_form.post_org_phone.errors }}</span>
+                            </div>
+
+                            <div class="input-field">
+                                <label for="org_address ">Organization's Address</label>
+                                {{  recipient_post_form.post_org_address}}
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-input input-field">
+                                    <label for="org_city">City</label>
+                                    {{  recipient_post_form.post_org_city}}
+                                </div>
+                                <div class="col col-input input-field">
+                                    <label for="org_state">State</label>
+                                    {{  recipient_post_form.post_org_state}}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-input input-field">
+                                    <label for="org_zipcode">Zipcode</label>
+                                    {{  recipient_post_form.post_org_zipcode}}
+                                </div>
+                                <div class="col col-input input-field">
+                                    <label for="org_country">Country</label>
+                                    {{  recipient_post_form.post_org_country}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="avail-range ">When Do You Need The Donation Buy?
+                            <label for="post_begin_date">
+                                {{  recipient_post_form.post_begin_date|add_class:"select"}}
+                                <span></span>
+                            </label>
+                            <label for="post_end_date">
+                                {{  recipient_post_form.post_end_date|add_class:"select"}}
+                                <span></span>
+                            </label>
+                        </div>
+                        <p>What's The Best Time Window To Donate this?</p>
+                        <div class="avail-section" id="avail-sect_0">
+
+                            {{ avail_form.management_form }}
+                            {% for form in avail_form %}
+                            {% for hidden in form.hidden_fields %}
+                            {{ hidden }}
+                            {% endfor %}
+                            {{ form.management_form }}
+                            <div class="avail-subsection" id=avail_{{forloop.counter0}}>
+                                <label for="id_availability_set-{{forloop.counter0}}-start_hour" class="">Start
+                                    time:</label>
+                                {{   form.start_hour |add_class:"avclass"}}
+                                {{form.start_hour.errors}}
+                                <label for="id_availability_set-{{forloop.counter0}}-end_hour" class="">End
+                                    time:</label>
+                                {{   form.end_hour |add_class:"avclass"}}
+                                {{form.end_hour.errors}}
+                                <span></span>
+                                <div>
+                                    {% for value,text in form.post_day.field.choices %}
+                                    <label
+                                        for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
+                                        <input type="checkbox"
+                                            name="availability_set-{{forloop.parentloop.counter0}}-post_day"
+                                            id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
+                                            class="avclass" value="{{ value }}" {% if value in checked_post_day %}
+                                            {% endif %}>{{ text }}
+                                        <span></span>
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                                {{ form.post_day.errors}}
+                            </div>
+                            {% endfor %}
+                            <div class="row sign-row">
+                                <div class="flexbox">
+                                    <img class="col" id="moreAvail" alt="add Availability"
+                                        src="{% static 'images/icon-plus.svg' %}" height="20px"
+                                        style="display: block;">
+                                    <img class="col" id="lessAvail" alt="remove Availability"
+                                        src="{% static 'images/icon-minus.svg' %}" height="20px"
+                                        style="display: block;">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="row">
+                        <div id="deliver-status">
+                            <label for="id_post_deliver">Will you be able to pick a donation for this need?
+                                {{  recipient_post_form.post_deliver}}
+                                <span></span>
+                            </label>
+                        </div>
+                        <div id="reccur-status">
+                            <label for="id_post_recurring">Will this need be recurring?
+                                {{  recipient_post_form.post_recurring | append_attr:"onclick:recurrCheck()" }}
+                                <!-- {{ form.title|append_attr:"class:css_class_1 css_class_2" }} -->
+                                <span></span>
+                            </label>
+                        </div>
+                        <div id="recurr-div" style="display: none;">
+                            <label for="recurrences-details" style="font-size:18; ">Describe the frequency of the
+                                reccurrence</label>
+                            {{  recipient_post_form.recurrences |add_class:"textarea" }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            <label for="org_desc" style="font-size:18;">Give some details about your need</label>
+                            {{  recipient_post_form.post_desc |add_class:"textarea" }}
+                        </div>
+                        </p>
+                    </div>
+                    <div>
+                        <button type="submit" class="comment-add btn btn-lg btn-purple">Add</button>
+                    </div>
+                </form>
+            </div>
+    </section>
+    {% include 'main/footer.html' %}
+</body>
+
+<script>
+    $(function () {
+        window.onload = function () {
+
+            $('.avail-section').find('.avail-subsection').each(function () {
+                $(this).css('display', 'none');
+            });
+            $("#avail_0").css('display', 'block');
+            $("#avail_0").find('input[type=time]').prop("required", true);
+
+        };
+    })
+
+    $(function () {
+        $("#moreAvail").on('click', function () {
+            let count = 0
+            $('.avail-section').find('.avail-subsection:visible').each(function () {
+                count++
+            });
+            switch (count) {
+                case 1:
+                    $("#avail_1").css('display', 'block');
+                    break;
+                case 2:
+                    $("#avail_2").css('display', 'block');
+                    break;
+                case 3:
+                    $("#avail_3").css('display', 'block');
+                    break;
+                case 4:
+                    break;
+                default:  $("#avail_0").css('display', 'block');
+            }
+
+        })
+    })
+
+    $(function () {
+        $("#lessAvail").on('click', function () {
+            let count = 0
+            $('.avail-section').find('.avail-subsection:visible').each(function () {
+                count++
+            });
+            switch (count) {
+                case 4:
+                    $("#avail_3").css('display', 'none');
+                    $("#avail_3").find('input[type=time]').val('');
+                    $("#avail_3").find('input[type=checkbox]').prop("checked", false);
+                    break;
+                case 3:
+                    $("#avail_2").css('display', 'none');
+                    $("#avail_2").find('input[type=time]').val('');
+                    $("#avail_2").find('input[type=checkbox]').prop("checked", false);
+                    break;
+                case 2:
+                    $("#avail_1").css('display', 'none');
+                    $("#avail_1").find('input[type=time]').val('');
+                    $("#avail_1").find('input[type=checkbox]').prop("checked", false);
+                    break;
+                case 1:
+                    break;
+                default:  $("#avail_0").css('display', 'block');
+            }
+        })
+    })
+
+
+    function recurrCheck() {
+        // Get the checkbox
+        var checkBox = document.getElementById("id_post_recurring");
+        // If the checkbox is checked, display the extra field
+        if (checkBox.checked == true) {
+            document.getElementById('recurr-div').style.display = 'block';
+        } else {
+            document.getElementById('recurr-div').style.display = 'none';
+        }
+    }
+</script>
+
+{% endblock %}

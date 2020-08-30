@@ -42,7 +42,7 @@
               <span class="helper-text" data-error="Invalid Image"
                 data-success="">{{ profile_form.image.errors }}</span>
               <img id="image" class="account-img" />
-              <!-- <span class="helper-text" data-error="Invalid Image" data-success="">{{ profile_form.image.errors }}</span> -->
+
               <div id="donor-status">
                 <label for="org_role">Do You Donate Food or Recieve It?</label>
                 {{  profile_form.org_role |add_class:"select" }}
@@ -64,7 +64,8 @@
                   <label for="org-phone">Your Org Phone</label>
                   {{  profile_form.org_phone |add_class:"validate" }}
                 </div>
-                <span class="helper-text" data-error="Invalid Email" data-success="">{{  profile_form.org_phone.errors }}</span>
+                <span class="helper-text" data-error="Invalid Email"
+                  data-success="">{{  profile_form.org_phone.errors }}</span>
               </div>
 
               <div class="input-field">
@@ -119,9 +120,10 @@
   {% include 'main/footer.html' %}
 </body>
 <script>
+
   document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("image").src = "{{ user.profile.image.url }}";
-    if("{{ user.profile.image.url }}"!=null){
+    if ("{{ user.profile.image.url }}" != null) {
       document.getElementById("id_image").required = false;
     }
   });
@@ -138,5 +140,7 @@
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
   };
+
+
 </script>
 {% endblock %}

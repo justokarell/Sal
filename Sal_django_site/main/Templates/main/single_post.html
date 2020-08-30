@@ -1,0 +1,33 @@
+{% extends 'main/header.html' %}
+
+{% block content %}
+<head>
+  {% load static %}
+  <title> Post - Sal Hates Waste</title>
+</head>
+
+<body>
+    
+    <section>
+        <div class="row">
+
+            <h3>{{single_post.post_title}}</h3>
+                <div class="col s12 m6 l4">
+                    <img src="{{single_post.post_image.url}}" style=" max-width: 60%; max-height: 60%;">
+                        <div class="card hoverable">
+                            <div class="card-content">
+                                <div class="card-title">by {{single_post.post_org_name}}</div>
+                                <!--<p style="font-size:70%">Published {{tut.tutorial_published}}</p>-->
+                                <p>{{single_post.post_desc}}</p>
+                                <p><a href="{{single_post.post_creator.profile.profile_slug}}">About this Organization</a></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+    
+        </div>
+    </section>
+
+    {% include 'main/footer.html' %}
+</body>
+{% endblock %}

@@ -13,15 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+import django
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.conf.urls import url, include
+from django.views.i18n import JavaScriptCatalog
 from . import views
 from django.contrib import admin
 from .tokens import user_tokenizer
-from .views import contactView, successView, volunteerView
 
 # from django.contrib.auth import views as auth_views
 
@@ -29,6 +29,7 @@ app_name = 'main'
 
 urlpatterns = [
     path("", views.homepage, name="homepage"),
+    path("contact", views.contact, name="contact"),
     path("signup", views.signup, name="signup"),
     path("login", views.login_request, name="login"),
     path("logout", views.logout_request, name="logout"),
@@ -39,18 +40,23 @@ urlpatterns = [
     path('map_page', views.map_page, name='map_page'),
     path('profile-edit', views.profile_edit, name='profile_edit'),
     path('profile-view', views.profile_view, name='profile-view'),
-    path('my-posts', views.my_posts, name='my_posts'),
-    path('contact', contactView, name='contact'),
-    path('success', successView, name='success'),
-    path('volunteer', volunteerView, name='volunteer'),
-    
+    path('my-posts', views.my_posts, name='my-posts'),
+    path('new-dpost', views.new_dpost, name='new_dpost'),
+    path('new-rpost', views.new_rpost, name='new_rpost'),
+    path('<single_slug>/edit-rpost/', views.edit_rpost, name='edit-rpost'),
+    path('<single_slug>/edit-dpost/', views.edit_dpost, name='edit-dpost'),
+    path("<single_slug>", views.single_slug, name="single_slug"),
 
-
-    # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-    #     views.activate, name='activate'),
-    # path('activate/<uidb64>/<token>/', views.activate, name='activate')
-    # path('activate', views.activate, name='activate'),
-    # path("activate/(<uidb64>[0-9A-Za-z_\-]+)/(<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})",
-    #     views.activate, name="activate"),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# If you already have a js_info_dict dictionary, just add
+# 'recurrence' to the existing 'packages' tuple.
+js_info_dict = {
+    'packages': ('recurrence', ),
+}
+
+# jsi18n can be anything you like here
+urlpatterns += [
+    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), js_info_dict),
+]
