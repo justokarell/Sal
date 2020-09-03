@@ -1,0 +1,67 @@
+{
+  "_from": "@google/markerclustererplus",
+  "_id": "@google/markerclustererplus@5.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-LLYJHLLERawpRQUn7iu/Y6Ll/2vJct3v5iIky99apzaZ9nTy/adYhAEmnUI9PRnMS3nt65CQdLDz178HA6wvgw==",
+  "_location": "/@google/markerclustererplus",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@google/markerclustererplus",
+    "name": "@google/markerclustererplus",
+    "escapedName": "@google%2fmarkerclustererplus",
+    "scope": "@google",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@google/markerclustererplus/-/markerclustererplus-5.1.0.tgz",
+  "_shasum": "245d39408c6863f2f7f2d325c846e6e8128ee301",
+  "_spec": "@google/markerclustererplus",
+  "_where": "D:\\OneDrive\\Documents\\GitHub\\Sal\\Sal_django_site",
+  "author": {
+    "name": "Google Inc."
+  },
+  "bugs": {
+    "url": "https://github.com/googlemaps/v3-utility-library/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Creates and manages per-zoom-level clusters for large amounts of markers.",
+  "files": [
+    "dist/*",
+    "images/*"
+  ],
+  "homepage": "https://github.com/googlemaps/v3-utility-library/tree/master/markerclustererplus",
+  "keywords": [
+    "cluster",
+    "google",
+    "maps",
+    "marker"
+  ],
+  "license": "Apache-2.0",
+  "main": "dist/markerclustererplus.umd.js",
+  "module": "dist/markerclustererplus.esm.js",
+  "name": "@google/markerclustererplus",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://wombat-dressing-room.appspot.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/googlemaps/v3-utility-library.git"
+  },
+  "scripts": {
+    "format": "sort-package-json && prettier *.json *.js src/* examples/* --write",
+    "lint": "eslint src/*",
+    "prepare": "rollup -c"
+  },
+  "types": "dist/index.d.ts",
+  "unpkg": "dist/markerclustererplus.min.js",
+  "version": "5.1.0"
+}

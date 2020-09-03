@@ -10,16 +10,19 @@
     <link rel="stylesheet" type="text/css" href="{% static 'profile_view_style.css' %}">
 </head>
 
+<style>
+
+</style>
 
 <body>
-  <div class="container col " style="margin-bottom: 12em;">
+  <div class="container col " style="margin-bottom: 12em; ">
     <div class="card hoverable">
       <div class="title-banner">
         <h3 class="title-text"> Your Profile</h2>
       </div>
       <div class="card-content center">
         <div class="media">
-          <div class=" main-row row center">
+          <div class=" main-row row center flexbox-container">
             <div class="col right-col">
               <!-- <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" width="200"> -->
               <img class="account-img" src="{{ user.profile.image.url }}" >

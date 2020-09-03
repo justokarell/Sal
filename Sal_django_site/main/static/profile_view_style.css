@@ -1,16 +1,53 @@
 
+
+  .account-img{
+    margin-top: auto;
+    margin-bottom: auto;
+    min-width: 200;
+    max-width: 400;
+    max-height:180px;
+    /* max-height:100px; */
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    padding: 10px;
+  }
+
+  body {
+    background-color: ghostwhite;
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+    background-image: url('images/orange-photo.jpg');
+    /* Remember to change this url by removing static when you move it to statics */
+  }
+
   .title-banner {
-    background-color: #3C91E6;
+    background-color:ghostwhite;
+    /* background-color:#F2F2F2; */
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
   }
 
   .title-text {
-    color: ghostwhite;
+    color: #FA824C;
+    /* text-align: center; */
     margin-left: 3rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
+   
+  
+  .edit, .edit:hover{
+    background-color: #9FD356;
+  }
+
+  .posts, .posts:hover{
+    background-color: #FA824C;
+  }
+
+
+  .card .card-content {
+    padding-top: 8px;
+  }
+  
   .text-secondary{
     margin-left: 3rem;
   }
@@ -27,21 +64,17 @@
     /* background-color:#F2F2F2; */
   }
 
-
+  /* body{background-color: #342E37;} */
 
   .card {
     border-radius: 20px;
     
   }
 
-
-  .account-img{
-    min-width: 200;
-    max-width: 400;
-    border: 3px solid rgba(0, 0, 0, 0.3);
-    padding: 10px;
-
-  }
+  /* .row .col{
+    display: inline-block;
+    vertical-align: middle;
+  } */
 
   .col{ 
     max-width: auto;
@@ -58,23 +91,18 @@
     font-size:20px;
   }
 
-
-  
-  .edit, .edit:hover{
-    background-color: #3C91E6;
-
-  }
-
-  .posts, .posts:hover{
-    background-color: #FA824C;
-    
-
-  }
-
+  .desc{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color:#F2F2F2;
+    text-align: left;
+    padding-left: 10%;
+    }
 
   @media screen and (min-width: 621px) {
     .main-row{ 
     display: flex;
+    width: 100%;
     justify-content: center;
     }
 
@@ -86,20 +114,25 @@
     padding-top: 10%;
     } */
 
-    .desc{
-    padding-top: 2%;
-    padding-bottom: 2%;
-    background-color:#F2F2F2;
-    text-align: left;
-    padding-left: 10%;
-    }
-
-    .right-col {
+    .account-img{
+      margin-left: auto;
       margin-right: 2.5%;
     }
 
+
+    .right-col {
+      /* margin-right: 2.5%; */
+      content: '';
+      flex: 3.5;
+      display: flex;
+      /* justify-content: center; */
+      /* align-items: center; */
+
+    }
+
     .left-col {
-      margin-left: 2.5%;
+      /* margin-left: 2.5%; */
+      flex: 3.5;
     }
     
 
@@ -120,11 +153,10 @@
     margin-top: 4%;
     }
 
-    .desc{
-    padding-top: 2%;
-    padding-bottom: 2%;
-    background-color:#F2F2F2;
-    text-align: left;
+    .account-img{
+      min-width: 160;
+      max-width:100%;
     }
+
   }
 

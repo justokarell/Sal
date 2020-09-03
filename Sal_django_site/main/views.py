@@ -250,12 +250,13 @@ def edit_rpost(request, single_slug = None):
                     avail.start_min = time[0]
                     avail.end_min = time[1]
                     avail.save()
-                recipient_post.save()  
+                recipient_post.save()
+                messages.success(request, f"Your post has been uploaded")
+                return redirect('main:my-posts')  
             else:
                 for errors in avail_form.errors:
                     messages.error(request, f"Your availability is off. Try again.")
-            messages.success(request, f"Your post has been uploaded")
-            return redirect('main:my-posts')
+            
         
         else: 
             for errors in recipient_post_form.errors:
@@ -294,12 +295,13 @@ def new_rpost(request):
                     avail.start_min = time[0]
                     avail.end_min = time[1]
                     avail.save()
-                recipient_post.save()  
+                recipient_post.save()
+                messages.success(request, f"Your post has been uploaded")
+                return redirect('main:my-posts')  
             else:
                 for errors in avail_form.errors:
                     messages.error(request, f"Your availability is off. Try again.")
-            messages.success(request, f"Your post has been uploaded")
-            return redirect('main:my-posts')
+            
         
         else: 
             for errors in recipient_post_form.errors:
@@ -329,23 +331,22 @@ def edit_dpost(request, single_slug = None):
             coord = donor_post.get_geocode()
             donor_post.post_lat = coord[0]
             donor_post.post_long = coord[1]
-            donor_post.save() 
-            donor_post.save() 
+            donor_post.save()
             if avail_form.is_valid():
-                availslist = avail_form.save(False)
+                availslist = avail_form.save()
+                print ('wow: ', availslist)
                 for avail in availslist:
-                    avail.assigned_post = donor_post
                     time = avail.get_min()
                     avail.start_min = time[0]
                     avail.end_min = time[1]
                     avail.save()
-                donor_post.save()  
+                donor_post.save()
+                messages.success(request, f"Your post has been uploaded")
+                return redirect('main:my-posts')  
             else:
                 for errors in avail_form.errors:
                     messages.error(request, f"Your availability is off. Try again.")
-            messages.success(request, f"Your post has been uploaded")
-            return redirect('main:my-posts')
-        
+
         else: 
             for errors in donor_post_form.errors:
                     messages.error(request, f"Some of your input is off. Try again.")
@@ -354,6 +355,7 @@ def edit_dpost(request, single_slug = None):
         avail_form = AvailabilityFormset(instance=instance)
 
     return render(request=request, template_name="main/edit_dpost.html", context = {
+                                                                "instance": instance,
                                                                 "avail_form": avail_form,
                                                                 "donor_post_form": donor_post_form})
 
@@ -383,12 +385,13 @@ def new_dpost(request):
                     avail.start_min = time[0]
                     avail.end_min = time[1]
                     avail.save()
-                donor_post.save()  
+                donor_post.save()
+                messages.success(request, f"Your post has been uploaded")
+                return redirect('main:my-posts')  
             else:
                 for errors in avail_form.errors:
                     messages.error(request, f"Your availability is off. Try again.")
-            messages.success(request, f"Your post has been uploaded")
-            return redirect('main:my-posts')
+            
         
         else: 
             for errors in donor_post_form.errors:

@@ -6,220 +6,223 @@
 <head>
     <title>New Donor Post- Sal Hates Waste</title>
     {% load crispy_forms_tags %}
-
+    <link rel="stylesheet" type="text/css" href="{% static 'dpost_style.css' %}">
 
 </head>
-<style>
-    .select {
-        display: block;
-    }
-
-    .sign-row {
-        margin-top: 1.5rem;
-    }
-
-    .flexbox {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
 
 <body>
     <section>
-        <h2>New Surplus</h2>
-        <div class="col-md-12 card hoverable">
-            <div class="card-content center">
-                <form method="post" class="post-form" action=" " enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {% load widget_tweaks %}
-                    <!-- {{ drepeat_post_form.media }} -->
-                    {{  donor_post_form.media }}
-                    {{  donor_post_form.source }}
-                    <!-- {{   avail_form.source }} -->
+        <div class="title-banner">
+            <h3 class="title-text">New Surplus</h3>
+        </div>
+        <div class="container col " style="margin-bottom: 12em;">
+            <div class="col-md-12 card hoverable">
+                <div class="card-content center">
+                    <form method="post" class="post-form" action=" " enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% load widget_tweaks %}
+                        {{  donor_post_form.media }}
+                        {{  donor_post_form.source }}
 
-                    <div id="main-row" class="row">
-                        <div class="input-field ">
+                        <div class="input-field title-div">
                             <label for="post_title">Post Title</label>
-                            {{  donor_post_form.post_title |add_class:"input" }}
+                            {{  donor_post_form.post_title |add_class:"input title-input" }}
                         </div>
-                        <div class="col left-col">
-                            {{  donor_post_form.post_image }}
-                            <span class="helper-text" data-error="Invalid Image"
-                                data-success="">{{ donor_post_form.post_image.errors }}</span>
-                            <img id="post_image" class="account-img" />
+                        <div id="main-row" class="row">
+                            <div id="top-of-column1" class="col left-col">
+                                {{  donor_post_form.post_image }}
+                                <span class="helper-text" data-error="Invalid Image"
+                                    data-success="">{{ donor_post_form.post_image.errors }}</span>
+                                <img id="post_image" class="post-img" />
+                            </div>
+                            <div id="top-of-column2" class="col right-col">
+                                <div  class="input-field ">
+                                    <label for="org-name">Your Organization's Name</label>
+                                    {{  donor_post_form.post_org_name |add_class:"validate" }}
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-input input-field">
+                                        <label for="org-email">Your Org Email</label>
+                                        {{  donor_post_form.post_org_email |add_class:"validate" }}
+                                    </div>
+                                    <span class="helper-text" data-error="Invalid Email"
+                                        data-success="">{{ donor_post_form.email.errors }}</span>
+                                    <div class="col col-input input-field">
+                                        <label for="org-phone">Your Org Phone</label>
+                                        {{  donor_post_form.post_org_phone |add_class:"validate" }}
+                                    </div>
+                                    <span class="helper-text" data-error="Invalid Email"
+                                        data-success="">{{  donor_post_form.post_org_phone.errors }}</span>
+                                </div>
+
+                                <div class="input-field">
+                                    <label for="org_address ">Organization's Address</label>
+                                    {{  donor_post_form.post_org_address}}
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-input input-field">
+                                        <label for="org_city">City</label>
+                                        {{  donor_post_form.post_org_city}}
+                                    </div>
+                                    <div class="col col-input input-field">
+                                        <label for="org_state">State</label>
+                                        {{  donor_post_form.post_org_state}}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-input input-field">
+                                        <label for="org_zipcode">Zipcode</label>
+                                        {{  donor_post_form.post_org_zipcode}}
+                                    </div>
+                                    <div class="col col-input input-field">
+                                        <label for="org_country">Country</label>
+                                        {{  donor_post_form.post_org_country}}
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="col right-col">
-                            <div class="input-field ">
-                                <label for="org-name">Your Organization's Name</label>
-                                {{  donor_post_form.post_org_name |add_class:"validate" }}
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-input input-field">
-                                    <label for="org-email">Your Org Email</label>
-                                    {{  donor_post_form.post_org_email |add_class:"validate" }}
-                                </div>
-                                <span class="helper-text" data-error="Invalid Email"
-                                    data-success="">{{ donor_post_form.email.errors }}</span>
-                                <div class="col col-input input-field">
-                                    <label for="org-phone">Your Org Phone</label>
-                                    {{  donor_post_form.post_org_phone |add_class:"validate" }}
-                                </div>
-                                <span class="helper-text" data-error="Invalid Email"
-                                    data-success="">{{  donor_post_form.post_org_phone.errors }}</span>
-                            </div>
-
-                            <div class="input-field">
-                                <label for="org_address ">Organization's Address</label>
-                                {{  donor_post_form.post_org_address}}
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-input input-field">
-                                    <label for="org_city">City</label>
-                                    {{  donor_post_form.post_org_city}}
-                                </div>
-                                <div class="col col-input input-field">
-                                    <label for="org_state">State</label>
-                                    {{  donor_post_form.post_org_state}}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-input input-field">
-                                    <label for="org_zipcode">Zipcode</label>
-                                    {{  donor_post_form.post_org_zipcode}}
-                                </div>
-                                <div class="col col-input input-field">
-                                    <label for="org_country">Country</label>
-                                    {{  donor_post_form.post_org_country}}
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="avail-range ">How long will the surplus be available?
-                            <label for="post_begin_date">
-                                {{  donor_post_form.post_begin_date|add_class:"select"}}
-                                <span></span>
-                            </label>
-                            <label for="post_end_date">
-                                {{  donor_post_form.post_end_date|add_class:"select"}}
-                                <span></span>
-                            </label>
-                        </div>
-                        <p>What's the best time window to recieve this?</p>
-                        <div class="avail-section" id="avail-sect_0">
-                            <!-- <label for="id_post_avail">
-                                {{   avail_form.form.start_hour |add_class:"avclass"}}
-                                {{   avail_form.form.end_hour |add_class:"avclass"}}
-                                <span></span>
-                            </label>
-                            <div>
-                                {% for value,text in avail_form.form.post_day.field.choices %}
-                                <label for="id_post_day_{{ forloop.counter0 }}">{{ text }}
-                                    <input id="id_post_day_{{ forloop.counter0 }}" class = "avclass"
-                                        name="{{ avail_form.form.post_day.name }}" type="checkbox" value="{{ value }}"
-                                        {% if value in checked_post_day %} checked="checked" {% endif %}>
-                                    <span></span>
-                                </label>
-                                {% endfor %}
-                            </div> -->
-                            <!-- {{avail_form}} -->
-                            {{ avail_form.management_form }}
-                            {% for form in avail_form %}
-                            {% for hidden in form.hidden_fields %}
-                            {{ hidden }}
-                            {% endfor %}
-                            {{ form.management_form }}
-                            <div class="avail-subsection" id=avail_{{forloop.counter0}}>
-                                <label for="id_availability_set-{{forloop.counter0}}-start_hour" class="">Start
-                                    time:</label>
-                                {{   form.start_hour |add_class:"avclass"}}
-                                {{form.start_hour.errors}}
-                                <label for="id_availability_set-{{forloop.counter0}}-end_hour" class="">End
-                                    time:</label>
-                                {{   form.end_hour |add_class:"avclass"}}
-                                {{form.end_hour.errors}}
-                                <span></span>
-                                <div>
-                                    {% for value,text in form.post_day.field.choices %}
-                                    <label
-                                        for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
-                                        <input type="checkbox"
-                                            name="availability_set-{{forloop.parentloop.counter0}}-post_day"
-                                            id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
-                                            class="avclass" value="{{ value }}" {% if value in checked_post_day %}
-                                            {% endif %}>{{ text }}
+                        <div class="row">
+                            <p class="section-label">How long will the surplus be available?</p>
+                            <div class="avail-range row">
+                                <div class="col post_date">
+                                    <label for="post_begin_date">
+                                        {{  donor_post_form.post_begin_date|add_class:"select"}}
                                         <span></span>
                                     </label>
-                                    {% endfor %}
                                 </div>
-                                {{ form.post_day.errors}}
-                            </div>
-                            {% endfor %}
-                            <div class="row sign-row">
-                                <div class="flexbox">
-                                    <img class="col" id="moreAvail" alt="add Availability"
-                                        src="{% static 'images/icon-plus.svg' %}" height="20px" style="display: block;">
-                                    <img class="col" id="lessAvail" alt="remove Availability"
-                                        src="{% static 'images/icon-minus.svg' %}" height="20px"
-                                        style="display: block;">
+                                <div class="col post_date ">
+                                    <h5> to </h5> 
+                                </div>
+                                <div class="col post_date">
+                                    <label for="post_end_date">
+                                        {{  donor_post_form.post_end_date|add_class:"select"}}
+                                        <span></span>
+                                    </label>
                                 </div>
                             </div>
+                            <p class="section-label">What's the best time window to recieve this?</p>
+                            <div class="avail-section">
+                                <!-- id="avail-sect_0" -->
+                                {{ avail_form.management_form }}
+                                {% for form in avail_form %}
+                                {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                                {% endfor %}
+                                {{ form.management_form }}
+                                <div class="avail-subsection" id=avail_{{forloop.counter0}}>
+                                    <div class="row time-row">
+                                        <div class="col post_date">
+                                            <label for="id_availability_set-{{forloop.counter0}}-start_hour" class="">Start
+                                                time:</label>
+                                            {{   form.start_hour |add_class:"avclass"}}
+                                            {{form.start_hour.errors}}
+                                        </div>
+                                        
+                                        <div class="col post_date">
+                                            <h5> to </h5> 
+                                        </div>
+    
+                                        <div class="col post_date">
+                                            <label for="id_availability_set-{{forloop.counter0}}-end_hour" class="">End
+                                                time:</label>
+                                            {{   form.end_hour |add_class:"avclass"}}
+                                            {{form.end_hour.errors}}
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row choice-row flex-container">
+                                        {% for value,text in form.post_day.field.choices %}
+                                        <div class="col">
+                                            <label 
+                                                for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
+                                                <input type="checkbox"
+                                                    name="availability_set-{{forloop.parentloop.counter0}}-post_day"
+                                                    id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
+                                                    class="avclass" value="{{ value }}" {% if value in checked_post_day %}
+                                                    {% endif %}>{{ text }}
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    {{ form.post_day.errors}}
+                                </div>
+                                {% endfor %}
+                                <div class="row sign-row">
+                                    <div class="flexbox">
+                                        <img class="col" id="moreAvail" alt="add Availability"
+                                            src="{% static 'images/icon-plus.svg' %}" height="20px"
+                                            style="display: block;">
+                                        <img class="col" id="lessAvail" alt="remove Availability"
+                                            src="{% static 'images/icon-minus.svg' %}" height="20px"
+                                            style="display: block;">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
                         </div>
-
-
-
-
-
-                    </div>
-                    <div class="row">
-                        <div id="deliver-status">
-                            <label for="id_post_deliver">Can you deliver this donation?
-                                {{  donor_post_form.post_deliver}}
-                                <span></span>
-                            </label>
+                        <div class="row">
+                            <div id="deliver-status">
+                                <label for="id_post_deliver">Can you deliver this donation?
+                                    {{  donor_post_form.post_deliver}}
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div id="reccur-status">
+                                <label for="id_post_recurring">Will this surplus be recurring?
+                                    {{  donor_post_form.post_recurring | append_attr:"onclick:recurrCheck()" }}
+                                    <!-- {{ form.title|append_attr:"class:css_class_1 css_class_2" }} -->
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div id="recurr-div" style="display: none;">
+                                <label for="recurrences-details" style="font-size:18; ">Describe the frequency of the
+                                    reccurrence</label>
+                                {{  donor_post_form.recurrences |add_class:"textarea desc" }}
+                            </div>
                         </div>
-                        <div id="reccur-status">
-                            <label for="id_post_recurring">Will this surplus be recurring?
-                                {{  donor_post_form.post_recurring | append_attr:"onclick:recurrCheck()" }}
-                                <!-- {{ form.title|append_attr:"class:css_class_1 css_class_2" }} -->
-                                <span></span>
-                            </label>
+                        <div class="row">
+                            <div>
+                                <label for="org_desc" style="font-size:18;">Give some details about your surplus</label>
+                                {{  donor_post_form.post_desc |add_class:"textarea desc" }}
+                            </div>
+                            </p>
                         </div>
-                        <div id="recurr-div" style="display: none;">
-                            <label for="recurrences-details" style="font-size:18; ">Describe the frequency of the
-                                reccurrence</label>
-                            {{  donor_post_form.recurrences |add_class:"textarea" }}
-                        </div>
-                    </div>
-                    <div class="row">
                         <div>
-                            <label for="org_desc" style="font-size:18;">Give some details about your surplus</label>
-                            {{  donor_post_form.post_desc |add_class:"textarea" }}
+                            <button type="submit" id="add-button" class="btn btn-lg">Add</button>
                         </div>
-                        </p>
-                    </div>
-                    <div>
-                        <button type="submit" class="comment-add btn btn-lg btn-purple">Add</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
+        </div>
+
     </section>
     {% include 'main/footer.html' %}
 </body>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function (event) {
-        document.getElementById("image").src = "{{  donor_post_form.post_image }}";
-        if ("{{  donor_post_form.post_image }}" != null) {
-            document.getElementById("id_post_image").required = false;
-        }
-    });
+
+    document.getElementById("id_post_image").onchange = function () {
+        document.getElementById("id_post_image").required = true;
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            document.getElementById("post_image").src = e.target.result;
+        };
+
+        // read the image file as a data URL.
+        reader.readAsDataURL(this.files[0]);
+    };
 
     $(function () {
         window.onload = function () {
