@@ -7,10 +7,12 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.core.validators import RegexValidator
 from .validators import validate_is_pic
 from address.models import AddressField
+# import django_address.models 
+# from django_address.models import AddressField
 import urllib
 import requests 
 from django.template.defaultfilters import slugify 
-from django_google_maps import fields as map_fields
+# from django_google_maps import fields as map_fields
 import recurrence.fields
 from multiselectfield import MultiSelectField
 from django.conf import settings
