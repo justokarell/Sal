@@ -1,4 +1,3 @@
-from django.shortcuts import render, redirect 
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
@@ -10,8 +9,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import CustomUserCreationForm
 from .tokens import user_tokenizer
-from rest_framework import serializers
-from .models import InfoPrompt, CustomUser, Profile, UserPost, DonorPost, RecipientPost, Availability
+from .models import InfoPrompt, CustomUser, Profile
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
 from django.template.loader import get_template
@@ -19,14 +18,13 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
-import json
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ContactForm
-from .serializers import UserPostSerializer, AvailabilitySerializer
-from django.core.serializers.json import DjangoJSONEncoder
-from address.models import Address
-from .forms import ProfileForm, EditProfileForm, DonorPostForm, RecipientPostForm, AvailabilityFormset
+
+
+# from address.models import Address
+from .forms import ProfileForm, EditProfileForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -35,11 +33,16 @@ def homepage(request):
     return render(request=request,
                   template_name="main/home.html",
                   context={"InfoPrompt": InfoPrompt.objects.all})
+    
+# def contact(request):
+#     return render(request=request,
+#                   template_name="main/email.html")
 
 def volunteerView(request):
     return render(request=request,
                   template_name="main/volunteer.html")
     
+
 def contactView(request):
     if request.method == 'GET':
         form = ContactForm()
@@ -63,6 +66,16 @@ def successView(request):
     return render(request=request, template_name="main/success.html")
     # return HttpResponse('Success! Thank you for your message.')
 
+def profile_view(request):
+    if request.user.is_authenticated:
+        return render(request=request,template_name="main/profile_view.html")
+    else:
+        messages.info(request, f"Login to view your profile")
+        return redirect('main:login')
+
+def my_posts(request):
+    return render(request=request,
+                  template_name="main/my_posts.html")
 
 def email_test1(request):
     return render(request=request,
@@ -181,30 +194,20 @@ def map_page(request):
     #                fields=('uid', 'latitude', 'longitude'))
     # return HttpResponse(result)
 
-    # post_list = UserPost.objects.all().values()
-    
-
-
-    post_list = UserPost.objects.all()
-    serializer = UserPostSerializer(post_list, many=True)
-    result = json.dumps(serializer.data)
-
-    return render(request=request, template_name="main/map_page.html", context={"result":result})
+    return render(request=request,
+                  template_name="main/map_page.html")#,
+                 # context={"post_list": post_list})
                   
 
-def profile_view(request):
-    if request.user.is_authenticated:
-        return render(request=request,template_name="main/profile_view.html")
-    else:
-        messages.info(request, f"Login to view your profile")
-        return redirect('main:login')
+def test_homepage_search_input(request):
+    return request.session['place']
 
 @login_required
 def profile_edit(request):
  if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)  # request.FILES is show the selected image or file
-    
+
         if form.is_valid() and profile_form.is_valid():
             user_form = form.save()
             custom_form = profile_form.save(False)
@@ -225,215 +228,3 @@ def profile_edit(request):
     
     return render(request, 'main/profile_edit.html', context = {'form': form,
                'profile_form': profile_form})
-
-def edit_rpost(request, single_slug = None):
-    user = request.user
-    instance = get_object_or_404(RecipientPost, post_slug = single_slug)
-    avail_instance = AvailabilityFormset(queryset=Availability.objects.all())
-    if request.method == "POST":
-        recipient_post_form = RecipientPostForm(request.POST or None, request.FILES or None, instance=instance or None)
-        avail_form = AvailabilityFormset(request.POST, request.FILES, instance=instance)
-
-        if recipient_post_form.is_valid():
-            
-            recipient_post = recipient_post_form.save(False)
-            coord = recipient_post.get_geocode()
-            recipient_post.post_lat = coord[0]
-            recipient_post.post_long = coord[1]
-            recipient_post.save() 
-            recipient_post.save() 
-            if avail_form.is_valid():
-                availslist = avail_form.save(False)
-                for avail in availslist:
-                    avail.assigned_post = recipient_post
-                    time = avail.get_min()
-                    avail.start_min = time[0]
-                    avail.end_min = time[1]
-                    avail.save()
-                recipient_post.save()
-                messages.success(request, f"Your post has been uploaded")
-                return redirect('main:my-posts')  
-            else:
-                for errors in avail_form.errors:
-                    messages.error(request, f"Your availability is off. Try again.")
-            
-        
-        else: 
-            for errors in recipient_post_form.errors:
-                    messages.error(request, f"Some of your input is off. Try again.")
-    else:
-        recipient_post_form = RecipientPostForm(instance=instance)
-        avail_form = AvailabilityFormset(instance=instance)
-
-    return render(request=request, template_name="main/edit_rpost.html", context = {
-                                                                "avail_form": avail_form,
-                                                                "recipient_post_form": recipient_post_form})
-
-def new_rpost(request):
-    user = request.user
-    profile = request.user.profile
-    
-
-    if request.method == "POST":
-        recipient_post_form = RecipientPostForm(request.POST, request.FILES)
-        avail_form = AvailabilityFormset(request.POST, request.FILES)
-
-        if recipient_post_form.is_valid():
-            
-            recipient_post = recipient_post_form.save(False)
-            recipient_post.post_creator = user
-            recipient_post.donor_or_recip = "Recipient"
-            coord = recipient_post.get_geocode()
-            recipient_post.post_lat = coord[0]
-            recipient_post.post_long = coord[1]
-            recipient_post.save() 
-            if avail_form.is_valid():
-                availslist = avail_form.save(False)
-                for avail in availslist:
-                    avail.assigned_post = recipient_post
-                    time = avail.get_min()
-                    avail.start_min = time[0]
-                    avail.end_min = time[1]
-                    avail.save()
-                recipient_post.save()
-                messages.success(request, f"Your post has been uploaded")
-                return redirect('main:my-posts')  
-            else:
-                for errors in avail_form.errors:
-                    messages.error(request, f"Your availability is off. Try again.")
-            
-        
-        else: 
-            for errors in recipient_post_form.errors:
-                    messages.error(request, f"Some of your input is off. Try again.")
-    else:
-        recipient_post_form = RecipientPostForm(initial={'post_org_name': profile.org_name, 'post_org_email':profile.org_email,
-        'post_org_phone':profile.org_phone,'post_org_address':profile.org_address,'post_org_city':profile.org_city,
-        'post_org_state':profile.org_state,'post_org_zipcode':profile.org_zipcode,'post_org_country':profile.org_country})
-        avail_form = AvailabilityFormset()
-
-    
-    return render(request=request, template_name="main/new_rpost.html", context = {
-                                                               "profile" : profile,
-                                                                "avail_form": avail_form,
-                                                                "recipient_post_form": recipient_post_form})
-def edit_dpost(request, single_slug = None):
-    user = request.user
-    instance = get_object_or_404(DonorPost, post_slug = single_slug)
-    avail_instance = AvailabilityFormset(queryset=Availability.objects.all())
-    if request.method == "POST":
-        donor_post_form = DonorPostForm(request.POST or None, request.FILES or None, instance=instance or None)
-        avail_form = AvailabilityFormset(request.POST, request.FILES, instance=instance)
-
-        if donor_post_form.is_valid():
-            
-            donor_post = donor_post_form.save(False)
-            coord = donor_post.get_geocode()
-            donor_post.post_lat = coord[0]
-            donor_post.post_long = coord[1]
-            donor_post.save()
-            if avail_form.is_valid():
-                availslist = avail_form.save()
-                print ('wow: ', availslist)
-                for avail in availslist:
-                    time = avail.get_min()
-                    avail.start_min = time[0]
-                    avail.end_min = time[1]
-                    avail.save()
-                donor_post.save()
-                messages.success(request, f"Your post has been uploaded")
-                return redirect('main:my-posts')  
-            else:
-                for errors in avail_form.errors:
-                    messages.error(request, f"Your availability is off. Try again.")
-
-        else: 
-            for errors in donor_post_form.errors:
-                    messages.error(request, f"Some of your input is off. Try again.")
-    else:
-        donor_post_form = DonorPostForm(instance=instance)
-        avail_form = AvailabilityFormset(instance=instance)
-
-    return render(request=request, template_name="main/edit_dpost.html", context = {
-                                                                "instance": instance,
-                                                                "avail_form": avail_form,
-                                                                "donor_post_form": donor_post_form})
-
-def new_dpost(request):
-    user = request.user
-    profile = request.user.profile
-    
-
-    if request.method == "POST":
-        donor_post_form = DonorPostForm(request.POST, request.FILES)
-        avail_form = AvailabilityFormset(request.POST, request.FILES)
-
-        if donor_post_form.is_valid():
-            
-            donor_post = donor_post_form.save(False)
-            donor_post.post_creator = user
-            donor_post.donor_or_recip = "Donor"
-            coord = donor_post.get_geocode()
-            donor_post.post_lat = coord[0]
-            donor_post.post_long = coord[1]
-            donor_post.save() 
-            if avail_form.is_valid():
-                availslist = avail_form.save(False)
-                for avail in availslist:
-                    avail.assigned_post = donor_post
-                    time = avail.get_min()
-                    avail.start_min = time[0]
-                    avail.end_min = time[1]
-                    avail.save()
-                donor_post.save()
-                messages.success(request, f"Your post has been uploaded")
-                return redirect('main:my-posts')  
-            else:
-                for errors in avail_form.errors:
-                    messages.error(request, f"Your availability is off. Try again.")
-            
-        
-        else: 
-            for errors in donor_post_form.errors:
-                    messages.error(request, f"Some of your input is off. Try again.")
-    else:
-        donor_post_form = DonorPostForm(initial={'post_org_name': profile.org_name, 'post_org_email':profile.org_email,
-        'post_org_phone':profile.org_phone,'post_org_address':profile.org_address,'post_org_city':profile.org_city,
-        'post_org_state':profile.org_state,'post_org_zipcode':profile.org_zipcode,'post_org_country':profile.org_country})
-        avail_form = AvailabilityFormset()
-
-    
-    return render(request=request, template_name="main/new_dpost.html", context = {
-                                                               "profile" : profile,
-                                                                "avail_form": avail_form,
-                                                                "donor_post_form": donor_post_form})
-
-def my_posts(request):
-    if request.user.is_authenticated:
-        user = request.user
-        my_posts = UserPost.objects.filter(post_creator = user)
-        return render(request=request, template_name="main/my_posts.html", context = {
-                                                               "my_posts" : my_posts})
-    else:
-        messages.info(request, f"Login to view your posts")
-        return HttpResponseRedirect('main:login')
-    return render(request=request, template_name="main/my_posts.html")
-
-def single_slug(request, single_slug):
-
-    posts = [p.post_slug for p in UserPost.objects.all()]
-    if single_slug in posts:
-        matching_post = UserPost.objects.filter(post_slug=single_slug).first()
-        return render(request=request,
-                      template_name='main/single_post.html',
-                      context={"single_post": matching_post})
-    
-    profiles = [r.profile_slug for r in Profile.objects.all()]
-    if single_slug in profiles:
-        matching_profile = Profile.objects.filter(profile_slug=single_slug).first()
-        this_org = matching_profile.user
-        return render(request=request,
-                      template_name='main/other_profiles.html',
-                      context={"this_org":this_org})
-
-    return HttpResponse(f"'{single_slug}' does not correspond to anything we know of!") 
