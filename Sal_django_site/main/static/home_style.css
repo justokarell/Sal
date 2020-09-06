@@ -88,7 +88,8 @@ position: relative;
 width: 50%;
 
 margin: auto;
-margin-top: 5pc;
+margin-top: 8.5pc;
+margin-bottom: 9pc;
 padding: 2pt; 
 /* height: 16pt;  */
 /* margin-top: 15pc; */
@@ -104,6 +105,7 @@ padding: 2pt;
   transition: 0.3s;
   align-items: center;
   min-width: 181.5px;
+
 }
 
 .tab > .tablinks {
@@ -112,14 +114,14 @@ padding: 2pt;
   background-color:#ffffff;
   border-top-left-radius: 10pt;
   border-top-right-radius: 10pt;
-  border-top:1pt solid #dcdcdc;
+  border-top:0.25pt solid;
   border-bottom: none;
-  border-left: 1pt solid #dcdcdc;
-  border-right: 1pt solid #dcdcdc;
+  border-left: 0.25pt solid;
+  border-right: 0.25pt solid;
   display:inline-block;
   cursor:pointer;
-  color:#666666;
-  font-size: 15pt;
+  /* color:#666666; */
+  font-size: 20pt;
   /* font-weight:bold; */
   padding:6pt 20pt;
   text-decoration:none;
@@ -137,21 +139,21 @@ padding: 2pt;
   }
 }
 .tab button:hover {
-  background:linear-gradient(to bottom, lightgrey 5%, #f6f6f6 100%);
+  background:linear-gradient(to bottom, lightgreen 8%, white 100%);
   background-color:#f6f6f6;
 }
 .tab button.active {
   box-shadow:inset 0px 1px 0px 0px #ffffff;
-  background:linear-gradient(to bottom, lightgrey 5%, white 100%);
+  background:linear-gradient(to bottom, lightgreen 5%, white 100%);
   background-color:#ffffff;
-  border-radius:12pt;
+  /* border-radius:12pt; */
   border-top-left-radius: 10pt;
   border-top-right-radius: 10pt;
-  border-top:1px solid #dcdcdc;
+  border-top: none;
   border-bottom: none;
   display:inline-block;
   cursor:pointer;
-  color:#666666;
+  /* color:#666666; */
   font-size: 20pt;
   font-weight:bold;
   padding:6pt 20pt;
@@ -163,40 +165,42 @@ padding: 2pt;
 font-size: 5px;
 display: none;
 margin: auto;
-padding: 6px 12px;
-border: 2pt solid lightgrey;
+padding: 12px 24px;
+border: 0.25pt solid;
 border-radius: 12pt;
 border-top: none;
 background-color: white;
 min-width: 182px;
+width: 520pt;
+height: 60pt;
 }
 
 .search-button {
 margin: auto;
 margin-top: 4pt;
-width: 130pt;
-height: 35pt;
+width: 160pt;
+height: 45pt;
   box-shadow:inset 0px 1px 0px 0px #ffffff;
   background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
   background-color:#ffffff;
   border-radius:10px;
-  border:1px solid #dcdcdc;
+  border:1px solid;
   display:inline-block;
   cursor:pointer;
-  color:#666666;
+  /* color:#666666; */
 
-  font-size: 15pt;
+  font-size: 18pt;
   /* font-weight:bold; */
   padding:8pt 20pt;
   text-decoration:none;
   text-shadow:0px 1px 0px #ffffff;
 }
 .search-button:hover {
-  background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+  background:linear-gradient(to bottom, lightgreen 100%, #ffffff 100%);
   background-color:#f6f6f6;
 }
 .search-button:active {
-background-color: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+background-color: linear-gradient(to bottom, lightgreen 100%, #ffffff 100%);
   position:relative;
   top:1px;
 }
