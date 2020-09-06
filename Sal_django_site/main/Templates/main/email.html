@@ -10,19 +10,51 @@
     <link rel="stylesheet" type="text/css" href="{% static 'profile_view_style.css' %}">
 </head>
 
+<style>
+.search-button {
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.search-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.search-button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.search-button:hover span {
+  padding-right: 20pt;
+}
+
+.search-button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
 
 <body>
   <div class="container col " style="margin-bottom: 12em;">
-    <div class="card hoverable">
-      <div class="title-banner">
-        <h2 class="title-text center-align"> Contact Form</h2>
+    <div class="card hoverable" style="padding: 16pt";>
+      <div class="title-banner" style="background-color: white;">
+        <h2 class="title-text center-align" style="padding: 16pt";> Contact Form</h2>
       </div>
 
-      <form method="post">
+      <form method="post" style="font-size:14pt;">
          {% csrf_token %}
          {{ form.as_p }}
-         <div class="form-actions">
-            <button type="submit" value="Submit">Send</button>
+         <div class="form-actions center-align" style="padding: 10pt;">
+            <button class="search-button" type="submit" value="Submit" style="color: grey; background-color: white; padding: 5pt; width: 80pt; height: 40pt; border: 1.5pt solid black; border-radius: 5pt; font-size:20pt"><span>Send</span></button>
          </div>
       </form>
     </div>
