@@ -62,7 +62,7 @@ text-align: center;
   position: relative;
   display:block;
   background-color: #3C91E6;
-  background-image: url('images/cartoonfood.jpg'); 
+  background-image: url('images/lime.jpg'); 
   background-size: cover;
   background-repeat: no-repeat;
   height: auto;
@@ -110,12 +110,12 @@ padding: 2pt;
 }
 
 .tab > .tablinks {
-  box-shadow:inset 0px 1px 0px 0px #ffffff;
-  background:linear-gradient(to bottom, #ffffff 100%, #f6f6f6 100%);
-  background-color:#ffffff;
+  box-shadow:inset 0px 1px 0px 0px #342E37;
+  /* background:linear-gradient(to bottom, #ffffff 100%, #f6f6f6 100%); */
+  background-color:#342E37;
   border-top-left-radius: 10pt;
   border-top-right-radius: 10pt;
-  border-top:6.0pt solid #342E37;
+  /* border-top:6.0pt solid #342E37; */
   border-bottom: none;
   border-left: 6.0pt solid #342E37;
   border-right: 6.0pt solid #342E37;
@@ -161,7 +161,7 @@ padding: 12px 24px;
 border: 6.0pt solid #342E37;
 border-radius: 10pt;
 border-top: none;
-background-color: white;
+background-color: #342E37;
 min-width: 182px;
 width: 520pt;
 height: 60pt;
@@ -172,14 +172,17 @@ margin: auto;
 margin-top: 4pt;
 width: 160pt;
 height: 45pt;
-  box-shadow:inset 0px 1px 0px 0px #ffffff;
+  box-shadow:inset 0px 1px 0px 0px #342E37;
   /* background:linear-gradient(to bottom, lightgreen 20%, white 80%); */
-  background-color:#ffffff;
+  background-color: #342E37;
   border-radius:10pt;
   border:6.0pt solid #342E37;
+  border-bottom: 6.0pt solid;
+  border-left: 6.0pt solid;
+  border-right: 6.0pt solid;
   display:inline-block;
   cursor:pointer;
-  /* color:#666666; */
+  /* color:#ffffff; */
 
   font-size: 22pt;
   /* font-weight:bold; */
