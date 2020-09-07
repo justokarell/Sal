@@ -62,7 +62,7 @@ text-align: center;
   position: relative;
   display:block;
   background-color: #3C91E6;
-  background-image: url('images/food_photo.jpg'); 
+  background-image: url('images/cartoonfood.jpg'); 
   background-size: cover;
   background-repeat: no-repeat;
   height: auto;
@@ -101,6 +101,7 @@ padding: 2pt;
   outline: none;
   cursor: pointer;
   margin: auto;
+  margin-top: none;
   margin-bottom: 0;
   transition: 0.3s;
   align-items: center;
@@ -114,21 +115,24 @@ padding: 2pt;
   background-color:#ffffff;
   border-top-left-radius: 10pt;
   border-top-right-radius: 10pt;
-  border-top:0.25pt solid;
+  border-top:6.0pt solid #342E37;
   border-bottom: none;
-  border-left: 0.25pt solid;
-  border-right: 0.25pt solid;
+  border-left: 6.0pt solid #342E37;
+  border-right: 6.0pt solid #342E37;
   display:inline-block;
   cursor:pointer;
-  /* color:#666666; */
-  font-size: 20pt;
+  color:#666666;
+  font-size: 25pt;
   /* font-weight:bold; */
-  padding:6pt 20pt;
+  padding:8pt 20pt;
   text-decoration:none;
   /* overflow: hidden;
   white-space:nowrap; */
   min-width: 182px;
-  
+}
+
+.tablinks:active {
+  background:linear-gradient(to bottom, lightgreen 5%, white 100%);
 }
 
 @media screen and (max-width: 818px) {
@@ -140,24 +144,12 @@ padding: 2pt;
 }
 .tab button:hover {
   background:linear-gradient(to bottom, lightgreen 8%, white 100%);
-  background-color:#f6f6f6;
 }
-.tab button.active {
-  box-shadow:inset 0px 1px 0px 0px #ffffff;
+
+.tab button:focus {
+  /* box-shadow:inset 0px 1px 0px 0px #ffffff; */
   background:linear-gradient(to bottom, lightgreen 5%, white 100%);
-  background-color:#ffffff;
-  /* border-radius:12pt; */
-  border-top-left-radius: 10pt;
-  border-top-right-radius: 10pt;
-  border-top: none;
-  border-bottom: none;
-  display:inline-block;
-  cursor:pointer;
-  /* color:#666666; */
-  font-size: 20pt;
-  font-weight:bold;
-  padding:6pt 20pt;
-  text-decoration:none;
+  /* background-color:#ffffff; */
   
 }
 
@@ -166,8 +158,8 @@ font-size: 5px;
 display: none;
 margin: auto;
 padding: 12px 24px;
-border: 0.25pt solid;
-border-radius: 12pt;
+border: 6.0pt solid #342E37;
+border-radius: 10pt;
 border-top: none;
 background-color: white;
 min-width: 182px;
@@ -181,17 +173,17 @@ margin-top: 4pt;
 width: 160pt;
 height: 45pt;
   box-shadow:inset 0px 1px 0px 0px #ffffff;
-  background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+  /* background:linear-gradient(to bottom, lightgreen 20%, white 80%); */
   background-color:#ffffff;
-  border-radius:10px;
-  border:1px solid;
+  border-radius:10pt;
+  border:6.0pt solid #342E37;
   display:inline-block;
   cursor:pointer;
   /* color:#666666; */
 
-  font-size: 18pt;
+  font-size: 22pt;
   /* font-weight:bold; */
-  padding:8pt 20pt;
+  padding:10pt 20pt;
   text-decoration:none;
   text-shadow:0px 1px 0px #ffffff;
 }

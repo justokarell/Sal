@@ -38,25 +38,32 @@
 <style>
 .nav-search-container {
     display: grid;
-    height: 30pc;
-    margin: auto;
+    height: 120pt;
+    margin: 40pt;
 
     
   }
 .navbar {
     align-self: center;
-    height: 80px;
+    height: 220pt;
     width: 90%;
-    border-radius: 3pt;
-    margin: auto;
-    margin-top: 10pt;
-    padding: 2pt;
-
-    
+    border: 20pt white;
+    border-radius: 7pt;
+    margin: 50pt;
+    margin-top: 20pt;
+    padding: 10pt;  
   }
+
   .nav-wrapper {
     width: 90%;
   }
+
+li:hover {
+  background: lightgreen;
+  
+  color: black;
+  transition: 0.3s;
+}
 
 </style>
 
@@ -65,46 +72,46 @@
   <!-- NAVBAR -->
   <section>
 
-    <nav style="background-color: #292929" role="navigation">
-      <div class="nav-wrapper container">
+    <nav style="background-color: #ffffff" role="navigation">
+      <div class="nav-wrapper container" style="background-color: #ffffff">
         <!-- <a id="logo-container" href="" class=" center brand-logo">Salhateswaste</a> -->
         <a href="/"  class=" center brand-logo">
           <img alt="Logo" src="{% static 'images/sal_hates_waste_logo.png' %}" height="60" style="display: block;  color: #ffffff; font-size: 16px;" border="0">
       </a>
         <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
-          <li><a href="/account" style="color:LightGreen;font-size:16pt;">{{ user.your_name }}</a></li>
-          <li><a href="/account" style="color:LightGreen;font-size:16pt;">My Account</a></li>
-          <li><a href="/my-posts" style="color:LightGreen;font-size:16pt;">My Posts</a></li>
-          <li><a href="/logout" style="color:LightGreen;font-size:16pt;">Logout</a></li>
+          <li><a href="/account" style="color:black;font-size:20pt;">{{ user.your_name }}</a></li>
+          <li><a href="/account" style="color:black;font-size:20pt;">My Account</a></li>
+          <li><a href="/my-posts" style="color:black;font-size:20pt;">My Posts</a></li>
+          <li><a href="/logout" style="color:black;font-size:20pt;">Logout</a></li>
           {% else %}
-          <li><a href="/login" style="color:LightGreen;font-size:16pt;">Login</a></li>
-          <li><a href="/signup" style="color:LightGreen;font-size:16pt;">Sign Up</a></li>
-          <li><a href="/volunteer" style="color:LightGreen;font-size:16pt;">Volunteer!</a></li>
+          <li><a href="/login" style="color:black;font-size:20pt;">Login</a></li>
+          <li><a href="/signup" style="color:black;font-size:20pt;">Sign Up</a></li>
+          <li><a href="/volunteer" style="color:black;font-size:20pt;">Volunteer!</a></li>
           {% endif %}
         </ul>
 
         <ul class="left hide-on-med-and-down">
-          <li><a href="/#about-title" style="color:LightGreen;font-size:16pt;">About</a></li>
-          <li><a href="/contact" style="color:LightGreen;font-size:16pt;">Contact</a></li>
-          <li><a href="/profile-view" style="color:LightGreen;font-size:16pt;">Profile</a></li>
-          <li><a href="/map_page" style="color:LightGreen;font-size:16pt;">Map</a></li>
+          <li><a href="/#about-title" style="color:black;font-size:20pt;">About</a></li>
+          <li><a href="/contact" style="color:black;font-size:20pt;">Contact</a></li>
+          <li><a href="/profile-view" style="color:black;font-size:20pt;">Profile</a></li>
+          <li><a href="/map_page" style="color:black;font-size:20pt;">Map</a></li>
         </ul>
 
         <ul id="nav-mobile" class="sidenav">
-          <li><a href="/" style="color:LightGreen; font-size: x-large;">Home</a></li>
-          <li><a href="/#about-title"  style="color:LightGreen; font-size: x-large;">About</a></li>
-          <li><a href="contact"  style="color:LightGreen; font-size: x-large;">Contact</a></li>
-          <li><a href="profile-view"  style="color:LightGreen; font-size: x-large;">Profile</a></li>
-          <li><a href="map_page" style="color:LightGreen; font-size: x-large;">Map</a></li>
+          <li><a href="/" style="color:black; font-size: x-large;">Home</a></li>
+          <li><a href="/#about-title"  style="color:black; font-size: x-large;">About</a></li>
+          <li><a href="contact"  style="color:black; font-size: x-large;">Contact</a></li>
+          <li><a href="profile-view"  style="color:black; font-size: x-large;">Profile</a></li>
+          <li><a href="map_page" style="color:black; font-size: x-large;">Map</a></li>
           {% if user.is_authenticated %}
-          <li><a href="account"  style="color:LightGreen; font-size: x-large;">My Account</a></li>
-          <li><a href="my-posts"  style="color:LightGreen; font-size: x-large;">My Posts</a></li>
-          <li><a href="logout"  style="color:LightGreen; font-size: x-large;">Logout</a></li>
+          <li><a href="account"  style="color:black; font-size: x-large;">My Account</a></li>
+          <li><a href="my-posts"  style="color:black; font-size: x-large;">My Posts</a></li>
+          <li><a href="logout"  style="color:black; font-size: x-large;">Logout</a></li>
           {% else %}
-          <li><a href="login" style="color:LightGreen;font-size: 16pt;">Login</a></li>
-          <li><a href="signup" style="color:LightGreen;font-size: x-large;">Sign Up</a></li>
-          <li><a href="/volunteer" style="color:LightGreen;font-size:16pt;">Volunteer!</a></li>
+          <li><a href="login" style="color:black;font-size: x-large;">Login</a></li>
+          <li><a href="signup" style="color:black;font-size: x-large;">Sign Up</a></li>
+          <li><a href="/volunteer" style="color:black;font-size:x-large;">Volunteer!</a></li>
           {% endif %}
         </ul>
         <!-- <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
