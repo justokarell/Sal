@@ -9,21 +9,26 @@
 </head>
 <style>
     body {
-        background-color:  #F2F2F2;
-        background-size: cover;
-        background-repeat: repeat;
-        /* background-image: url('static/images/fruit-background.png'); */
+        /* background-color:  #F2F2F2; */
+        background-size: contain;
+        background-image: url('static/images/cherry-photo.jpg');
+        background-repeat: repeat-y;
         /* Remember to change this url by removing static when you move it to statics */
     }
   
+    /* .new-button {
+        max-height: 50px;
+    } */
+
     .title-banner {
-        background-color: #FA824C;
+        background-color: #EACB4D;
         border-top-right-radius: 20px;
         border-top-left-radius: 20px;
     }
 
     .title-text {
         color: ghostwhite;
+        color: #342E37;
         margin-left: 3rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
@@ -144,7 +149,7 @@
                             <a href="new-dpost">
                                 <div class="card hoverable post-row">
                                     <div class="card-content  ">
-                                        <div class="row">
+                                        <div class="row new-button">
                                             <div class="col left-col">
                                                 <img class="card-pic" src="{% static 'images/donor-plus.png' %}">
                                             </div>
@@ -158,7 +163,7 @@
                             <a href="new-rpost">
                                 <div class="card hoverable post-row">
                                     <div class="card-content  ">
-                                        <div class="row">
+                                        <div class="row new-button">
                                             <div class="col left-col">
                                                 <img class="card-pic" src="{% static 'images/recipient-plus.png' %}">
                                             </div>

@@ -7,7 +7,6 @@
     <title>New Donor Post- Sal Hates Waste</title>
     {% load crispy_forms_tags %}
     <link rel="stylesheet" type="text/css" href="{% static 'dpost_style.css' %}">
-
 </head>
 
 <body>
@@ -195,7 +194,7 @@
                                 <label for="org_desc" style="font-size:18;">Give some details about your surplus</label>
                                 {{  donor_post_form.post_desc |add_class:"textarea desc" }}
                             </div>
-                            </p>
+                            
                         </div>
                         <div>
                             <button type="submit" id="add-button" class="btn btn-lg">Add</button>

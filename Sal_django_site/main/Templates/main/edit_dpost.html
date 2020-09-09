@@ -210,7 +210,7 @@
 <script>
 
     document.addEventListener("DOMContentLoaded", function (event) {
-        console.log("{{  instance.post_image.url}}");
+        
         document.getElementById("post_image").src = "{{  instance.post_image.url }}";
         if ("{{  instance.post_image.url }}" != null) {
             document.getElementById("id_post_image").required = false;

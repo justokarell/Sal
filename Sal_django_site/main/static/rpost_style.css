@@ -3,7 +3,7 @@
         /* background-color: ghostwhite; */
         background-size: cover;
         background-repeat: repeat-y;
-        background-image: url('images/blue-orange-photo.jpg');
+        background-image: url('images/red-orange-photo.jpg');
         /* Remember to change this url by removing static when you move it to statics */
     }
   
@@ -22,7 +22,7 @@
     .title-div > label {
         font-size: 26px;
     }
-    
+
     #id_post_title.input{
         font-size: 26px;
     }
@@ -33,7 +33,7 @@
     }
 
     .title-text {
-        color: ghostwhite;
+        color: #342E37;
         padding-top: 8px;
         text-align: center;
         margin-top: 2rem;

@@ -20,14 +20,15 @@
   }
 
   .title-banner {
-    background-color:ghostwhite;
+    /* background-color:ghostwhite; */
+    background-color:#9FD356;
     /* background-color:#F2F2F2; */
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
   }
 
   .title-text {
-    color: #FA824C;
+    color: ghostwhite;
     /* text-align: center; */
     margin-left: 3rem;
     padding-top: 1rem;
