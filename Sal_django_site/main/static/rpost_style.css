@@ -27,6 +27,23 @@
         font-size: 26px;
     }
 
+    .last-row{
+        margin-bottom: 0;
+    }
+    
+    #address-status{
+        margin-bottom: 2rem;
+    }
+
+    #address-status > label {
+        font-size: 14px;
+    }
+
+    .errorlist > li {
+        color: #f44336;
+        font-size: 16px;
+    }
+
     .post-date{
         margin-right: auto;
         margin-left: auto;

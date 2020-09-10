@@ -236,26 +236,27 @@ def edit_rpost(request, single_slug = None):
 
         if recipient_post_form.is_valid():
             
-            recipient_post = recipient_post_form.save(False)
+            recipient_post = recipient_post_form.save()
             coord = recipient_post.get_geocode()
             recipient_post.post_lat = coord[0]
             recipient_post.post_long = coord[1]
             recipient_post.save() 
             recipient_post.save() 
             if avail_form.is_valid():
-                availslist = avail_form.save(False)
+                availslist = avail_form.save()
                 for avail in availslist:
-                    avail.assigned_post = recipient_post
+                    # avail.assigned_post = recipient_post
                     time = avail.get_min()
                     avail.start_min = time[0]
                     avail.end_min = time[1]
                     avail.save()
                 recipient_post.save()
-                messages.success(request, f"Your post has been uploaded")
+                messages.success(request, f"Your post has been updated")
                 return redirect('main:my-posts')  
             else:
-                for errors in avail_form.errors:
-                    messages.error(request, f"Your availability is off. Try again.")
+                messages.error(request, f"Your availability input is off. Try again.")
+                # for errors in avail_form.errors:
+                #     messages.error(request, f"Your availability is off. Try again.")
             
         
         else: 
@@ -266,6 +267,7 @@ def edit_rpost(request, single_slug = None):
         avail_form = AvailabilityFormset(instance=instance)
 
     return render(request=request, template_name="main/edit_rpost.html", context = {
+                                                                "instance": instance,
                                                                 "avail_form": avail_form,
                                                                 "recipient_post_form": recipient_post_form})
 
@@ -273,7 +275,6 @@ def new_rpost(request):
     user = request.user
     profile = request.user.profile
     
-
     if request.method == "POST":
         recipient_post_form = RecipientPostForm(request.POST, request.FILES)
         avail_form = AvailabilityFormset(request.POST, request.FILES)
@@ -327,25 +328,26 @@ def edit_dpost(request, single_slug = None):
 
         if donor_post_form.is_valid():
             
-            donor_post = donor_post_form.save(False)
+            # donor_post = donor_post_form.save(False)
+            donor_post = donor_post_form.save()
             coord = donor_post.get_geocode()
             donor_post.post_lat = coord[0]
             donor_post.post_long = coord[1]
             donor_post.save()
             if avail_form.is_valid():
                 availslist = avail_form.save()
-                print ('wow: ', availslist)
                 for avail in availslist:
                     time = avail.get_min()
                     avail.start_min = time[0]
                     avail.end_min = time[1]
                     avail.save()
                 donor_post.save()
-                messages.success(request, f"Your post has been uploaded")
+                messages.success(request, f"Your post has been updated")
                 return redirect('main:my-posts')  
             else:
-                for errors in avail_form.errors:
-                    messages.error(request, f"Your availability is off. Try again.")
+                messages.error(request, f"Your availability input is off. Try again.")
+                # for errors in avail_form.errors:
+                #     messages.error(request, f"Your availability is off. Try again.")
 
         else: 
             for errors in donor_post_form.errors:

@@ -32,6 +32,13 @@
                             <label for="post_title">Post Title</label>
                             {{  recipient_post_form.post_title |add_class:"input" }}
                         </div>
+                        <div id="address-status">
+                            <label for="diff-address">Does this surplus have a different address or contact than your
+                                organization's?
+                                <input type="checkbox" name="diff-address" id="diff-address" onclick="addressCheck()">
+                                <span></span>
+                            </label>
+                        </div>
                         <div id="main-row" class="row">
 
                             <div id="top-of-column1" class="col left-col">
@@ -77,7 +84,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row last-row">
                                     <div class="col col-input input-field">
                                         <label for="org_zipcode">Zipcode</label>
                                         {{  recipient_post_form.post_org_zipcode}}
@@ -298,6 +305,18 @@
             document.getElementById('recurr-div').style.display = 'block';
         } else {
             document.getElementById('recurr-div').style.display = 'none';
+        }
+    }
+
+    function addressCheck() {
+        // Get the checkbox
+        var checkBox = document.getElementById("diff-address");
+        // If the checkbox is checked, display the extra field
+        if (checkBox.checked == true) {
+            document.getElementById('top-of-column2').style.display = 'block';
+        } else {
+            document.getElementById('top-of-column2').style.display = 'none';
+            // document.getElementById('top-of-column1').style.maxWidth = 90 +'%';
         }
     }
 </script>

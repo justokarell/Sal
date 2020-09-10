@@ -27,15 +27,24 @@
                             <label for="post_title">Post Title</label>
                             {{  donor_post_form.post_title |add_class:"input title-input" }}
                         </div>
+                        <div id="address-status">
+                            <label for="diff-address">Does this surplus have a different address or contact than your
+                                organization's?
+                                <input type="checkbox" name="diff-address" id="diff-address" onclick="addressCheck()">
+                                <span></span>
+                            </label>
+                        </div>
                         <div id="main-row" class="row">
                             <div id="top-of-column1" class="col left-col">
                                 {{  donor_post_form.post_image }}
                                 <span class="helper-text" data-error="Invalid Image"
                                     data-success="">{{ donor_post_form.post_image.errors }}</span>
                                 <img id="post_image" class="post-img" />
+
                             </div>
+
                             <div id="top-of-column2" class="col right-col">
-                                <div  class="input-field ">
+                                <div class="input-field ">
                                     <label for="org-name">Your Organization's Name</label>
                                     {{  donor_post_form.post_org_name |add_class:"validate" }}
                                 </div>
@@ -71,7 +80,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row last-row">
                                     <div class="col col-input input-field">
                                         <label for="org_zipcode">Zipcode</label>
                                         {{  donor_post_form.post_org_zipcode}}
@@ -94,7 +103,7 @@
                                     </label>
                                 </div>
                                 <div class="col post_date ">
-                                    <h5> to </h5> 
+                                    <h5> to </h5>
                                 </div>
                                 <div class="col post_date">
                                     <label for="post_end_date">
@@ -115,16 +124,17 @@
                                 <div class="avail-subsection" id=avail_{{forloop.counter0}}>
                                     <div class="row time-row">
                                         <div class="col post_date">
-                                            <label for="id_availability_set-{{forloop.counter0}}-start_hour" class="">Start
+                                            <label for="id_availability_set-{{forloop.counter0}}-start_hour"
+                                                class="">Start
                                                 time:</label>
                                             {{   form.start_hour |add_class:"avclass"}}
                                             {{form.start_hour.errors}}
                                         </div>
-                                        
+
                                         <div class="col post_date">
-                                            <h5> to </h5> 
+                                            <h5> to </h5>
                                         </div>
-    
+
                                         <div class="col post_date">
                                             <label for="id_availability_set-{{forloop.counter0}}-end_hour" class="">End
                                                 time:</label>
@@ -133,17 +143,17 @@
                                             <span></span>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row choice-row flex-container">
                                         {% for value,text in form.post_day.field.choices %}
                                         <div class="col">
-                                            <label 
+                                            <label
                                                 for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
                                                 <input type="checkbox"
                                                     name="availability_set-{{forloop.parentloop.counter0}}-post_day"
                                                     id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
-                                                    class="avclass" value="{{ value }}" {% if value in checked_post_day %}
-                                                    {% endif %}>{{ text }}
+                                                    class="avclass" value="{{ value }}"
+                                                    {% if value in checked_post_day %} {% endif %}>{{ text }}
                                                 <span></span>
                                             </label>
                                         </div>
@@ -194,7 +204,7 @@
                                 <label for="org_desc" style="font-size:18;">Give some details about your surplus</label>
                                 {{  donor_post_form.post_desc |add_class:"textarea desc" }}
                             </div>
-                            
+
                         </div>
                         <div>
                             <button type="submit" id="add-button" class="btn btn-lg">Add</button>
@@ -209,7 +219,6 @@
 </body>
 
 <script>
-
     document.getElementById("id_post_image").onchange = function () {
         document.getElementById("id_post_image").required = true;
         var reader = new FileReader();
@@ -231,6 +240,8 @@
             });
             $("#avail_0").css('display', 'block');
             $("#avail_0").find('input[type=time]').prop("required", true);
+
+            $("#diff-address").attr("checked", "checked");
 
         };
     })
@@ -297,6 +308,18 @@
             document.getElementById('recurr-div').style.display = 'block';
         } else {
             document.getElementById('recurr-div').style.display = 'none';
+        }
+    }
+
+    function addressCheck() {
+        // Get the checkbox
+        var checkBox = document.getElementById("diff-address");
+        // If the checkbox is checked, display the extra field
+        if (checkBox.checked == true) {
+            document.getElementById('top-of-column2').style.display = 'block';
+        } else {
+            document.getElementById('top-of-column2').style.display = 'none';
+            // document.getElementById('top-of-column1').style.maxWidth = 90 +'%';
         }
     }
 </script>

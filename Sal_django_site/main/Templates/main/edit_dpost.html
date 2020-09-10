@@ -16,13 +16,13 @@
         </div>
         <div class="container col " style="margin-bottom: 12em;">
             <div class="col-md-12 card hoverable">
-                <div class="card-content center"> 
+                <div class="card-content center">
                     <form method="post" class="post-form" action=" " enctype="multipart/form-data">
                         {% csrf_token %}
                         {% load widget_tweaks %}
                         {{  donor_post_form.media }}
                         {{  donor_post_form.source }}
-    
+
                         <div class="input-field title-div">
                             <label for="post_title">Post Title</label>
                             {{  donor_post_form.post_title |add_class:"input" }}
@@ -39,7 +39,7 @@
                                     <label for="org-name">Your Organization's Name</label>
                                     {{  donor_post_form.post_org_name |add_class:"validate" }}
                                 </div>
-    
+
                                 <div class="row">
                                     <div class="col col-input input-field">
                                         <label for="org-email">Your Org Email</label>
@@ -54,12 +54,12 @@
                                     <span class="helper-text" data-error="Invalid Email"
                                         data-success="">{{  donor_post_form.post_org_phone.errors }}</span>
                                 </div>
-    
+
                                 <div class="input-field">
                                     <label for="org_address ">Organization's Address</label>
                                     {{  donor_post_form.post_org_address}}
                                 </div>
-    
+
                                 <div class="row">
                                     <div class="col col-input input-field">
                                         <label for="org_city">City</label>
@@ -70,7 +70,7 @@
                                         {{  donor_post_form.post_org_state}}
                                     </div>
                                 </div>
-    
+
                                 <div class="row">
                                     <div class="col col-input input-field">
                                         <label for="org_zipcode">Zipcode</label>
@@ -81,7 +81,7 @@
                                         {{  donor_post_form.post_org_country}}
                                     </div>
                                 </div>
-    
+
                             </div>
                         </div>
                         <div class="row">
@@ -94,7 +94,7 @@
                                     </label>
                                 </div>
                                 <div class="col post_date ">
-                                    <h5> to </h5> 
+                                    <h5> to </h5>
                                 </div>
                                 <div class="col post_date">
                                     <label for="post_end_date">
@@ -114,16 +114,17 @@
                                 <div class="avail-subsection" id=avail_{{forloop.counter0}}>
                                     <div class="row time-row">
                                         <div class="col post_date">
-                                            <label for="id_availability_set-{{forloop.counter0}}-start_hour" class="">Start
+                                            <label for="id_availability_set-{{forloop.counter0}}-start_hour"
+                                                class="">Start
                                                 time:</label>
                                             {{   form.start_hour |add_class:"avclass"}}
                                             {{form.start_hour.errors}}
                                         </div>
-                                        
+
                                         <div class="col post_date">
-                                            <h5> to </h5> 
+                                            <h5> to </h5>
                                         </div>
-    
+
                                         <div class="col post_date">
                                             <label for="id_availability_set-{{forloop.counter0}}-end_hour" class="">End
                                                 time:</label>
@@ -132,20 +133,34 @@
                                             <span></span>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row choice-row flex-container">
                                         {% for value,text in form.post_day.field.choices %}
-                                        <div class="col">
-                                            <label 
-                                                for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
-                                                <input type="checkbox"
-                                                    name="availability_set-{{forloop.parentloop.counter0}}-post_day"
-                                                    id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
-                                                    class="avclass" value="{{ value }}" {% if value in checked_post_day %}
-                                                    {% endif %}>{{ text }}
-                                                <span></span>
-                                            </label>
-                                        </div>
+                                            {% if value in form.instance.post_day %}
+                                            <div class="col">
+                                                <label
+                                                    for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
+                                                    <input type="checkbox" checked="checked"
+                                                        name="availability_set-{{forloop.parentloop.counter0}}-post_day"
+                                                        id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
+                                                        class="avclass" value="{{ value }}"
+                                                        {% if value in checked_post_day %} {% endif %}>{{ text }}
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            {% else %}
+                                            <div class="col">
+                                                <label
+                                                    for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
+                                                    <input type="checkbox"
+                                                        name="availability_set-{{forloop.parentloop.counter0}}-post_day"
+                                                        id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
+                                                        class="avclass" value="{{ value }}"
+                                                        {% if value in checked_post_day %} {% endif %}>{{ text }}
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            {% endif %}
                                         {% endfor %}
                                     </div>
                                     {{ form.post_day.errors}}
@@ -162,11 +177,9 @@
                                     </div>
                                 </div>
                             </div>
-    
-    
-    
-    
-    
+
+
+
                         </div>
                         <div class="row">
                             <div id="deliver-status">
@@ -210,7 +223,7 @@
 <script>
 
     document.addEventListener("DOMContentLoaded", function (event) {
-        
+
         document.getElementById("post_image").src = "{{  instance.post_image.url }}";
         if ("{{  instance.post_image.url }}" != null) {
             document.getElementById("id_post_image").required = false;
@@ -261,7 +274,7 @@
                     break;
                 case 4:
                     break;
-                default:  $("#avail_0").css('display', 'block');
+                default: $("#avail_0").css('display', 'block');
             }
 
         })
@@ -291,7 +304,7 @@
                     break;
                 case 1:
                     break;
-                default:  $("#avail_0").css('display', 'block');
+                default: $("#avail_0").css('display', 'block');
             }
         })
     })

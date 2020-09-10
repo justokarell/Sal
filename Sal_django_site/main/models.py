@@ -317,8 +317,6 @@ class Availability(models.Model):
     end_min = models.IntegerField(null=True, blank=True)
 
     def get_min(self):
-        # t1 = datetime.datetime.strptime(self.start_hour, '%H:%M:%S.%f0')
-        # t2 = datetime.datetime.strptime(self.end_hour, '%H:%M:%S.%f0')
         t1 = self.start_hour.hour*60 + self.start_hour.minute
         t2 = self.end_hour.hour*60 + self.end_hour.minute
         t0 = 0

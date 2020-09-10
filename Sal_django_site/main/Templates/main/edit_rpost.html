@@ -11,26 +11,23 @@
 
 <body>
     <section>
-
         <div class="title-banner">
-            <h2 class="title-text">Edit Post</h2>
+            <h3 class="title-text">Edit Post</h3>
         </div>
         <div class="container col " style="margin-bottom: 12em;">
             <div class="col-md-12 card hoverable">
-                <div class="card-content center">
+                <div class="card-content center"> 
                     <form method="post" class="post-form" action=" " enctype="multipart/form-data">
                         {% csrf_token %}
                         {% load widget_tweaks %}
-
                         {{  recipient_post_form.media }}
                         {{  recipient_post_form.source }}
-
+    
                         <div class="input-field title-div">
                             <label for="post_title">Post Title</label>
                             {{  recipient_post_form.post_title |add_class:"input" }}
                         </div>
                         <div id="main-row" class="row">
-
                             <div id="top-of-column1" class="col left-col">
                                 {{  recipient_post_form.post_image }}
                                 <span class="helper-text" data-error="Invalid Image"
@@ -42,7 +39,7 @@
                                     <label for="org-name">Your Organization's Name</label>
                                     {{  recipient_post_form.post_org_name |add_class:"validate" }}
                                 </div>
-
+    
                                 <div class="row">
                                     <div class="col col-input input-field">
                                         <label for="org-email">Your Org Email</label>
@@ -57,12 +54,12 @@
                                     <span class="helper-text" data-error="Invalid Email"
                                         data-success="">{{  recipient_post_form.post_org_phone.errors }}</span>
                                 </div>
-
+    
                                 <div class="input-field">
                                     <label for="org_address ">Organization's Address</label>
                                     {{  recipient_post_form.post_org_address}}
                                 </div>
-
+    
                                 <div class="row">
                                     <div class="col col-input input-field">
                                         <label for="org_city">City</label>
@@ -73,7 +70,7 @@
                                         {{  recipient_post_form.post_org_state}}
                                     </div>
                                 </div>
-
+    
                                 <div class="row">
                                     <div class="col col-input input-field">
                                         <label for="org_zipcode">Zipcode</label>
@@ -84,31 +81,30 @@
                                         {{  recipient_post_form.post_org_country}}
                                     </div>
                                 </div>
-
+    
                             </div>
                         </div>
                         <div class="row">
-                            <p class="section-label">When Do You Need The Donation Buy?</p>
+                            <p class="section-label">When Do You Need The Donation By?</p>
                             <div class="avail-range row">
                                 <div class="col post_date">
                                     <label for="post_begin_date">
-                                        {{  donor_post_form.post_begin_date|add_class:"select"}}
+                                        {{  recipient_post_form.post_begin_date|add_class:"select"}}
                                         <span></span>
                                     </label>
                                 </div>
                                 <div class="col post_date ">
-                                    <h5> to </h5>
+                                    <h5> to </h5> 
                                 </div>
                                 <div class="col post_date">
                                     <label for="post_end_date">
-                                        {{  donor_post_form.post_end_date|add_class:"select"}}
+                                        {{  recipient_post_form.post_end_date|add_class:"select"}}
                                         <span></span>
                                     </label>
                                 </div>
                             </div>
                             <p class="section-label">What's The Best Time Window To Donate This To You?</p>
                             <div class="avail-section">
-                                <!-- id="avail-sect_0" -->
                                 {{ avail_form.management_form }}
                                 {% for form in avail_form %}
                                 {% for hidden in form.hidden_fields %}
@@ -118,17 +114,16 @@
                                 <div class="avail-subsection" id=avail_{{forloop.counter0}}>
                                     <div class="row time-row">
                                         <div class="col post_date">
-                                            <label for="id_availability_set-{{forloop.counter0}}-start_hour"
-                                                class="">Start
+                                            <label for="id_availability_set-{{forloop.counter0}}-start_hour" class="">Start
                                                 time:</label>
                                             {{   form.start_hour |add_class:"avclass"}}
                                             {{form.start_hour.errors}}
                                         </div>
-
+                                        
                                         <div class="col post_date">
-                                            <h5> to </h5>
+                                            <h5> to </h5> 
                                         </div>
-
+    
                                         <div class="col post_date">
                                             <label for="id_availability_set-{{forloop.counter0}}-end_hour" class="">End
                                                 time:</label>
@@ -137,17 +132,17 @@
                                             <span></span>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="row choice-row flex-container">
                                         {% for value,text in form.post_day.field.choices %}
                                         <div class="col">
-                                            <label
+                                            <label 
                                                 for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
                                                 <input type="checkbox"
                                                     name="availability_set-{{forloop.parentloop.counter0}}-post_day"
                                                     id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
-                                                    class="avclass" value="{{ value }}"
-                                                    {% if value in checked_post_day %} {% endif %}>{{ text }}
+                                                    class="avclass" value="{{ value }}" {% if value in checked_post_day %}
+                                                    {% endif %}>{{ text }}
                                                 <span></span>
                                             </label>
                                         </div>
@@ -167,8 +162,12 @@
                                     </div>
                                 </div>
                             </div>
+    
+    
+    
+    
+    
                         </div>
-
                         <div class="row">
                             <div id="deliver-status">
                                 <label for="id_post_deliver">Will you be able to pickup a donation for this need?
@@ -179,6 +178,7 @@
                             <div id="reccur-status">
                                 <label for="id_post_recurring">Will this need be recurring?
                                     {{  recipient_post_form.post_recurring | append_attr:"onclick:recurrCheck()" }}
+                                    <!-- {{ form.title|append_attr:"class:css_class_1 css_class_2" }} -->
                                     <span></span>
                                 </label>
                             </div>
@@ -191,22 +191,45 @@
                         <div class="row">
                             <div>
                                 <label for="org_desc" style="font-size:18;">Give some details about your need</label>
-                                {{  recipient_post_form.post_desc |add_class:"textarea" }}
+                                {{  recipient_post_form.post_desc |add_class:"textarea desc" }}
                             </div>
-
+                            </p>
                         </div>
                         <div>
-                            <button type="submit" id="add-button" class="btn btn-lg">Add</button>
+                            <button type="submit" id="add-button" class="btn btn-lg">Update</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
     </section>
     {% include 'main/footer.html' %}
 </body>
 
 <script>
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        
+        document.getElementById("post_image").src = "{{  instance.post_image.url }}";
+        if ("{{  instance.post_image.url }}" != null) {
+            document.getElementById("id_post_image").required = false;
+        }
+    });
+
+    document.getElementById("id_post_image").onchange = function () {
+        document.getElementById("id_post_image").required = true;
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            document.getElementById("post_image").src = e.target.result;
+        };
+
+        // read the image file as a data URL.
+        reader.readAsDataURL(this.files[0]);
+    };
+
     $(function () {
         window.onload = function () {
 
