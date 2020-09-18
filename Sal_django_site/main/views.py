@@ -226,6 +226,12 @@ def profile_edit(request):
     return render(request, 'main/profile_edit.html', context = {'form': form,
                'profile_form': profile_form})
 
+def delete(request, single_slug = None):
+    instance = get_object_or_404(UserPost, post_slug = single_slug)
+    instance.delete()
+    return redirect('main:my-posts')
+    return render(request=request, template_name="main/my_posts.html")
+
 def edit_rpost(request, single_slug = None):
     user = request.user
     instance = get_object_or_404(RecipientPost, post_slug = single_slug)

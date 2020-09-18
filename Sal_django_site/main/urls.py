@@ -48,6 +48,7 @@ urlpatterns = [
     path('success', successView, name='success'),
     path('volunteer', volunteerView, name='volunteer'),
 
+    path('<single_slug>/delete/', views.delete, name='delete'),
     path('<single_slug>/edit-rpost/', views.edit_rpost, name='edit-rpost'),
     path('<single_slug>/edit-dpost/', views.edit_dpost, name='edit-dpost'),
     path("<single_slug>", views.single_slug, name="single_slug"),

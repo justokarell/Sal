@@ -21,6 +21,7 @@ class ProfileAdmin(admin.ModelAdmin):
 admin.site.register(Profile, ProfileAdmin)
 
 class DonorPostAdmin(admin.ModelAdmin):
+    list_display = ('post_title','post_slug', 'post_org_name', 'post_creator')
     fields = ('post_creator','post_title','post_slug', 'post_org_name','post_org_phone','post_org_email','post_org_address','post_org_city',
         'post_org_state','post_org_zipcode','post_org_country','post_image','post_desc', 'post_begin_date', 'post_end_date',
          'post_lat','post_long', 'donor_or_recip','post_recurring', 'recurrences','post_deliver')
@@ -28,6 +29,7 @@ class DonorPostAdmin(admin.ModelAdmin):
 admin.site.register(DonorPost, DonorPostAdmin)
 
 class RecipientPostAdmin(admin.ModelAdmin):
+    list_display = ('post_title','post_slug', 'post_org_name', 'post_creator')
     fields = ('post_creator','post_title','post_slug', 'post_org_name','post_org_phone','post_org_email','post_org_address','post_org_city',
         'post_org_state','post_org_zipcode','post_org_country','post_image','post_desc', 'post_begin_date', 'post_end_date',
          'post_lat','post_long','donor_or_recip','post_recurring',  'recurrences','post_deliver')
