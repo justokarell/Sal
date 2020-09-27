@@ -61,8 +61,8 @@ text-align: center;
 .navbar-search-area {
   position: relative;
   display:block;
-  background-color: #3C91E6;
-  background-image: url('images/lime.jpg'); 
+  /* background-color: beige; */
+  background-color: beige;
   background-size: cover;
   background-repeat: no-repeat;
   height: auto;
@@ -110,18 +110,18 @@ padding: 2pt;
 }
 
 .tab > .tablinks {
-  box-shadow:inset 0px 1px 0px 0px #342E37;
+  box-shadow:inset 0px 1px 0px 0px beige;
   /* background:linear-gradient(to bottom, #ffffff 100%, #f6f6f6 100%); */
-  background-color:#342E37;
+  background-color: beige;
   border-top-left-radius: 10pt;
   border-top-right-radius: 10pt;
   /* border-top:6.0pt solid #342E37; */
   border-bottom: none;
-  border-left: 6.0pt solid #342E37;
-  border-right: 6.0pt solid #342E37;
+  border-left: 6.0pt solid beige;
+  border-right: 6.0pt solid beige;
   display:inline-block;
   cursor:pointer;
-  color:#666666;
+  color: beige;
   font-size: 25pt;
   /* font-weight:bold; */
   padding:8pt 20pt;
@@ -132,7 +132,7 @@ padding: 2pt;
 }
 
 .tablinks:active {
-  background:linear-gradient(to bottom, lightgreen 5%, white 100%);
+  background:linear-gradient(to bottom, lightgreen 5%, blue 100%);
 }
 
 @media screen and (max-width: 818px) {
@@ -158,10 +158,10 @@ font-size: 5px;
 display: none;
 margin: auto;
 padding: 12px 24px;
-border: 6.0pt solid #342E37;
+border: 6.0pt solid white;
 border-radius: 10pt;
 border-top: none;
-background-color: #342E37;
+background-color: white;
 min-width: 182px;
 width: 520pt;
 height: 60pt;
@@ -172,11 +172,11 @@ margin: auto;
 margin-top: 4pt;
 width: 160pt;
 height: 45pt;
-  box-shadow:inset 0px 1px 0px 0px #342E37;
+  box-shadow:inset 0px 0px 0px 0px white;
   /* background:linear-gradient(to bottom, lightgreen 20%, white 80%); */
-  background-color: #342E37;
+  background-color: white;
   border-radius:10pt;
-  border:6.0pt solid #342E37;
+  border:6.0pt solid;
   border-bottom: 6.0pt solid;
   border-left: 6.0pt solid;
   border-right: 6.0pt solid;
@@ -184,9 +184,9 @@ height: 45pt;
   cursor:pointer;
   /* color:#ffffff; */
 
-  font-size: 22pt;
+  font-size: 16pt;
   /* font-weight:bold; */
-  padding:10pt 20pt;
+  padding:10pt 10pt;
   text-decoration:none;
   text-shadow:0px 1px 0px #ffffff;
 }

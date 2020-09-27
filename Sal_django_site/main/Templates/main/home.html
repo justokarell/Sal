@@ -12,18 +12,18 @@
 
 
 <body>
-  <div class="grid-container">
+  <div class="grid-container" style="background-color: beige">
 
     <!-- FIRST PAGE W/ NAVBAR AND SEARCH -->
       <!-- SEARCH AREA -->
-    <section class="navbar-search-area" >
-      <div class="search-area">
+    <section class="navbar-search-area" style="background-color: beige">
+      <div class="search-area" style="background-color?: beige">
         <div class="tab">
-          <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')" id="defaultOpen" style="color:#ffffff; font-size:22pt;">Find Food<i class="material-icons right">location_on</i></button>
-          <button class="tablinks waves-light" onclick="openCity(event, 'Donate')" style="color:#ffffff; font-size:22pt;">Donate<i class="material-icons right">local_grocery_store</i></button>
+          <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')" id="defaultOpen" style="background-color:white; color:darkslategray; font-size:22pt;">Find Food<i class="material-icons right">location_on</i></button>
+          <button class="tablinks waves-light" onclick="openCity(event, 'Donate')" style="background-color:white; color:darkslategray; font-size:22pt;">Donate<i class="material-icons right">local_grocery_store</i></button>
         </div>
         <div>
-          <div id="Find-food" class="tabcontent">
+          <div id="Find-food" class="tabcontent" style="background-color: white; color: darkslategray">
             <input id="place" type="text" placeholder="Find a business, or organization looking to donate">
           </div>
           <div id="Donate" class="tabcontent">
@@ -31,14 +31,14 @@
           </div>
         </div>
         <br><br>
-        <button class="search-button waves-light" onclick="searchPlace()"> Search! <i class="material-icons right">location_searching</i></button>
+        <button class="search-button" onclick="searchPlace()" style="background-color: grey; font-size: 18pt"> Search! <i class="material-icons right">location_searching</i></button>
       </div>
     </section>
 
 
 
     <!-- ABOUT SECTION -->
-    <section id="about-title" class="about-container">
+    <section id="about-title" class="about-container" style="background-color: beige">
       <div class="about-header">
         <h1>About <a>Us</a></h1>
       </div>
