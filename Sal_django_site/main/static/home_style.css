@@ -7,7 +7,6 @@ html {
 height: auto;
 margin: auto;
 text-align: center;
-
 }
 
 .about-header {
@@ -58,16 +57,21 @@ text-align: center;
   align-content: center;
 }
 
+.cta-test {
+  color: #F7F7F7;
+}
+
 .navbar-search-area {
   position: relative;
   display:block;
-  /* background-color: beige; */
-  background-color: beige;
+  /* background-color: #F7F7F7; */
+  background-image: url('images/map-side.jpg');
+  background-color: #F7F7F7;
   background-size: cover;
   background-repeat: no-repeat;
   height: auto;
   width: auto;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
 
   display: grid;
   align-items: center;
@@ -78,18 +82,18 @@ text-align: center;
 
 
 .search-area {
-  /* align-items: center; */
+align-items: center;
 display: grid;
 grid-template-columns: 1fr;
 grid-template-rows: 1fr 1fr;
 grid-template-areas: "." ".";
 position: relative;
  
-width: 50%;
+width: fit-content;
 
 margin: auto;
-margin-top: 8.5pc;
-margin-bottom: 9pc;
+/* margin-top: 1pc; */
+margin-bottom: 5pc;
 padding: 2pt; 
 /* height: 16pt;  */
 /* margin-top: 15pc; */
@@ -110,19 +114,19 @@ padding: 2pt;
 }
 
 .tab > .tablinks {
-  box-shadow:inset 0px 1px 0px 0px beige;
+  box-shadow:inset 0px 1px 0px 0px #F7F7F7;
   /* background:linear-gradient(to bottom, #ffffff 100%, #f6f6f6 100%); */
-  background-color: beige;
+  background-color: #F7F7F7;
   border-top-left-radius: 10pt;
   border-top-right-radius: 10pt;
   /* border-top:6.0pt solid #342E37; */
   border-bottom: none;
-  border-left: 6.0pt solid beige;
-  border-right: 6.0pt solid beige;
+  border-left: 6.0pt solid #F7F7F7;
+  border-right: 6.0pt solid #F7F7F7;
   display:inline-block;
   cursor:pointer;
-  color: beige;
-  font-size: 25pt;
+  color: #F7F7F7;
+  font-size: 20pt;
   /* font-weight:bold; */
   padding:8pt 20pt;
   text-decoration:none;
@@ -132,7 +136,8 @@ padding: 2pt;
 }
 
 .tablinks:active {
-  background:linear-gradient(to bottom, lightgreen 5%, blue 100%);
+  background: #F7F7F7;
+  /* background:linear-gradient(to bottom, lightgreen 5%, blue 100%); */
 }
 
 @media screen and (max-width: 818px) {
@@ -143,12 +148,16 @@ padding: 2pt;
   }
 }
 .tab button:hover {
-  background:linear-gradient(to bottom, lightgreen 8%, white 100%);
+  /* background:linear-gradient(to bottom, #9fd356 8%, white 100%); */
+  transform: scale(1.15);
+  /* transition: background-color .2s ease-out;
+  cursor: pointer; */
 }
 
 .tab button:focus {
+  transform: scale(1.15);
   /* box-shadow:inset 0px 1px 0px 0px #ffffff; */
-  background:linear-gradient(to bottom, lightgreen 5%, white 100%);
+  /* background:linear-gradient(to bottom, lightgreen 5%, white 100%); */
   /* background-color:#ffffff; */
   
 }
@@ -176,10 +185,10 @@ height: 45pt;
   /* background:linear-gradient(to bottom, lightgreen 20%, white 80%); */
   background-color: white;
   border-radius:10pt;
-  border:6.0pt solid;
-  border-bottom: 6.0pt solid;
+  border:6.0pt solid #F7F7F7;
+  /* border-bottom: 6.0pt solid;
   border-left: 6.0pt solid;
-  border-right: 6.0pt solid;
+  border-right: 6.0pt solid; */
   display:inline-block;
   cursor:pointer;
   /* color:#ffffff; */
@@ -187,16 +196,20 @@ height: 45pt;
   font-size: 16pt;
   /* font-weight:bold; */
   padding:10pt 10pt;
-  text-decoration:none;
-  text-shadow:0px 1px 0px #ffffff;
+  /* text-decoration:none; */
+  /* text-shadow:0px 1px 0px #ffffff; */
 }
 .search-button:hover {
-  background:linear-gradient(to bottom, lightgreen 100%, #ffffff 100%);
-  background-color:#f6f6f6;
+  transform: scale(1.15);
+  /* background:linear-gradient(to bottom, lightgreen 100%, #ffffff 100%);
+  background-color:#f6f6f6; */
 }
-.search-button:active {
-background-color: linear-gradient(to bottom, lightgreen 100%, #ffffff 100%);
+.search-button:active,.search-button:focus {
+  transform: scale(1.15);
+  background-color: white;
+/* background-color: linear-gradient(to bottom, lightgreen 100%, #ffffff 100%); */
   position:relative;
   top:1px;
+  
 }
  

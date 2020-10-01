@@ -12,18 +12,20 @@
 
 
 <body>
-  <div class="grid-container" style="background-color: beige">
-
+  <div class="grid-container" >
+    
     <!-- FIRST PAGE W/ NAVBAR AND SEARCH -->
       <!-- SEARCH AREA -->
-    <section class="navbar-search-area" style="background-color: beige">
-      <div class="search-area" style="background-color?: beige">
+    <section class="navbar-search-area" >
+      
+      <div class="search-area" >
+        <h1 class="cta-test center">Find or donate free food </h1>
         <div class="tab">
-          <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')" id="defaultOpen" style="background-color:white; color:darkslategray; font-size:22pt;">Find Food<i class="material-icons right">location_on</i></button>
-          <button class="tablinks waves-light" onclick="openCity(event, 'Donate')" style="background-color:white; color:darkslategray; font-size:22pt;">Donate<i class="material-icons right">local_grocery_store</i></button>
+          <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')" id="defaultOpen" style="background-color:white; color:#342E37; font-size:22pt;">Find Food<i class="material-icons right">location_on</i></button>
+          <button class="tablinks waves-light" onclick="openCity(event, 'Donate')" style="background-color:white; color:#342E37; font-size:22pt;">Donate<i class="material-icons right">local_grocery_store</i></button>
         </div>
         <div>
-          <div id="Find-food" class="tabcontent" style="background-color: white; color: darkslategray">
+          <div id="Find-food" class="tabcontent" style="background-color: white; color:#342E37">
             <input id="place" type="text" placeholder="Find a business, or organization looking to donate">
           </div>
           <div id="Donate" class="tabcontent">
@@ -31,16 +33,15 @@
           </div>
         </div>
         <br><br>
-        <button class="search-button" onclick="searchPlace()" style="background-color: grey; font-size: 18pt"> Search! <i class="material-icons right">location_searching</i></button>
+        <button class="search-button" onclick="searchPlace()" > Search! <i class="material-icons right">location_searching</i></button>
       </div>
     </section>
 
 
-
     <!-- ABOUT SECTION -->
-    <section id="about-title" class="about-container" style="background-color: beige">
+    <section id="about-title" class="about-container">
       <div class="about-header">
-        <h1>About <a>Us</a></h1>
+        <h1>About <a class="us">Us</a></h1>
       </div>
       <div class="about-content row">
         <div class="about-box col">
