@@ -34,6 +34,7 @@ urlpatterns = [
     path("login", views.login_request, name="login"),
     path("logout", views.logout_request, name="logout"),
     path("reset-password-confirmation", views.reset_confirmation_sent, name='password_reset_confirm_sent'),
+    path("reset-password", views.reset_password, name="reset-password"),
     path("email-test1", views.email_test1, name="email-test1"),
     path("email-test2", views.email_test2, name="email-test2"),
     path('confirm-email', views.account_activation_sent, name='confirm_email_sent'),

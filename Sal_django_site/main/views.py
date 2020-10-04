@@ -157,6 +157,10 @@ def account_activation_sent(request):
                   template_name="main/account_activation_sent.html")#,
                  # context={"InfoPrompt": InfoPrompt.objects.all})
 
+def reset_password(request):
+    return render(request=request,
+                  template_name="main/reset_password.html")#,
+
 def reset_confirmation_sent(request):
     return render(request=request,
                   template_name="main/reset_confirmation_sent.html")#,

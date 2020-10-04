@@ -22,7 +22,10 @@
     height: 100%;
   }
 
-
+  .card{
+    background-color: #F7F7F7;
+  }
+  
   #search-button {
     float: right;
     top: 20%;
@@ -139,7 +142,8 @@
     .scroll-box {
       overflow-y: scroll;
       height: 200px;
-      padding: 1rem
+      padding: 1rem;
+      
     }
 
 
