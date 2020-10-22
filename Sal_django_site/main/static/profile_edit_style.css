@@ -8,12 +8,12 @@
     background-color: ghostwhite;
     background-size: cover;
     /* background-repeat: no-repeat; */
-    background-image: url('images/orange-photo.jpg');
+    /* background-image: url('images/orange-photo.jpg'); */
     /* Remember to change this url by removing static when you move it to statics */
   }
   
   .title-banner {
-    background-color: #3C91E6;
+    background-color:#342E37;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
   }
@@ -31,6 +31,8 @@
 
   .card {
     border-radius: 20px;
+    box-shadow:  20px 20px 60px #d3d3d9, 
+    -20px -20px 60px #ffffff;
   }
 
   .account-img {

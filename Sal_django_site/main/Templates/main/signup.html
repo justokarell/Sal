@@ -9,100 +9,102 @@
 </head>
 
 <body>
-    <div class="container col s8 m6" style="margin-bottom: 12em;"> 
+    <div class="box">
+        <div class="container col s8 m6" style="margin-bottom: 12em;"> 
 
-        <div class="card hoverable">
-            <a href="javascript:history.back()" class="btn-flat waves-effect waves-light  right">
-                <i class="material-icons">close</i>
-            </a>
+            <div class="card hoverable">
+                <a href="javascript:history.back()" class="btn-flat waves-effect waves-light  right">
+                    <i class="material-icons">close</i>
+                </a>
 
-            <div class="card-content center ">
-                <h2 class="center title-text">Welcome!</h2>
+                <div class="card-content center ">
+                    <h2 class="center title-text">Welcome!</h2>
 
-                <a href="login" class="btn inactive tab-btn z-depth-1">Login</a>
-                <a href="#" class="btn active tab-btn z-depth-1">Sign Up</a>
-                <form method="POST" class="col s12">
-                    {% csrf_token %}
-                    {% load widget_tweaks %}
-                    
-                    {{ form.non_field_errors }}
-                    {{ form.source.errors }}
-                    {{ form.source }}
+                    <a href="login" class="btn inactive tab-btn z-depth-1">Login</a>
+                    <a href="#" class="btn active tab-btn z-depth-1">Sign Up</a>
+                    <form method="POST" class="col s12">
+                        {% csrf_token %}
+                        {% load widget_tweaks %}
+                        
+                        {{ form.non_field_errors }}
+                        {{ form.source.errors }}
+                        {{ form.source }}
 
-                    <div class="input-field col s7" style="margin-top:3rem;">
-                        <label for="name">Your Name</label>
-                        {{ form.your_name |add_class:"validate" }}
+                        <div class="input-field col s7" style="margin-top:3rem;">
+                            <label for="name">Your Name</label>
+                            {{ form.your_name |add_class:"validate" }}
 
-                        <span class="helper-text" data-error="Invalid Name" data-success="">{{ form.your_name.errors }}</span>
-                    </div>
-                    <div class="input-field col s7">
-                        <label for="email">Email Address</label>
-                        {{ form.email |add_class:"validate" }}
-                        <!-- <label for="email">{{ form.email.label_tag }}</label> -->
-                        <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
-                    </div>
-
-                    <div class="input-field col s7">
-                        <label for="password">Password</label>
-                        {{ form.password1|add_class:"validate" }}
-                        <span class="helper-text" data-error="Invalid Password" data-success="">
-                            <!-- <p style="color: lightgrey;">{{ form.password1.help_text }}</p> -->
-                            {{ form.password1.errors }}
-                        </span>
-                    </div>
-
-                    <div class="input-field col s7 ">
-                        <label for="confirmPassword">Confirm Password</label>
-                        {{ form.password2|add_class:"validate" }}
-                        <span class="helper-text" data-error="Passwords not match"
-                            data-success="">{{ form.password2.errors }}</span>
-                    </div>
-
-
-
-                    <button id="login-submit" type="submit" class=" waves-effect waves-light btn-large">Sign Up</button>
-
-                    <!-- <a id="login-submit" type="submit" class=" waves-effect waves-light btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Sign Up</a> -->
-
-                    <div class="alignright">
-                        <a href="login">Already Have An Account?</a>
-                    </div>
-
-
-                    <div class="divider"></div>
-                    <div class="col-md-8 mx-auto social-container my-2 order-md-1">
-                        <div class="col-xs-6">
-                            <a href="{% url 'social:begin' 'facebook' %}" id="facebook"
-                                class="waves-effect waves-light btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="facebook-icon" width="15" height="16" viewBox="0 0 27 28">
-                                    <!-- <title id="pbs-facebook-box__title">Facebook</title> -->
-                                    <path fill="#FFF" fill-rule="nonzero" d="M25.448.503H1.488c-.82 0-1.486.665-1.486 1.486v23.96c0 .82.666 1.486 1.487 1.486h12.898v-10.43h-3.51v-4.064h3.51V9.943c0-3.479 2.125-5.373 5.228-5.373 1.487 0 2.764.111 3.137.16v3.636h-2.153c-1.687 0-2.014.803-2.014 1.98v2.595h4.025l-.524 4.064h-3.501v10.43h6.863c.821 0 1.487-.666 1.487-1.487V1.99c0-.821-.666-1.486-1.487-1.486z"></path>
-                                </svg>
-                                Sign in with Facebook</a>
-                            <!-- <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" id="facebook" class="waves-effect waves-light btn"><i class="material-icons left">face</i>Sign in with Facebook</a> -->
+                            <span class="helper-text" data-error="Invalid Name" data-success="">{{ form.your_name.errors }}</span>
                         </div>
-                        <div class="col-xs-6">
-                            <a href="{% url 'social:begin' 'google-oauth2' %}" id="google"
-                                class="waves-effect waves-light btn">
-                                
-                                <span class="sign-in__icon-wrapper google-icon" width="15" height="16">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 46 46" >
-                                        <g id="logo_googleg_48dp" transform="translate(15 15)">
-                                            <path id="Shape" d="M30 8.5c0-1.6-.1-3.2-.4-4.7H8v8.9h12.4c-.5 2.9-2.1 5.3-4.6 6.9v5.8h7.4c4.3-4 6.8-9.9 6.8-16.9z" fill-rule="evenodd" clip-rule="evenodd" fill="#4285f4"></path>
-                                            <path id="Shape_1_" d="M8 30.9c6.2 0 11.4-2.1 15.2-5.6l-7.4-5.8c-2.1 1.4-4.7 2.2-7.8 2.2-6 0-11-4-12.8-9.5h-7.7v5.9C-8.7 25.8-1 30.9 8 30.9z" fill-rule="evenodd" clip-rule="evenodd" fill="#34a853"></path>
-                                            <path id="Shape_2_" d="M-4.8 12.3c-.5-1.4-.8-2.8-.8-4.3s.3-3 .7-4.4v-5.9h-7.7C-14.1.8-15 4.3-15 8s.9 7.2 2.4 10.3l7.8-6z" fill-rule="evenodd" clip-rule="evenodd" fill="#fbbc05"></path>
-                                            <path id="Shape_3_" d="M8-5.9c3.4 0 6.4 1.2 8.8 3.4L23.4-9c-4-3.7-9.2-6-15.4-6-9 0-16.7 5.2-20.5 12.7l7.7 5.9C-3-1.8 2-5.9 8-5.9z" fill-rule="evenodd" clip-rule="evenodd" fill="#ea4335"></path>
-                                            <path id="Shape_4_" d="M-15-15h46v45.9h-46V-15z" fill="none"></path>
-                                        </g>
+                        <div class="input-field col s7">
+                            <label for="email">Email Address</label>
+                            {{ form.email |add_class:"validate" }}
+                            <!-- <label for="email">{{ form.email.label_tag }}</label> -->
+                            <span class="helper-text" data-error="Invalid Email" data-success="">{{ form.email.errors }}</span>
+                        </div>
+
+                        <div class="input-field col s7">
+                            <label for="password">Password</label>
+                            {{ form.password1|add_class:"validate" }}
+                            <span class="helper-text" data-error="Invalid Password" data-success="">
+                                <!-- <p style="color: lightgrey;">{{ form.password1.help_text }}</p> -->
+                                {{ form.password1.errors }}
+                            </span>
+                        </div>
+
+                        <div class="input-field col s7 ">
+                            <label for="confirmPassword">Confirm Password</label>
+                            {{ form.password2|add_class:"validate" }}
+                            <span class="helper-text" data-error="Passwords not match"
+                                data-success="">{{ form.password2.errors }}</span>
+                        </div>
+
+
+
+                        <button id="login-submit" type="submit" class=" waves-effect waves-light btn-large">Sign Up</button>
+
+                        <!-- <a id="login-submit" type="submit" class=" waves-effect waves-light btn-large" style= "margin-top:1rem; margin-bottom:2rem;" >Sign Up</a> -->
+
+                        <div class="alignright">
+                            <a href="login">Already Have An Account?</a>
+                        </div>
+
+
+                        <div class="divider"></div>
+                        <div class="col-md-8 mx-auto social-container my-2 order-md-1">
+                            <div class="col-xs-6">
+                                <a href="{% url 'social:begin' 'facebook' %}" id="facebook"
+                                    class="waves-effect waves-light btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="facebook-icon" width="15" height="16" viewBox="0 0 27 28">
+                                        <!-- <title id="pbs-facebook-box__title">Facebook</title> -->
+                                        <path fill="#FFF" fill-rule="nonzero" d="M25.448.503H1.488c-.82 0-1.486.665-1.486 1.486v23.96c0 .82.666 1.486 1.487 1.486h12.898v-10.43h-3.51v-4.064h3.51V9.943c0-3.479 2.125-5.373 5.228-5.373 1.487 0 2.764.111 3.137.16v3.636h-2.153c-1.687 0-2.014.803-2.014 1.98v2.595h4.025l-.524 4.064h-3.501v10.43h6.863c.821 0 1.487-.666 1.487-1.487V1.99c0-.821-.666-1.486-1.487-1.486z"></path>
                                     </svg>
-                                </span>
-                                Sign in with Google</a>
-                            <!-- <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"  id="google" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Sign in with Google</a> -->
+                                    Sign in with Facebook</a>
+                                <!-- <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" id="facebook" class="waves-effect waves-light btn"><i class="material-icons left">face</i>Sign in with Facebook</a> -->
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="{% url 'social:begin' 'google-oauth2' %}" id="google"
+                                    class="waves-effect waves-light btn">
+                                    
+                                    <span class="sign-in__icon-wrapper google-icon" width="15" height="16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 46 46" >
+                                            <g id="logo_googleg_48dp" transform="translate(15 15)">
+                                                <path id="Shape" d="M30 8.5c0-1.6-.1-3.2-.4-4.7H8v8.9h12.4c-.5 2.9-2.1 5.3-4.6 6.9v5.8h7.4c4.3-4 6.8-9.9 6.8-16.9z" fill-rule="evenodd" clip-rule="evenodd" fill="#4285f4"></path>
+                                                <path id="Shape_1_" d="M8 30.9c6.2 0 11.4-2.1 15.2-5.6l-7.4-5.8c-2.1 1.4-4.7 2.2-7.8 2.2-6 0-11-4-12.8-9.5h-7.7v5.9C-8.7 25.8-1 30.9 8 30.9z" fill-rule="evenodd" clip-rule="evenodd" fill="#34a853"></path>
+                                                <path id="Shape_2_" d="M-4.8 12.3c-.5-1.4-.8-2.8-.8-4.3s.3-3 .7-4.4v-5.9h-7.7C-14.1.8-15 4.3-15 8s.9 7.2 2.4 10.3l7.8-6z" fill-rule="evenodd" clip-rule="evenodd" fill="#fbbc05"></path>
+                                                <path id="Shape_3_" d="M8-5.9c3.4 0 6.4 1.2 8.8 3.4L23.4-9c-4-3.7-9.2-6-15.4-6-9 0-16.7 5.2-20.5 12.7l7.7 5.9C-3-1.8 2-5.9 8-5.9z" fill-rule="evenodd" clip-rule="evenodd" fill="#ea4335"></path>
+                                                <path id="Shape_4_" d="M-15-15h46v45.9h-46V-15z" fill="none"></path>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    Sign in with Google</a>
+                                <!-- <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"  id="google" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Sign in with Google</a> -->
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
 
+                </div>
             </div>
         </div>
     </div>

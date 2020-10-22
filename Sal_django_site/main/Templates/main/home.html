@@ -4,7 +4,7 @@
 <head>
   {% load static %}
   <title>Sal Hates Waste Home</title>
-  <script src="{% static '/js/home_js.js' %}"></script>   
+  <script src="{% static '/js/home_js.js' %}"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'home_style.css' %}">
 
 
@@ -12,28 +12,31 @@
 
 
 <body>
-  <div class="grid-container" >
-    
+  <div class="grid-container">
+
     <!-- FIRST PAGE W/ NAVBAR AND SEARCH -->
-      <!-- SEARCH AREA -->
-    <section class="navbar-search-area" >
-      
-      <div class="search-area" >
+    <!-- SEARCH AREA -->
+    <section class="navbar-search-area">
+
+      <div class="search-area">
         <h1 class="cta-test center">Find or donate free food </h1>
         <div class="tab">
-          <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')" id="defaultOpen" style="background-color:white; color:#342E37; font-size:22pt;">Find Food<i class="material-icons right">location_on</i></button>
-          <button class="tablinks waves-light" onclick="openCity(event, 'Donate')" style="background-color:white; color:#342E37; font-size:22pt;">Donate<i class="material-icons right">local_grocery_store</i></button>
+          <button class="tablinks waves-light" onclick="openCity(event, 'Find-food')" id="defaultOpen">Find<i
+              class="material-icons tab-icon">location_on</i></button>
+          <button class="tablinks waves-light" onclick="openCity(event, 'Donate')">Donate<i
+              class="material-icons tab-icon">local_grocery_store</i></button>
         </div>
         <div>
-          <div id="Find-food" class="tabcontent" style="background-color: white; color:#342E37">
-            <input id="place" type="text" placeholder="Find a business, or organization looking to donate">
+          <div id="Find-food" class="tabcontent">
+            <input id="place" type="text" placeholder="Type an address to find organizations looking to donate">
           </div>
           <div id="Donate" class="tabcontent">
-            <input id="place" type="text" placeholder="Find organizations looking for donations">
+            <input id="place" type="text" placeholder="Type an address to find organizations looking for donations">
           </div>
         </div>
         <br><br>
-        <button class="search-button" onclick="searchPlace()" > Search! <i class="material-icons right">location_searching</i></button>
+        <button class="search-button" onclick="searchPlace()"> Search! <i id="search-cta"
+            class="material-icons right">location_searching</i></button>
       </div>
     </section>
 
@@ -41,41 +44,53 @@
     <!-- ABOUT SECTION -->
     <section id="about-title" class="about-container">
       <div class="about-header">
-        <h1>About <a class="us">Us</a></h1>
+        <h1><a class="us">About Us</a></h1>
       </div>
       <div class="about-content row">
-        <div class="about-box col">
-          <div class="about-desc">
-            <h1>We hate waste! And you do too!</h1>
-            <p> Sal helps small businesses and local non-profits connect to donate and/or find surplus food that would otherwise be wasted. </p>
-            <div class="about-left-photo">
-              <img src="{% static 'images/trash_icon.png' %}" style=" max-width: 50%; max-height: 70%;">
+        <div class="card hoverable col">
+          <div class="about-box  card-content">
+            <div class="about-desc">
+              <h1>We hate waste! And you do too!</h1>
+              <p> Sal helps small businesses and local non-profits connect to donate and/or find surplus food that would
+                otherwise be wasted. </p>
+              <div class="about-left-photo">
+                <img id="trash-img" src="{% static 'images/trash_icon.png' %}" style=" max-width: 50%; max-height: 70%;">
+              </div>
             </div>
           </div>
         </div>
-        <div class="about-box col">
-          <div class="about-desc">
-            <h1>Default to generosity!</h1>
-            <p> All of our services are free. Simply sign-up and post your business' food surplus or search our map for donations. </p>
-          </div>
-          <div class="about-center-photo">
-            <img src="{% static 'images/bread.png' %}" style="display:inline-flex; max-width: 40%; max-height: 70%;">
-          </div>
-        </div>
-        <div class="about-box col">
-          <div class="about-desc">
-            <h1>There are lots of ways to help!</h1>
-            <p> If you would rather give your time, we have some tips on how you can help connect organizations with surplus to groups who could use it. </p>
-          </div>
-          <div class="about-right-photo">
-            <img src="{% static 'images/delivery.png' %}" style=" max-width: 50%;
-            max-height: 70%;">
+
+        <div class="card hoverable col">
+          <div class="about-box  card-content">
+            <div class="about-desc">
+              <h1>Default to generosity!</h1>
+              <p> All of our services are free. Simply sign-up and post your business' food surplus or search our map
+                for donations. </p>
+            </div>
+            <div class="about-center-photo">
+              <img id="taco-img" src="{% static 'images/bread.png' %}" style="display:inline-flex; max-width: 40%; max-height: 70%;">
+            </div>
           </div>
         </div>
+
+        <div class="card hoverable col">
+          <div class="about-box  card-content">
+            <div class="about-desc">
+              <h1>There are lots of ways to help!</h1>
+              <p> If you would rather give your time, we have some tips on how you can help connect organizations with
+                surplus to groups who could use it. </p>
+            </div>
+            <div class="about-right-photo">
+              <img id="delivery-img" src="{% static 'images/delivery.png' %}" style=" max-width: 50%;
+              max-height: 70%;">
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </section>
-    
+
 
 
     {% include 'main/footer.html' %}
@@ -83,9 +98,10 @@
   </div>
 
   <!--  Scripts-->
-<script> document.getElementById("defaultOpen").click(); </script>
+  <script> document.getElementById("defaultOpen").click(); </script>
 
 </body>
+
 </html>
 
 {% endblock %}

@@ -136,31 +136,31 @@
 
                                     <div class="row choice-row flex-container">
                                         {% for value,text in form.post_day.field.choices %}
-                                            {% if value in form.instance.post_day %}
-                                            <div class="col">
-                                                <label
-                                                    for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
-                                                    <input type="checkbox" checked="checked"
-                                                        name="availability_set-{{forloop.parentloop.counter0}}-post_day"
-                                                        id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
-                                                        class="avclass" value="{{ value }}"
-                                                        {% if value in checked_post_day %} {% endif %}>{{ text }}
-                                                    <span></span>
-                                                </label>
-                                            </div>
-                                            {% else %}
-                                            <div class="col">
-                                                <label
-                                                    for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
-                                                    <input type="checkbox"
-                                                        name="availability_set-{{forloop.parentloop.counter0}}-post_day"
-                                                        id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
-                                                        class="avclass" value="{{ value }}"
-                                                        {% if value in checked_post_day %} {% endif %}>{{ text }}
-                                                    <span></span>
-                                                </label>
-                                            </div>
-                                            {% endif %}
+                                        {% if value in form.instance.post_day %}
+                                        <div class="col">
+                                            <label
+                                                for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
+                                                <input type="checkbox" checked="checked"
+                                                    name="availability_set-{{forloop.parentloop.counter0}}-post_day"
+                                                    id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
+                                                    class="avclass" value="{{ value }}"
+                                                    {% if value in checked_post_day %} {% endif %}>{{ text }}
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        {% else %}
+                                        <div class="col">
+                                            <label
+                                                for="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}">
+                                                <input type="checkbox"
+                                                    name="availability_set-{{forloop.parentloop.counter0}}-post_day"
+                                                    id="id_availability_set-{{forloop.parentloop.counter0}}-post_day_{{ forloop.counter0 }}"
+                                                    class="avclass" value="{{ value }}"
+                                                    {% if value in checked_post_day %} {% endif %}>{{ text }}
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        {% endif %}
                                         {% endfor %}
                                     </div>
                                     {{ form.post_day.errors}}

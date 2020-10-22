@@ -1,17 +1,26 @@
-.active:visited,
-.active:hover,
-.active {
-    color: #342E37;
-    background-color: #ffffff;
-}
+html,body{
+    background-color:ghostwhite;
+    background-image: url('images/map-side.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
-.inactive:visited,
-.inactive:hover,
-.inactive {
-    color: #ffffff;
-    background-color: #212121;
-    opacity: 0.7;
-}
+  .box {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 1;
+    backdrop-filter: blur(.25rem);   
+   -webkit-backdrop-filter: blur(.25rem);
+    -moz-backdrop-filter: blur(.25rem);
+    -o-backdrop-filter: blur(.25rem);
+    -ms-backdrop-filter: blur(.25rem);
+    /* width: 100%;
+    height: fit-content; */
+    padding: 20px 40px;
+  }
+
 
 
 .container {
@@ -70,11 +79,56 @@
 }
 
 .tab-btn {
-    -webkit-box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
-    box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.75);
+    -webkit-box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.0);
+    -moz-box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.0);
+    box-shadow: 0px -2px 3px rgba(50, 50, 50, 0.2);
     margin-bottom:1rem;
+    
+    /* box-shadow:inset 0px 1px 0px 0px #F7F7F7; */
+    line-height: 16px;
+    border-top-left-radius: 10pt;
+    border-top-right-radius: 10pt;
+    border-bottom: none;
+    outline: none;   
+    display:inline-block;
+    cursor:pointer;
+    padding:8pt 20pt;
 
+}
+
+.active{
+    color: #342E37;
+}
+
+.inactive,.inactive:visited{
+    color: #F7F7F7;
+    background-color:#342e37;
+}
+
+.active:visited,
+.active:hover,
+.active:focus{
+    /* color: #342E37; */
+    /* background-color: #F7F7F7; */
+    background-color: rgb(255, 255, 255);
+    transition: background-color .3s;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+
+
+.inactive:hover,
+.inactive:focus{
+    color: #342e37;
+    /* background-color: #F7F7F7; */
+    background-color: rgba(52, 46, 55, 0.3);
+    transition: background-color .3s;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
 }
 
 .input-field {

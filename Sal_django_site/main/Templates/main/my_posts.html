@@ -9,10 +9,10 @@
 </head>
 <style>
     body {
-        /* background-color:  #F2F2F2; */
+        background-color: ghostwhite;
         background-size: cover;
         /* background-image: url('static/images/red-orange-photo.jpg'); */
-        background-image: url('static/images/tall-berry-photo.jpg');
+        /* background-image: url('static/images/tall-berry-photo.jpg'); */
         background-repeat: repeat-y;
         /* Remember to change this url by removing static when you move it to statics */
     }
@@ -28,11 +28,11 @@
         width: fit-content;
     }
 
-    .title-banner {
-        background-color: #EACB4D;
+    /* .title-banner {
+        background-color:  #9FD356;
         border-top-right-radius: 20px;
         border-top-left-radius: 20px;
-    }
+    } */
 
     .delete-button:visited,
     .delete-button:hover,
@@ -44,9 +44,9 @@
     }
 
     .title-text {
-        color: ghostwhite;
-        color: #342E37;
-        margin-left: 3rem;
+        /* color: ghostwhite; */
+        color:#342E37;
+        /* margin-left: 3rem; */
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
@@ -61,6 +61,7 @@
 
     .card .card-content {
         padding: 20px;
+        height: max-content;
     }
 
     .left-col {
@@ -70,8 +71,13 @@
         overflow: hidden
     }
 
+    .card{
+       min-height: 200px;
+    }
+
     .times {
         text-align: left;
+        font-size: 16px;
     }
 
     .text {
@@ -107,16 +113,17 @@
             max-width: 70%;
         }
 
-        .card-content .post-row {
+        /* .card-content .post-row {
             max-height: 176px;
-        }
+        } */
 
 
         .post-row {
-            max-height: 176px;
-            width: 95%;
+            max-height: 200px;
+            /* width: 95%; */
             margin-left: auto;
             margin-right: auto;
+            margin-bottom: 0;
         }
 
     }
@@ -154,16 +161,16 @@
 </style>
 
 <body>
-    <section>
-        <div class="container col " style="margin-bottom: 12em;">
-            <div id="over-card" class="card hoverable">
+    <section class="row">
+        <!-- <div class="container col " style="margin-bottom: 12em;"> -->
+            <!-- <div id="over-card" class="card hoverable"> -->
                 <div class="title-banner">
-                    <h3 class="title-text"> My Posts</h2>
+                    <h3 class="title-text center"> Your Posts</h2>
                 </div>
-                <div class="card-content center">
+                <!-- <div class="card-content center"> -->
                     <div class="media">
-                        <div class=" main-row row center">
-                            <a href="new-dpost">
+                        <!-- <div class=" main-row row center"> -->
+                            <a href="new-dpost" class="col s12 m6 l4">
                                 <div class="card hoverable post-row">
                                     <div class="card-content  ">
                                         <div class="row new-button">
@@ -171,13 +178,13 @@
                                                 <img class="card-pic" src="{% static 'images/donor-plus.png' %}">
                                             </div>
                                             <div class="col right-col">
-                                                <h4>Make a Post About Your Surplus</h4>
+                                                <strong>Make a Post About Your Surplus</strong>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </a>
-                            <a href="new-rpost">
+                            <a href="new-rpost" class="col s12 m6 l4">
                                 <div class="card hoverable post-row">
                                     <div class="card-content  ">
                                         <div class="row new-button">
@@ -185,22 +192,22 @@
                                                 <img class="card-pic" src="{% static 'images/recipient-plus.png' %}">
                                             </div>
                                             <div class="col right-col">
-                                                <h4>Make a Post About Your Need</h4>
+                                                <strong>Make a Post About Your Need</strong>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                             {% for post in my_posts %}
-                            <div class="row profile-content">
+                            <div class="col s12 m6 l4 profile-content">
 
-                                <div class="card hoverable post-row">
-                                    <div class="card-content  ">
+                                <div class="card hoverable ">
+                                    <div class="card-content">
 
-                                        <div class="row">
+                                        <div class="row post-row ">
                                             <a href="{{post.post_slug}}" , style="color:#000">
                                                 <div class="col left-col">
-                                                    <img class="card-pic" src="{{post.post_image.url}}">
+                                                    <img class="card-image card-pic" src="{{post.post_image.url}}">
                                                 </div>
                                             </a>
                                             <div class="col right-col">
@@ -241,15 +248,15 @@
                             {% endfor %}
 
 
-                        </div>
+                        <!-- </div> -->
                         <div>
 
                         </div>
                     </div>
 
-                </div>
-            </div>
-        </div>
+                <!-- </div> -->
+            <!-- </div> -->
+        <!-- </div> -->
     </section>
     {% include 'main/footer.html' %}
 </body>
