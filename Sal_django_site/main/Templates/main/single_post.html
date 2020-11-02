@@ -1,30 +1,98 @@
 {% extends 'main/header.html' %}
 
 {% block content %}
+
 <head>
-  {% load static %}
-  <title> Post - Sal Hates Waste</title>
+    {% load static %}
+    <title> Post - Sal Hates Waste</title>
 </head>
+<style>
+
+     /* body {
+        background-color: ghostwhite;
+    } */
+
+    .mega-container{
+        margin-top: 5em;
+        margin-bottom: 7em;
+    }
+
+    .main-row {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .right-col {
+        /* margin-right: 2.5%; */
+        content: '';
+        flex: 3.5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .left-col {
+        /* margin-left: 2.5%; */
+        content: '';
+        flex: 3.5;
+        display: flex;
+
+    }
+
+    .p-line {
+        text-align: left;
+        padding-bottom: 4%;
+        /* background-color:#F2F2F2; */
+    }
+
+    .post-content{
+        margin-right: 8%;
+    }
+
+    .post-image {
+        margin-left: auto;
+        margin-right: auto;
+        /* max-width: 60%;
+        max-height: 60%; */
+    }
+
+    @media screen and (min-width: 621px) {
+        .post-image {
+            min-width: 200;
+            max-width: 400;
+            /* max-height: 180px; */
+        }
+    }
+
+
+    @media screen and (max-width: 620px) {
+        .post-image {
+            min-width: 160;
+            max-width: 100%;
+        }
+    }
+</style>
 
 <body>
-    
-    <section>
-        <div class="row">
 
-            <h3>{{single_post.post_title}}</h3>
-                <div class="col s12 m6 l4">
-                    <img src="{{single_post.post_image.url}}" style=" max-width: 60%; max-height: 60%;">
-                        <div class="card hoverable">
-                            <div class="card-content">
-                                <div class="card-title">by {{single_post.post_org_name}}</div>
-                                <!--<p style="font-size:70%">Published {{tut.tutorial_published}}</p>-->
-                                <p>{{single_post.post_desc}}</p>
-                                <p><a href="{{single_post.post_creator.profile.profile_slug}}">About this Organization</a></p>
-                            </div>
-                        </div>
-                    </a>
+    <section>
+        <div class="mega-container">
+            <h3 class="center">{{single_post.post_title}}</h3>
+
+            <div class="row main-row">
+                <div class="col left-col">
+                    <img class="post-image" src="{{single_post.post_image.url}}">
                 </div>
-    
+                <div class="col right-col">
+                    <div class="post-content">
+                        <strong class="p-line">by {{single_post.post_org_name}}</strong>
+                        <p class="p-line">{{single_post.post_desc}}</p>
+                        <p class="p-line"><a href="{{single_post.post_creator.profile.profile_slug}}">About this Organization</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

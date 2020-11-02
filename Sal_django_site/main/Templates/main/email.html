@@ -6,7 +6,6 @@
 <head>
   <title>Contact - Sal Hates Waste</title>
   <!-- {% load crispy_forms_tags %} -->
-  {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'profile_view_style.css' %}">
 </head>
 
@@ -41,13 +40,21 @@
   opacity: 1;
   right: 0;
 }
+
+form{
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-bottom: 4%;
+  padding-top: 2%;
+}
+
 </style>
 
 <body>
   <div class="container col " style="margin-bottom: 12em;">
-    <div class="card hoverable" style="padding: 16pt";>
-      <div class="title-banner" style="background-color: white;">
-        <h2 class="title-text center-align" style="padding: 16pt";> Contact Form</h2>
+    <div class="card hoverable">
+      <div class="title-banner">
+        <h3 class="title-text";> Contact Form</h3>
       </div>
 
       <form method="post" style="font-size:14pt;">

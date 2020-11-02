@@ -1,14 +1,37 @@
 
     body {
-        /* background-color: ghostwhite; */
+        background-color: ghostwhite;
         background-size: cover;
         background-repeat: repeat-y;
-        background-image: url('images/red-orange-photo.jpg');
+        /* background-image: url('images/red-orange-photo.jpg'); */
         /* Remember to change this url by removing static when you move it to statics */
     }
   
     input[type=text]:not(.browser-default).title-input {
         font-size: 30px;
+    }
+
+    .title-banner {
+        background-color: #FA824C;
+        box-shadow:  20px 20px 60px #d3d3d9, 
+        -20px -20px 60px #ffffff;
+        width: max-content;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+        margin-top: 3rem;
+        margin-bottom: 4rem;
+    }
+
+    .title-text {
+        color: ghostwhite;
+        padding-top: 8px;
+        text-align: center;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        
     }
 
     .title-div {
@@ -49,13 +72,6 @@
         margin-left: auto;
     }
 
-    .title-text {
-        color: #342E37;
-        padding-top: 8px;
-        text-align: center;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-    }
 
     .card .card-content {
         padding-top: 8px;
@@ -117,7 +133,11 @@
 
     .card {
         border-radius: 20px;
+        background: white;
+        box-shadow:  20px 20px 60px #d3d3d9, 
+        -20px -20px 60px #ffffff;
     }
+
 
     #deliver-status{
         padding-bottom: 2rem;

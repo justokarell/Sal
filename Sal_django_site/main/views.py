@@ -56,7 +56,7 @@ def contactView(request):
                 mail.send()
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-            return redirect('main:success')
+            return redirect('success')
     return render(request=request, template_name="main/email.html", context={'form': form})
 
 def successView(request):
@@ -112,7 +112,7 @@ def signup(request):
             mail.send()
             messages.success(request,  f'A confirmation email has been sent to {user.email}. Please confirm to finish registering')
 
-            return redirect("main:homepage")
+            return redirect("homepage")
 
         else:
             for msg in form.error_messages:
@@ -131,7 +131,7 @@ def signup(request):
 def logout_request(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
-    return redirect("main:homepage")
+    return redirect("homepage")
 
 
 class ConfirmRegistrationView(View):
@@ -142,7 +142,7 @@ class ConfirmRegistrationView(View):
 
         context = {
           'form': AuthenticationForm(),
-          'message': 'Registration confirmation error . Please click the reset password to generate a new confirmation email.'
+          'message': 'Registration confirmation error . Please click reset password to generate a new confirmation email.'
         }
         if user and user_tokenizer.check_token(user, token):
             user.is_valid = True
@@ -150,7 +150,7 @@ class ConfirmRegistrationView(View):
             context['message'] = 'Registration complete. Please login'
 
         messages.success(request, f"Your account has been registered")
-        return redirect('main:login')
+        return redirect('login')
 
 def account_activation_sent(request):
     return render(request=request,
@@ -201,7 +201,7 @@ def profile_view(request):
         return render(request=request,template_name="main/profile_view.html")
     else:
         messages.info(request, f"Login to view your profile")
-        return redirect('main:login')
+        return redirect('login')
 
 @login_required
 def profile_edit(request):
@@ -215,7 +215,7 @@ def profile_edit(request):
             custom_form.user = user_form
             custom_form.save()
             messages.success(request, f"Your profile has been updated")
-            return redirect('main:profile-view')
+            return redirect('profile-view')
         else:
             for msg in profile_form.errors:
                 messages.error(request, f"Some of your input is off. Try again.")
@@ -233,7 +233,7 @@ def profile_edit(request):
 def delete(request, single_slug = None):
     instance = get_object_or_404(UserPost, post_slug = single_slug)
     instance.delete()
-    return redirect('main:my-posts')
+    return redirect('my-posts')
     return render(request=request, template_name="main/my_posts.html")
 
 def edit_rpost(request, single_slug = None):
@@ -262,7 +262,7 @@ def edit_rpost(request, single_slug = None):
                     avail.save()
                 recipient_post.save()
                 messages.success(request, f"Your post has been updated")
-                return redirect('main:my-posts')  
+                return redirect('my-posts')  
             else:
                 messages.error(request, f"Your availability input is off. Try again.")
                 # for errors in avail_form.errors:
@@ -308,7 +308,7 @@ def new_rpost(request):
                     avail.save()
                 recipient_post.save()
                 messages.success(request, f"Your post has been uploaded")
-                return redirect('main:my-posts')  
+                return redirect('my-posts')  
             else:
                 for errors in avail_form.errors:
                     messages.error(request, f"Your availability is off. Try again.")
@@ -353,7 +353,7 @@ def edit_dpost(request, single_slug = None):
                     avail.save()
                 donor_post.save()
                 messages.success(request, f"Your post has been updated")
-                return redirect('main:my-posts')  
+                return redirect('my-posts')  
             else:
                 messages.error(request, f"Your availability input is off. Try again.")
                 # for errors in avail_form.errors:
@@ -399,7 +399,7 @@ def new_dpost(request):
                     avail.save()
                 donor_post.save()
                 messages.success(request, f"Your post has been uploaded")
-                return redirect('main:my-posts')  
+                return redirect('my-posts')  
             else:
                 for errors in avail_form.errors:
                     messages.error(request, f"Your availability is off. Try again.")
@@ -420,6 +420,10 @@ def new_dpost(request):
                                                                 "avail_form": avail_form,
                                                                 "donor_post_form": donor_post_form})
 
+def my_account(request):
+    user = request.user
+    return render(request=request, template_name="main/my_account.html", context={'user': user})
+
 def my_posts(request):
     if request.user.is_authenticated:
         user = request.user
@@ -428,7 +432,7 @@ def my_posts(request):
                                                                "my_posts" : my_posts})
     else:
         messages.info(request, f"Login to view your posts")
-        return HttpResponseRedirect('main:login')
+        return HttpResponseRedirect('login')
     return render(request=request, template_name="main/my_posts.html")
 
 def single_slug(request, single_slug):

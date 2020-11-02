@@ -92,21 +92,22 @@ li:hover {
         <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
           <!-- <li><a href="/account" style="color:#342E37;font-size:14pt;">{{ user.your_name }}</a></li> -->
-          <li><a href="/account" style="color:#342E37;font-size:14pt;">My Account</a></li>
+          <li><a href="/my-account" style="color:#342E37;font-size:14pt;">My Account</a></li>
           <li><a href="/my-posts" style="color:#342E37;font-size:14pt;">My Posts</a></li>
           <li><a href="/logout" style="color:#342E37;font-size:14pt;">Logout</a></li>
           {% else %}
           <li><a href="/login" style="color:#342E37;font-size:14pt;">Login</a></li>
           <li><a href="/signup" style="color:#342E37;font-size:14pt;">Sign Up</a></li>
-          <li><a href="/volunteer" style="color:#342E37;font-size:14pt;">Volunteer!</a></li>
+          
           {% endif %}
         </ul>
 
         <ul class="left hide-on-med-and-down">
-          <li><a href="/#about-title" style="color:#342E37;font-size:14pt;">About</a></li>
-          <li><a href="/contact" style="color:#342E37;font-size:14pt;">Contact</a></li>
-          <li><a href="/profile-view" style="color:#342E37;font-size:14pt;">Profile</a></li>
-          <li><a href="/map_page" style="color:#342E37;font-size:14pt;">Map</a></li>
+          <li><a href="/#about-title" style="color:#342E37;font-size:13pt;">About</a></li>
+          <li><a href="/map_page" style="color:#342E37;font-size:13pt;">Map</a></li>
+          <li><a href="/contact" style="color:#342E37;font-size:13pt;">Contact</a></li>
+          <li><a href="/profile-view" style="color:#342E37;font-size:13pt;">Profile</a></li>
+          <li><a href="/volunteer" style="color:#342E37;font-size:13pt;">Volunteer!</a></li>
         </ul>
 
         <ul id="nav-mobile" class="sidenav">
@@ -116,7 +117,7 @@ li:hover {
           <li><a href="profile-view"  style="color:#342E37; font-size: x-large;">Profile</a></li>
           <li><a href="map_page" style="color:#342E37; font-size: x-large;">Map</a></li>
           {% if user.is_authenticated %}
-          <li><a href="account"  style="color:#342E37; font-size: x-large;">My Account</a></li>
+          <li><a href="my-account"  style="color:#342E37; font-size: x-large;">My Account</a></li>
           <li><a href="my-posts"  style="color:#342E37; font-size: x-large;">My Posts</a></li>
           <li><a href="logout"  style="color:#342E37; font-size: x-large;">Logout</a></li>
           {% else %}

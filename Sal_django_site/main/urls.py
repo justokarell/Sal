@@ -16,9 +16,10 @@ Including another URLconf
 import django
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path, include
+from django.urls import path, reverse_lazy, include
 from django.conf.urls import url, include
 from django.views.i18n import JavaScriptCatalog
+from django.contrib.auth import views as auth_views
 from . import views
 from django.contrib import admin
 from .tokens import user_tokenizer
@@ -26,7 +27,7 @@ from .views import contactView, successView, volunteerView
 
 # from django.contrib.auth import views as auth_views
 
-app_name = 'main'
+# app_name = 'main'
 
 urlpatterns = [
     path("", views.homepage, name="homepage"),
@@ -34,9 +35,8 @@ urlpatterns = [
     path("login", views.login_request, name="login"),
     path("logout", views.logout_request, name="logout"),
     path("reset-password-confirmation", views.reset_confirmation_sent, name='password_reset_confirm_sent'),
-    path("reset-password", views.reset_password, name="reset-password"),
     path("email-test1", views.email_test1, name="email-test1"),
-    path("email-test2", views.email_test2, name="email-test2"),
+    path("email-test2", views.email_test2, name="email_test2"),
     path('confirm-email', views.account_activation_sent, name='confirm_email_sent'),
     path('map_page', views.map_page, name='map_page'),
     path('profile-edit', views.profile_edit, name='profile_edit'),
@@ -44,15 +44,34 @@ urlpatterns = [
     path('my-posts', views.my_posts, name='my-posts'),
     path('new-dpost', views.new_dpost, name='new_dpost'),
     path('new-rpost', views.new_rpost, name='new_rpost'),
+    path('my-account', views.my_account, name='my_account'),
 
     path('contact', contactView, name='contact'),
     path('success', successView, name='success'),
     path('volunteer', volunteerView, name='volunteer'),
+    
 
+    path('confirm-email/<str:user_id>/<str:token>/', views.ConfirmRegistrationView.as_view(), name='confirm_email'),
+    path('reset-password', auth_views.PasswordResetView.as_view(template_name='main/reset_password.html',
+      html_email_template_name='main/reset_password_email.html',
+      success_url=settings.LOGIN_URL,
+      token_generator=user_tokenizer),
+      name='reset_password'),
+    path(
+        'reset-password-confirmation/<str:uidb64>/<str:token>/',
+        auth_views.PasswordResetConfirmView.as_view(
+        template_name='main/reset_password_update.html', 
+        post_reset_login=True,
+        post_reset_login_backend='django.contrib.auth.backends.ModelBackend',
+        token_generator=user_tokenizer,
+        success_url=settings.LOGIN_REDIRECT_URL),
+        name='password_reset_confirm'),
+    
     path('<single_slug>/delete/', views.delete, name='delete'),
     path('<single_slug>/edit-rpost/', views.edit_rpost, name='edit-rpost'),
     path('<single_slug>/edit-dpost/', views.edit_dpost, name='edit-dpost'),
     path("<single_slug>", views.single_slug, name="single_slug"),
+
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

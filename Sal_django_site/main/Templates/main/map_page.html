@@ -14,7 +14,7 @@
     <section class="Donation">
       <div>
         <div id="donate-col" class="col s14 m6">
-          <div class="card scroll-box">
+          <div class="card hoverable scroll-box">
             <h2 class="filter-title center-align" style="color:#3C91E6" >Filters</h2>
             <div class="card-content">
               <p class="search-location filter-label center-align">Location</p>
@@ -287,7 +287,7 @@
     content: ''
   });
 
-  markers1 = JSON.parse('{{ result|safe }}');
+  markers1 = JSON.parse('{{ result|safe}}');
   markerCount = markers1.length
 
   // Function to init map

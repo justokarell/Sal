@@ -1,9 +1,9 @@
 
     body {
-        /* background-color: ghostwhite; */
+        background-color: #f8f8ff;
         background-size: cover;
-        background-repeat: repeat-y;
-        background-image: url('images/blue-orange-photo.jpg');
+        /* background-repeat: repeat-y; */
+        /* background-image: url('images/banana.jpg'); */
         /* Remember to change this url by removing static when you move it to statics */
     }
   
@@ -37,12 +37,27 @@
         margin-left: auto;
     }
 
+    .title-banner {
+        background-color: #3C91E6;
+        box-shadow:  20px 20px 60px #d3d3d9, 
+        -20px -20px 60px #ffffff;
+        width: max-content;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+        margin-top: 3rem;
+        margin-bottom: 4rem;
+    }
+
     .title-text {
         color: ghostwhite;
         padding-top: 8px;
         text-align: center;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        
     }
 
     .card .card-content {
@@ -51,6 +66,7 @@
 
     .select {
         display: block;
+        background-color:#F2F2F2;
     }
 
 
@@ -105,6 +121,9 @@
 
     .card {
         border-radius: 20px;
+        background: white;
+        box-shadow:  20px 20px 60px #d3d3d9, 
+        -20px -20px 60px #ffffff;
     }
 
     .last-row{

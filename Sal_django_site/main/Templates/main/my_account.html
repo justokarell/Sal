@@ -1,0 +1,57 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block content %}
+
+<head>
+    <title>My Account - Sal Hates Waste</title>
+    {% load crispy_forms_tags %}
+    <link rel="stylesheet" type="text/css" href="{% static 'profile_view_style.css' %}">
+</head>
+
+<style>
+    .links{
+        color: #3C91E6;
+        font-size: 16px;
+    }
+
+    .account-attr{
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<body>
+    <div class="container col " style="margin-bottom: 12em;">
+        <div class="card hoverable">
+            <div class="title-banner">
+                <h3 class="title-text";>Your Account</h3>
+            </div>
+            <div class="card-content">
+                <div class="account-attr">
+                    <strong> Current User Email</strong>
+                    <div>
+                        {{user.email}}
+                    </div>
+                </div>
+                <div class="account-attr">
+                    <strong>Password</strong>
+                    <div>
+                        <a class="links" href="reset-password">Change Password</a>
+                    </div>
+                </div>
+                <div class="account-attr">
+                    <strong>Profile</strong>
+                    <div>
+                        <a class="links" href="profile-edit">Update Account Profile</a>
+                    </div>
+                </div>    
+
+            </div>
+
+        </div>
+    </div>
+
+    {% include 'main/footer.html' %}
+</body>
+
+{% endblock %}
