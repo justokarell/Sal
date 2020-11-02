@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'recurrence',
     'multiselectfield',
     'rest_framework',
+    'escapejson',
 
 ]
 

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import UserPost, DonorPost, RecipientPost, Availability
 
+
 class AvailabilitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Availability
@@ -10,7 +11,9 @@ class UserPostSerializer(serializers.ModelSerializer):
     availability_set = AvailabilitySerializer(many=True, read_only=True)
     class Meta:
         model = UserPost
+
         fields = ("post_title","post_lat","post_long","post_deliver","donor_or_recip", "post_desc", "post_image", "post_slug","availability_set", )
+
 
 class DonorPostSerializer(serializers.ModelSerializer):
     class Meta:

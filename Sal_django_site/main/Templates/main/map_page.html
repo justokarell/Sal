@@ -3,6 +3,7 @@
 {% block content %}
 <head>
   {% load static %}
+  {% load escapejson %}
   <title>Surplus Map - Sal Hates Waste</title>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'map_page_style.css' %}">
@@ -277,7 +278,6 @@
   });
 </script>
 
-
 <script>
 
   var gmarkers1 = [];
@@ -287,7 +287,8 @@
     content: ''
   });
 
-  markers1 = JSON.parse('{{ result|safe}}');
+  markers1 = JSON.parse('{{result|escapejson}}');
+  console.log(markers1)
   markerCount = markers1.length
 
   // Function to init map
@@ -431,9 +432,10 @@
     var title = marker["post_title"];
     var pos = new google.maps.LatLng(marker["post_lat"], marker["post_long"]);
 
-    var content = "<div class=infowindow>"+"<h1>" + title + "</h1>" + "<image style= 'max-width: 30%; max-height: 30%;' src="+thumbnail+" >" +
-                  "<div id='date-time'>"+ wholeAvail +"</div>" + "<p>" + marker["post_desc"] + "</p></div>"+
-                  "<strong><a style=':blue' href="+ marker["post_slug"] +" >Read More</a></strong>";
+    var content = "<div class=infowindow style='width:fit-content;'>"+"<h1 class=center style= 'margin-top:0rem; margin-bottom:3%;'>" + title + "</h1>" + 
+                  "<div class='row center' style='margin-left:0; margin-right:auto;'><image class='col' style= 'float: none; max-width: 30%; max-height: 30%; margin-left:auto; margin-right:0;' src="+thumbnail+" >" +
+                  "<div class='col' style='float:none; margin-left:0; margin-right:auto;'> <div id='date-time'>"+ wholeAvail +"</div>" + "<p>" + marker["post_desc"] + "</p></div></div>"+
+                  "<strong style='float:right;'><a style=':blue' href="+ marker["post_slug"] +" >Read More</a></strong></div>";
 
     //get array of markers (wish this was just the ones currently in cluster)
     var allMarkers = gmarkers1;

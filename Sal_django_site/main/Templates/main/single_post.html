@@ -7,14 +7,18 @@
     <title> Post - Sal Hates Waste</title>
 </head>
 <style>
-
-     /* body {
+    /* body {
         background-color: ghostwhite;
     } */
 
-    .mega-container{
-        margin-top: 5em;
+    .mega-container {
+        margin-top: 3em;
         margin-bottom: 7em;
+    }
+
+    .title{
+        margin-top: 1.75em;
+        margin-bottom: 1em;
     }
 
     .main-row {
@@ -47,13 +51,26 @@
         /* background-color:#F2F2F2; */
     }
 
-    .post-content{
+    .post-content {
         margin-right: 8%;
     }
+
+    .post-content > .row{
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    p.col {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
 
     .post-image {
         margin-left: auto;
         margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
         /* max-width: 60%;
         max-height: 60%; */
     }
@@ -62,7 +79,6 @@
         .post-image {
             min-width: 200;
             max-width: 400;
-            /* max-height: 180px; */
         }
     }
 
@@ -79,7 +95,7 @@
 
     <section>
         <div class="mega-container">
-            <h3 class="center">{{single_post.post_title}}</h3>
+            <h3 class="center title">{{single_post.post_title}}</h3>
 
             <div class="row main-row">
                 <div class="col left-col">
@@ -88,8 +104,30 @@
                 <div class="col right-col">
                     <div class="post-content">
                         <strong class="p-line">by {{single_post.post_org_name}}</strong>
+                        <div></Strong>
+                            {% for availability in post.availability_set.all %}
+                            <strong>
+                                <p class="times">{{availability.post_day}}&emsp;
+                                    {{availability.start_hour}}&nbsp;-&nbsp;{{availability.end_hour}}
+                                </p>
+                            </strong>
+                            {% endfor %}
+                        </div>
+
                         <p class="p-line">{{single_post.post_desc}}</p>
-                        <p class="p-line"><a href="{{single_post.post_creator.profile.profile_slug}}">About this Organization</a></p>
+
+                        <strong>Contact Info</strong>
+                        <p>{{single_post.post_org_phone}}</p>
+                        <p>{{single_post.post_org_email}}</p>
+                        <p>{{single_post.post_org_address}}</p>
+                        <div class="row">
+                            <p class="col">{{single_post.post_org_city}}</p>
+                            <p class="col">{{single_post.post_org_state}}</p>
+                            <p class="col">{{single_post.post_org_zipcode}}</p>
+                        </div>
+
+                        <p class="p-line"><a href="{{single_post.post_creator.profile.profile_slug}}">About this
+                                Organization</a></p>
                     </div>
                 </div>
             </div>
