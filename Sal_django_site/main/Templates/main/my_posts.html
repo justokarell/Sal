@@ -11,15 +11,9 @@
     body {
         background-color: ghostwhite;
         background-size: cover;
-        /* background-image: url('static/images/red-orange-photo.jpg'); */
-        /* background-image: url('static/images/tall-berry-photo.jpg'); */
         background-repeat: repeat-y;
-        /* Remember to change this url by removing static when you move it to statics */
     }
 
-    /* .new-button {
-        max-height: 50px;
-    } */
 
     .row .col .s12,
     .row .col .m6,
@@ -33,11 +27,6 @@
         flex-wrap: wrap;
         justify-content: center;
     }
-
-    /* .flex > .col {
-        margin-left: 10px;
-        margin-right: 10px;
-    } */
 
     .post-container {
         background-color: #9FD356;
@@ -70,15 +59,11 @@
         color: #3C91E6;
         background: none;
         border: white;
-        cursor: pointer; 
+        cursor: pointer;
     }
 
     .title-text {
-        /* color: #3C91E6; */
-        /* color: #342E37; */
-        /* font-family: 'latobold', Arial, sans-serif; */
         color: #f8f8ff;
-        /* background-color: #9FD356; */
         padding-top: 1rem;
         padding-bottom: 1rem;
         padding-left: 1.5rem;
@@ -117,9 +102,6 @@
 
     .card {
         min-height: 200px;
-        /* margin-left: 8px; */
-        /* padding-left: 4%;
-        padding-right: 4%; */
         height: 90%;
         margin-bottom: 5%;
         border-radius: 6px;
@@ -134,9 +116,8 @@
         word-wrap: break-word;
         display: block;
         line-height: 1em;
-        /* a */
         max-height: 2em;
-        /* a x number of line to show (ex : 2 line)  */
+
     }
 
     .text {
@@ -150,14 +131,12 @@
     }
 
     .second-row {
-        /* left: 4px; */
-        /* bottom: 5px; */
         padding-right: 0.75rem;
         padding-left: 0.75rem;
 
     }
 
-    .third-row{
+    .third-row {
         position: absolute;
         width: 100%;
         bottom: 8px;
@@ -165,7 +144,7 @@
         padding-left: 0.75rem;
     }
 
-    .button-console{
+    .button-console {
         margin-left: auto;
         margin-right: 0;
     }
@@ -176,9 +155,6 @@
 
 
     @media screen and (min-width: 621px) {
-        /* .title-banner {
-            margin-left: 3rem;
-        } */
 
         .card-pic {
             max-height: 100px;
@@ -199,18 +175,11 @@
 
         }
 
-        /* .card-content .post-row {
-            max-height: 176px;
-        } */
-
 
         .post-row {
-            /* min-height: 180px; */
-            /* width: 95%; */
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 0;
-            /* padding: inherit; */
         }
 
 
@@ -256,14 +225,13 @@
 
 <body>
     <section class="row">
-        <!-- <div class="container col " style="margin-bottom: 12em;"> -->
-        <!-- <div id="over-card" class="card hoverable"> -->
+
         <div class="title-banner">
             <h1 class="title-text center"> Your Posts</h1>
         </div>
-        <!-- <div class="card-content center"> -->
+
         <div class=" row flex post-container">
-            <!-- <div class=" main-row row center"> -->
+
             <a href="new-dpost" class="col s12 m6 l4">
                 <div class="post-row card hoverable">
                     <div class="card-content">
@@ -297,7 +265,7 @@
 
                 <div class="card hoverable">
                     <div class="card-content">
-                        
+
                         <div class="row post-row ">
                             <a href="{{post.post_slug}}" , style="color:#000">
                                 <div class="col left-col">
@@ -344,7 +312,7 @@
                                         class="material-icons right">edit</i></a>
                                 {% endif %}
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -352,16 +320,12 @@
             </div>
             {% endfor %}
 
-
-            <!-- </div> -->
             <div>
 
             </div>
         </div>
 
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
+
     </section>
     {% include 'main/footer.html' %}
 </body>

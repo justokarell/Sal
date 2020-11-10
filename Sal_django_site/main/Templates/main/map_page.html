@@ -11,7 +11,6 @@
 
 <body>
   <div id="mega-container" class="row">
-    <!-- DONATION INFORMATION -->
     <section class="Donation">
       <div>
         <div id="donate-col" class="col s14 m6">
@@ -19,15 +18,12 @@
             <h2 class="filter-title center-align" style="color:#3C91E6" >Filters</h2>
             <div class="card-content">
               <p class="search-location filter-label center-align">Location</p>
-              <!-- <nav class="search-title-filter white"> -->
-              <!-- <div class="nav-wrapper"> -->
               <div class="input-field">
                 <input id="search" type="search" required="" class="pac-target-input" placeholder="Where to look"
                   autocomplete="off">
                 <i class="material-icons" id="search-button" style="display: inline-flex;">search</i>
               </div>
-              <!-- </div> -->
-              <!-- </nav> -->
+
               <br>
               <form action="#">
                 <p class="time-range filter-label center-align  ">Donors or Recipients?</p>
@@ -59,24 +55,6 @@
                   </label>
                 </p>
               </form>
-              <!-- <form action="#">
-                <p class="time-range filter-label center-align  ">Perishable?</p>
-                <br>
-                <p>
-                  <label>
-                    <input class="with-gap" name="perishable" type="checkbox" id="perishable"
-                      onchange="updateView(this)" />
-                    <span>Perishable</span>
-                  </label>
-                </p>
-                <p>
-                  <label>
-                    <input class="with-gap" name="non-perishable" type="checkbox" id="non-perishable"
-                      onchange="updateView(this)" />
-                    <span>Non-Perishable</span>
-                  </label>
-                </p>
-              </form> -->
               <br>
               <div class="time-picker">
                 <p class="time-picker-header filter-label center-align  ">Time(s) Available</p>
@@ -130,7 +108,6 @@
 
     <!-- MAP -->
     <section class="Map ">
-      <!--The div element for the map -->
       <div id="map"></div>
       
     </section>
@@ -145,20 +122,8 @@
 </body>
 
 
-<!--Load the API from the specified URL
-    * The async attribute allows the browser to render the page while the API loads
-    * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function
-    -->
-
-<!-- <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
-    
-</script> -->
-
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbMU1uNeRWo7V47J7Bz3WJSaLKQxz6DbE&libraries=places"></script>
-<!-- <script src="/maps/documentation/javascript/examples/markerclusterer/markerclustererplus@4.0.1.min.js"></script> -->
 <script src="{% static 'google/markerclustererplus/dist/markerclustererplus.min.js' %}"></script>
 
 <script>
@@ -187,7 +152,6 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('select');
-    // var instances = M.FormSelect.init(elems, options);
     var instances = M.FormSelect.init(elems);
   });
 
@@ -392,6 +356,31 @@
     google.maps.event.trigger(this, 'focus', {});
 
   };
+  function timeFormatter(unformatted){
+    var hours1 = Math.floor(unformatted / 60);
+      var minutes1 = unformatted - (hours1 * 60);
+      if (hours1.length == 1) hours1 = '0' + hours1;
+      if (minutes1.length == 1) minutes1 = '0' + minutes1;
+      if (minutes1 == 0) minutes1 = '00';
+      if (hours1 >= 12) {
+        if (hours1 == 12) {
+          hours1 = hours1;
+          minutes1 = minutes1 + " PM";
+        } else {
+          hours1 = hours1 - 12;
+          minutes1 = minutes1 + " PM";
+        }
+      } else {
+        hours1 = hours1;
+        minutes1 = minutes1 + " AM";
+      }
+      if (hours1 == 0) {
+        hours1 = 12;
+        minutes1 = minutes1;
+      }
+      return formatted = hours1 + ':' + minutes1
+  }
+
 
   // Function to add marker to map
   function addMarker(marker) {
@@ -421,20 +410,22 @@
             category.push(day)
             days = days + day +", "
         });
-        wholeAvail += "<p>"+ days + "&emsp;&emsp;" +marker["availability_set"][j]['start_hour']+' - '+ marker["availability_set"][j]['end_hour'] +"</p>";
+        
+        wholeAvail += "<p>"+ days + "&emsp;&emsp;" + timeFormatter(marker["availability_set"][j]['start_min']) +' - '+ timeFormatter(marker["availability_set"][j]['end_min']) +"</p>";
       }
     }
 
     for (j = 0; j < marker["availability_set"].length; j++){
       availability.push([marker["availability_set"][j]["start_min"],marker["availability_set"][j]["end_min"]])
     }
+    
     var thumbnail = marker['post_image']
     var title = marker["post_title"];
     var pos = new google.maps.LatLng(marker["post_lat"], marker["post_long"]);
 
-    var content = "<div class=infowindow style='width:fit-content;'>"+"<h1 class=center style= 'margin-top:0rem; margin-bottom:3%;'>" + title + "</h1>" + 
-                  "<div class='row center' style='margin-left:0; margin-right:auto;'><image class='col' style= 'float: none; max-width: 30%; max-height: 30%; margin-left:auto; margin-right:0;' src="+thumbnail+" >" +
-                  "<div class='col' style='float:none; margin-left:0; margin-right:auto;'> <div id='date-time'>"+ wholeAvail +"</div>" + "<p>" + marker["post_desc"] + "</p></div></div>"+
+    var content = "<div class=infowindow style='width:fit-content;'>"+"<h4 class=center style= 'margin-top:2%; margin-bottom:3%; color: #342E37;'>" + title + "</h4>" + 
+                  "<div class='row' style= 'display:flex; flex-direction:row; color:#342E37;'><image class='col' style= 'float: none; max-width: 30%; max-height: 30%; margin-left:auto; margin-right:0; max-width:50%; ' src="+thumbnail+" >" +
+                  "<div class='col' style='float:none; margin-top:auto; margin-bottom:auto; margin-left:0; margin-right:auto; max-width:49%'> <div id='date-time' style='font-size: 14px; font-weight:bold; color:#342E37;' >"+"Availability: "+ wholeAvail +"</div>" + "<p style='font-size: 14px; color:#342E37;'>" + marker["post_desc"] + "</p></div></div>"+
                   "<strong style='float:right;'><a style=':blue' href="+ marker["post_slug"] +" >Read More</a></strong></div>";
 
     //get array of markers (wish this was just the ones currently in cluster)
@@ -483,7 +474,8 @@
         console.log('Gmarker 1 gets pushed');
         infowindow.setContent(content);
         infowindow.open(map, marker1);
-        map.panTo(this.getPosition());
+        // infowindow.close();
+        // map.panTo(this.getPosition());
         // map.setZoom(15);
       }
     })(marker1, content));

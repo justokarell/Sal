@@ -191,7 +191,6 @@
                             <div id="reccur-status">
                                 <label for="id_post_recurring">Will this surplus be recurring?
                                     {{  donor_post_form.post_recurring | append_attr:"onclick:recurrCheck()" }}
-                                    <!-- {{ form.title|append_attr:"class:css_class_1 css_class_2" }} -->
                                     <span></span>
                                 </label>
                             </div>
@@ -235,11 +234,9 @@
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            // get loaded data and render thumbnail.
             document.getElementById("post_image").src = e.target.result;
         };
 
-        // read the image file as a data URL.
         reader.readAsDataURL(this.files[0]);
     };
 
@@ -311,9 +308,7 @@
 
 
     function recurrCheck() {
-        // Get the checkbox
         var checkBox = document.getElementById("id_post_recurring");
-        // If the checkbox is checked, display the extra field
         if (checkBox.checked == true) {
             document.getElementById('recurr-div').style.display = 'block';
         } else {

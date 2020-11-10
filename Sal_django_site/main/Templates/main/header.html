@@ -19,20 +19,12 @@
   <script src="{% static '/js/init.js' %}"></script>
 
 
-
-  <!-- Wanted more material design icons -->
   <link href="css/materialdesignicons.min.css" media="all" type="text/css" />
-
   <link rel="stylesheet" type="text/css" href="{% static '/fonts/stylesheet.css' %}">
-  <!-- Not sure we need the tinymce rich text editor tbh -->
-  <!-- <link href="{% static 'tinymce/css/prism.css' %}" rel='stylesheet'> -->
-  <!-- <link rel="stylesheet" type="text/css" href="{% static '/css/home_style.css' %}"> -->
-
   <link rel="apple-touch-icon" sizes="180x180" href="{% static '/apple-touch-icon.png' %}">
   <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favicon-32x32.png' %}">
   <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favicon-16x16.png' %}">
   <link rel="manifest" href="{% static '/site.webmanifest' %}">
-
 </head>
 
 <style>
@@ -51,7 +43,6 @@
 
 .navbar {
     align-self: center;
-    /* height: 240pt; */
     width: 90%;
     border: 20pt #342E37;
     border-radius: 7pt;
@@ -70,8 +61,6 @@
     font-style:normal;
   }
 li:hover {
-  /* background: #9FD356; */
-  
   color: #F7F7F7;
   transition: 0.3s;
 }
@@ -85,13 +74,11 @@ li:hover {
 
     <nav class="z-depth-0" style="background-color: white" role="navigation">
       <div class="nav-wrapper container" style="background-color:white">
-        <!-- <a id="logo-container" href="" class=" center brand-logo">Salhateswaste</a> -->
         <a href="/"  class="center brand-logo">
           <img alt="Logo" src="{% static 'images/sal_hates_waste_logo.png' %}" height="60" style="display: block;  color: #ffffff; font-size: 16px; margin-top:5;" >
       </a>
         <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
-          <!-- <li><a href="/account" style="color:#342E37;font-size:14pt;">{{ user.your_name }}</a></li> -->
           <li><a href="/my-account" style="color:#342E37;font-size:14pt;">My Account</a></li>
           <li><a href="/my-posts" style="color:#342E37;font-size:14pt;">My Posts</a></li>
           <li><a href="/logout" style="color:#342E37;font-size:14pt;">Logout</a></li>
@@ -126,7 +113,6 @@ li:hover {
           <li><a href="/volunteer" style="color:#342E37;font-size:x-large;">Volunteer!</a></li>
           {% endif %}
         </ul>
-        <!-- <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
         <a href="javascript:void(0);" data-target="nav-mobile" class="sidenav-trigger" >
           <i class="material-icons" style="color:#342E37;font-size:x-large;">menu</i>
         </a>

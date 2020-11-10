@@ -2,14 +2,12 @@
   .select {
     display: block;
     background-color: #F2F2F2;
+
   }
 
   body {
     background-color: ghostwhite;
     background-size: cover;
-    /* background-repeat: no-repeat; */
-    /* background-image: url('images/orange-photo.jpg'); */
-    /* Remember to change this url by removing static when you move it to statics */
   }
   
   .title-banner {

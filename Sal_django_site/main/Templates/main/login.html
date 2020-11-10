@@ -16,13 +16,12 @@
         <div class="container col s8 m6" style="margin-bottom: 12em;">
 
         <div class="card hoverable">
-            <!-- card can also be a chip -->
+
             <a href="javascript:history.back()" class="btn-flat waves-effect waves-light  right">
                 <i class="material-icons">close</i>
             </a>
 
             <div class="card-content center ">
-                <!-- <span class="card-title">Welcome</span> -->
                 <h2 class="center title-text">Welcome!</h2>
 
                 <a href="#" class="btn active tab-btn z-depth-1">Login</a>
@@ -57,11 +56,9 @@
                         <a href="{% url 'social:begin' 'facebook' %}" id="facebook"
                             class="waves-effect waves-light btn">
                             <svg xmlns="http://www.w3.org/2000/svg" class="facebook-icon" width="15" height="16" viewBox="0 0 27 28">
-                                <!-- <title id="pbs-facebook-box__title">Facebook</title> -->
                                 <path fill="#FFF" fill-rule="nonzero" d="M25.448.503H1.488c-.82 0-1.486.665-1.486 1.486v23.96c0 .82.666 1.486 1.487 1.486h12.898v-10.43h-3.51v-4.064h3.51V9.943c0-3.479 2.125-5.373 5.228-5.373 1.487 0 2.764.111 3.137.16v3.636h-2.153c-1.687 0-2.014.803-2.014 1.98v2.595h4.025l-.524 4.064h-3.501v10.43h6.863c.821 0 1.487-.666 1.487-1.487V1.99c0-.821-.666-1.486-1.487-1.486z"></path>
                             </svg>
                             Sign in with Facebook</a>
-                        <!-- <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" id="facebook" class="waves-effect waves-light btn"><i class="material-icons left">face</i>Sign in with Facebook</a> -->
                     </div>
                     <div class="col-xs-6">
                         <a href="{% url 'social:begin' 'google-oauth2' %}" id="google"
@@ -79,7 +76,7 @@
                                 </svg>
                             </span>
                             Sign in with Google</a>
-                        <!-- <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"  id="google" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Sign in with Google</a> -->
+                       
                     </div>
                 </div>
 

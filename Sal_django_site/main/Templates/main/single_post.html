@@ -16,7 +16,7 @@
         margin-bottom: 7em;
     }
 
-    .title{
+    .title {
         margin-top: 1.75em;
         margin-bottom: 1em;
     }
@@ -55,7 +55,7 @@
         margin-right: 8%;
     }
 
-    .post-content > .row{
+    .post-content>.row {
         margin-bottom: 0;
         margin-top: 0;
     }
@@ -113,6 +113,8 @@
                             </strong>
                             {% endfor %}
                         </div>
+                        <!-- <p class="p-line">Possible Deliver/Pickup: {{single_post.post_deliver}}</p> -->
+
 
                         <p class="p-line">{{single_post.post_desc}}</p>
 
@@ -125,6 +127,12 @@
                             <p class="col">{{single_post.post_org_state}}</p>
                             <p class="col">{{single_post.post_org_zipcode}}</p>
                         </div>
+                        {% if single_post.post_deliver is True %}
+                        <p class="p-line">Possible Deliver/Pickup: Yes</p>
+                        {% endif %}
+                        {% if single_post.post_deliver is False %}
+                        <p class="p-line">Possible Deliver/Pickup: No</p>
+                        {% endif %}
 
                         <p class="p-line"><a href="{{single_post.post_creator.profile.profile_slug}}">About this
                                 Organization</a></p>

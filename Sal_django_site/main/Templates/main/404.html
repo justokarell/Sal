@@ -1,0 +1,28 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block content %}
+
+<head>
+    <title>404 - Sal Hates Waste</title>
+    {% load static %}
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'profile_view_style.css' %}">
+</head>
+
+
+<body>
+    <div class="container col " style="margin-bottom: 12em;">
+
+        <h1 class="main-text center-align"> 404 Page not found </h1>
+
+        <div class="main-text">
+            <h4 class="center-align">Sorry couldn't find that one</h4>
+            <img id="trash-img" src="{% static 'images/trash_icon.png' %}" style=" max-width: 50%; max-height: 70%;">
+        </div>
+
+    </div>
+    {% include 'main/footer.html' %}
+</body>
+
+{% endblock %}

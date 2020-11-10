@@ -81,7 +81,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}")
-                return redirect('/')
+                return redirect('homepage')
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -150,7 +150,7 @@ class ConfirmRegistrationView(View):
             context['message'] = 'Registration complete. Please login'
 
         messages.success(request, f"Your account has been registered")
-        return redirect('login')
+        return redirect('/login')
 
 def account_activation_sent(request):
     return render(request=request,
@@ -198,10 +198,10 @@ def map_page(request):
 
 def profile_view(request):
     if request.user.is_authenticated:
-        return render(request=request,template_name="main/profile_view.html")
+        return render(request=request, template_name="main/profile_view.html")
     else:
         messages.info(request, f"Login to view your profile")
-        return redirect('login')
+        return redirect('/login')
 
 @login_required
 def profile_edit(request):
@@ -451,5 +451,5 @@ def single_slug(request, single_slug):
         return render(request=request,
                       template_name='main/other_profiles.html',
                       context={"this_org":this_org})
-
-    return HttpResponse(f"'{single_slug}' does not correspond to anything we know of!") 
+    return render(request=request,
+                  template_name="main/404.html")

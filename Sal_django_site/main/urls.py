@@ -25,8 +25,6 @@ from django.contrib import admin
 from .tokens import user_tokenizer
 from .views import contactView, successView, volunteerView
 
-# from django.contrib.auth import views as auth_views
-
 # app_name = 'main'
 
 urlpatterns = [
