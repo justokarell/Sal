@@ -42,7 +42,10 @@ def volunteerView(request):
     
 def contactView(request):
     if request.method == 'GET':
+        post_id = request.GET.get('post_id')
         form = ContactForm()
+        if post_id:
+            form.fields["message"].initial = "There's something wrong with this post: /"+ post_id
     else:
         form = ContactForm(request.POST)
         if form.is_valid():

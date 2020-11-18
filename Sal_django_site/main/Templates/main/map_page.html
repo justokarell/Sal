@@ -425,8 +425,10 @@
 
     var content = "<div class=infowindow style='width:fit-content;'>"+"<h4 class=center style= 'margin-top:2%; margin-bottom:3%; color: #342E37;'>" + title + "</h4>" + 
                   "<div class='row' style= 'display:flex; flex-direction:row; color:#342E37;'><image class='col' style= 'float: none; max-width: 30%; max-height: 30%; margin-left:auto; margin-right:0; max-width:50%; ' src="+thumbnail+" >" +
-                  "<div class='col' style='float:none; margin-top:auto; margin-bottom:auto; margin-left:0; margin-right:auto; max-width:49%'> <div id='date-time' style='font-size: 14px; font-weight:bold; color:#342E37;' >"+"Availability: "+ wholeAvail +"</div>" + "<p style='font-size: 14px; color:#342E37;'>" + marker["post_desc"] + "</p></div></div>"+
-                  "<strong style='float:right;'><a style=':blue' href="+ marker["post_slug"] +" >Read More</a></strong></div>";
+                  "<div class='col' style='float:none; margin-top:auto; margin-bottom:auto; margin-left:0; margin-right:auto; max-width:49%'> <div id='date-time' style='font-size: 14px; font-weight:bold; color:#342E37;' >"+"Availability: "+ wholeAvail +"</div>" + 
+                  "<p style='font-size: 14px; color:#342E37;'>" + marker["post_desc"] + "</p>"+
+                  "<br><br><br><strong style='float:right;'><a style=':blue' href="+ marker["post_slug"] +" >Read More</a></strong></div></div>"+
+                  "<br><p class=center style='float:none;'><a style='color:orange' href='{% url 'contact' %}?post_id="+ marker["post_slug"] +"' >Report</a></p></div></div>";
 
     //get array of markers (wish this was just the ones currently in cluster)
     var allMarkers = gmarkers1;
